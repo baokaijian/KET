@@ -67,6 +67,31 @@
 
 共同限制：真实感方形照片、清楚主体、明亮光线、没有图标、拼图、水印和品牌。生成图的角色由场景句子建立，不用外貌证明职业身份；健康照片只教学词义，不提供诊断或用药指示。救护车初图不入发布包，只发布实际复核后的修正版。
 
+## 衣物与天气主题（2026-10-11）
+
+十六个词分别调用内置 imagegen，逐张实际视觉检查后转换为 640 × 640 WebP。完整生成提示词保存在 `src/data/clothes-images.js` 和 `src/data/weather-images.js` 的 `generationPrompt`；修正版另保留 `refinementPrompt`。下表是场景摘要，不是提示词逐字转录。
+
+| 单词 | 最终图片 | 实际视觉复核与指定词义 |
+| --- | --- | --- |
+| shirt | public/word-images/l12_shirt.webp | 蓝色长袖纽扣衬衫，尖领、纽扣、袖口与下摆可见，不用夹克代替。 |
+| coat | public/word-images/l12_coat.webp | 绿色长款大衣，翻领与纽扣，衣身明显长于袖子；主词义为外套，大衣只是示例。 |
+| hat | public/word-images/l12_hat.webp | 蓝色毛球针织帽，翻折帽沿与开口可见，不用棒球帽图混用。 |
+| shoe | public/word-images/l12_shoe.webp | 单只红色帆布运动鞋，鞋带、鞋底、鞋头与鞋跟完整可见。 |
+| sock | public/word-images/l8_sock.webp | 单只黄色软袜，袜口、脚跟与脚尖可辨，沒有硬鞋底。 |
+| dress | public/word-images/l8_dress.webp | 红色短袖连衣裙，上身与裙摆是一体；只解释名词，不解释穿衣动作。 |
+| skirt | public/word-images/l12_skirt.webp | 绿色半身短裙，腰带与裙摆清楚，没有连衣裙上身。 |
+| jacket | public/word-images/l12_jacket.webp | 蓝色短款拉链夹克，拉链、立领、袖口与下摆可见，区别于长款大衣。 |
+| sun | public/word-images/l6_sun.webp | 海面上方的完整太阳圆盘与反射，区别于月亮或图标。 |
+| rain | public/word-images/l6_rain.webp | 下落雨滴、湿润小路、水洼涟漪和溅水，照片指定雨的名词含义。 |
+| snow | public/word-images/l6_snow.webp | 栅栏、树枝与地面覆盖积雪，空中有落雪；照片指定雪的名词含义。 |
+| wind | public/word-images/l5_wind.webp | 红旗舒展飘动与草向同一方向倾斜；初图近景灌木方向矛盾，移除后重新检查，状态 fixed。 |
+| cloud | public/word-images/l5_cloud.webp | 蓝天中的大朵白色积云，云底灰色阴影，照片主体为云。 |
+| hot | public/word-images/l6_hot.webp | 孩子在遮阳处扇风、擦汗，旁有饮水，表达炎热天气，不解释烫物或疾病。 |
+| cold | public/word-images/l2_cold.webp | 雪景中孩子穿厚外套、帽子、围巾、手套，表达天气冷，不解释名词感冒。 |
+| weather | public/word-images/l5_weather.webp | 孩子在室内隔着关闭窗户观察晴天与云；初图太阳在视线附近，移除太阳圆盘后复核，状态 fixed。 |
+
+共同限制：每词唯一生成照片，不使用拼图、文字标签、品牌、水印或泛用图标；单物体衣物可完整观察。天气照片表达具体天气条件，weather 的晴天场景不宣称包含所有天气类型；角色场景不提供医疗判断。只发布最终修正版，未将失败的初图登记为通过。
+
 ## 后续完整队列
 
 `src/data/word-image-plans.js` 为全部 1687 个词建立唯一文件路径、指定 KET 词义、词性、教学场景和逐词提示词。该队列只用于制作，不把提示词视作图片已存在的证明，不自动写入通过状态。抽象词必须继续检查生成场景是否真的能表达其含义。

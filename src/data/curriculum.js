@@ -5,6 +5,7 @@ import { skillLessons, productionTasks } from "./skill-lessons.js";
 import { getSpeakableWordText } from "../utils/speechText.js";
 import { courseUnitFor } from "./course-topics.js";
 import { meaningKey } from "./meaning-groups.js";
+import { legacyRegroupedCourses } from "./legacy-regrouped-courses.js";
 
 export const courseWords = allKetWords.map(dictionaryEntry);
 export const courseWordById = Object.fromEntries(courseWords.map((word) => [word.id, word]));
@@ -42,13 +43,22 @@ export function vocabularyQuestions(words, pool) {
   });
 }
 
+export function vocabularyLessonId(unit, topic, index, words) {
+  const base = `vocabulary-${unit}-${topic}-${index + 1}`;
+  if (!["body_health", "city_travel", "nature_weather"].includes(topic)) return base;
+  const ids = words.map((word) => word.id);
+  // A changed group must not inherit a pass earned for different word IDs.
+  return JSON.stringify(legacyRegroupedCourses[base]) === JSON.stringify(ids)
+    ? base : `${base}--${ids.join("_")}`;
+}
+
 export const vocabularyLessons = levels.flatMap((level) => {
   return topicCategories.flatMap((topic) => {
   const words = courseWords.filter((word) => courseUnitFor(word) === level.id && word.topic === topic.id);
   return Array.from({ length: Math.ceil(words.length / 8) }, (_, index) => {
     const group = words.slice(index * 8, index * 8 + 8);
     return {
-      id: `vocabulary-${level.id}-${topic.id}-${index + 1}`,
+      id: vocabularyLessonId(level.id, topic.id, index, group),
       unit: level.id,
       title: `${topic.scene} · 词汇 ${index + 1}`,
       topic: topic.id,

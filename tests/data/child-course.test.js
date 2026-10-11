@@ -9,9 +9,26 @@ import { familyImages } from "../../src/data/family-images.js";
 import { homeImages } from "../../src/data/home-images.js";
 import { parkImages } from "../../src/data/park-images.js";
 import { healthImages } from "../../src/data/health-images.js";
+import { clothesImages } from "../../src/data/clothes-images.js";
+import { weatherImages } from "../../src/data/weather-images.js";
 import { dictionaryEntry } from "../../src/data/learning.js";
 
 describe("whole-bank meaning, POS and theme regressions", () => {
+  it("separates weather senses from travel and identifies noun and verb meanings explicitly", () => {
+    const find = (name) => allKetWords.find((word) => word.word === name);
+    for (const name of ["cloud", "cloudy", "foggy", "storm", "warm", "weather", "wind", "windy", "cold", "hot", "sun", "rain", "snow"]) {
+      expect(find(name).topic, name).toBe("nature_weather");
+    }
+    for (const name of ["dress", "rain", "snow"]) {
+      expect(find(name).partOfSpeech).toEqual(["n", "v"]);
+      expect(find(name).translation).toContain("名词");
+      expect(find(name).translation).toContain("动词");
+    }
+    expect(find("cold").translation).toContain("感冒");
+    expect(weatherImages.l2_cold.meaning).toBe("冷的（天气）");
+    expect(weatherImages.l6_hot.meaning).toBe("炎热的（天气）");
+    expect(clothesImages.l8_dress.meaning).toBe("连衣裙（名词）");
+  });
   it("places calendar, spatial and formerly unclassified words into explicit semantic groups", () => {
     const names = Object.values(curatedTopicGroups).flatMap((group) => group.split("|"));
     expect(new Set(names).size).toBe(names.length);
@@ -50,7 +67,7 @@ describe("whole-bank meaning, POS and theme regressions", () => {
   });
 });
 describe("six-year-old listening and reading", () => {
-  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
+  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages], ["clothes", clothesImages], ["weather", weatherImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
     const words = childThemes.find((theme) => theme.id === themeId).vocabulary.words;
     expect(Object.keys(images).sort()).toEqual(words.map((word) => word.id).sort());
     for (const word of words) {
@@ -66,6 +83,12 @@ describe("six-year-old listening and reading", () => {
     if (themeId === "family") {
       expect(familyImages.l1_sister.meaning).toBe("姐姐");
       expect(familyImages.l10_brother.meaning).toBe("哥哥");
+    }
+    if (themeId === "weather") {
+      for (const id of ["l5_wind", "l5_weather"]) {
+        expect(images[id].reviewStatus).toBe("fixed");
+        expect(images[id].refinementPrompt.length).toBeGreaterThan(80);
+      }
     }
   });
   it("pairs health photographs with specific clinical meanings, never restaurant content", () => {

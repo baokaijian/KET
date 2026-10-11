@@ -1,6 +1,6 @@
 # 单词与图片复核
 
-图片范围：58 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1629 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：74 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1613 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
@@ -136,7 +136,7 @@
 | l2_clean | clean | 打扫/干净的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_coffee | coffee | 咖啡 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_cola | cola | 可乐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_cold | cold | 冷的；寒冷；感冒 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_cold | cold | 冷的；寒冷；感冒 | 冷的（天气） | word-images/l2_cold.webp / cold: a bundled child hugging their arms in a snowy garden | pass | Winter coat, hat, scarf, mittens, close-held arms and snow establish cold temperature; not the noun illness sense of a cold. |
 | l2_comb | comb | 梳子；梳头 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_cook | cook | 厨师；烹饪 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_cream | cream | 奶油；护肤霜；奶油色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -363,7 +363,7 @@
 | l5_case | case | 箱子；盒子；情况；案例 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_castle | castle | 城堡 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_city | city | 城市 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_cloud | cloud | 云 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_cloud | cloud | 云 | 云 | word-images/l5_cloud.webp / cloud: one large white cumulus cloud with a grey underside in a blue sky | pass | A large billowing atmospheric cloud fills most of the sky with natural shaded underside, unlike the broader weather-observation scene. |
 | l5_cloudy | cloudy | 多云的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_delay | delay | 延误；耽搁；推迟 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_dentist | dentist | 牙医 | 牙医 | word-images/l5_dentist.webp / dentist: a dentist checking a child's teeth with a dental mirror in a dental chair under an examination light | pass | Dental chair, overhead examination light, tray and mirror at the child's open mouth establish a dental checkup; no chest exam, extraction, drilling or bleeding. |
@@ -430,9 +430,9 @@
 | l5_visitor | visitor | 访客；游客 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_warm | warm | 温暖的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_way | way | 道路；方法 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_weather | weather | 天气 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_weather | weather | 天气 | 天气（晴天场景示例） | word-images/l5_weather.webp / weather: a child checking sunny outdoor conditions through a closed window | fixed | The child observes blue sky, small clouds and a sunlit dry garden as overall weather conditions. The visible sun disk in the initial image was removed and rechecked; this is not the close-up cloud image. |
 | l5_wheel | wheel | 轮子；车轮 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_wind | wind | 风 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_wind | wind | 风 | 风 | word-images/l5_wind.webp / wind: a red flag rippling sideways and grass bending in the same direction | fixed | The flag stretches and ripples rightward while foreground grasses bend rightward. The contradictory foreground shrub in the initial image was removed and the result rechecked. |
 | l5_window | window | 窗户 | 窗户 | word-images/l5_window.webp / window: a white-framed glass window with a sill, an open casement and a garden visible outside | pass | Transparent glass panes, a sill and an open framed casement distinguish a window from the solid door; the garden is visible through the glass. |
 | l5_windy | windy | 刮风的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_air | air | 空气 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -447,7 +447,7 @@
 | l6_fire | fire | 火 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_fog | fog | 雾 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_grass | grass | 草地 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l6_hot | hot | 炎热的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l6_hot | hot | 热的；炎热的；烫的（指物体温度高） | 炎热的（天气） | word-images/l6_hot.webp / hot: a child fanning themself and wiping sweat in shade on a sunny day | pass | Short sleeves, fan, sweat-wiping and a sunlit garden establish feeling hot in warm weather; the child is calm and in shade, not ill or eating spicy food. |
 | l6_ice | ice | 冰 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_island | island | 岛屿 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_lake | lake | 湖泊 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -456,14 +456,14 @@
 | l6_ocean | ocean | 海洋 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_petrol_station | petrol station | 加油站（英式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_playground | playground | 操场 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l6_rain | rain | 雨 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l6_rain | rain | 雨（名词）；下雨（动词） | 雨（名词） | word-images/l6_rain.webp / rain: falling water drops making splashes and ripples in a garden puddle | pass | Visible falling drops, water splashes and circular ripples on a wet path express ordinary rain, not snow or an isolated water container. |
 | l6_river | river | 河流 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_roundabout | roundabout | 环形交叉路口；转盘路口 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_sea | sea | 海 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_sky | sky | 天空 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l6_snow | snow | 雪 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l6_snow | snow | 雪（名词）；下雪（动词） | 雪（名词） | word-images/l6_snow.webp / snow: white accumulated snow on a fence and garden with snowflakes falling | pass | Soft white snow coats the fence, twigs and ground, with falling flakes; not rain, hailstones or artificial cotton. |
 | l6_street | street | 街道 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l6_sun | sun | 太阳 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l6_sun | sun | 太阳 | 太阳 | word-images/l6_sun.webp / sun: the visible bright sun above a low sea horizon in a clear sky | pass | A complete bright solar disk and daylight sea reflection distinguish the sun from a cratered moon or cartoon circle; no child looks at it. |
 | l6_sunny | sunny | 晴朗的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_thunderstorm | thunderstorm | 雷暴；雷雨 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_town | town | 城镇 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -592,7 +592,7 @@
 | l8_different | different | 不同的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_difficult | difficult | 困难的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_dirty | dirty | 脏的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l8_dress | dress | 连衣裙 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l8_dress | dress | 连衣裙（名词）；穿衣；给……穿衣（动词） | 连衣裙（名词） | word-images/l8_dress.webp / dress: one red short-sleeved dress with a connected bodice, waist and skirt | pass | The neckline and upper bodice connect to a flared skirt in one garment; illustrates the noun, not the act of dressing. |
 | l8_earring | earring | 耳环 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_excellent | excellent | 极好的；优秀的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_excited | excited | 感到兴奋的；激动的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -643,7 +643,7 @@
 | l8_shorts | shorts | 短裤（复数形式） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_slow | slow | 慢的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_small | small | 小的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l8_sock | sock | 袜子 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l8_sock | sock | 袜子 | 袜子（单只袜） | word-images/l8_sock.webp / sock: one yellow ankle sock with a ribbed cuff, shaped heel and rounded toe | pass | One soft knitted sock shows cuff opening, heel and toe without a rigid sole; not a shoe or pair of tights. |
 | l8_soft | soft | 柔软的；轻柔的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_special | special | 特别的；特殊的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_strange | strange | 奇怪的；陌生的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1008,7 +1008,7 @@
 | l12_closed | closed | 关闭的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_closet | closet | 壁橱；衣橱（美式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_clown | clown | 小丑；逗人笑的人 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_coat | coat | 外套 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_coat | coat | 外套 | 外套（长款大衣示例） | word-images/l12_coat.webp / coat: one long green wool coat with lapels, buttons and pockets | pass | The wool body extends well below the sleeves, with lapels and front buttons; distinct from the short zip jacket. |
 | l12_coast | coast | 海岸；海滨 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_colleague | colleague | 同事；一起工作的人 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_colour | colour | 颜色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1182,7 +1182,7 @@
 | l12_half_price | half-price | 半价的；以半价 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_happen | happen | 发生 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_harbour | harbour | 港口（英式拼写） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_hat | hat | 帽子 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_hat | hat | 帽子 | 帽子（针织帽示例） | word-images/l12_hat.webp / hat: one blue knitted hat with a folded brim and a pom-pom | pass | The complete knitted crown, folded brim and pom-pom identify a warm hat; not a baseball cap, helmet or scarf. |
 | l12_hate | hate | 讨厌；憎恶 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_have | have | 有；吃或喝；经历；完成时的助动词 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_have_got_to | have got to | 必须；不得不（口语表达） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1242,7 +1242,7 @@
 | l12_it | it | 它 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_its | its | 它的（物主限定词，没有撇号） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_itself | itself | 它自己（反身代词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_jacket | jacket | 夹克 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_jacket | jacket | 夹克 | 夹克（短款拉链外套） | word-images/l12_jacket.webp / jacket: one short blue jacket with a central zip, cuffs and an elastic hem | pass | A waist-length body, zip, stand collar and elastic cuffs distinguish this jacket example from the long wool coat and buttoned shirt. |
 | l12_january | January | 一月 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_jazz | jazz | 爵士乐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_jellyfish | jellyfish | 水母 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1506,8 +1506,8 @@
 | l12_she | she | 她 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_sheep | sheep | 绵羊 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_sheet | sheet | 床单；一张（纸） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_shirt | shirt | 衬衫 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_shoe | shoe | 鞋子 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_shirt | shirt | 衬衫 | 衬衫 | word-images/l12_shirt.webp / shirt: one blue long-sleeved button-up shirt with a collar, front buttons and cuffs | pass | Complete collar, button placket, sleeves and button cuffs identify a shirt rather than a T-shirt or zip jacket. |
+| l12_shoe | shoe | 鞋子 | 鞋子（单只鞋） | word-images/l12_shoe.webp / shoe: one red lace-up canvas shoe with a visible toe, heel and rubber sole | pass | One entire shoe has laces, eyelets, heel and rigid rubber sole, with no foot or second shoe. |
 | l12_shopping_centre | shopping centre | 购物中心（英式拼写） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_short | short | 矮的/短的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_should | should | 应该（建议或应做的事）；预期会 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1530,7 +1530,7 @@
 | l12_skateboard | skateboard | 滑板；玩滑板 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_skateboarding | skateboarding | 滑板运动 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_skating | skating | 滑冰；溜冰活动 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_skirt | skirt | 短裙 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_skirt | skirt | 短裙 | 短裙 | word-images/l12_skirt.webp / skirt: one green standalone skirt with an elastic waistband and a hem | pass | The waistband and skirt hem are visible without a bodice, sleeves or neckline, unlike the one-piece dress. |
 | l12_sleep | sleep | 睡觉 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_slim | slim | 苗条的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_slowly | slowly | 缓慢地；慢慢地 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |

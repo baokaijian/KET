@@ -9,6 +9,7 @@ export const curatedTopicGroups = {
   feelings_descriptions: "broken|colour|extra|fair|fantastic|full|impossible|little|luckily|missing|pity|possible|shame|trouble|unfortunately|worry",
   home_room: "build|fix|gas|indoor|indoors|shampoo|sleep|tidy",
   city_travel: "gas station|lost|stamp",
+  nature_weather: "cloud|cloudy|foggy|storm|warm|weather|wind|windy",
   school_library: "add|part|story|topic",
   sports_hobbies: "dive|Olympic",
   tech_media: "clown",

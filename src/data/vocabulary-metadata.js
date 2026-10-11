@@ -38,6 +38,7 @@ const explicit = {
   "Dr": "body_health", "litre": "school_library", "litre / liter": "school_library",
   can: "daily_starters", break: "daily_starters", bit: "daily_starters", fat: "feelings_descriptions",
   box: "home_room", cut: "daily_starters",
+  cold: "nature_weather",
 };
 const animalWords = new Set("animal|bear|bee|beetle|bird|butterfly|camel|cat|cow|creature|crocodile|dinosaur|dog|dolphin|donkey|duck|eagle|elephant|frog|giraffe|goat|hippo|horse|insect|jellyfish|kangaroo|kitten|lion|lizard|monkey|octopus|panda|parrot|penguin|pet|polar bear|puppy|rabbit|shark|sheep|snail|snake|spider|swan|tiger|tortoise|whale|zebra".split("|"));
 const clothesWords = new Set("belt|boot|cap|coat|dress|glasses|glove|hat|jacket|jeans|jumper|shirt|shoe|shorts|skirt|sock|suit|sunglasses|tights|trousers|bathing suit|swimming costume".split("|"));

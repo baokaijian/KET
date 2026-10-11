@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { curriculumUnits, vocabularyLessons, courseWords } from "../../src/data/curriculum.js";
+import { curriculumUnits, vocabularyLessons, courseWords, courseLessons } from "../../src/data/curriculum.js";
+import { childLessons, childThemes } from "../../src/data/child-course.js";
+import { lessons } from "../../src/data/learning.js";
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -25,6 +27,34 @@ async function answer(page, question, wrong = false) {
   } else await page.locator(".answer-option").nth(wrong ? (question.answer + 1) % question.options.length : question.answer).click();
   await expect(page.getByText(wrong ? "没关系，我们再认识一次。" : "答对啦！", { exact: true })).toBeVisible();
 }
+
+test("regrouped courses do not inherit old passes or erase word review dates", async ({ page }) => {
+  const unchanged = vocabularyLessons.find((lesson) => lesson.id === "vocabulary-2-body_health-1");
+  const memory = { l2_cold: { reading: { due: "2026-10-20", lastDay: "2026-10-11", step: 1, successDays: ["2026-10-11"], lastCorrect: true } } };
+  const completed = ["vocabulary-5-city_travel-3", "vocabulary-6-nature_weather-1", unchanged.id, childThemes[0].story.id, curriculumUnits[0].grammar[0].id];
+  await page.addInitScript((snapshot) => {
+    if (!localStorage.getItem("sparks_learning_v2")) localStorage.setItem("sparks_learning_v2", JSON.stringify(snapshot));
+  }, { completed, seen: ["l2_cold"], memory });
+  await page.goto("./#learn");
+  await page.getByText("家长与进阶课程 · 完整 KET 体系", { exact: true }).click();
+  const hub = page.getByRole("region", { name: "KET 系统课程" });
+  await hub.getByRole("button", { name: new RegExp(`05 ${curriculumUnits[4].name}$`) }).click();
+  await expect(hub.locator(".unit-heading .tag")).toContainText("已通过 0 /");
+  await hub.getByRole("button", { name: new RegExp(`02 ${curriculumUnits[1].name}$`) }).click();
+  const unchangedButton = hub.getByRole("button", { name: `开始${unchanged.title}`, exact: true });
+  for (let group = 1; group < Math.ceil(curriculumUnits[1].vocabulary.length / 5) && await unchangedButton.count() === 0; group++) {
+    await hub.getByRole("button", { name: "下一组", exact: true }).click();
+  }
+  await expect(unchangedButton.locator(".positive")).toHaveCount(1);
+  await page.getByRole("navigation").getByRole("link", { name: "成长记录", exact: true }).click();
+  const total = new Set([...lessons, ...courseLessons, ...childLessons].map((lesson) => lesson.id)).size;
+  await expect(page.locator(".stat-block").filter({ hasText: "完成课程" }).locator("strong")).toHaveText(`3 / ${total}`);
+  await page.reload();
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2")));
+  expect(stored.memory).toEqual(memory);
+  expect(stored.seen).toEqual(["l2_cold"]);
+  expect(stored.completed).toEqual(completed);
+});
 
 test("dictionary supplies Chinese meanings for every page and supports Chinese search", async ({ page }) => {
   await page.goto("./#learn");

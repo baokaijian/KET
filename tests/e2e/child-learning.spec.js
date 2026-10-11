@@ -6,6 +6,8 @@ import { familyImages } from "../../src/data/family-images.js";
 import { homeImages } from "../../src/data/home-images.js";
 import { parkImages } from "../../src/data/park-images.js";
 import { healthImages } from "../../src/data/health-images.js";
+import { clothesImages } from "../../src/data/clothes-images.js";
+import { weatherImages } from "../../src/data/weather-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 
 test.beforeEach(async ({ page }) => {
@@ -60,7 +62,7 @@ test("daily eight-word lesson resumes after leaving and reloading without demand
   expect(Object.keys(stored.memory)).toHaveLength(8);
 });
 
-for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
+for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"], ["clothes", clothesImages, "l8_dress"], ["weather", weatherImages, "l2_cold"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
   await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   const theme = childThemes.find((item) => item.id === themeId);
   const completed = childThemes.slice(0, childThemes.indexOf(theme));
@@ -108,6 +110,8 @@ for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sist
     await expect(page.getByRole("dialog")).toContainText("停车（动词）");
     await expect(page.getByRole("dialog")).toContainText("照片对应：公园（名词）");
   }
+  if (themeId === "clothes") await expect(page.getByRole("dialog")).toContainText("穿衣");
+  if (themeId === "weather") await expect(page.getByRole("dialog")).toContainText("感冒");
   await page.getByRole("button", { name: "朗读例句", exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(dictionaryImage.context.sentence);
 });

@@ -908,6 +908,8 @@ function Assessment({ startTest, progress, update, say, curriculum, start, produ
 
 function Progress({ progress, review, curriculum, reviewDue }) {
   const registry = curriculum?.courseWordById || wordById;
+  const currentLessonIds = new Set([...lessons, ...(curriculum?.courseLessons || []), ...(curriculum?.childLessons || [])].map((lesson) => lesson.id));
+  const completedCount = new Set(progress.completed.filter((id) => currentLessonIds.has(id))).size;
   const questionRegistry = { ...Object.fromEntries(abilityQuestions.map((question) => [question.id, question])), ...curriculum?.courseQuestionById, ...curriculum?.childQuestionById };
   const wordsToReview = progress.review.filter((id) => registry[id]);
   const due = dueReviews(progress).filter((item) => registry[item.id] || questionRegistry[item.id]);
@@ -920,7 +922,7 @@ function Progress({ progress, review, curriculum, reviewDue }) {
             "已掌握单词",
             "在不同日期成功复习，听读分别记录",
           ],
-          [progress.completed.length, "完成课程", "属于你的探索足迹"],
+          [completedCount, "完成课程", "属于你的探索足迹"],
           [Object.keys(progress.days).length, "学习天数", "每一天都值得鼓励"],
         ].map(([number, title, description]) => (
           <div className="stat-block" key={title}>
@@ -932,7 +934,7 @@ function Progress({ progress, review, curriculum, reviewDue }) {
                 {title === "已掌握单词"
                   ? 1687
                   : title === "完成课程"
-                    ? (curriculum?.courseLessons.length || 0) + lessons.length
+                    ? currentLessonIds.size
                     : "天"}
               </span>
             </strong>
