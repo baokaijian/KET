@@ -39,6 +39,7 @@ import {
   recordEncounter,
   dueReviews,
   localDay,
+  retainDailyPlans,
 } from "./utils/learningProgress.js";
 import { useLocalStorageState, safeReadStorage, safeWriteStorage } from "./hooks/useLocalStorageState.js";
 import {
@@ -1051,6 +1052,14 @@ export default function App() {
     emptyProgress,
   );
   const progress = normalizeProgress(stored);
+  useEffect(() => {
+    setStored((previous) => {
+      const plans = retainDailyPlans(previous?.dailyPlans);
+      const old = previous?.dailyPlans;
+      if (old && typeof old === "object" && !Array.isArray(old) && Object.keys(old).length === Object.keys(plans).length && Object.keys(plans).every((day) => plans[day] === old[day])) return previous;
+      return { ...normalizeProgress(previous), dailyPlans: plans };
+    });
+  }, [setStored]);
   const [settings, setSettings] = useLocalStorageState("sparks_voice_v2", {
     lang: "en-GB",
     rate: 0.85,
@@ -1073,12 +1082,12 @@ export default function App() {
     clearTimeout(noticeTimer.current);
     noticeTimer.current = setTimeout(() => setNotice(""), 6000);
   }
-  function say(text, rate, onEnd, onError) {
+  function say(text, rate, onEnd, onError, lang) {
     const accepted = speakText(
       text,
       rate || settings.rate || 0.85,
       onEnd,
-      settings.lang || "en-GB",
+      lang || settings.lang || "en-GB",
       (error) => {
         showNotice("发音未成功播放，请检查浏览器语音与设备声音后重试。");
         onError?.(error);

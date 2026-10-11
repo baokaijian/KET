@@ -237,7 +237,9 @@ describe("daily load control", () => {
     expect(log.every((entry) => entry.reviewCount <= REVIEW_DAILY_LIMIT)).toBe(true);
     expect(log.every((entry) => entry.reviewCount >= 1)).toBe(true);
     expect(log.every((entry) => entry.newWords === 0)).toBe(true);
-    expect(summary.memoryKeys).toBe(1697);
+    // Completed flags alone cannot create "familiar" question evidence.
+    expect(summary.newQuestionRecords).toBe(0);
+    expect(summary.memoryKeys).toBe(1687);
     expect(progress.seen.length).toBe(1687);
     expect(progress.mastered.length).toBeGreaterThan(1000);
     // Documented trade-off: at a fixed 30-review day the fully learned 1687-word bank

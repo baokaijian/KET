@@ -42,7 +42,15 @@ export function separatedAssessment(item, date) {
   const latestPossibleTime = new Date(`${item.lastDay}T23:59:59.999`).getTime();
   return date.getTime() - latestPossibleTime >= minimumReviewIntervalMs;
 }
-export function normalizeProgress(value) {
+export const DAILY_PLAN_LIMIT = 90;
+export function retainDailyPlans(value, activeDay = localDay()) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  const entries = Object.entries(value).filter(([day, plan]) => validDay(day) && plan && typeof plan === "object" && !Array.isArray(plan) && plan.day === day);
+  const active = entries.find(([day]) => day === activeDay);
+  const recent = entries.filter(([day]) => day !== activeDay).sort(([a], [b]) => a.localeCompare(b)).slice(-(DAILY_PLAN_LIMIT - Number(Boolean(active))));
+  return Object.fromEntries(active ? [...recent, active] : recent);
+}
+export function normalizeProgress(value, date = new Date()) {
   const result = { ...emptyProgress };
   for (const key of ["seen", "mastered", "review", "completed", "sessions"])
     result[key] = Array.isArray(value?.[key]) ? value[key] : [];
@@ -65,7 +73,7 @@ export function normalizeProgress(value) {
       }));
     if (Object.keys(valid).length) result.memory[id] = valid;
   }
-  result.dailyPlans = value?.dailyPlans && typeof value.dailyPlans === "object" && !Array.isArray(value.dailyPlans) ? value.dailyPlans : {};
+  result.dailyPlans = retainDailyPlans(value?.dailyPlans, localDay(date));
   // Old single-answer mastery is not evidence of retention across days.
   result.mastered = result.mastered.filter((id) => retainedWord(result.memory[id]));
   return result;
@@ -84,7 +92,7 @@ export const reviewGaps = [1, 2, 4, 7, 16, 30, 60, 120, 180, 365];
 export const maxReviewStep = reviewGaps.length;
 
 export function recordEncounter(progress, id, date = new Date()) {
-  const p = normalizeProgress(progress);
+  const p = normalizeProgress(progress, date);
   const skills = { ...p.memory[id] };
   for (const skill of ["reading", "listening"]) {
     if (!skills[skill]) skills[skill] = { step: 0, due: dayAfter(date, 1), lastDay: localDay(date), successDays: [], lastCorrect: false, assessed: false };
@@ -93,7 +101,7 @@ export function recordEncounter(progress, id, date = new Date()) {
 }
 
 export function recordAnswer(progress, id, correct, date = new Date(), { skill = "reading", hinted = false } = {}) {
-  const p = normalizeProgress(progress);
+  const p = normalizeProgress(progress, date);
   const day = localDay(date);
   const unique = (items) => [...new Set(items)];
   const old = p.memory[id]?.[skill];
@@ -126,7 +134,7 @@ export function recordAnswer(progress, id, correct, date = new Date(), { skill =
 }
 
 export function dueReviews(progress, date = new Date()) {
-  const p = normalizeProgress(progress);
+  const p = normalizeProgress(progress, date);
   const day = localDay(date);
   return Object.entries(p.memory).flatMap(([id, skills]) => Object.entries(skills)
     .filter(([, item]) => item.due <= day && separatedAssessment(item, date)).map(([skill, item]) => ({ id, skill, ...item })))

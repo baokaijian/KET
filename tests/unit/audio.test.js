@@ -139,6 +139,15 @@ describe("audio effects", () => {
     expect(speechSynthesis.speak).not.toHaveBeenCalled();
   });
 
+  it.each([undefined, null, {}])("rejects an unavailable or incomplete speech API without throwing (%s)", async (api) => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { speakText } = await loadAudioModule(fakeContext, api);
+    expect(speakText("今天先听一听。", 0.9, null, "zh-CN")).toBe(false);
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(error).not.toHaveBeenCalled();
+    error.mockRestore();
+  });
+
   it("honors explicit British English and does not replace it with a US voice", async () => {
     const { speakText } = await loadAudioModule(fakeContext, speechSynthesis);
     speakText("banana", 0.85, null, "en-GB");

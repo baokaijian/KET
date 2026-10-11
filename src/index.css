@@ -223,6 +223,17 @@ button:not(:disabled):active {
 .section-heading h2 {
   font-size: 18px;
 }
+.daily-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.daily-title h2 {
+  margin: 0;
+}
+.daily-title .icon-button {
+  flex-shrink: 0;
+}
 .muted {
   font-size: 12px;
   color: var(--muted);
@@ -1615,7 +1626,7 @@ select {
 .story-sentences svg { flex-shrink: 0; }
 @media (max-width: 760px) {
   .daily-task-list article { grid-template-columns: 24px minmax(0, 1fr); gap: 12px; }
-  .daily-task-list article > button { grid-column: 2; justify-self: start; }
+  .daily-task-list article > button, .daily-task-list article > span { grid-column: 2; justify-self: start; }
   .child-theme-row > strong { width: 100%; }
   .child-theme-row .quiet-button { padding: 10px 12px; }
 }

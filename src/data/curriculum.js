@@ -80,7 +80,7 @@ export const checkpoints = levels.map((level) => ({
   questions: [
     ...grammarLessons.filter((lesson) => lesson.unit === level.id).flatMap((lesson) => lesson.questions).slice(0, 3),
     ...skillLessons.find((lesson) => lesson.unit === level.id).questions,
-  ],
+  ].map((question) => ({ ...question, id: `checkpoint-${level.id}-${question.id}`, sourceQuestionId: question.id })),
 }));
 
 export const curriculumUnits = levels.map((level) => ({

@@ -12,6 +12,7 @@
     "test:e2e": "playwright test",
     "test:functional": "npm run lint && npm run build && npm run test:data && npm run test:e2e && npm run test:pages",
     "test:acceptance": "npm run test:functional && npm run test:full-content",
+    "test:release": "npm run test:functional && npm run review:images",
     "test:pages": "node scripts/test-pages.mjs",
     "review:content": "node scripts/generate-content-review.mjs",
     "review:images": "node scripts/review-images.mjs",

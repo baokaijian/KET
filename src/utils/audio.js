@@ -208,7 +208,7 @@ export const speakText = (
   lang = null,
   onError = null,
 ) => {
-  if (!("speechSynthesis" in window)) {
+  if (typeof window === "undefined" || !window.speechSynthesis || typeof window.speechSynthesis.speak !== "function" || typeof SpeechSynthesisUtterance !== "function") {
     console.warn("SpeechSynthesis API not supported in this browser.");
     return false;
   }

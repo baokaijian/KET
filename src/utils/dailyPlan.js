@@ -1,4 +1,4 @@
-import { dueReviews, localDay, normalizeProgress, dayAfter, separatedAssessment } from "./learningProgress.js";
+import { dueReviews, localDay, normalizeProgress, dayAfter, separatedAssessment, retainDailyPlans } from "./learningProgress.js";
 import { getSpeakableWordText } from "./speechText.js";
 
 // These are teaching defaults chosen for a six-year-old's daily rhythm, not laws:
@@ -39,7 +39,7 @@ function forecastFrom(p, curriculum, date, days = FORECAST_DAYS) {
 }
 
 export function reviewLoadForecast(progress, curriculum, date = new Date(), days = FORECAST_DAYS) {
-  return forecastFrom(normalizeProgress(progress), curriculum, date, days);
+  return forecastFrom(normalizeProgress(progress, date), curriculum, date, days);
 }
 
 // A lesson can be re-read as "familiar" only when the child already answered all
@@ -135,7 +135,7 @@ function admitDeferredReviews(saved, due, memory) {
 }
 
 export function buildDailyPlan(progress, curriculum, date = new Date()) {
-  const p = normalizeProgress(progress);
+  const p = normalizeProgress(progress, date);
   const day = localDay(date);
   const saved = p.dailyPlans[day];
   if (storedPlanUsable(saved, day, curriculum)) return saved.deferredReviews?.length
@@ -165,16 +165,19 @@ export function buildDailyPlan(progress, curriculum, date = new Date()) {
   // A heavy queue is met with material the child already met: same questions, no new schedule.
   // This also applies on weekends, so an integration or light day never quietly adds nine
   // new comprehension questions while the queue is already over budget.
-  const familiar = ratio > CATCHUP_RATIO ? familiarLessons(p, curriculum, readingStage) : { sentencesLessonId: "", storyLessonId: "" };
-  const familiarReady = Boolean(familiar.sentencesLessonId || familiar.storyLessonId);
-  const sentencesLessonId = familiarReady ? familiar.sentencesLessonId : theme.sentences.id;
-  const storyLessonId = familiarReady ? familiar.storyLessonId : readingStage === 2 ? theme.longStory.id : theme.story.id;
+  const recovery = ratio > CATCHUP_RATIO;
+  const familiar = recovery || light ? familiarLessons(p, curriculum, readingStage) : { sentencesLessonId: "", storyLessonId: "" };
+  const sentencesLessonId = light || integration ? "" : recovery ? familiar.sentencesLessonId : theme.sentences.id;
+  const storyLessonId = recovery || light ? familiar.storyLessonId : readingStage === 2 ? theme.longStory.id : theme.story.id;
+  const familiarReady = (recovery || light) && Boolean(sentencesLessonId || storyLessonId);
   const offered = [sentencesLessonId, storyLessonId].filter(Boolean)
     .map((id) => curriculum.childLessons.find((lesson) => lesson.id === id)).filter(Boolean);
   const newQuestions = offered.reduce((sum, lesson) => sum + lesson.questions.filter((question) => !p.memory[question.id]).length, 0);
+  const readingTheme = !newWords.length && familiarReady
+    ? curriculum.childThemes.find((item) => [item.story.id, item.longStory.id].includes(storyLessonId)) || theme : theme;
   return {
     day,
-    themeId: theme.id,
+    themeId: readingTheme.id,
     readingStage,
     vocabularyLessonId: vocabulary?.id || "",
     newWords,
@@ -216,8 +219,8 @@ export function dailyVocabularyLesson(plan, theme, curriculum, progress) {
 }
 
 export function saveDailyPlan(progress, plan) {
-  const p = normalizeProgress(progress);
-  return { ...p, dailyPlans: { ...p.dailyPlans, [plan.day]: plan } };
+  const p = normalizeProgress(progress, new Date(`${plan.day}T12:00:00`));
+  return { ...p, dailyPlans: retainDailyPlans({ ...p.dailyPlans, [plan.day]: plan }, plan.day) };
 }
 
 // The day's review is split into fixed batches. A batch keeps its members, its

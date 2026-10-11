@@ -22,6 +22,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test:data
+      - run: npm run review:images
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - run: npm run test:pages

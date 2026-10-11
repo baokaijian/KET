@@ -287,15 +287,15 @@ describe("daily plan", () => {
     expect(sentencesPlan.storyLessonId).toBe("");
     expect(sentencesPlan.newQuestions).toBe(0);
   });
-  it("counts the reading questions a weekend still offers instead of reporting zero", () => {
+  it("counts Saturday's single story and keeps Sunday free of new comprehension questions", () => {
     const saturday = buildDailyPlan({ ...emptyProgress, seen: ["l2_apple"] }, curriculum, date(17));
     expect(saturday.mode).toBe("story");
     expect(saturday.newWords).toEqual([]);
-    expect(saturday.newQuestions).toBe(9);
+    expect(saturday.newQuestions).toBe(3);
     const sunday = buildDailyPlan({ ...emptyProgress, seen: ["l2_apple"] }, curriculum, date(18));
     expect(sunday.mode).toBe("light");
     expect(sunday.newWords).toEqual([]);
-    expect(sunday.newQuestions).toBe(9);
+    expect(sunday.newQuestions).toBe(0);
   });
   it("keeps parent typing practice out of the child load forecast and the intake decision", () => {
     const typing = Object.values(course.courseQuestionById).filter((q) => ["input", "spelling"].includes(q.type));
@@ -337,7 +337,7 @@ describe("daily plan", () => {
     expect(plan.newWords).toHaveLength(2);
     expect(plan.newWords.every((id) => !seen.includes(id))).toBe(true);
     expect(plan.mode).toBe("learn");
-    expect(plan.newQuestions).toBe(9);
+    expect(plan.newQuestions).toBe(0);
   });
   it("forecasts the next seven days of already-scheduled load", () => {
     let p = emptyProgress;
