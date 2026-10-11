@@ -10,6 +10,7 @@ import { clothesImages } from "../../src/data/clothes-images.js";
 import { weatherImages } from "../../src/data/weather-images.js";
 import { bodyImages } from "../../src/data/body-images.js";
 import { shoppingImages } from "../../src/data/shopping-images.js";
+import { dayImages } from "../../src/data/day-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 
 test.beforeEach(async ({ page }) => {
@@ -204,7 +205,7 @@ for (const failure of ["missing", "silent"]) test(`listening can be skipped safe
   await expect(page.locator(".practice-header")).toContainText("2 /");
 });
 
-for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"], ["clothes", clothesImages, "l8_dress"], ["weather", weatherImages, "l2_cold"], ["body", bodyImages, "l12_mouth"], ["shopping", shoppingImages, "l5_shop"], ["travel", wordImages, "l12_stop"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
+for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"], ["clothes", clothesImages, "l8_dress"], ["weather", weatherImages, "l2_cold"], ["body", bodyImages, "l12_mouth"], ["shopping", shoppingImages, "l5_shop"], ["travel", wordImages, "l12_stop"], ["day", dayImages, "l2_dinner"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
   await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   const theme = childThemes.find((item) => item.id === themeId);
   const completed = childThemes.slice(0, childThemes.indexOf(theme));
@@ -257,6 +258,10 @@ for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sist
   }
   if (themeId === "clothes") await expect(page.getByRole("dialog")).toContainText("穿衣");
   if (themeId === "weather") await expect(page.getByRole("dialog")).toContainText("感冒");
+  if (themeId === "day") {
+    await expect(page.getByRole("dialog")).toContainText("也可在中午吃");
+    await expect(page.getByRole("dialog")).toContainText("照片对应：正餐（此处为晚餐）");
+  }
   if (themeId === "travel") {
     await expect(page.getByRole("dialog")).toContainText("停靠站");
     await expect(page.getByRole("dialog")).toContainText("照片对应：停下（动词）");

@@ -13,7 +13,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 1 | feelings_descriptions | l1_able | able | adj. 形容词 | able | not published | 能够的 | not published | provided | pending |  |
 | 1 | daily_starters | l1_about | about | adv. 副词 / prep. 介词 | about | not published | 关于；大约（如 about ten 大约十） | not published | provided | pending |  |
 | 1 | family_friends | l1_adult | adult | adj. 形容词 / n. 名词 | adult | not published | 成年人（名词）；成年的（形容词） | not published | provided | pending |  |
-| 1 | time_calendar | l1_afternoon | afternoon | n. 名词 | afternoon | not published | 下午 | not published | provided | pending |  |
+| 1 | time_calendar | l1_afternoon | afternoon | n. 名词 | afternoon | not published | 下午 | word-images/l1_afternoon.webp | provided | pending |  |
 | 1 | daily_starters | l1_again | again | adv. 副词 | again | not published | 再一次 | not published | provided | pending |  |
 | 1 | family_friends | l1_age | age | n. 名词 | age | not published | 年龄 | not published | provided | pending |  |
 | 1 | daily_starters | l1_all | all | adv. 副词 / det. 限定词 / pron. 代词 | all | not published | 全部 | not published | provided | pending |  |
@@ -36,7 +36,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 1 | family_friends | l1_child | child | n. 名词 | child | not published | 儿童 | not published | provided | pending |  |
 | 1 | daily_starters | l1_could | could | modal v. 情态动词 | could | not published | 能；可以；can 的过去式，也用于礼貌请求 | not published | provided | pending |  |
 | 1 | daily_starters | l1_do | do | aux. 助动词 / v. 动词 | do | not published | 做；助动词（用于一般现在时的疑问、否定或强调） | not published | provided | pending |  |
-| 1 | time_calendar | l1_evening | evening | n. 名词 | evening | not published | 傍晚/晚上 | not published | provided | pending |  |
+| 1 | time_calendar | l1_evening | evening | n. 名词 | evening | not published | 傍晚；晚上（夜间较早的时候） | word-images/l1_evening.webp | provided | pending |  |
 | 1 | family_friends | l1_girl | girl | n. 名词 | girl | not published | 女孩 | not published | provided | pending |  |
 | 1 | family_friends | l1_guy | guy | n. 名词 | guy | not published | 人；家伙（口语，常指男子） | not published | provided | pending |  |
 | 1 | school_library | l1_half | half | det. 限定词 / n. 名词 / pron. 代词 | half | not published | 一半 | not published | provided | pending |  |
@@ -54,11 +54,11 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 1 | time_calendar | l1_midnight | midnight | n. 名词 | midnight | not published | 午夜；半夜十二点 | not published | provided | pending |  |
 | 1 | time_calendar | l1_minute | minute | n. 名词 | minute | not published | 分钟 | not published | provided | pending |  |
 | 1 | time_calendar | l1_monthly | monthly | adj. 形容词 / adv. 副词 | monthly | not published | 每月的；每月一次地 | not published | provided | pending |  |
-| 1 | time_calendar | l1_morning | morning | n. 名词 | morning | not published | 早上 | not published | provided | pending |  |
+| 1 | time_calendar | l1_morning | morning | n. 名词 | morning | not published | 早晨；上午 | word-images/l1_morning.webp | provided | pending |  |
 | 1 | daily_starters | l1_name | name | n. 名词 | name | not published | 名字 | not published | provided | pending |  |
 | 1 | daily_starters | l1_need | need | v. 动词 | need | not published | 需要 | not published | provided | pending |  |
 | 1 | feelings_descriptions | l1_nice | nice | adj. 形容词 | nice | not published | 好的/和蔼的 | not published | provided | pending |  |
-| 1 | time_calendar | l1_night | night | n. 名词 | night | not published | 夜晚 | not published | provided | pending |  |
+| 1 | time_calendar | l1_night | night | n. 名词 | night | not published | 夜晚 | word-images/l1_night.webp | provided | pending |  |
 | 1 | daily_starters | l1_no | no | adv. 副词 / det. 限定词 / pron. 代词 | no | not published | 不；没有 | not published | provided | pending |  |
 | 1 | time_calendar | l1_noon | noon | n. 名词 | noon | not published | 中午 | not published | provided | pending |  |
 | 1 | daily_starters | l1_not | not | adv. 副词 | not | not published | 不 | not published | provided | pending |  |
@@ -115,7 +115,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | body_health | l2_brain | brain | n. 名词 | brain | not published | 大脑 | not published | provided | pending |  |
 | 2 | food_cafe | l2_bread | bread | n. 名词 | bread | /bred/ | 面包 | word-images/l2_bread.webp | provided | pending |  |
 | 2 | daily_starters | l2_break | break | n. 名词 / v. 动词 | break | not published | 休息；打破 | not published | provided | pending |  |
-| 2 | food_cafe | l2_breakfast | breakfast | n. 名词 | breakfast | not published | 早餐 | not published | provided | pending |  |
+| 2 | food_cafe | l2_breakfast | breakfast | n. 名词 | breakfast | not published | 早餐 | word-images/l2_breakfast.webp | provided | pending |  |
 | 2 | food_cafe | l2_burger | burger | n. 名词 | burger | not published | 汉堡包 | not published | provided | pending |  |
 | 2 | food_cafe | l2_butter | butter | n. 名词 | butter | not published | 黄油 | not published | provided | pending |  |
 | 2 | food_cafe | l2_cafe_caf | cafe / café | n. 名词 | cafe or café | not published | 咖啡馆；小餐馆（两种拼写） | not published | provided | pending |  |
@@ -147,7 +147,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | food_cafe | l2_delicious | delicious | adj. 形容词 | delicious | not published | 美味的 | not published | provided | pending |  |
 | 2 | food_cafe | l2_dessert | dessert | n. 名词 | dessert | not published | 餐后甜点 | not published | provided | pending |  |
 | 2 | body_health | l2_die | die | v. 动词 | die | not published | 死亡；死去 | not published | provided | pending |  |
-| 2 | food_cafe | l2_dinner | dinner | n. 名词 | dinner | not published | 晚餐 | not published | provided | pending |  |
+| 2 | food_cafe | l2_dinner | dinner | n. 名词 | dinner | not published | 正餐（通常是晚餐，也可在中午吃） | word-images/l2_dinner.webp | provided | pending |  |
 | 2 | food_cafe | l2_dish | dish | n. 名词 | dish | not published | 盘子；一道菜 | not published | provided | pending |  |
 | 2 | body_health | l2_doctor | doctor | n. 名词 | doctor | not published | 医生 | word-images/l2_doctor.webp | provided | pending |  |
 | 2 | food_cafe | l2_drink | drink | n. 名词 / v. 动词 | drink | not published | 饮料；喝 | not published | provided | pending |  |
@@ -188,7 +188,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | body_health | l2_leg | leg | n. 名词 | leg | not published | 腿 | word-images/l2_leg.webp | provided | pending |  |
 | 2 | food_cafe | l2_lemon | lemon | n. 名词 | lemon | not published | 柠檬 | not published | provided | pending |  |
 | 2 | food_cafe | l2_lemonade | lemonade | n. 名词 | lemonade | not published | 柠檬饮料 | not published | provided | pending |  |
-| 2 | food_cafe | l2_lunch | lunch | n. 名词 | lunch | not published | 午餐 | not published | provided | pending |  |
+| 2 | food_cafe | l2_lunch | lunch | n. 名词 | lunch | not published | 午餐 | word-images/l2_lunch.webp | provided | pending |  |
 | 2 | food_cafe | l2_meal | meal | n. 名词 | meal | not published | 一餐 | not published | provided | pending |  |
 | 2 | food_cafe | l2_meat | meat | n. 名词 | meat | not published | 肉；食用的肉 | not published | provided | pending |  |
 | 2 | body_health | l2_medicine | medicine | n. 名词 | medicine | not published | 药 | word-images/l2_medicine.webp | provided | pending |  |
@@ -1530,7 +1530,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | sports_hobbies | l12_skateboarding | skateboarding | n. 名词 | skateboarding | not published | 滑板运动 | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_skating | skating | n. 名词 | skating | not published | 滑冰；溜冰活动 | not published | provided | pending |  |
 | 12 | clothes | l12_skirt | skirt | n. 名词 | skirt | not published | 短裙 | word-images/l12_skirt.webp | provided | pending |  |
-| 12 | home_room | l12_sleep | sleep | v. 动词 | sleep | not published | 睡觉 | not published | provided | pending |  |
+| 12 | home_room | l12_sleep | sleep | v. 动词 | sleep | not published | 睡觉 | word-images/l12_sleep.webp | provided | pending |  |
 | 12 | feelings_descriptions | l12_slim | slim | adj. 形容词 | slim | not published | 苗条的 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_slowly | slowly | adv. 副词 | slowly | not published | 缓慢地；慢慢地 | not published | provided | pending |  |
 | 12 | body_health | l12_smoke | smoke | v. 动词 | smoke | not published | 烟；冒烟；吸烟 | not published | provided | pending |  |

@@ -8,6 +8,7 @@ import { weatherImages } from "./weather-images.js";
 import { bodyImages } from "./body-images.js";
 import { shoppingImages } from "./shopping-images.js";
 import { travelImages } from "./travel-images.js";
+import { dayImages } from "./day-images.js";
 
 export const additionalImages = {
   ...familyImages,
@@ -19,6 +20,7 @@ export const additionalImages = {
   ...bodyImages,
   ...shoppingImages,
   ...travelImages,
+  ...dayImages,
   l12_pen: { src: "word-images/l12_pen.webp", alt: "pen: an uncapped fountain pen with a visible metal nib and its cap beside it", meaning: "钢笔", reviewStatus: "pass", sha256: "66685096bd5d51b03b0f6b3b945aaaa13c7874ec074488bcdf8aa103d642d25a", note: "Visible fountain-pen nib and separate cap distinguish the pen from a graphite pencil or felt-tip marker." },
   l4_desk: { src: "word-images/l4_desk.webp", alt: "desk: a wooden writing desk with drawers, one drawer partly open", meaning: "书桌", reviewStatus: "pass", sha256: "c2f6af9f921b2367ca23977f275084051356b90c3e6d0567230d5211c90012de", note: "The writing surface and built-in drawers clearly identify a study desk, not a dining table." },
   l4_teacher: { src: "word-images/l4_teacher.webp", alt: "teacher: a school teacher showing a picture book to children seated at classroom desks", meaning: "老师", reviewStatus: "pass", sha256: "e382bf04c21bf4dbfe33e15328d876d5db4575f798eaa51ea67ba0be8aa1a710", note: "An adult leading a picture-book lesson, pupils at school desks and a classroom board establish the teacher's role." },

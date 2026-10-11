@@ -1,4 +1,4 @@
-# 词性与释义证据复核（购物与出行照片批次）
+# 词性与释义证据复核（购物、出行与一天照片批次）
 
 这是主任务对 Antigravity 报告线索的独立复核，不是 1687 词教师签字验收。英文与原始词性记录仍保留在官方元数据中，教学标签覆盖单独写入 `vocabulary-corrections.js`；中文解释为项目原创简述，不复制词典例句。
 
@@ -41,3 +41,13 @@
 | road | “道路；马路”，覆盖供车辆行驶的路面 | [Cambridge Learner's Dictionary](https://dictionary.cambridge.org/dictionary/learner-english/road) 的道路名词义；照片有铺装路面、中心线及独立人行道，不用公园小径代替 |
 
 bus 与 bicycle 的照片文件未改变，主任务再次查看后，把图片例句改为可见的红色公交车、两个车轮；原“上学”“去公园”仍在儿童句子课语境中，不让静物图承担看不到的目的地信息。train/stop 新增名词、动词完整性回归；出行八词检查图片、双语短句和朗读文本。
+
+## 一天批次补充
+
+| 单词 | 本批处理 | 独立核实依据与边界 |
+| --- | --- | --- |
+| morning | 从“早上”补全为“早晨；上午” | [Cambridge Learner's Dictionary](https://dictionary.cambridge.org/us/dictionary/learner-english/morning) 指起床或日出后直到中午的时段；图中 7:00 AM 是一个例子，不定义所有人的起床时间 |
+| evening | “傍晚；晚上（夜间较早的时候）”，与 night 区分 | [Cambridge Learner's Dictionary](https://dictionary.cambridge.org/us/dictionary/learner-english/evening) 定义为下午与夜间之间；7:00 PM、暮色与家庭阅读是具体场景，不宣称各地七点都日落 |
+| dinner | “正餐（通常是晚餐，也可在中午吃）”，不只解释晚餐 | [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english/dinner) 包括晚间或中午的主要一餐；照片指定为晚餐，6:00 PM 是示例而非固定课程要求 |
+
+afternoon、night、breakfast、lunch、sleep 保留原有正确常用释义与官方词性。八张照片各用独立场景；时间由实际钟面、双语短句与照片词义共同明确。三餐不以某种食物来定义，sleep 显示闭眼躺在床上睡觉，不与夜景图混用。本批仍不是独立教师逐词语义签字或真实声音验收。

@@ -142,6 +142,23 @@
 
 共同限制：一个词一张专属照片，不同词不共用照片。人物身体完整，停车与候车情境明确安全；无图标、拼图或水印。火车票允许真实物体上的用途文字，行人信号允许照片内实体信号，不把写出的单词或符号独自当成图片语义证据。
 
+## 一天主题（2026-10-11）
+
+八词分别调用内置 imagegen；晚餐初图的钟太小，另调用一次局部修改，将钟移至前景放大并移除后方小钟。所有最终照片均实际查看，再用 Sharp 转为 640 × 640 WebP，未使用网络图片或共享图裁剪。完整生成提示词、晚餐修正提示词、双语短句、alt、视觉依据与最终哈希在 `src/data/day-images.js`。
+
+| 单词 | 最终资产 | 实际视觉复核 |
+| --- | --- | --- |
+| morning | public/word-images/l1_morning.webp | 孩子在日光下拉开卧室窗帘；前景钟清楚显示 7:00 AM。 |
+| afternoon | public/word-images/l1_afternoon.webp | 孩子在日光下书桌前画画；钟显示 3:00 PM，区别于早晨拉窗帘。 |
+| evening | public/word-images/l1_evening.webp | 成人与孩子在沙发上看绘本，窗外暮色、室内灯光，钟为 7:00 PM。 |
+| night | public/word-images/l1_night.webp | 安静房间有灯光，窗外深色天空、月亮与星星，钟为 10:00 PM；没有孩子熬夜。 |
+| breakfast | public/word-images/l2_breakfast.webp | 孩子在家吃麦片粥、吐司，旁有牛奶；8:00 AM 明确为早餐示例。 |
+| lunch | public/word-images/l2_lunch.webp | 学校用餐场景、打开的饭盒、米饭和蔬菜，钟为 12:00 PM。 |
+| dinner | public/word-images/l2_dinner.webp | 家人在暮色中共进正餐；修正后前景钟为 6:00 PM 且无重复钟，仅发布 fixed 修正版。 |
+| sleep | public/word-images/l12_sleep.webp | 孩子穿睡衣躺在床上，双眼闭合、头枕枕头、手放松，明确睡觉动作。 |
+
+钟面数字与 AM/PM 已逐张核对；钟是照片中的实体，不是写着单词的覆盖标签。活动或食物不独自代表时间定义，照片时刻只是例子，完整释义与指定照片含义分开展示。原始 PNG 保留在本机 Codex 的 generated_images 目录，失败的晚餐初图不进入发布包。
+
 ## 后续完整队列
 
 `src/data/word-image-plans.js` 为全部 1687 个词建立唯一文件路径、指定 KET 词义、词性、教学场景和逐词提示词。该队列只用于制作，不把提示词视作图片已存在的证明，不自动写入通过状态。抽象词必须继续检查生成场景是否真的能表达其含义。

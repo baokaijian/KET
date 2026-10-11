@@ -1,6 +1,6 @@
 # 单词与图片复核
 
-图片范围：95 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1592 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：103 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1584 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
@@ -14,7 +14,7 @@
 | l1_able | able | 能够的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_about | about | 关于；大约（如 about ten 大约十） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_adult | adult | 成年人（名词）；成年的（形容词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_afternoon | afternoon | 下午 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l1_afternoon | afternoon | 下午 | 下午（图中为三点） | word-images/l1_afternoon.webp / afternoon: a child draws at a desk in daylight beside a clock showing 3:00 PM | pass | Drawing in daylight and a legible 3:00 PM clock establish an afternoon example; the activity alone does not define the time. |
 | l1_again | again | 再一次 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_age | age | 年龄 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_all | all | 全部 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -37,7 +37,7 @@
 | l1_child | child | 儿童 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_could | could | 能；可以；can 的过去式，也用于礼貌请求 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_do | do | 做；助动词（用于一般现在时的疑问、否定或强调） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_evening | evening | 傍晚/晚上 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l1_evening | evening | 傍晚；晚上（夜间较早的时候） | 傍晚；晚上（图中为七点） | word-images/l1_evening.webp / evening: an adult and child read on a sofa at dusk beside a clock showing 7:00 PM | pass | Reading together, lamplight, dusk and a 7:00 PM clock establish early evening; sunset timing is not universal. |
 | l1_girl | girl | 女孩 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_guy | guy | 人；家伙（口语，常指男子） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_half | half | 一半 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -55,11 +55,11 @@
 | l1_midnight | midnight | 午夜；半夜十二点 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_minute | minute | 分钟 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_monthly | monthly | 每月的；每月一次地 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_morning | morning | 早上 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l1_morning | morning | 早晨；上午 | 早晨；上午（图中为七点） | word-images/l1_morning.webp / morning: a child opens bedroom curtains in daylight beside a clock showing 7:00 AM | pass | Bright daylight, opening curtains and a legible 7:00 AM clock establish a morning example, not a universal wake-up time. |
 | l1_name | name | 名字 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_need | need | 需要 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_nice | nice | 好的/和蔼的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_night | night | 夜晚 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l1_night | night | 夜晚 | 夜晚（图中为晚上十点） | word-images/l1_night.webp / night: a quiet lit room with a dark sky and moon outside, and a clock showing 10:00 PM | pass | Dark sky and moon outside a quiet lit room with 10:00 PM distinguish night from the brighter dusk scene; no child is depicted staying up. |
 | l1_no | no | 不；没有 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_noon | noon | 中午 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_not | not | 不 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -116,7 +116,7 @@
 | l2_brain | brain | 大脑 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_bread | bread | 面包 | 面包 | word-images/l2_bread.webp / A loaf of bread with cut slices. | pass | Bread loaf and slices, crust and crumb visible; not a cake. |
 | l2_break | break | 休息；打破 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_breakfast | breakfast | 早餐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_breakfast | breakfast | 早餐 | 早餐（图中为上午八点） | word-images/l2_breakfast.webp / breakfast: a child eats porridge, toast and milk at home beside a clock showing 8:00 AM | pass | A child eats a morning meal beside a clearly readable 8:00 AM clock; porridge, toast and milk are examples, not requirements for breakfast. |
 | l2_burger | burger | 汉堡包 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_butter | butter | 黄油 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_cafe_caf | cafe / café | 咖啡馆；小餐馆（两种拼写） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -148,7 +148,7 @@
 | l2_delicious | delicious | 美味的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_dessert | dessert | 餐后甜点 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_die | die | 死亡；死去 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_dinner | dinner | 晚餐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_dinner | dinner | 正餐（通常是晚餐，也可在中午吃） | 正餐（此处为晚餐） | word-images/l2_dinner.webp / dinner: a family shares an evening meal at home beside a clock showing 6:00 PM | fixed | The original rear clock was too small. The edited large foreground clock reads 6:00 PM, the rear clock is removed, and the family meal and dusk remain. This illustrates an evening dinner, not every possible dinner time. |
 | l2_dish | dish | 盘子；一道菜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_doctor | doctor | 医生 | 医生 | word-images/l2_doctor.webp / doctor: a doctor listening to a fully dressed child's chest with a stethoscope during a clinic checkup | pass | Clinical examination equipment and visible stethoscope examination establish the teaching scene; the caption identifies the doctor role, not gender or appearance alone. |
 | l2_drink | drink | 饮料；喝 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -189,7 +189,7 @@
 | l2_leg | leg | 腿 | 腿 | word-images/l2_leg.webp / leg: one human leg from blue shorts through the knee and ankle to a white shoe | pass | A clothed person's thigh, knee, shin and ankle are visible above the complete shoe; the leg, not the shoe, is dominant. |
 | l2_lemon | lemon | 柠檬 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_lemonade | lemonade | 柠檬饮料 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_lunch | lunch | 午餐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_lunch | lunch | 午餐 | 午餐（图中为中午十二点） | word-images/l2_lunch.webp / lunch: a child eats from a lunchbox in a school dining room beside a clock showing 12:00 PM | pass | Lunchbox, school dining tables and a legible 12:00 PM clock show a midday meal, not another generic food still life. |
 | l2_meal | meal | 一餐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_meat | meat | 肉；食用的肉 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_medicine | medicine | 药 | 药 | word-images/l2_medicine.webp / medicine: a closed brown medicine bottle and a sealed blister pack of white tablets on a clinical tray | pass | A capped medicine bottle and intact tablet blister packaging distinguish medicine from food or drink; no child, loose pills, dosage or consumption instruction. |
@@ -1531,7 +1531,7 @@
 | l12_skateboarding | skateboarding | 滑板运动 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_skating | skating | 滑冰；溜冰活动 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_skirt | skirt | 短裙 | 短裙 | word-images/l12_skirt.webp / skirt: one green standalone skirt with an elastic waistband and a hem | pass | The waistband and skirt hem are visible without a bodice, sleeves or neckline, unlike the one-piece dress. |
-| l12_sleep | sleep | 睡觉 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_sleep | sleep | 睡觉 | 睡觉（动词） | word-images/l12_sleep.webp / sleep: a child lies asleep in bed with closed eyes and a head resting on a pillow | pass | Both eyes are visibly closed, the face and hand relaxed, the head rests on a pillow and the clothed body is under a blanket; the action is sleep, not lying awake. |
 | l12_slim | slim | 苗条的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_slowly | slowly | 缓慢地；慢慢地 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_smoke | smoke | 烟；冒烟；吸烟 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |

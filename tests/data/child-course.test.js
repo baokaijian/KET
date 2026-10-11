@@ -16,6 +16,7 @@ import { weatherImages } from "../../src/data/weather-images.js";
 import { bodyImages } from "../../src/data/body-images.js";
 import { shoppingImages } from "../../src/data/shopping-images.js";
 import { travelImages } from "../../src/data/travel-images.js";
+import { dayImages } from "../../src/data/day-images.js";
 import { learningWords } from "../../src/data/learning.js";
 import { dictionaryEntry } from "../../src/data/learning.js";
 
@@ -119,6 +120,30 @@ describe("whole-bank meaning, POS and theme regressions", () => {
   });
 });
 describe("six-year-old listening and reading", () => {
+  it("gives every word in all twelve child themes its own reviewed photograph", () => {
+    expect(childThemes).toHaveLength(12);
+    const words = [...new Map(childThemes.flatMap((theme) => theme.vocabulary.words).map((word) => [word.id, word])).values()];
+    expect(words).toHaveLength(95);
+    expect(new Set(words.map((word) => word.image.src)).size).toBe(words.length);
+    for (const word of words) {
+      expect(["pass", "fixed"], word.word).toContain(word.image.reviewStatus);
+      expect(word.image.alt.toLowerCase(), word.word).toContain(word.word.toLowerCase());
+    }
+  });
+  it("distinguishes daytime, night, meals and sleeping without treating example hours as definitions", () => {
+    const find = (name) => dictionaryEntry(allKetWords.find((word) => word.word === name));
+    const times = { l1_morning: "7:00 AM", l1_afternoon: "3:00 PM", l1_evening: "7:00 PM", l1_night: "10:00 PM", l2_breakfast: "8:00 AM", l2_lunch: "12:00 PM", l2_dinner: "6:00 PM" };
+    for (const [id, time] of Object.entries(times)) expect(dayImages[id].alt, id).toContain(time);
+    expect(new Set(Object.values(dayImages).map((image) => image.sha256)).size).toBe(8);
+    expect(find("morning").translation).toBe("早晨；上午");
+    expect(find("evening").translation).toContain("夜间较早");
+    expect(find("dinner").translation).toContain("也可在中午吃");
+    expect(dayImages.l2_dinner.meaning).toBe("正餐（此处为晚餐）");
+    expect(dayImages.l2_dinner.reviewStatus).toBe("fixed");
+    expect(dayImages.l2_dinner.refinementPrompt).toContain("6:00 PM");
+    expect(find("sleep").partOfSpeech).toEqual(["v"]);
+    expect(dayImages.l12_sleep.alt).toContain("closed eyes");
+  });
   it("provides all eight travel words with distinct reviewed photographs and speakable examples", () => {
     const words = childThemes.find((theme) => theme.id === "travel").vocabulary.words;
     expect(Object.keys(travelImages).sort()).toEqual(words.filter((word) => !["bus", "bicycle"].includes(word.word)).map((word) => word.id).sort());
@@ -157,7 +182,7 @@ describe("six-year-old listening and reading", () => {
     expect(find("road").translation).toBe("道路；马路");
     expect(new Set(Object.values(travelImages).map((image) => image.sha256)).size).toBe(6);
   });
-  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages], ["clothes", clothesImages], ["weather", weatherImages], ["body", bodyImages], ["shopping", shoppingImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
+  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages], ["clothes", clothesImages], ["weather", weatherImages], ["body", bodyImages], ["shopping", shoppingImages], ["day", dayImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
     const words = childThemes.find((theme) => theme.id === themeId).vocabulary.words;
     expect(Object.keys(images).sort()).toEqual(words.map((word) => word.id).sort());
     for (const word of words) {
