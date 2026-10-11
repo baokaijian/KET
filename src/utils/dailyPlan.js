@@ -1,4 +1,4 @@
-import { dueReviews, localDay, normalizeProgress, dayAfter } from "./learningProgress.js";
+import { dueReviews, localDay, normalizeProgress, dayAfter, separatedAssessment } from "./learningProgress.js";
 import { getSpeakableWordText } from "./speechText.js";
 
 // These are teaching defaults chosen for a six-year-old's daily rhythm, not laws:
@@ -87,6 +87,9 @@ function storedPlanUsable(saved, day, curriculum) {
   if (!lessonKnown(saved.sentencesLessonId) || !lessonKnown(saved.storyLessonId)) return false;
   if (saved.reviewLimit !== undefined && saved.reviewLimit !== REVIEW_DAILY_LIMIT) return false;
   if (saved.batchSize !== undefined && saved.batchSize !== REVIEW_BATCH_SIZE) return false;
+  if (saved.deferredReviews !== undefined && (!Array.isArray(saved.deferredReviews) ||
+    !saved.deferredReviews.every((item) => item && ["reading", "listening"].includes(item.skill) && childReviewAllowed(item.id, curriculum)))) return false;
+  if (saved.reviewBatchEnds !== undefined && (!validBatchEnds(saved.reviewBatchEnds, saved.review.length, saved.batchSize ?? REVIEW_BATCH_SIZE) || saved.reviewBatchEnds.length > Math.ceil(REVIEW_DAILY_LIMIT / REVIEW_BATCH_SIZE))) return false;
   if (saved.forecast !== undefined && (!Array.isArray(saved.forecast) || saved.forecast.length !== FORECAST_DAYS ||
     !saved.forecast.every((value) => Number.isInteger(value) && value >= 0))) return false;
   if (saved.pressure !== undefined && (!Number.isInteger(saved.pressure) || saved.pressure < 0)) return false;
@@ -96,12 +99,50 @@ function storedPlanUsable(saved, day, curriculum) {
   return true;
 }
 
+function validBatchEnds(ends, total, size) {
+  return Array.isArray(ends) && (total ? ends.at(-1) === total : ends.length === 0) &&
+    ends.every((end, index) => Number.isInteger(end) && end > (ends[index - 1] || 0) && end - (ends[index - 1] || 0) <= size);
+}
+
+export function reviewBatches(plan, batchSize = REVIEW_BATCH_SIZE) {
+  const items = Array.isArray(plan.review) ? plan.review : [];
+  const size = plan.batchSize ?? batchSize;
+  const ends = validBatchEnds(plan.reviewBatchEnds, items.length, size) ? plan.reviewBatchEnds
+    : Array.from({ length: Math.ceil(items.length / size) }, (_, index) => Math.min((index + 1) * size, items.length));
+  return ends.map((end, index) => items.slice(ends[index - 1] || 0, end));
+}
+
+function admitDeferredReviews(saved, due, memory) {
+  const key = (item) => `${item.id}:${item.skill}`;
+  const existing = new Set(saved.review.map(key));
+  const pending = (saved.deferredReviews || []).filter((item) => !existing.has(key(item)) && memory[item.id]?.[item.skill]?.due <= saved.day);
+  const deferred = new Set(pending.map(key));
+  const ready = due.filter((item) => deferred.has(key(item)) && !existing.has(key(item)));
+  const batches = reviewBatches(saved);
+  const batchSize = saved.batchSize ?? REVIEW_BATCH_SIZE;
+  const limit = saved.reviewLimit ?? REVIEW_DAILY_LIMIT;
+  const slots = Math.min(limit - saved.review.length, Math.max(0, Math.ceil(limit / batchSize) - batches.length) * batchSize);
+  const added = ready.slice(0, slots).map(({ id, skill }) => ({ id, skill }));
+  const review = [...saved.review, ...added];
+  for (const item of added) existing.add(key(item));
+  const deferredReviews = pending.filter((item) => !existing.has(key(item)));
+  const backlog = new Set([...due, ...deferredReviews].filter((item) => !existing.has(key(item))).map(key)).size;
+  if (!added.length) return backlog === saved.backlog && pending.length === saved.deferredReviews.length ? saved : { ...saved, deferredReviews, backlog };
+  // Append new groups, never fill or reorder a partly used existing batch.
+  const newBatches = reviewBatches({ review: added, batchSize });
+  const reviewBatchEnds = [...batches, ...newBatches].reduce((ends, batch) => [...ends, (ends.at(-1) || 0) + batch.length], []);
+  return { ...saved, review, reviewBatchEnds, deferredReviews, backlog };
+}
+
 export function buildDailyPlan(progress, curriculum, date = new Date()) {
   const p = normalizeProgress(progress);
   const day = localDay(date);
   const saved = p.dailyPlans[day];
-  if (storedPlanUsable(saved, day, curriculum)) return saved;
+  if (storedPlanUsable(saved, day, curriculum)) return saved.deferredReviews?.length
+    ? admitDeferredReviews(saved, dueReviews(p, date).filter((item) => childReviewAllowed(item.id, curriculum)), p.memory) : saved;
   const due = dueReviews(p, date).filter((item) => childReviewAllowed(item.id, curriculum));
+  const deferredReviews = Object.entries(p.memory).flatMap(([id, skills]) => childReviewAllowed(id, curriculum)
+    ? Object.entries(skills).filter(([, item]) => item.due <= day && !separatedAssessment(item, date)).map(([skill]) => ({ id, skill })) : []);
   const forecast = forecastFrom(p, curriculum, date, FORECAST_DAYS);
   const pressure = Math.max(due.length, ...forecast);
   const ratio = pressure / REVIEW_DAILY_LIMIT;
@@ -138,9 +179,10 @@ export function buildDailyPlan(progress, curriculum, date = new Date()) {
     vocabularyLessonId: vocabulary?.id || "",
     newWords,
     review: due.slice(0, REVIEW_DAILY_LIMIT).map(({ id, skill }) => ({ id, skill })),
+    deferredReviews,
     reviewLimit: REVIEW_DAILY_LIMIT,
     batchSize: REVIEW_BATCH_SIZE,
-    backlog: Math.max(0, due.length - REVIEW_DAILY_LIMIT),
+    backlog: Math.max(0, due.length - REVIEW_DAILY_LIMIT) + deferredReviews.length,
     mode: light ? "light" : integration ? "story" : familiarReady ? "catchup" : "learn",
     familiar: familiarReady,
     pressure,
@@ -183,7 +225,7 @@ export function saveDailyPlan(progress, plan) {
 // restores the same practice snapshot (including "I already heard this passage")
 // and the answer positions stay where they were. The next batch only appears
 // once every question is answered and its saved feedback/correction is finished.
-export function reviewBatch(plan, progress, { batchSize = REVIEW_BATCH_SIZE, dailyLimit = REVIEW_DAILY_LIMIT, unfinishedBatches = [] } = {}) {
+export function reviewBatch(plan, progress, { batchSize = REVIEW_BATCH_SIZE, dailyLimit = REVIEW_DAILY_LIMIT, unfinishedBatches = [], date } = {}) {
   const memory = progress?.memory || {};
   const items = Array.isArray(plan.review) ? plan.review : [];
   const size = plan.batchSize ?? batchSize;
@@ -194,8 +236,7 @@ export function reviewBatch(plan, progress, { batchSize = REVIEW_BATCH_SIZE, dai
     return saved?.lastDay === plan.day && saved.assessed !== false && saved.due > plan.day;
   };
   const answered = items.filter(answeredItem).length;
-  const batches = [];
-  for (let index = 0; index < items.length; index += size) batches.push(items.slice(index, index + size));
+  const batches = reviewBatches(plan, size);
   let batchIndex = batches.findIndex((batch, index) => unfinishedBatches.includes(index) || batch.some((item) => !answeredItem(item)));
   if (batchIndex === -1) batchIndex = batches.length;
   const batch = batches[batchIndex] || [];
@@ -208,6 +249,7 @@ export function reviewBatch(plan, progress, { batchSize = REVIEW_BATCH_SIZE, dai
     batch,
     unanswered: batch.filter((item) => !answeredItem(item)).length,
     pending: unfinishedBatches.includes(batchIndex),
+    ready: !date || batch.every((item) => answeredItem(item) || separatedAssessment(memory[item.id]?.[item.skill], date)),
     done: batchIndex >= batches.length,
   };
 }

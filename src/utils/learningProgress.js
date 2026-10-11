@@ -29,6 +29,19 @@ function validDay(day) {
   validDayCache.set(day, valid);
   return valid;
 }
+function validAssessmentTime(value) {
+  return Number.isSafeInteger(value) && value >= 0 && value <= 8_640_000_000_000_000;
+}
+// A calendar change alone is not a second spaced retrieval session.
+export const minimumReviewIntervalMs = 4 * 60 * 60 * 1000;
+export function separatedAssessment(item, date) {
+  if (!item || item.assessed === false) return true;
+  if (validAssessmentTime(item.lastAssessedAt)) return date.getTime() - item.lastAssessedAt >= minimumReviewIntervalMs;
+  // Legacy same-day overdue items remain available, but cannot advance below.
+  if (item.lastDay === localDay(date)) return true;
+  const latestPossibleTime = new Date(`${item.lastDay}T23:59:59.999`).getTime();
+  return date.getTime() - latestPossibleTime >= minimumReviewIntervalMs;
+}
 export function normalizeProgress(value) {
   const result = { ...emptyProgress };
   for (const key of ["seen", "mastered", "review", "completed", "sessions"])
@@ -46,7 +59,10 @@ export function normalizeProgress(value) {
   for (const [id, skills] of Object.entries(value?.memory && typeof value.memory === "object" ? value.memory : {})) {
     if (!skills || typeof skills !== "object") continue;
     const valid = Object.fromEntries(Object.entries(skills).filter(([skill, item]) => ["reading", "listening"].includes(skill) && item && validDay(item.due) && validDay(item.lastDay) && Number.isInteger(item.step) && item.step >= 0 && item.step <= maxReviewStep && Array.isArray(item.successDays) && item.successDays.every(validDay) && typeof item.lastCorrect === "boolean")
-      .map(([skill, item]) => [skill, { ...item, successDays: [...new Set(item.successDays)] }]));
+      .map(([skill, item]) => {
+        const { lastAssessedAt, ...rest } = item;
+        return [skill, { ...rest, ...(validAssessmentTime(lastAssessedAt) ? { lastAssessedAt } : {}), successDays: [...new Set(item.successDays)] }];
+      }));
     if (Object.keys(valid).length) result.memory[id] = valid;
   }
   result.dailyPlans = value?.dailyPlans && typeof value.dailyPlans === "object" && !Array.isArray(value.dailyPlans) ? value.dailyPlans : {};
@@ -82,8 +98,8 @@ export function recordAnswer(progress, id, correct, date = new Date(), { skill =
   const unique = (items) => [...new Set(items)];
   const old = p.memory[id]?.[skill];
   const independent = correct && !hinted;
-  const newDay = old?.lastDay !== day;
-  const eligible = old?.assessed === false || (newDay && (!old || old.due <= day));
+  const newDay = validAssessmentTime(old?.lastAssessedAt) ? !old.successDays.includes(day) : old?.lastDay !== day;
+  const eligible = old?.assessed === false || (newDay && (!old || old.due <= day) && separatedAssessment(old, date));
   // Preserve past evidence, but same-day correction cannot undo an error or hint.
   const confirmed = independent && (eligible || old?.lastCorrect === true);
   const successDays = independent && eligible ? unique([...(old?.successDays || []), day]) : old?.successDays || [];
@@ -93,6 +109,7 @@ export function recordAnswer(progress, id, correct, date = new Date(), { skill =
     due: independent && !eligible && old ? old.due : dayAfter(date, independent ? reviewGaps[Math.max(0, step - 1)] : 1),
     lastCorrect: confirmed,
     assessed: true,
+    ...(!independent || eligible ? { lastAssessedAt: date.getTime() } : validAssessmentTime(old?.lastAssessedAt) ? { lastAssessedAt: old.lastAssessedAt } : {}),
   } } };
   const retained = retainedWord(memory[id]);
   return {
@@ -112,7 +129,7 @@ export function dueReviews(progress, date = new Date()) {
   const p = normalizeProgress(progress);
   const day = localDay(date);
   return Object.entries(p.memory).flatMap(([id, skills]) => Object.entries(skills)
-    .filter(([, item]) => item.due <= day).map(([skill, item]) => ({ id, skill, ...item })))
+    .filter(([, item]) => item.due <= day && separatedAssessment(item, date)).map(([skill, item]) => ({ id, skill, ...item })))
     .sort((a, b) => Number(a.lastCorrect) - Number(b.lastCorrect) || a.due.localeCompare(b.due) || a.id.localeCompare(b.id));
 }
 export function countEnglishWords(text) {

@@ -174,6 +174,21 @@ all/also/always/a.m./and/answer 分别使用内置 imagegen 生成真实感照�
 
 所有六词需配语境理解，均为实际替换后登记 `fixed`。桌面/手机截图分别保存完整图片视口与例句视口并实际查看；文件和文本断言不是独立教师语义签字或真实设备声音验收。
 
+## 食物补图（2026-10-12）
+
+cake/carrot/chicken/potato/rice/soup 分别调用内置 imagegen 生成，原图及转换后的 640 × 640 WebP 均逐张实际查看。六个旧文件是未发布的图标模板，确认与已提交基线字节一致后替换；完整提示词、指定照片含义、双语短句与最终哈希保存于 `src/data/food-images.js`。各词保留官方词性和餐厅主题，没有新增健康词或改动词 ID。
+
+| 单词 | 最终资产 | 实际视觉复核 |
+| --- | --- | --- |
+| cake | public/word-images/l2_cake.webp | 两层烘焙海绵蛋糕、奶油夹心和粉色糖霜；完整蛋糕块清楚，盘子边缘部分出框不影响词义。 |
+| carrot | public/word-images/l2_carrot.webp | 一根完整橙色尖根和绿色叶子，少量上方叶尖触及边缘；例句只描述这根胡萝卜。 |
+| chicken | public/word-images/l2_chicken.webp | 鸡腿与腿排完整可辨，棕色表皮、切开处白色熟肉；照片只表达鸡肉，外观不作为食品安全证明。 |
+| potato | public/word-images/l2_potato.webp | 一个完整椭圆土豆，浅棕皮和浅芽眼，没有绿皮或发芽，不是面包或红薯。 |
+| rice | public/word-images/l2_rice.webp | 完整碗中的白米饭，每粒米形状可辨，不是粥或土豆泥；完整释义保留大米与米饭。 |
+| soup | public/word-images/l2_soup.webp | 碗中胡萝卜片、豌豆与其他蔬菜被清楚可见的金色液体环绕，是蔬菜汤而非干蔬菜。 |
+
+全部六图为各词独立资产和哈希，实际替换后记 fixed，不将生成完成直接当作语义通过。词典依据与教学范围见 `food-image-review-2026-10-12.md`；实体设备朗读仍待人工听辨。
+
 ## 后续完整队列
 
 `src/data/word-image-plans.js` 为全部 1687 个词建立唯一文件路径、指定 KET 词义、词性、教学场景和逐词提示词。该队列只用于制作，不把提示词视作图片已存在的证明，不自动写入通过状态。抽象词必须继续检查生成场景是否真的能表达其含义。

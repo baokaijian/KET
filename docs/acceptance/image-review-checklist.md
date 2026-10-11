@@ -1,6 +1,6 @@
 # 单词与图片复核
 
-图片范围：109 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1578 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：115 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1572 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
@@ -121,15 +121,15 @@
 | l2_butter | butter | 黄油 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_cafe_caf | cafe / café | 咖啡馆；小餐馆（两种拼写） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_cafeteria | cafeteria | 自助餐厅；食堂 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_cake | cake | 蛋糕 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_cake | cake | 蛋糕 | 蛋糕（图中是一块分层蛋糕） | word-images/l2_cake.webp / cake: one slice of sponge cake with visible baked layers and cream on a plate | fixed | One cake slice has two visible baked sponge layers, white cream and pink icing. The complete edible subject is visible; the supporting plate's outer edge is cropped. This is cake, not bread or cheese. Replaces an unpublished icon template. |
 | l2_candy | candy | 糖果（美式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_carrot | carrot | 胡萝卜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_carrot | carrot | 胡萝卜 | 胡萝卜（图中是一根橙色胡萝卜） | word-images/l2_carrot.webp / carrot: one complete orange carrot with its pointed root and green leaves | fixed | One orange carrot has a long tapered root, intact pointed tip and green leaves. The root is complete; a few upper leaf tips meet the image edge. The sentence describes this carrot's colour, not every variety. Replaces an unpublished icon template. |
 | l2_cereal | cereal | 谷物；早餐麦片 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_check | check | 检查 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_cheese | cheese | 奶酪 | 奶酪 | word-images/l2_cheese.webp / cheese: a yellow cheese wedge with holes and two cheese slices | pass | Distinct yellow cheese wedge and slices with natural cheese holes, no unrelated food. |
 | l2_chef | chef | 厨师 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_chemist | chemist | 药剂师；药店（英式英语）；化学家 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_chicken | chicken | 鸡；鸡肉 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_chicken | chicken | 鸡；鸡肉 | 鸡肉（照片只表达作为食物的含义） | word-images/l2_chicken.webp / chicken: a cooked chicken leg quarter with browned skin and visible white meat on a plate | fixed | One cooked chicken leg quarter has a recognizable drumstick and thigh, browned skin and exposed white meat. The photo teaches chicken as food; the full gloss retains the living bird meaning. Appearance does not certify food safety. Replaces an unpublished icon template. |
 | l2_chilli | chilli | 辣椒 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_chips | chips | 炸薯条（英式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_chocolate | chocolate | 巧克力 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -207,10 +207,10 @@
 | l2_piece | piece | 一块；一片；一件；部分 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_pizza | pizza | 比萨饼 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_plate | plate | 盘子 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_potato | potato | 土豆 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_potato | potato | 土豆 | 土豆（图中是一个带皮土豆） | word-images/l2_potato.webp / potato: one whole oval potato with light brown skin and shallow eyes | fixed | One whole oval potato has light brown skin and recognizable shallow eyes. Its complete outline is visible, with no green skin or sprouting shoots. It is not a bread roll or sweet potato. Replaces an unpublished icon template. |
 | l2_problem | problem | 问题 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_rest | rest | 休息；剩余部分 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_rice | rice | 大米；米饭 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_rice | rice | 大米；米饭 | 米饭（图中为煮熟的白米饭） | word-images/l2_rice.webp / rice: a small bowl filled with cooked white rice with individual grains visible | fixed | Cooked white rice is heaped in one complete bowl, with separate grains visible. The specific photo teaches cooked rice, while the full gloss retains both uncooked grain and cooked-food senses. Replaces an unpublished icon template. |
 | l2_run | run | 跑 | 跑 | word-images/l2_run.webp / run: a child running across grass with a long stride, bent arms and both feet off the ground | pass | Full-body side view shows an extended running stride and bent swinging arms, with both shoes airborne; not the relaxed grounded walking pose. |
 | l2_salad | salad | 沙拉 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_salt | salt | 食盐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -221,7 +221,7 @@
 | l2_slice | slice | 薄片；切成薄片 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_snack | snack | 点心；零食；小吃 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_soap | soap | 肥皂 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_soup | soup | 汤 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_soup | soup | 汤 | 汤（图中是一碗蔬菜汤） | word-images/l2_soup.webp / soup: a bowl of clear vegetable broth with carrot pieces and peas surrounded by visible liquid | fixed | The complete bowl contains visible golden liquid, carrot rounds, peas and other vegetable pieces. Liquid surrounds the solids, distinguishing soup from salad or dry vegetables; this is one vegetable-soup example. Replaces an unpublished icon template. |
 | l2_steak | steak | 牛排；肉排 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_stomach | stomach | 胃；肚子 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_stomach_ache | stomach ache | 胃痛；肚子痛 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |

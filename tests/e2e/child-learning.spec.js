@@ -12,7 +12,12 @@ import { bodyImages } from "../../src/data/body-images.js";
 import { shoppingImages } from "../../src/data/shopping-images.js";
 import { dayImages } from "../../src/data/day-images.js";
 import { starterImages } from "../../src/data/starter-images.js";
+import { foodImages } from "../../src/data/food-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
+import { emptyProgress, recordAnswer, recordEncounter } from "../../src/utils/learningProgress.js";
+import { buildDailyPlan, saveDailyPlan, reviewQuestions } from "../../src/utils/dailyPlan.js";
+import * as course from "../../src/data/curriculum.js";
+import * as child from "../../src/data/child-course.js";
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -522,9 +527,8 @@ test("health photographs keep their clinical context, spoken examples and restau
   await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe("doctor");
 });
 
-test("the six originally mismatched starter words show separate scenes, contexts, POS and precise spoken text", async ({ page }, info) => {
-  await page.goto("./#learn");
-  for (const [id, image] of Object.entries(starterImages)) {
+async function verifyPhotoEntries(page, info, images) {
+  for (const [id, image] of Object.entries(images)) {
     const word = courseWordById[id];
     await page.getByRole("textbox", { name: "搜索单词或中文" }).fill(word.word);
     await page.locator(".dictionary-row").filter({ has: page.getByText(word.word, { exact: true }) }).locator(".dictionary-word").click();
@@ -539,7 +543,7 @@ test("the six originally mismatched starter words show separate scenes, contexts
     await dialog.evaluate((element) => { element.scrollTop = 0; });
     await page.screenshot({ path: info.outputPath(`${id}-dictionary.png`) });
     await dialog.getByRole("button", { name: "播放单词发音", exact: true }).click();
-    await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(id === "l1_a_m" ? "A M" : word.word);
+    await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(getSpeakableWordText(word));
     await dialog.getByRole("button", { name: "朗读例句", exact: true }).click();
     await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(image.context.sentence);
     await expect(dialog.getByText(image.context.sentence, { exact: true })).toBeInViewport();
@@ -548,6 +552,83 @@ test("the six originally mismatched starter words show separate scenes, contexts
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await dialog.getByRole("button", { name: "关闭词条", exact: true }).click();
   }
+}
+
+test("the six originally mismatched starter words show separate scenes, contexts, POS and precise spoken text", async ({ page }, info) => {
+  await page.goto("./#learn");
+  await verifyPhotoEntries(page, info, starterImages);
+});
+
+test("six food photos retain their exact pictured senses, bilingual examples and speech in the restaurant category", async ({ page }, info) => {
+  await page.goto("./#learn");
+  await page.getByLabel("选择词汇主题").selectOption("food_cafe");
+  await verifyPhotoEntries(page, info, foodImages);
+  await page.getByRole("textbox", { name: "搜索单词或中文" }).fill("ambulance");
+  await expect(page.getByText("还没找到这个词")).toBeVisible();
+});
+
+test("midnight learning waits for elapsed time then admits reviews into the same saved day's plan", async ({ page }, info) => {
+  const curriculum = { ...course, ...child };
+  const first = new Date("2026-10-12T23:58:00");
+  let p = recordEncounter(emptyProgress, "l2_apple", first);
+  for (const skill of ["reading", "listening"]) p = recordAnswer(p, "l2_apple", true, first, { skill });
+  const early = buildDailyPlan(p, curriculum, new Date("2026-10-13T00:02:00"));
+  const initial = saveDailyPlan(p, early);
+  await page.clock.install({ time: new Date("2026-10-13T00:02:00") });
+  await page.addInitScript((value) => { if (!localStorage.getItem("sparks_learning_v2")) localStorage.setItem("sparks_learning_v2", JSON.stringify(value)); }, initial);
+  await page.goto("./#today");
+  await expect(page.getByText("复习稍后回来，先听读今天的内容")).toBeVisible();
+  await expect(page.getByRole("button", { name: "开始复习", exact: true })).toBeDisabled();
+  await page.screenshot({ path: info.outputPath("midnight-deferred.png") });
+  await page.clock.setSystemTime(new Date("2026-10-13T03:57:00"));
+  await page.reload();
+  await expect(page.getByRole("button", { name: "开始复习", exact: true })).toBeDisabled();
+  await page.clock.setSystemTime(new Date("2026-10-13T04:05:00"));
+  await page.reload();
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText("2 项到期复习");
+  await expect(page.getByRole("button", { name: "开始复习", exact: true })).toBeEnabled();
+  await page.screenshot({ path: info.outputPath("midnight-ready.png") });
+  await page.getByRole("button", { name: "开始复习", exact: true }).click();
+  const later = buildDailyPlan(initial, curriculum, new Date("2026-10-13T04:05:00"));
+  await answerAll(page, reviewQuestions(later.review, curriculum));
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2")));
+  for (const skill of ["reading", "listening"]) expect(saved.memory.l2_apple[skill]).toMatchObject({ step: 2, successDays: ["2026-10-12", "2026-10-13"], due: "2026-10-15" });
+  expect(saved.dailyPlans[early.day].newWords).toEqual(early.newWords);
+  expect(saved.dailyPlans[early.day].reviewBatchEnds).toEqual([2]);
+  expect(saved.mastered).toEqual([]);
+});
+
+test("later-ready reviews do not change a five-question batch or lose its paused third question", async ({ page }) => {
+  const curriculum = { ...course, ...child };
+  let p = emptyProgress;
+  for (const word of courseWords.slice(0, 5)) p = recordAnswer(p, word.id, false, new Date("2026-10-12T12:00:00"));
+  p = recordAnswer(p, "l2_apple", true, new Date("2026-10-12T23:58:00"));
+  const early = buildDailyPlan(p, curriculum, new Date("2026-10-13T00:02:00"));
+  const questions = reviewQuestions(early.review, curriculum);
+  await page.clock.install({ time: new Date("2026-10-13T00:02:00") });
+  await page.addInitScript((value) => { if (!localStorage.getItem("sparks_learning_v2")) localStorage.setItem("sparks_learning_v2", JSON.stringify(value)); }, saveDailyPlan(p, early));
+  await page.goto("./#today");
+  await page.getByRole("button", { name: "开始复习", exact: true }).click();
+  for (const question of questions.slice(0, 2)) {
+    await page.locator(".answer-option").nth(question.answer).click();
+    await page.getByRole("button", { name: "下一题", exact: true }).click();
+  }
+  await expect(page.locator(".question-stage h2")).toHaveText(questions[2].prompt);
+  await page.getByRole("button", { name: "返回", exact: true }).click();
+  await page.clock.setSystemTime(new Date("2026-10-13T04:05:00"));
+  await page.reload();
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText("已完成 2 / 6 项");
+  await page.getByRole("button", { name: "继续复习", exact: true }).click();
+  await expect(page.locator(".question-stage h2")).toHaveText(questions[2].prompt);
+  const admitted = await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2")).dailyPlans["2026-10-13"]);
+  expect(admitted.reviewBatchEnds).toEqual([5, 6]);
+  expect(admitted.review.slice(0, 5)).toEqual(early.review);
+  await answerAll(page, questions.slice(2), 5, 5);
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText("已完成 5 / 6 项");
+  await page.getByRole("button", { name: "继续复习", exact: true }).click();
+  await expect(page.locator(".practice-header")).toContainText("第 2 批");
+  await answerAll(page, reviewQuestions(admitted.review.slice(5), curriculum));
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText("今天已完成 6 项复习");
 });
 
 test("every published photograph loads in its own vocabulary entry with its specific sense", async ({ page }) => {

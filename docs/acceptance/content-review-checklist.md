@@ -120,15 +120,15 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | food_cafe | l2_butter | butter | n. 名词 | butter | not published | 黄油 | not published | provided | pending |  |
 | 2 | food_cafe | l2_cafe_caf | cafe / café | n. 名词 | cafe or café | not published | 咖啡馆；小餐馆（两种拼写） | not published | provided | pending |  |
 | 2 | food_cafe | l2_cafeteria | cafeteria | n. 名词 | cafeteria | not published | 自助餐厅；食堂 | not published | provided | pending |  |
-| 2 | food_cafe | l2_cake | cake | n. 名词 | cake | not published | 蛋糕 | not published | provided | pending |  |
+| 2 | food_cafe | l2_cake | cake | n. 名词 | cake | not published | 蛋糕 | word-images/l2_cake.webp | provided | pending |  |
 | 2 | food_cafe | l2_candy | candy | n. 名词 | candy | not published | 糖果（美式英语） | not published | provided | pending |  |
-| 2 | food_cafe | l2_carrot | carrot | n. 名词 | carrot | not published | 胡萝卜 | not published | provided | pending |  |
+| 2 | food_cafe | l2_carrot | carrot | n. 名词 | carrot | not published | 胡萝卜 | word-images/l2_carrot.webp | provided | pending |  |
 | 2 | food_cafe | l2_cereal | cereal | n. 名词 | cereal | not published | 谷物；早餐麦片 | not published | provided | pending |  |
 | 2 | body_health | l2_check | check | v. 动词 | check | not published | 检查 | not published | provided | pending |  |
 | 2 | food_cafe | l2_cheese | cheese | n. 名词 | cheese | not published | 奶酪 | word-images/l2_cheese.webp | provided | pending |  |
 | 2 | food_cafe | l2_chef | chef | n. 名词 | chef | not published | 厨师 | not published | provided | pending |  |
 | 2 | body_health | l2_chemist | chemist | n. 名词 | chemist | not published | 药剂师；药店（英式英语）；化学家 | not published | provided | pending |  |
-| 2 | food_cafe | l2_chicken | chicken | n. 名词 | chicken | not published | 鸡；鸡肉 | not published | provided | pending |  |
+| 2 | food_cafe | l2_chicken | chicken | n. 名词 | chicken | not published | 鸡；鸡肉 | word-images/l2_chicken.webp | provided | pending |  |
 | 2 | food_cafe | l2_chilli | chilli | n. 名词 | chilli | not published | 辣椒 | not published | provided | pending |  |
 | 2 | food_cafe | l2_chips | chips | n. 名词 | chips | not published | 炸薯条（英式英语） | not published | provided | pending |  |
 | 2 | food_cafe | l2_chocolate | chocolate | n. 名词 | chocolate | not published | 巧克力 | not published | provided | pending |  |
@@ -206,10 +206,10 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | food_cafe | l2_piece | piece | n. 名词 | piece | not published | 一块；一片；一件；部分 | not published | provided | pending |  |
 | 2 | food_cafe | l2_pizza | pizza | n. 名词 | pizza | not published | 比萨饼 | not published | provided | pending |  |
 | 2 | food_cafe | l2_plate | plate | n. 名词 | plate | not published | 盘子 | not published | provided | pending |  |
-| 2 | food_cafe | l2_potato | potato | n. 名词 | potato | not published | 土豆 | not published | provided | pending |  |
+| 2 | food_cafe | l2_potato | potato | n. 名词 | potato | not published | 土豆 | word-images/l2_potato.webp | provided | pending |  |
 | 2 | body_health | l2_problem | problem | n. 名词 | problem | not published | 问题 | not published | provided | pending |  |
 | 2 | body_health | l2_rest | rest | n. 名词 / v. 动词 | rest | not published | 休息；剩余部分 | not published | provided | pending |  |
-| 2 | food_cafe | l2_rice | rice | n. 名词 | rice | not published | 大米；米饭 | not published | provided | pending |  |
+| 2 | food_cafe | l2_rice | rice | n. 名词 | rice | not published | 大米；米饭 | word-images/l2_rice.webp | provided | pending |  |
 | 2 | sports_hobbies | l2_run | run | v. 动词 | run | not published | 跑 | word-images/l2_run.webp | provided | pending |  |
 | 2 | food_cafe | l2_salad | salad | n. 名词 | salad | not published | 沙拉 | not published | provided | pending |  |
 | 2 | food_cafe | l2_salt | salt | n. 名词 | salt | not published | 食盐 | not published | provided | pending |  |
@@ -220,7 +220,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | food_cafe | l2_slice | slice | n. 名词 | slice | not published | 薄片；切成薄片 | not published | provided | pending |  |
 | 2 | food_cafe | l2_snack | snack | n. 名词 | snack | not published | 点心；零食；小吃 | not published | provided | pending |  |
 | 2 | body_health | l2_soap | soap | n. 名词 | soap | not published | 肥皂 | not published | provided | pending |  |
-| 2 | food_cafe | l2_soup | soup | n. 名词 | soup | not published | 汤 | not published | provided | pending |  |
+| 2 | food_cafe | l2_soup | soup | n. 名词 | soup | not published | 汤 | word-images/l2_soup.webp | provided | pending |  |
 | 2 | food_cafe | l2_steak | steak | n. 名词 | steak | not published | 牛排；肉排 | not published | provided | pending |  |
 | 2 | body_health | l2_stomach | stomach | n. 名词 | stomach | not published | 胃；肚子 | not published | provided | pending |  |
 | 2 | body_health | l2_stomach_ache | stomach ache | n. 名词 | stomach ache | not published | 胃痛；肚子痛 | not published | provided | pending |  |
