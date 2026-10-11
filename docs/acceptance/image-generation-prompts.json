@@ -1,0 +1,86 @@
+[
+  {
+    "word": "apple",
+    "file": "public/learning-images/apple.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"apple\": a single fresh red apple with a small green leaf. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "banana",
+    "file": "public/learning-images/banana.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"banana\": one whole ripe yellow banana. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "bread",
+    "file": "public/learning-images/bread.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"bread\": one small loaf of bread with two cut slices clearly showing bread texture. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "milk",
+    "file": "public/learning-images/milk.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"milk\": a transparent glass filled with white milk. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "cat",
+    "file": "public/learning-images/cat.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"cat\": a friendly domestic tabby cat sitting, entire animal visible. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "dog",
+    "file": "public/learning-images/dog.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"dog\": a friendly golden retriever dog sitting, entire animal visible. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "rabbit",
+    "file": "public/learning-images/rabbit.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"rabbit\": a small white rabbit with long upright ears, entire animal visible. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "fish",
+    "file": "public/learning-images/fish.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"fish\": one live orange goldfish underwater against a clear pale aqua background, entire fish visible. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "book",
+    "file": "public/learning-images/book.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"book\": one open hardcover book, clearly visible pages without readable text. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "pencil",
+    "file": "public/learning-images/pencil.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"pencil\": one sharpened yellow wooden graphite pencil, entire pencil visible. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "bicycle",
+    "file": "public/learning-images/bicycle.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"bicycle\": one green bicycle with two wheels, side profile, entire bicycle visible. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  },
+  {
+    "word": "bus",
+    "file": "public/learning-images/bus.webp",
+    "tool": "built-in imagegen",
+    "prompt": "Create ONE photorealistic educational vocabulary photograph for the English word \"bus\": one red city passenger bus, three-quarter side view, entire bus visible. The subject must be unambiguous and fill about 65% of a square composition, fully in frame, sharp and detailed. Clean soft light grey studio background (fish underwater exception). Natural bright soft daylight, authentic textures, cheerful but realistic. No extra objects, no people, no words, letters, labels, watermarks, logos, frame, collage, or illustration. This is a learning card for young children, NOT a marketing scene.",
+    "transparent_background": false
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "name": "ket",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test:data": "vitest run tests/data tests/unit",
+    "test:e2e": "playwright test",
+    "test:acceptance": "npm run lint && npm run build && npm run test:data && npm run test:e2e && npm run test:pages",
+    "test:pages": "node scripts/test-pages.mjs",
+    "review:content": "node scripts/generate-content-review.mjs",
+    "review:images": "node scripts/review-images.mjs",
+    "test:full-content": "node scripts/review-images.mjs --full",
+    "generate:word-images": "node scripts/generate-word-image-assets.mjs"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "lucide-react": "^1.16.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "sharp": "^0.34.5",
+    "vite": "^8.0.12",
+    "vitest": "^4.1.7"
+  }
+}
