@@ -109,6 +109,23 @@
 
 共同限制：明亮真实感照片，没有文字标签、品牌、水印、拼图或医疗诊断提示。例句明确单数的身体部位；句子课、起步故事与进阶故事补入 mouth 等词汇的真实语境。原始生成文件保存在本机 Codex 生成目录，本项目仅发布逐张检查后的 WebP。
 
+## 购物主题（2026-10-11）
+
+七个尚缺图片的词分别调用内置 imagegen，新图逐张检查后转换为 640 × 640 WebP。完整生成提示词、pay 的修正提示词、中英文语境、视觉依据和最终哈希保存在 `src/data/shopping-images.js`。bag 仍使用原有已检查照片，不重新生成或把同一个词计为新增资产。
+
+| 单词 | 最终图片 | 实际视觉复核与指定词义 |
+| --- | --- | --- |
+| shop | public/word-images/l5_shop.webp | 杂货店的完整入口、食品货架、蔬果陈列、购物者与收银台；明确商店的名词义。 |
+| buy | public/word-images/l9_buy.webp | 顾客接过装有两个苹果的纸袋，同时将硬币交给摊主；不是赠送、选购或单独的付款机画面。 |
+| money | public/word-images/l12_money.webp | 打开的零钱包和有金属边缘、压印表面的硬币；只用硬币举例解释钱，不教授具体币种或面额。 |
+| price | public/word-images/l9_price.webp | 购物袋挂有清楚的 £3 价签，例句是 three pounds，与图中数字和货币一致。 |
+| fruit | public/word-images/l2_fruit.webp | 可分别辨认的苹果、香蕉、橙子及半个橙子；通过明确例子表达水果类别，不复用 apple 图。 |
+| vegetable | public/word-images/l2_vegetable.webp | 胡萝卜、西兰花和菠菜，均为儿童熟悉的食用蔬菜，没有混入水果。 |
+| pay | public/word-images/l9_pay.webp | 顾客用卡接触收银终端的感应区，旁有商品袋；初图数字重复，修正版逐键确认 1–9 和 0 后登记 fixed，只发布修正版。 |
+| bag | public/word-images/l12_bag.webp | 原有绿色背包图，提手、肩带、拉链明确；例句“This backpack is a kind of bag.”说明背包是包的一种，学校和购物课共用同一 word ID 的语义，不让不同词共用照片。 |
+
+共同限制：不同词使用不同照片与哈希；buy/pay/money/price 分别展示购买交换、刷卡付款、硬币和物品价签。除价格与付款机的真实物体信息外，不使用文字标签、图标、拼图、水印或品牌；人物身份靠教学句子而非外貌推断。
+
 ## 后续完整队列
 
 `src/data/word-image-plans.js` 为全部 1687 个词建立唯一文件路径、指定 KET 词义、词性、教学场景和逐词提示词。该队列只用于制作，不把提示词视作图片已存在的证明，不自动写入通过状态。抽象词必须继续检查生成场景是否真的能表达其含义。

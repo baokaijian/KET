@@ -1,6 +1,6 @@
 # 单词与图片复核
 
-图片范围：82 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1605 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：89 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1598 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
@@ -72,7 +72,7 @@
 | l1_sister | sister | 姐姐/妹妹 | 姐姐 | word-images/l1_sister.webp / sister: an older sister drawing a picture together with her younger brother at home | pass | Older girl and younger boy draw together in a home setting; the caption specifies older sister, without claiming that appearance alone proves kinship. |
 | l1_some | some | 一些 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_sorry | sorry | 抱歉的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_spring | spring | 春天；弹簧（另一名词含义） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l1_spring | spring | 春天；春季；弹簧 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_thank | thank | 感谢 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_thanks | thanks | 谢谢（非正式表达） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_time | time | 时间 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -166,7 +166,7 @@
 | l2_food | food | 食物 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_foot | foot | 脚 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_fork | fork | 叉子 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_fruit | fruit | 水果 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_fruit | fruit | 水果 | 水果 | word-images/l2_fruit.webp / fruit: a red apple, a yellow banana and an orange with a cut orange half | pass | The apple, banana and orange are distinct recognisable fruit examples; the exposed orange segments support the category sense. |
 | l2_garlic | garlic | 大蒜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_glass | glass | 玻璃；玻璃杯 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_grape | grape | 葡萄 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -236,9 +236,9 @@
 | l2_toothache | toothache | 牙痛 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_toothbrush | toothbrush | 牙刷 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_up | up | 向上 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_vegetable | vegetable | 蔬菜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_vegetable | vegetable | 蔬菜 | 蔬菜 | word-images/l2_vegetable.webp / vegetable: carrots, broccoli and spinach on a kitchen surface | pass | Carrot roots, broccoli florets and stalk, and spinach leaves give clear culinary vegetable examples without fruit or prepared dishes. |
 | l2_waiter | waiter | 男服务员 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_walk | walk | 走路 | 走路（动词） | word-images/l2_walk.webp / walk: a child walking along a park path with relaxed arms and a shoe on the ground | pass | Upright body, relaxed straight arms and a grounded short step show walking; neither both feet airborne nor a long running stride. |
+| l2_walk | walk | 走路；步行（动词）；散步（名词） | 走路（动词） | word-images/l2_walk.webp / walk: a child walking along a park path with relaxed arms and a shoe on the ground | pass | Upright body, relaxed straight arms and a grounded short step show walking; neither both feet airborne nor a long running stride. |
 | l2_wash | wash | 洗 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_wash_up | wash up | 洗餐具（英式英语）；洗手洗脸（美式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_well | well | 好；健康的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -287,7 +287,7 @@
 | l3_sink | sink | 洗涤槽；洗手池；下沉（动词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l3_sofa | sofa | 沙发 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l3_table | table | 桌子 | 桌子 | word-images/l3_table.webp / table: one round wooden table with a flat top and four legs, without drawers | pass | An empty round tabletop and four legs clearly show a table; no built-in drawers, writing materials or chairs obscure the distinction from desk. |
-| l3_temperature | temperature | 温度 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l3_temperature | temperature | 温度；气温；体温 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l3_toilet | toilet | 厕所；坐便器 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l3_towel | towel | 毛巾 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l3_wall | wall | 墙壁 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -375,7 +375,7 @@
 | l5_engine | engine | 发动机；引擎 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_engineer | engineer | 工程师 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_factory | factory | 工厂 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_far | far | 远的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_far | far | 远（表示距离，如 far away 在远处） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_flight | flight | 航班/飞行 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_fly | fly | 飞行 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_foggy | foggy | 有雾的；雾大的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -410,7 +410,7 @@
 | l5_school | school | 学校 | 学校 | word-images/l5_school.webp / school: a primary school building with a visible classroom and playground, children arriving with backpacks | pass | Classroom desks and board are visible through the building windows, with a fenced playground and arriving pupils. |
 | l5_seat | seat | 座位 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_ship | ship | 大船；轮船 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_shop | shop | 商店 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_shop | shop | 商店（名词）；购物（动词） | 商店（名词） | word-images/l5_shop.webp / shop: an open grocery shop with shelves, produce, a checkout counter and a shopper | pass | The whole shop entrance, stocked shelves, produce and checkout establish a grocery shop rather than a cafe or one isolated item. |
 | l5_stadium | stadium | 体育场 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_station | station | 车站 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_store | store | 商店（美式英语）；储存（动词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -471,7 +471,7 @@
 | l6_village | village | 村庄 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_west | west | 西方 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_wet | wet | 湿的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l6_wood | wood | 木头/木材 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l6_wood | wood | 木头；木材；树林 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l6_zoo | zoo | 动物园 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_autumn | autumn | 秋天 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_badminton | badminton | 羽毛球 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -635,7 +635,7 @@
 | l8_raincoat | raincoat | 雨衣 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_ready | ready | 准备好的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_real | real | 真实的；真正的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l8_red | red | 红色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l8_red | red | 红色的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_rich | rich | 富有的；丰富的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_right | right | 右边；右边的；正确的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_sad | sad | 难过的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -665,7 +665,7 @@
 | l8_wear | wear | 穿戴 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_worried | worried | 担心的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_wrong | wrong | 错误的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l8_yellow | yellow | 黄色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l8_yellow | yellow | 黄色的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l8_young | young | 年轻的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_artist | artist | 艺术家 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_assistant | assistant | 助手；店员 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -674,7 +674,7 @@
 | l9_business | business | 生意；商业；业务 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_businessman | businessman | 商人；男企业家 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_businesswoman | businesswoman | 女商人；女企业家 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l9_buy | buy | 购买 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l9_buy | buy | 购买 | 购买 | word-images/l9_buy.webp / buy: a customer receives two apples in a paper bag while giving coins to a fruit seller | pass | Both goods and coins are exchanged, making the transaction distinct from choosing fruit or receiving a gift; two apples are visible. |
 | l9_cash | cash | 现金 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_cent | cent | 分（美元、欧元等货币的百分之一） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_change | change | 改变/零钱 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -702,10 +702,10 @@
 | l9_occupation | occupation | 职业；工作 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_open | open | 打开；开放的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_painter | painter | 画家；油漆工 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l9_pay | pay | 支付 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l9_pay | pay | 支付 | 付款；支付 | word-images/l9_pay.webp / pay: a customer holds a bank card against a contactless payment terminal at a grocery checkout | fixed | The bank card touches the contactless reader beside groceries. The initial keypad contained repeated digits; the revised image has rows 1/2/3, 4/5/6, 7/8/9 and 0, checked individually. |
 | l9_penny | penny | 便士；一便士硬币（复数 pence 或 pennies） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_police_officer | police officer | 警察；警官 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l9_price | price | 价格 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l9_price | price | 价格 | 价格 | word-images/l9_price.webp / price: a blue bag on a shop shelf with an attached price tag reading £3 | pass | The price tag is physically attached to the bag and clearly reads £3; the context states three pounds, matching the visible price. |
 | l9_queen | queen | 女王；王后 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_receipt | receipt | 收据；购物小票 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_receptionist | receptionist | 接待员；前台工作人员 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -933,7 +933,7 @@
 | l12_available | available | 可获得的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_away | away | 离开；远离 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_badly | badly | 不好地；严重地；很，非常（如 badly need） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_bag | bag | 包 | 包 | word-images/l12_bag.webp / bag: a green fabric school backpack with two shoulder straps and a zipped front pocket | pass | One whole backpack has a carrying handle, two shoulder straps and zipped pockets; no unrelated objects. |
+| l12_bag | bag | 包 | 包（以背包为例） | word-images/l12_bag.webp / bag: a green fabric school backpack with two shoulder straps and a zipped front pocket | pass | One whole backpack has a carrying handle, two shoulder straps and zipped pockets. The same word appears in school and shopping contexts; the caption names this backpack as one example of a bag, not all bags. |
 | l12_balloon | balloon | 气球 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_band | band | 乐队 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_barbecue_barbeque | barbecue / barbeque | 烧烤；户外烧烤聚餐（两种拼写） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1172,7 +1172,7 @@
 | l12_grade | grade | 成绩等级；年级（美式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_grandchild | grandchild | 孙子、孙女、外孙或外孙女中的一位 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_granddaughter | granddaughter | 孙女；外孙女 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_green | green | 绿色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_green | green | 绿色的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_grocery_store | grocery store | 食品杂货店（美式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_ground | ground | 地面 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_guess | guess | 猜；猜测 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1325,7 +1325,7 @@
 | l12_model | model | 模型；型号；模特 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_mom | mom | 妈妈（美式非正式称呼） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_monday | Monday | 星期一 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_money | money | 钱 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_money | money | 钱 | 钱（以硬币为例） | word-images/l12_money.webp / money: metal coins in an open purse and on a table | pass | Silver and copper coins have metallic edges and stamped surfaces; the purse provides context. This is not a lesson in specific currencies or denominations. |
 | l12_monkey | monkey | 猴子 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_month | month | 月份 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_more | more | 更多的；更；另外（much、many 的比较级） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1379,7 +1379,7 @@
 | l12_onion | onion | 洋葱 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_only | only | 只有；仅仅；唯一的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_opinion | opinion | 意见；看法 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_opposite | opposite | 对面的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_opposite | opposite | 在……对面 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_or | or | 或者；还是（表示选择） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_order | order | 点菜；订购；命令；订单；顺序 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_other | other | 其他的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1421,7 +1421,7 @@
 | l12_pet | pet | 宠物 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_pharmacy | pharmacy | 药店；药房 | 药店/药房 | word-images/l12_pharmacy.webp / pharmacy: a pharmacy dispensing counter, medicine shelves and an adult receiving a medicine carton | pass | Dispensing counter, medicine cartons, capped pill bottles, blister pack and an adult receiving medicine identify a pharmacy rather than groceries or an examination room. |
 | l12_piano | piano | 钢琴 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_pink | pink | 粉红色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_pink | pink | 粉红色的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_pity | pity | 遗憾；同情（如 What a pity! 真遗憾！） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_place | place | 地方 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_plan | plan | 计划；打算；制定计划 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1448,7 +1448,7 @@
 | l12_program | program | 电脑程序；节目；计划（美式拼写）；编程 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_pull | pull | 拉；拖 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_puppy | puppy | 小狗；幼犬 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_purple | purple | 紫色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_purple | purple | 紫色的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_push | push | 推；推动 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_put | put | 放；放置 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_puzzle | puzzle | 谜题；智力游戏；拼图 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1671,7 +1671,7 @@
 | l12_well_known | well known | 著名的；众所周知的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_whale | whale | 鲸；鲸鱼 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_while | while | 在……期间；而；一会儿（名词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_white | white | 白色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_white | white | 白色的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_whole | whole | 整个的；全部的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_whose | whose | 谁的（询问所属关系） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_wide | wide | 宽的；宽阔的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |

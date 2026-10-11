@@ -10,6 +10,22 @@ import { supplementaryTopics, courseUnitFor } from "../../src/data/course-topics
 import { meaningGroups, meaningKey } from "../../src/data/meaning-groups.js";
 
 describe("meaning regressions", () => {
+  it("matches source teaching POS and removes editorial notes from child glosses", () => {
+    const find = (name) => allKetWords.find((word) => word.word === name);
+    for (const name of ["red", "yellow", "green", "pink", "purple", "white"]) {
+      expect(find(name).partOfSpeech, name).toEqual(["adj"]);
+      expect(find(name).translation, name).toMatch(/色的$/);
+    }
+    expect(find("golden").translation).toContain("金色的");
+    expect(find("opposite").partOfSpeech).toEqual(["prep"]);
+    expect(find("opposite").translation).toBe("在……对面");
+    expect(find("far").partOfSpeech).toEqual(["adv"]);
+    expect(find("far").translation).toContain("表示距离");
+    expect(find("wood").translation).toContain("树林");
+    expect(find("temperature").translation).toContain("体温");
+    expect(find("spring").translation).toContain("春天");
+    expect(find("spring").translation).not.toContain("另一名词含义");
+  });
   it("rejects placeholders and explains easily confused senses", () => {
     expect(() => withCorrectMeaning({ id: "invalid", word: "unknown", translation: "综合复习词：unknown" })).toThrow("Missing meaning");
     const meaning = (word) => allKetWords.find((entry) => entry.word === word)?.translation;

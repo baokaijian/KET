@@ -6,6 +6,7 @@ import { healthImages } from "./health-images.js";
 import { clothesImages } from "./clothes-images.js";
 import { weatherImages } from "./weather-images.js";
 import { bodyImages } from "./body-images.js";
+import { shoppingImages } from "./shopping-images.js";
 
 export const additionalImages = {
   ...familyImages,
@@ -15,8 +16,8 @@ export const additionalImages = {
   ...clothesImages,
   ...weatherImages,
   ...bodyImages,
+  ...shoppingImages,
   l12_pen: { src: "word-images/l12_pen.webp", alt: "pen: an uncapped fountain pen with a visible metal nib and its cap beside it", meaning: "钢笔", reviewStatus: "pass", sha256: "66685096bd5d51b03b0f6b3b945aaaa13c7874ec074488bcdf8aa103d642d25a", note: "Visible fountain-pen nib and separate cap distinguish the pen from a graphite pencil or felt-tip marker." },
-  l12_bag: { src: "word-images/l12_bag.webp", alt: "bag: a green fabric school backpack with two shoulder straps and a zipped front pocket", meaning: "包", reviewStatus: "pass", sha256: "85168a6086d92de3074ec3ecca18181b6990eb6df692a9c2f0ee44bef2ebd448", note: "One whole backpack has a carrying handle, two shoulder straps and zipped pockets; no unrelated objects." },
   l4_desk: { src: "word-images/l4_desk.webp", alt: "desk: a wooden writing desk with drawers, one drawer partly open", meaning: "书桌", reviewStatus: "pass", sha256: "c2f6af9f921b2367ca23977f275084051356b90c3e6d0567230d5211c90012de", note: "The writing surface and built-in drawers clearly identify a study desk, not a dining table." },
   l4_teacher: { src: "word-images/l4_teacher.webp", alt: "teacher: a school teacher showing a picture book to children seated at classroom desks", meaning: "老师", reviewStatus: "pass", sha256: "e382bf04c21bf4dbfe33e15328d876d5db4575f798eaa51ea67ba0be8aa1a710", note: "An adult leading a picture-book lesson, pupils at school desks and a classroom board establish the teacher's role." },
   l5_school: { src: "word-images/l5_school.webp", alt: "school: a primary school building with a visible classroom and playground, children arriving with backpacks", meaning: "学校", reviewStatus: "pass", sha256: "0ede9d957dbc66511336c8c9296a3de5b0a76ed76c7b9dea343def9349ac178a", note: "Classroom desks and board are visible through the building windows, with a fenced playground and arriving pupils." },

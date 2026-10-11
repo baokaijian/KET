@@ -14,6 +14,7 @@ import { healthImages } from "../../src/data/health-images.js";
 import { clothesImages } from "../../src/data/clothes-images.js";
 import { weatherImages } from "../../src/data/weather-images.js";
 import { bodyImages } from "../../src/data/body-images.js";
+import { shoppingImages } from "../../src/data/shopping-images.js";
 import { dictionaryEntry } from "../../src/data/learning.js";
 
 describe("whole-bank meaning, POS and theme regressions", () => {
@@ -22,7 +23,7 @@ describe("whole-bank meaning, POS and theme regressions", () => {
     for (const name of ["cloud", "cloudy", "foggy", "storm", "warm", "weather", "wind", "windy", "cold", "hot", "sun", "rain", "snow"]) {
       expect(find(name).topic, name).toBe("nature_weather");
     }
-    for (const name of ["dress", "rain", "snow"]) {
+    for (const name of ["dress", "rain", "snow", "shop", "walk"]) {
       expect(find(name).partOfSpeech).toEqual(["n", "v"]);
       expect(find(name).translation).toContain("名词");
       expect(find(name).translation).toContain("动词");
@@ -88,7 +89,7 @@ describe("whole-bank meaning, POS and theme regressions", () => {
     expect(find("Miss").partOfSpeech).toEqual(["n"]);
     expect(metadataFor("miss").pos).toEqual(["v"]);
     expect(find("as well").partOfSpeech).toEqual(["adv"]);
-    for (const [name, pos] of [["unhappy", "adj"], ["unfortunately", "adv"], ["diving", "n"], ["for sale", "phrase"], ["Guess what?", "phrase"]]) {
+    for (const [name, pos] of [["unhappy", "adj"], ["unfortunately", "adv"], ["diving", "n"], ["for sale", "phrase"], ["Guess what?", "phrase"], ["all the time", "phrase"], ["poor thing / you", "phrase"], ["tidy up", "phr v"]]) {
       expect(find(name).partOfSpeech, name).toEqual([pos]);
     }
     expect(metadataFor("unhappy").pos).toEqual(["n"]);
@@ -116,7 +117,7 @@ describe("whole-bank meaning, POS and theme regressions", () => {
   });
 });
 describe("six-year-old listening and reading", () => {
-  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages], ["clothes", clothesImages], ["weather", weatherImages], ["body", bodyImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
+  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages], ["clothes", clothesImages], ["weather", weatherImages], ["body", bodyImages], ["shopping", shoppingImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
     const words = childThemes.find((theme) => theme.id === themeId).vocabulary.words;
     expect(Object.keys(images).sort()).toEqual(words.map((word) => word.id).sort());
     for (const word of words) {
@@ -139,6 +140,23 @@ describe("six-year-old listening and reading", () => {
         expect(images[id].refinementPrompt.length).toBeGreaterThan(80);
       }
     }
+  });
+  it("distinguishes shopping actions, money and the visible price with explicit contexts", () => {
+    const images = shoppingImages;
+    expect(images.l9_buy.alt).toContain("receives two apples");
+    expect(images.l9_pay.alt).toContain("contactless payment terminal");
+    expect(images.l9_pay.reviewStatus).toBe("fixed");
+    expect(images.l9_pay.refinementPrompt).toContain("1 2 3");
+    expect(images.l12_money.context.sentence).toBe("These coins are money.");
+    expect(images.l9_price.alt).toContain("£3");
+    expect(images.l9_price.context.sentence).toContain("three pounds");
+    expect(images.l12_bag.context.sentence).toContain("a kind of bag");
+    for (const themeId of ["school", "shopping"]) {
+      const bag = childThemes.find((theme) => theme.id === themeId).vocabulary.words.find((word) => word.id === "l12_bag");
+      expect(bag.image).toEqual(images.l12_bag);
+      expect(bag.sentence).toBe(images.l12_bag.context.sentence);
+    }
+    expect(new Set(Object.values(images).map((image) => image.sha256)).size).toBe(8);
   });
   it("pairs health photographs with specific clinical meanings, never restaurant content", () => {
     expect(Object.keys(healthImages)).toHaveLength(8);

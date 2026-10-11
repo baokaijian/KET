@@ -9,6 +9,7 @@ import { healthImages } from "../../src/data/health-images.js";
 import { clothesImages } from "../../src/data/clothes-images.js";
 import { weatherImages } from "../../src/data/weather-images.js";
 import { bodyImages } from "../../src/data/body-images.js";
+import { shoppingImages } from "../../src/data/shopping-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 
 test.beforeEach(async ({ page }) => {
@@ -203,18 +204,21 @@ for (const failure of ["missing", "silent"]) test(`listening can be skipped safe
   await expect(page.locator(".practice-header")).toContainText("2 /");
 });
 
-for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"], ["clothes", clothesImages, "l8_dress"], ["weather", weatherImages, "l2_cold"], ["body", bodyImages, "l12_mouth"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
+for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"], ["clothes", clothesImages, "l8_dress"], ["weather", weatherImages, "l2_cold"], ["body", bodyImages, "l12_mouth"], ["shopping", shoppingImages, "l5_shop"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
   await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   const theme = childThemes.find((item) => item.id === themeId);
   const completed = childThemes.slice(0, childThemes.indexOf(theme));
+  const seen = completed.flatMap((theme) => theme.vocabulary.words.map((word) => word.id));
+  const newWords = theme.vocabulary.words.filter((word) => !seen.includes(word.id));
   await page.addInitScript((snapshot) => localStorage.setItem("sparks_learning_v2", JSON.stringify(snapshot)), {
-    seen: completed.flatMap((theme) => theme.vocabulary.words.map((word) => word.id)),
+    seen,
     completed: completed.flatMap((theme) => [theme.vocabulary.id, theme.sentences.id, theme.story.id]),
   });
   await page.goto("./#today");
   await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText(theme.title);
-  await expect(page.locator(".preview-word img")).toHaveCount(8);
-  for (const word of theme.vocabulary.words) {
+  expect(newWords).toHaveLength(themeId === "shopping" ? 7 : 8);
+  await expect(page.locator(".preview-word img")).toHaveCount(newWords.length);
+  for (const word of newWords) {
     const image = images[word.id];
     const card = page.locator(".preview-word").filter({ has: page.getByRole("heading", { name: word.word, exact: true }) });
     if (image.meaning !== word.translation) await expect(card).toContainText(`照片对应：${image.meaning}`);
@@ -379,6 +383,12 @@ test("every published photograph loads in its own vocabulary entry with its spec
     await expect(dialog.locator("img")).toHaveAttribute("alt", image.alt);
     await expect(dialog.locator("img")).toHaveAttribute("src", new RegExp(`/word-images/${id}\\.webp$`));
     await expect.poll(() => dialog.locator("img").evaluate((img) => img.complete && img.naturalWidth === 640 && img.naturalHeight === 640)).toBe(true);
+    if (image.context) {
+      await expect(dialog).toContainText(image.context.sentence);
+      await expect(dialog).toContainText(image.context.translation);
+      await page.getByRole("button", { name: "朗读例句", exact: true }).click();
+      await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(image.context.sentence);
+    }
     await page.getByRole("button", { name: "关闭词条", exact: true }).click();
   }
 });
