@@ -20,6 +20,8 @@ describe("meaning regressions", () => {
     ]) expect(meaning(word), word).toContain(expected);
     for (const translation of Object.values(meaningCorrections)) expect(translation).not.toMatch(/待复核|词[：:]/);
     expect(meaning("mix")).toBe("混合；拌匀");
+    expect(meaning("play")).toContain("戏剧或话剧（名词）");
+    expect(allKetWords.find((word) => word.word === "play").partOfSpeech).toEqual(["n", "v"]);
     expect(allKetWords.find((word) => word.word === "mix").partOfSpeech).toEqual(["v"]);
     expect(allKetWords.every((word) => !/ -|board ing|pris ing/.test(word.word))).toBe(true);
   });
@@ -40,6 +42,7 @@ describe("the full A2 learning path", () => {
       }
     }
     const mother = courseWords.find((word) => word.word === "mother");
+    expect(meaningKey(courseWords.find((word) => word.word === "Dr"))).toBe(meaningKey(courseWords.find((word) => word.word === "doctor")));
     const q = vocabularyQuestions([mother])[0];
     expect(q.options).not.toContain("妈妈（美式非正式称呼）");
     expect(q.options.filter((option) => option !== mother.translation).every((option) => courseWords.some((word) => word.topic === mother.topic && word.translation === option && meaningKey(word) !== meaningKey(mother)))).toBe(true);

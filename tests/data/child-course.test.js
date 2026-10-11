@@ -7,6 +7,9 @@ import { countEnglishWords } from "../../src/utils/learningProgress.js";
 import { curatedTopics, curatedTopicGroups } from "../../src/data/curated-topics.js";
 import { familyImages } from "../../src/data/family-images.js";
 import { homeImages } from "../../src/data/home-images.js";
+import { parkImages } from "../../src/data/park-images.js";
+import { healthImages } from "../../src/data/health-images.js";
+import { dictionaryEntry } from "../../src/data/learning.js";
 
 describe("whole-bank meaning, POS and theme regressions", () => {
   it("places calendar, spatial and formerly unclassified words into explicit semantic groups", () => {
@@ -47,7 +50,7 @@ describe("whole-bank meaning, POS and theme regressions", () => {
   });
 });
 describe("six-year-old listening and reading", () => {
-  for (const [themeId, images] of [["family", familyImages], ["home", homeImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
+  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
     const words = childThemes.find((theme) => theme.id === themeId).vocabulary.words;
     expect(Object.keys(images).sort()).toEqual(words.map((word) => word.id).sort());
     for (const word of words) {
@@ -64,6 +67,26 @@ describe("six-year-old listening and reading", () => {
       expect(familyImages.l1_sister.meaning).toBe("姐姐");
       expect(familyImages.l10_brother.meaning).toBe("哥哥");
     }
+  });
+  it("pairs health photographs with specific clinical meanings, never restaurant content", () => {
+    expect(Object.keys(healthImages)).toHaveLength(8);
+    for (const [id, image] of Object.entries(healthImages)) {
+      const word = dictionaryEntry(allKetWords.find((entry) => entry.id === id));
+      expect(word.topic).toBe("body_health");
+      expect(word.image).toEqual(image);
+      expect(word.sentence).toBe(image.context.sentence);
+      expect(word.sentenceTranslation).toBe(image.context.translation);
+      expect(word.sentence.toLowerCase()).toContain(word.word.toLowerCase());
+      expect(word.sentenceTranslation).toMatch(/[\u4e00-\u9fff]/);
+      expect(countEnglishWords(word.sentence)).toBeLessThanOrEqual(10);
+      expect(image.generationPrompt.length).toBeGreaterThan(80);
+    }
+    expect(healthImages.l2_ambulance.reviewStatus).toBe("fixed");
+    expect(healthImages.l2_ambulance.refinementPrompt).toContain("Zoom out");
+    expect(healthImages.l2_tooth.context.sentence).toContain("model");
+    expect(healthImages.l2_tooth.meaning).toContain("模型");
+    expect(parkImages.l7_park.meaning).toBe("公园（名词）");
+    expect(parkImages.l7_play.meaning).toBe("玩游戏（动词）");
   });
   it("provides twelve themes with eight words, six sentences and one original short story each", () => {
     expect(childThemes).toHaveLength(12);

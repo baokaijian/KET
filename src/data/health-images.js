@@ -1,0 +1,60 @@
+// Clinical scenes illustrate vocabulary, not diagnosis or medication instructions.
+export const healthImages = {
+  l2_ambulance: {
+    src: "word-images/l2_ambulance.webp", alt: "ambulance: a white ambulance with emergency lights, a medical emblem and a stretcher inside its open side door", meaning: "救护车", reviewStatus: "fixed",
+    sha256: "8d218671bf17c61c469913b916f39dd76b4ecfb322af361f35151ed4321abb02",
+    note: "Emergency light bar, medical emblem and a secured stretcher identify an ambulance. Initial tight framing was regenerated; final roof, bumpers and wheels fit inside the frame.",
+    context: { sentence: "This is an ambulance.", translation: "这是一辆救护车。" },
+    generationPrompt: "One recognisable white high-roof ambulance with red stripe, blue emergency light bar, medical star and an open side door showing a secured stretcher; bright hospital forecourt, no patient, injuries, lettering, police car, fire engine or delivery van.",
+    refinementPrompt: "Zoom out the same ambulance photograph so the complete roof, rear and front bumpers and all wheels fit inside the square image with clear margins; keep emergency lights, emblem, open door and stretcher, no new people or branding.",
+  },
+  l2_doctor: {
+    src: "word-images/l2_doctor.webp", alt: "doctor: a doctor listening to a fully dressed child's chest with a stethoscope during a clinic checkup", meaning: "医生", reviewStatus: "pass",
+    sha256: "b211dcbc2761858ff40597d8394eb3de2a8c3386d00df097c08209cf839d1b63",
+    note: "Clinical examination equipment and visible stethoscope examination establish the teaching scene; the caption identifies the doctor role, not gender or appearance alone.",
+    context: { sentence: "The doctor listens to my heart.", translation: "医生听我的心跳。" },
+    generationPrompt: "A friendly woman doctor in a white coat listens to a fully dressed child's chest with a stethoscope in a bright examination room; both faces and natural hands visible, no isolated portrait, classroom, injury, needles, blood or distress.",
+  },
+  l9_nurse: {
+    src: "word-images/l9_nurse.webp", alt: "nurse: a nurse helping a child with a blood-pressure cuff connected to a monitor in a clinic", meaning: "护士", reviewStatus: "pass",
+    sha256: "00310723579cfff03abfaf6523aa884750aa92e00ee22fe6a038abef1f70ebbd",
+    note: "A medical worker adjusts a visible cuff connected to a monitor during a calm checkup; the explicit nurse sentence identifies the role without assuming all scrubs-wearers are nurses.",
+    context: { sentence: "The nurse is helping me.", translation: "护士正在帮助我。" },
+    generationPrompt: "A friendly male nurse in blue scrubs adjusts a blood-pressure cuff on a fully dressed child's upper arm beside its monitor in a bright clinic; faces, hands, cuff and tube visible, no white-coat stethoscope scene, injury, injection or distress.",
+  },
+  l5_hospital: {
+    src: "word-images/l5_hospital.webp", alt: "hospital: a hospital entrance with a visible ward bed, medical staff, a stretcher and a small ambulance", meaning: "医院", reviewStatus: "pass",
+    sha256: "2be8b29baeae71c132c5da02b657ce3ce1d9ffd112ab00c0c16f0953f8e2c9b0",
+    note: "The building has a sheltered patient entrance, an accessible ramp, medical workers with a stretcher and a ward bed visible through glass; not just a generic building bearing a plus sign.",
+    context: { sentence: "This is a hospital.", translation: "这是一家医院。" },
+    generationPrompt: "A modern multi-storey hospital with patient entrance, accessible ramp, small secondary ambulance, medical staff and stretcher, plus a ward bed visible through a window; wide bright architecture photo, no school playground, apartment, shop, crowd or injuries.",
+  },
+  l2_medicine: {
+    src: "word-images/l2_medicine.webp", alt: "medicine: a closed brown medicine bottle and a sealed blister pack of white tablets on a clinical tray", meaning: "药", reviewStatus: "pass",
+    sha256: "2c3b207477a4870f208d49b2691a1a8e52fa9ecb059060cb5d9a9c4c81f22604",
+    note: "A capped medicine bottle and intact tablet blister packaging distinguish medicine from food or drink; no child, loose pills, dosage or consumption instruction.",
+    context: { sentence: "This is medicine, not food.", translation: "这是药，不是食物。" },
+    generationPrompt: "One closed brown medicine bottle with a plain white cap and blank label beside one intact white-tablet blister pack on a light grey clinical tray; whole objects, no loose pills, candy colours, food, cup, hands, child, dosage, text or branding.",
+  },
+  l12_pharmacy: {
+    src: "word-images/l12_pharmacy.webp", alt: "pharmacy: a pharmacy dispensing counter, medicine shelves and an adult receiving a medicine carton", meaning: "药店/药房", reviewStatus: "pass",
+    sha256: "176f81943827a95cb50451ad93b93d4039c36196707fed58b9d2c2819d92d344",
+    note: "Dispensing counter, medicine cartons, capped pill bottles, blister pack and an adult receiving medicine identify a pharmacy rather than groceries or an examination room.",
+    context: { sentence: "An adult gets medicine at the pharmacy.", translation: "一位成年人在药房取药。" },
+    generationPrompt: "Whole pharmacy interior with dispensing counter, pharmacist handing a closed medicine carton to an adult, shelves of medicine cartons and capped pill bottles, tablet blister pack and a green medical plus; no child handling medicine, food, examination bed or dosage.",
+  },
+  l5_dentist: {
+    src: "word-images/l5_dentist.webp", alt: "dentist: a dentist checking a child's teeth with a dental mirror in a dental chair under an examination light", meaning: "牙医", reviewStatus: "pass",
+    sha256: "23475574226b3fe83aba4845825d6264a28f043e6e91742f60fa3227d48ec58d",
+    note: "Dental chair, overhead examination light, tray and mirror at the child's open mouth establish a dental checkup; no chest exam, extraction, drilling or bleeding.",
+    context: { sentence: "The dentist checks my teeth.", translation: "牙医检查我的牙齿。" },
+    generationPrompt: "A friendly dentist in pale green scrubs and gloves examines a fully dressed child's teeth with a small dental mirror, recognisable reclining dental chair, overhead light and tray; no stethoscope, blood-pressure cuff, extraction, drilling, needles or distress.",
+  },
+  l2_tooth: {
+    src: "word-images/l2_tooth.webp", alt: "tooth: a physical teaching model of one front tooth with a crown and tapered root on a clear stand", meaning: "牙齿（单颗门牙模型示例）", reviewStatus: "pass",
+    sha256: "30e1227cac1e09a0ce86f032ec1cee63d797ee77d3a36e523b7df70162d4f31b",
+    note: "One ivory incisor-shaped teaching model has a flattened crown and single tapered root on a clear support. The caption explicitly says model; it is not an extracted biological tooth or a cartoon icon.",
+    context: { sentence: "This is a model of one tooth.", translation: "这是一个单颗牙齿的模型。" },
+    generationPrompt: "A realistic physical dental teaching model of one human front incisor, ivory crown, flattened biting edge and single tapered root, tiny clear acrylic support on a clinic tabletop; whole tooth, no cartoon molar, mouth, extraction, blood, gum, cavity or labels.",
+  },
+};

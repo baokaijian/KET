@@ -42,6 +42,31 @@
 
 共同限制：方形真实感照片、明亮自然或柔和光照、清楚完整主体、无文字、水印、品牌、图标或拼图。家庭关系由明确教学语境建立，不能从照片外貌推断人物的真实亲属关系。不同家庭结构均成立，该照片只是一个例子。
 
+## 公园与健康主题（2026-10-11）
+
+每词独立调用内置 imagegen，十六张最终源图均实际查看后转换为 640 × 640 WebP；提示词主体、照片对应词义、例句与复核哈希保存在 `src/data/park-images.js` 和 `src/data/health-images.js`。下表为提示词主体和实际复核重点，不是完整调用提示词逐字转录。
+
+| 单词 | 最终图片 | 提示词主体 / 实际核验的场景 |
+| --- | --- | --- |
+| park | public/word-images/l7_park.webp | 公共公园全景，步行小路、草地、长椅、远处秋千滑梯；解释公园，不解释停车。 |
+| tree | public/word-images/l7_tree.webp | 一棵前景树，从地面树干到枝条和完整绿冠可见，不用公园全景代替。 |
+| flower | public/word-images/l7_flower.webp | 单朵红花，花心、花瓣、绿色茎与叶清楚，不用花束或树木代替。 |
+| ball | public/word-images/l7_ball.webp | 草地上的蓝黄橡胶球，球体完整，纹理与接地阴影可见，不是平面圆。 |
+| play | public/word-images/l7_play.webp | 两个孩子玩桌游，一个正在移动棋子；照片只解释玩游戏，不解释乐器或戏剧。 |
+| run | public/word-images/l2_run.webp | 红衣孩子长步幅跑过草地，手臂弯曲摆动，双脚短暂腾空，侧面全身。 |
+| jump | public/word-images/l12_jump.webp | 孩子双脚并拢向上跳，脚下有离地间隙与阴影，区别于横向奔跑。 |
+| walk | public/word-images/l2_walk.webp | 绿衣孩子直立、放松手臂、较短落地步幅走在小路上，区别于跑与跳。 |
+| ambulance | public/word-images/l2_ambulance.webp | 白色高顶救护车，警示灯、医疗标志、打开侧门内担架；第一次取景裁掉车尾，重新扩大取景后车顶、保险杠、车轮均在画面内，状态 fixed。 |
+| doctor | public/word-images/l2_doctor.webp | 医生在明亮诊室用听诊器听穿着衣服的孩子胸部，例句明确角色，不是普通成人头像。 |
+| nurse | public/word-images/l9_nurse.webp | 护士调整孩子上臂血压袖带，导管与显示器可见；句子明确角色，制服不是职业证明。 |
+| hospital | public/word-images/l5_hospital.webp | 医院入口、无障碍坡道、医护推担架、玻璃内病床，救护车是次要背景，不仅靠建筑十字标志。 |
+| medicine | public/word-images/l2_medicine.webp | 封闭药瓶和完整白色药片泡罩，在诊室托盘上，没有散落药片或孩子服药场景。 |
+| pharmacy | public/word-images/l12_pharmacy.webp | 药房柜台、药盒药瓶货架、成人取药；区别于杂货店和病房，没有用药剂量提示。 |
+| dentist | public/word-images/l5_dentist.webp | 牙医用口镜检查孩子牙齿，牙科躺椅、诊灯和器械托盘明确，无拔牙、钻牙或出血。 |
+| tooth | public/word-images/l2_tooth.webp | 一颗门牙的实体教学模型，有牙冠和单根，透明支架承托；中英文均明确是模型示例，不宣称为真实拔出的牙齿。 |
+
+共同限制：真实感方形照片、清楚主体、明亮光线、没有图标、拼图、水印和品牌。生成图的角色由场景句子建立，不用外貌证明职业身份；健康照片只教学词义，不提供诊断或用药指示。救护车初图不入发布包，只发布实际复核后的修正版。
+
 ## 后续完整队列
 
 `src/data/word-image-plans.js` 为全部 1687 个词建立唯一文件路径、指定 KET 词义、词性、教学场景和逐词提示词。该队列只用于制作，不把提示词视作图片已存在的证明，不自动写入通过状态。抽象词必须继续检查生成场景是否真的能表达其含义。

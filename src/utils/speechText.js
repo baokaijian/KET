@@ -8,5 +8,6 @@ export function getSpeakableWordText(wordOrText) {
     .replace(/[‘’]/g, "'")
     .replace(/\(([^)]*)\)/g, '$1')
     .replace(/\s+/g, ' ')
-    .trim();
+    .trim()
+    .replace(/^Dr\.?$/, 'doctor');
 }

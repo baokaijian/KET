@@ -4,6 +4,8 @@ import { courseWords, courseWordById } from "../../src/data/curriculum.js";
 import { wordImages } from "../../src/data/word-images.js";
 import { familyImages } from "../../src/data/family-images.js";
 import { homeImages } from "../../src/data/home-images.js";
+import { parkImages } from "../../src/data/park-images.js";
+import { healthImages } from "../../src/data/health-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 
 test.beforeEach(async ({ page }) => {
@@ -58,7 +60,7 @@ test("daily eight-word lesson resumes after leaving and reloading without demand
   expect(Object.keys(stored.memory)).toHaveLength(8);
 });
 
-for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
+for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
   await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   const theme = childThemes.find((item) => item.id === themeId);
   const completed = childThemes.slice(0, childThemes.indexOf(theme));
@@ -72,6 +74,7 @@ for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sist
   for (const word of theme.vocabulary.words) {
     const image = images[word.id];
     const card = page.locator(".preview-word").filter({ has: page.getByRole("heading", { name: word.word, exact: true }) });
+    if (image.meaning !== word.translation) await expect(card).toContainText(`照片对应：${image.meaning}`);
     await expect(card).toContainText(image.context.sentence);
     await expect(card).toContainText(image.context.translation);
     await expect(card.locator("img")).toHaveAttribute("alt", image.alt);
@@ -101,6 +104,10 @@ for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sist
   await page.locator(".dictionary-row").filter({ has: page.getByText(dictionaryWord.word, { exact: true }) }).locator(".dictionary-word").click();
   await expect(page.getByRole("dialog")).toContainText(`照片对应：${dictionaryImage.meaning}`);
   await expect(page.getByRole("dialog")).toContainText(dictionaryImage.context.translation);
+  if (themeId === "park") {
+    await expect(page.getByRole("dialog")).toContainText("停车（动词）");
+    await expect(page.getByRole("dialog")).toContainText("照片对应：公园（名词）");
+  }
   await page.getByRole("button", { name: "朗读例句", exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(dictionaryImage.context.sentence);
 });
@@ -180,6 +187,33 @@ test("restaurant search excludes health vocabulary and every dictionary entry ex
   await expect(page.locator(".dictionary-row")).toContainText("n. 名词");
   await page.locator(".dictionary-word").click();
   await expect(page.getByRole("dialog")).toContainText("n. 名词");
+});
+
+test("health photographs keep their clinical context, spoken examples and restaurant exclusions", async ({ page }, info) => {
+  await page.goto("./#learn");
+  for (const [id, image] of Object.entries(healthImages)) {
+    const word = courseWordById[id];
+    await page.getByRole("textbox", { name: "搜索单词或中文" }).fill(word.word);
+    await page.getByLabel("选择词汇主题").selectOption("food_cafe");
+    await expect(page.getByText("还没找到这个词")).toBeVisible();
+    await page.getByLabel("选择词汇主题").selectOption("body_health");
+    const row = page.locator(".dictionary-row").filter({ has: page.getByText(word.word, { exact: true }) });
+    await row.locator(".dictionary-word").click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toContainText(word.partOfSpeechLabel);
+    await expect(dialog).toContainText(`照片对应：${image.meaning}`);
+    await expect(dialog).toContainText(image.context.translation);
+    await expect(dialog.locator("img")).toHaveAttribute("alt", image.alt);
+    await dialog.locator("img").evaluate((img) => img.decode());
+    await page.getByRole("button", { name: "朗读例句", exact: true }).click();
+    await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(image.context.sentence);
+    if (["l2_ambulance", "l2_tooth"].includes(id)) await page.screenshot({ path: info.outputPath(`${word.word}-entry.png`) });
+    expect(await dialog.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
+    await page.getByRole("button", { name: "关闭词条", exact: true }).click();
+  }
+  await page.getByRole("textbox", { name: "搜索单词或中文" }).fill("Dr");
+  await page.locator(".dictionary-row").filter({ has: page.getByText("Dr", { exact: true }) }).getByRole("button", { name: "听 Dr 的发音", exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe("doctor");
 });
 
 test("every published photograph loads in its own vocabulary entry with its specific sense", async ({ page }) => {

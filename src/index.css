@@ -402,6 +402,10 @@ button:not(:disabled):active {
   aspect-ratio: 1.35;
   border-radius: 0;
 }
+.preview-word > .tiny {
+  margin: 0 14px 8px;
+  overflow-wrap: anywhere;
+}
 .word-caption {
   display: flex;
   align-items: center;

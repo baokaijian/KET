@@ -147,6 +147,9 @@ describe("published curriculum acceptance", () => {
   it("normalizes speech variants without reading punctuation", () => {
     expect(getSpeakableWordText("a / an")).toBe("a or an");
     expect(getSpeakableWordText("yog(h)urt")).toBe("yoghurt");
+    expect(getSpeakableWordText("Dr")).toBe("doctor");
+    expect(getSpeakableWordText({ word: "Dr" })).toBe("doctor");
+    expect(getSpeakableWordText(" Dr. ")).toBe("doctor");
     expect(
       getSpeakableWordText({ word: "hello", speechText: "hello there" }),
     ).toBe("hello there");

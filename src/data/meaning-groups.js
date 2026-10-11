@@ -11,9 +11,10 @@ export const meaningGroups = {
   someone: ["somebody", "someone"], everyone: ["everybody", "everyone"],
   fuel_station: ["petrol station", "gas station"], autumn: ["autumn", "fall"],
   dinner: ["dinner", "supper"],
+  pharmacy: ["pharmacy", "drugstore", "chemist"], doctor: ["doctor", "Dr"],
 };
 
-const byWord = Object.fromEntries(Object.entries(meaningGroups).flatMap(([concept, words]) => words.map((word) => [word, concept])));
+const byWord = Object.fromEntries(Object.entries(meaningGroups).flatMap(([concept, words]) => words.map((word) => [word.toLowerCase(), concept])));
 export function meaningKey(word) {
   const concept = byWord[word.word.toLowerCase()];
   return concept ? `concept:${concept}` : `meaning:${word.translation}`;

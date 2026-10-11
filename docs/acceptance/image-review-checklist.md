@@ -1,6 +1,6 @@
 # 单词与图片复核
 
-图片范围：42 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1645 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：58 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1629 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
@@ -97,7 +97,7 @@
 | l1_you | you | 你；你们 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_your | your | 你的；你们的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_accident | accident | 事故 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_ambulance | ambulance | 救护车 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_ambulance | ambulance | 救护车 | 救护车 | word-images/l2_ambulance.webp / ambulance: a white ambulance with emergency lights, a medical emblem and a stretcher inside its open side door | fixed | Emergency light bar, medical emblem and a secured stretcher identify an ambulance. Initial tight framing was regenerated; final roof, bumpers and wheels fit inside the frame. |
 | l2_apple | apple | 苹果 | 苹果 | word-images/l2_apple.webp / A single red apple with a green leaf. | pass | Red apple, stem and green leaf clearly visible; no competing object. |
 | l2_appointment | appointment | 预约 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_arm | arm | 手臂 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -150,7 +150,7 @@
 | l2_die | die | 死亡；死去 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_dinner | dinner | 晚餐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_dish | dish | 盘子；一道菜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_doctor | doctor | 医生 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_doctor | doctor | 医生 | 医生 | word-images/l2_doctor.webp / doctor: a doctor listening to a fully dressed child's chest with a stethoscope during a clinic checkup | pass | Clinical examination equipment and visible stethoscope examination establish the teaching scene; the caption identifies the doctor role, not gender or appearance alone. |
 | l2_drink | drink | 饮料；喝 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_ear | ear | 耳朵 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_eat | eat | 吃 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -192,7 +192,7 @@
 | l2_lunch | lunch | 午餐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_meal | meal | 一餐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_meat | meat | 肉；食用的肉 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_medicine | medicine | 药 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_medicine | medicine | 药 | 药 | word-images/l2_medicine.webp / medicine: a closed brown medicine bottle and a sealed blister pack of white tablets on a clinical tray | pass | A capped medicine bottle and intact tablet blister packaging distinguish medicine from food or drink; no child, loose pills, dosage or consumption instruction. |
 | l2_melon | melon | 瓜；甜瓜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_milk | milk | 牛奶 | 牛奶 | word-images/l2_milk.webp / A clear glass filled with white milk. | pass | White milk in a clear glass; liquid and container distinguishable. |
 | l2_neck | neck | 脖子；颈部 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -211,7 +211,7 @@
 | l2_problem | problem | 问题 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_rest | rest | 休息；剩余部分 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_rice | rice | 大米；米饭 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_run | run | 跑 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_run | run | 跑 | 跑 | word-images/l2_run.webp / run: a child running across grass with a long stride, bent arms and both feet off the ground | pass | Full-body side view shows an extended running stride and bent swinging arms, with both shoes airborne; not the relaxed grounded walking pose. |
 | l2_salad | salad | 沙拉 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_salt | salt | 食盐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_sandwich | sandwich | 三明治 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -232,13 +232,13 @@
 | l2_thirsty | thirsty | 口渴的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_toast | toast | 烤面包片；把面包烤脆 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_tomato | tomato | 西红柿 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_tooth | tooth | 牙齿 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_tooth | tooth | 牙齿 | 牙齿（单颗门牙模型示例） | word-images/l2_tooth.webp / tooth: a physical teaching model of one front tooth with a crown and tapered root on a clear stand | pass | One ivory incisor-shaped teaching model has a flattened crown and single tapered root on a clear support. The caption explicitly says model; it is not an extracted biological tooth or a cartoon icon. |
 | l2_toothache | toothache | 牙痛 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_toothbrush | toothbrush | 牙刷 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_up | up | 向上 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_vegetable | vegetable | 蔬菜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_waiter | waiter | 男服务员 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_walk | walk | 走路 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_walk | walk | 走路 | 走路（动词） | word-images/l2_walk.webp / walk: a child walking along a park path with relaxed arms and a shoe on the ground | pass | Upright body, relaxed straight arms and a grounded short step show walking; neither both feet airborne nor a long running stride. |
 | l2_wash | wash | 洗 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_wash_up | wash up | 洗餐具（英式英语）；洗手洗脸（美式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_well | well | 好；健康的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -366,7 +366,7 @@
 | l5_cloud | cloud | 云 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_cloudy | cloudy | 多云的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_delay | delay | 延误；耽搁；推迟 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_dentist | dentist | 牙医 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_dentist | dentist | 牙医 | 牙医 | word-images/l5_dentist.webp / dentist: a dentist checking a child's teeth with a dental mirror in a dental chair under an examination light | pass | Dental chair, overhead examination light, tray and mirror at the child's open mouth establish a dental checkup; no chest exam, extraction, drilling or bleeding. |
 | l5_department_store | department store | 百货商店 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_directions | directions | 方向；说明 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_drive | drive | 驾车 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -381,7 +381,7 @@
 | l5_foggy | foggy | 有雾的；雾大的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_guest_house | guest-house | 小旅馆；家庭旅馆 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_helicopter | helicopter | 直升机 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_hospital | hospital | 医院 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_hospital | hospital | 医院 | 医院 | word-images/l5_hospital.webp / hospital: a hospital entrance with a visible ward bed, medical staff, a stretcher and a small ambulance | pass | The building has a sheltered patient entrance, an accessible ramp, medical workers with a stretcher and a ward bed visible through glass; not just a generic building bearing a plus sign. |
 | l5_hotel | hotel | 旅馆/饭店 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_journey | journey | 旅程/行程 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_leave | leave | 离开 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -475,7 +475,7 @@
 | l6_zoo | zoo | 动物园 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_autumn | autumn | 秋天 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_badminton | badminton | 羽毛球 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l7_ball | ball | 球 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l7_ball | ball | 球 | 球 | word-images/l7_ball.webp / ball: one round blue-and-yellow rubber playground ball resting on grass | pass | A whole round rubber ball has visible texture, seam and ground contact; not a flat circle, planet or a child playing an unspecified game. |
 | l7_baseball | baseball | 棒球 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_basketball | basketball | 篮球 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_bat | bat | 球棒；蝙蝠（另一名词含义） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -499,7 +499,7 @@
 | l7_enter | enter | 进入 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_explorer | explorer | 探险者；探索者 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_fishing | fishing | 钓鱼 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l7_flower | flower | 花朵 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l7_flower | flower | 花朵 | 花朵 | word-images/l7_flower.webp / flower: one red flower with a visible centre, petals, green stem and leaf | pass | A single red flower head has a visible centre and complete petals, with stem and a leaf; not a bouquet, tree or generic garden scene. |
 | l7_football | football | 足球 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_forest | forest | 森林 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_goal | goal | 球门/得分目标 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -515,10 +515,10 @@
 | l7_mountain | mountain | 大山 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_north | north | 北方 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_paint | paint | 油漆；颜料；涂漆；用颜料画 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l7_park | park | 公园；停车（动词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l7_park | park | 公园；停车（动词） | 公园（名词） | word-images/l7_park.webp / park: a public park with a lawn, a curving footpath, a bench and a playground | pass | Open recreation space has a pedestrian path, bench and playground; teaches the noun park, not parking a car. |
 | l7_party | party | 聚会 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_plant | plant | 植物 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l7_play | play | 玩；演奏 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l7_play | play | 玩（游戏）；演奏（乐器）；戏剧或话剧（名词） | 玩游戏（动词） | word-images/l7_play.webp / play: two children playing a board game, one moving a red game token | pass | One child moves a token while another watches the game and smiles; shows playing a game, not a theatre play or performing music. |
 | l7_player | player | 运动员；播放器 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_prize | prize | 奖品；奖项 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_quiz | quiz | 知识问答；小测验 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -546,7 +546,7 @@
 | l7_tennis | tennis | 网球 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_tent | tent | 帐篷 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_throw | throw | 扔；投；抛 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l7_tree | tree | 树木 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l7_tree | tree | 树木 | 树木 | word-images/l7_tree.webp / tree: one leafy tree with its trunk, branches and whole green canopy visible | pass | One foreground tree has a brown trunk, branching structure and leafy canopy from ground to crown; background vegetation is secondary. |
 | l7_v_versus | v / versus | 对；与……比赛（v 是 versus 的缩写） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_volleyball | volleyball | 排球；排球运动 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_water | water | 水 | 水 | word-images/l7_water.webp / water: a glass and a pitcher visibly filled with clear drinking water | pass | Clear transparent liquid and visible waterlines distinguish drinking water from milk or juice. |
@@ -698,7 +698,7 @@
 | l9_journalist | journalist | 记者；新闻工作者 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_king | king | 国王 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_manager | manager | 经理；管理者 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l9_nurse | nurse | 护士 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l9_nurse | nurse | 护士 | 护士 | word-images/l9_nurse.webp / nurse: a nurse helping a child with a blood-pressure cuff connected to a monitor in a clinic | pass | A medical worker adjusts a visible cuff connected to a monitor during a calm checkup; the explicit nurse sentence identifies the role without assuming all scrubs-wearers are nurses. |
 | l9_occupation | occupation | 职业；工作 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_open | open | 打开；开放的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l9_painter | painter | 画家；油漆工 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1247,7 +1247,7 @@
 | l12_jazz | jazz | 爵士乐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_jellyfish | jellyfish | 水母 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_july | July | 七月 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_jump | jump | 跳 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_jump | jump | 跳 | 跳 | word-images/l12_jump.webp / jump: a child jumping upward with both feet together above the grass and arms raised | pass | Both feet are together and clearly above the lawn, arms raised and shadow below; vertical jumping differs from the horizontal running stride. |
 | l12_jumper | jumper | 套头毛衣（英式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_june | June | 六月 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_just | just | 刚刚；仅仅；恰好 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1419,7 +1419,7 @@
 | l12_perhaps | perhaps | 也许；可能 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_person | person | 人；一个人（复数常用 people） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_pet | pet | 宠物 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_pharmacy | pharmacy | 药店；药房 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_pharmacy | pharmacy | 药店；药房 | 药店/药房 | word-images/l12_pharmacy.webp / pharmacy: a pharmacy dispensing counter, medicine shelves and an adult receiving a medicine carton | pass | Dispensing counter, medicine cartons, capped pill bottles, blister pack and an adult receiving medicine identify a pharmacy rather than groceries or an examination room. |
 | l12_piano | piano | 钢琴 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_pink | pink | 粉红色 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_pity | pity | 遗憾；同情（如 What a pity! 真遗憾！） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
