@@ -2,6 +2,8 @@
 // Generated from Cambridge A2 Key Vocabulary List PDF
 
 export const topicCategories = [
+  { id: "animals", name: "动物朋友 Animals", color: "#23794d", icon: "PawPrint", levels: [6], scene: "动物朋友", scenePrompt: "认识动物，描述它们的身体、动作与生活环境。" },
+  { id: "clothes", name: "穿衣搭配 Clothes", color: "#23794d", icon: "Shirt", levels: [8], scene: "穿衣搭配", scenePrompt: "认识衣服、鞋帽和配饰，按天气选择合适的穿着。" },
   {
     "id": "daily_starters",
     "name": "日常开口 Daily Starters",
@@ -173,9 +175,9 @@ export const levels = [
   },
   {
     "id": 2,
-    "name": "餐厅点餐",
+    "name": "食物与健康",
     "emoji": "🍎",
-    "description": "在家、餐厅或咖啡馆点餐，描述食物和饮品。",
+    "description": "分主题学习食物与身体，点餐课与健康课分别安排。",
     "topics": [
       "food_cafe",
       "body_health"
@@ -218,10 +220,11 @@ export const levels = [
   },
   {
     "id": 6,
-    "name": "天气计划",
+    "name": "自然与动物",
     "emoji": "⛅",
-    "description": "谈论天气、季节、自然环境和户外安排。",
+    "description": "分主题认识动物、天气、季节和自然环境。",
     "topics": [
+      "animals",
       "nature_weather"
     ],
     "targetWeeks": "第 21-24 周",
@@ -240,10 +243,11 @@ export const levels = [
   },
   {
     "id": 8,
-    "name": "感受描述",
+    "name": "感受与穿衣",
     "emoji": "😊",
     "description": "表达心情、观点、外貌和事物特征。",
     "topics": [
+      "clothes",
       "feelings_descriptions"
     ],
     "targetWeeks": "第 29-32 周",

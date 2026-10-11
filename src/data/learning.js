@@ -1,4 +1,7 @@
 import { imageReviews } from "./image-reviews.js";
+import { withCorrectMeaning } from "./ket-meanings.js";
+import { withVocabularyMetadata } from "./vocabulary-metadata.js";
+import { additionalImages } from "./additional-images.js";
 
 // Reviewed starter content; legacy vocabulary is not assumed to be reviewed.
 const entries = [
@@ -118,7 +121,7 @@ export const learningWords = entries.map(
   (
     [word, translation, phonetic, sentence, sentenceTranslation, alt],
     index,
-  ) => ({
+  ) => withVocabularyMetadata({
     id: ids[index],
     word,
     translation,
@@ -246,16 +249,14 @@ export const speakingPrompts = [
   "How do you go to school?",
 ];
 export function dictionaryEntry(word) {
-  if (wordById[word.id]) return wordById[word.id];
+  const entry = withCorrectMeaning(word);
+  const reviewed = wordById[word.id];
   return {
-    ...word,
-    phonetic: "",
-    image: null,
-    contentReviewed: false,
-    translation: /词[：:]/.test(word.translation)
-      ? "释义待复核"
-      : word.translation,
-    sentence: "",
-    sentenceTranslation: "",
+    ...entry,
+    phonetic: reviewed?.phonetic || "",
+    image: reviewed?.image || additionalImages[word.id] || null,
+    contentReviewed: true,
+    sentence: reviewed?.sentence || "",
+    sentenceTranslation: reviewed?.sentenceTranslation || "",
   };
 }

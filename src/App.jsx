@@ -34,11 +34,13 @@ import {
 import {
   countEnglishWords,
   emptyProgress,
-  localDay,
   normalizeProgress,
   recordAnswer,
+  recordEncounter,
+  dueReviews,
+  localDay,
 } from "./utils/learningProgress.js";
-import { useLocalStorageState } from "./hooks/useLocalStorageState.js";
+import { useLocalStorageState, safeReadStorage, safeWriteStorage } from "./hooks/useLocalStorageState.js";
 import {
   playCorrectSound,
   playIncorrectSound,
@@ -48,6 +50,11 @@ import {
 } from "./utils/audio.js";
 import { getSpeakableWordText } from "./utils/speechText.js";
 import WordIllustration from "./components/WordIllustration.jsx";
+import CourseHub from "./components/CourseHub.jsx";
+import ProductionWorkspace from "./components/ProductionWorkspace.jsx";
+import CourseAssessment from "./components/CourseAssessment.jsx";
+import DailyLearning from "./components/DailyLearning.jsx";
+import { saveDailyPlan, reviewQuestions } from "./utils/dailyPlan.js";
 
 const navigation = [
   ["today", "今天", Home],
@@ -107,124 +114,12 @@ function LessonTile({ lesson, completed, start }) {
   );
 }
 
-function Today({ progress, start, navigate, say }) {
-  const next =
-    lessons.find((lesson) => !progress.completed.includes(lesson.id)) ||
-    lessons[0];
-  const todayCount = Number(progress.days[localDay()]) || 0;
-  return (
-    <>
-      <div className="section-heading">
-        <h2>今天的小目标</h2>
-        <span className="muted">每天 5 分钟，就很好</span>
-      </div>
-      <section className="daily-layout">
-        <div className="daily-lesson">
-          <div>
-            <span className="tag">
-              {progress.completed.includes(next.id)
-                ? "再巩固一次"
-                : "为你准备的下一课"}
-            </span>
-            <h2>{next.title}</h2>
-            <p>{next.description}</p>
-            <div className="lesson-meta">
-              <span>
-                <Clock size={15} /> 5 分钟
-              </span>
-              <span>
-                <BookOpen size={15} /> 4 个单词
-              </span>
-            </div>
-            <button className="primary" onClick={() => start(next)}>
-              开始学习 <ArrowRight size={18} />
-            </button>
-          </div>
-          <WordIllustration word={next.words[0]} />
-        </div>
-        <div className="daily-goal">
-          <div className="goal-top">
-            <span className="icon-tint">
-              <Sparkles size={22} />
-            </span>
-            <span className="tiny">TODAY</span>
-          </div>
-          <h3>{todayCount >= 4 ? "今天的目标完成啦" : "小小练习，大大进步"}</h3>
-          <p>完成 4 道练习，给今天添一颗星。</p>
-          <div
-            className="goal-dots"
-            aria-label={`今天已完成 ${Math.min(todayCount, 4)} / 4 道练习`}
-          >
-            {[0, 1, 2, 3].map((n) => (
-              <span key={n} className={n < todayCount ? "filled" : ""}>
-                {n < todayCount ? <Check size={17} /> : n + 1}
-              </span>
-            ))}
-          </div>
-          <button className="text-button" onClick={() => navigate("progress")}>
-            看看我的成长 <ChevronRight size={16} />
-          </button>
-        </div>
-      </section>
-      <div className="section-heading">
-        <h2>先认识这几个词</h2>
-        <button className="text-button" onClick={() => navigate("learn")}>
-          探索更多 <ChevronRight size={16} />
-        </button>
-      </div>
-      <section className="word-grid">
-        {next.words.map((word) => (
-          <article className="preview-word" key={word.id}>
-            <WordIllustration word={word} />
-            <div className="word-caption">
-              <div>
-                <h3 lang="en">{word.word}</h3>
-                <span>{word.translation}</span>
-              </div>
-              <SoundButton
-                text={word.word}
-                say={say}
-                label={`听 ${word.word} 的发音`}
-              />
-            </div>
-          </article>
-        ))}
-      </section>
-      <div className="section-heading">
-        <h2>我的探索路线</h2>
-        <span className="muted">从生活出发，慢慢走向 KET</span>
-      </div>
-      <section className="lesson-list">
-        {lessons.map((lesson) => (
-          <LessonTile
-            key={lesson.id}
-            lesson={lesson}
-            start={start}
-            completed={progress.completed.includes(lesson.id)}
-          />
-        ))}
-      </section>
-      <section className="review-banner">
-        <div>
-          <RotateCcw size={22} />
-          <div>
-            <h3>再见一次，就记得更牢</h3>
-            <p>
-              {progress.review.length
-                ? `${progress.review.length} 道练习等你回来。`
-                : "没有待复习的题目，继续探索吧。"}
-            </p>
-          </div>
-        </div>
-        <button className="secondary" onClick={() => navigate("progress")}>
-          我的复习
-        </button>
-      </section>
-    </>
-  );
+function Today({ progress, start, say, curriculum, savePlan }) {
+  return <DailyLearning curriculum={curriculum} progress={progress} launch={start} say={say} save={savePlan} />;
 }
 
-function Library({ progress, start, say }) {
+function Library({ progress, start, say, curriculum, produce }) {
+  const [advanced, setAdvanced] = useLocalStorageState("sparks_advanced_courses", false);
   const [dictionary, setDictionary] = useState(null);
   const [loadError, setLoadError] = useState(false);
   const [query, setQuery] = useState("");
@@ -263,6 +158,9 @@ function Library({ progress, start, say }) {
     );
   return (
     <>
+      {curriculum?.childThemes && <section className="child-library" aria-label="听读故事课程"><div className="section-heading"><h2>听读故事课程</h2><span className="muted">短句 · 小故事 · 进阶阅读</span></div>{curriculum.childThemes.map((theme) => <div className="child-theme-row" key={theme.id}><strong>{theme.title}</strong><div>{[theme.vocabulary, theme.sentences, theme.story, theme.longStory].map((lesson) => <button className="quiet-button" key={lesson.id} onClick={() => start(lesson)}>{lesson.id.endsWith("words") ? "认识新词" : lesson.id.endsWith("sentences") ? "听读句子" : lesson.id.endsWith("long-story") ? "进阶故事" : "阅读故事"}{progress.completed.includes(lesson.id) && <Check size={14} />}</button>)}</div></div>)}</section>}
+      <details className="advanced-courses" open={advanced} onToggle={(event) => { if (event.currentTarget.open !== advanced) setAdvanced(event.currentTarget.open); }}><summary>家长与进阶课程 · 完整 KET 体系</summary><CourseHub curriculum={curriculum} progress={progress} launch={start} produce={produce} /></details>
+      <div className="section-heading"><h2>照片启蒙课</h2><span className="muted">刚开始学英语，从这里热身</span></div>
       <section className="lesson-list">
         {lessons.map((lesson) => (
           <LessonTile
@@ -307,7 +205,7 @@ function Library({ progress, start, say }) {
         </select>
       </div>
       <p className="tiny library-note">
-        照片课程已逐项复核。扩展词库正在校对，未核实的图片和音标不展示；释义标注为待复核时，请先查词典。
+        全部词条提供中文含义，多义词按上下文选用。只有已核实的照片和音标会展示。
       </p>
       <div className="dictionary-grid">
         {results.slice(page * 36, (page + 1) * 36).map((word) => (
@@ -320,6 +218,7 @@ function Library({ progress, start, say }) {
               }}
             >
               <strong lang="en">{word.word}</strong>
+              <small className="part-of-speech">{word.partOfSpeechLabel}{word.grammarNotes ? ` · ${word.grammarNotes}` : ""}</small>
               <span>{word.translation}</span>
             </button>
             <SoundButton
@@ -399,7 +298,9 @@ function Library({ progress, start, say }) {
               <X size={20} />
             </button>
             <WordIllustration word={selected} />
+            {selected.image && <p className="tiny">照片对应：{selected.image.meaning}</p>}
             <h2 lang="en">{selected.word}</h2>
+            <p className="part-of-speech">{selected.partOfSpeechLabel}</p>
             {selected.phonetic && (
               <p className="phonetic">UK {selected.phonetic}</p>
             )}
@@ -411,11 +312,6 @@ function Library({ progress, start, say }) {
             />
             {selected.sentence && (
               <blockquote lang="en">{selected.sentence}</blockquote>
-            )}
-            {!selected.contentReviewed && (
-              <p className="tiny">
-                扩展词条尚未完成语义复核，不作为掌握度测试依据。
-              </p>
             )}
             <button className="quiet-button" onClick={() => setSelected(null)}>
               返回词库
@@ -434,11 +330,9 @@ function makeWordQuestions(words) {
     word,
     skill: "vocabulary",
     type:
-      index % 3 === 1 ? "spelling" : index % 3 === 2 ? "listening" : "picture",
+      index % 3 === 2 ? "listening" : "picture",
     prompt:
-      index % 3 === 1
-        ? `拼出“${word.translation.replace("（名词）", "")}”的英文`
-        : index % 3 === 2
+      index % 3 === 2
           ? "听一听，选择你听到的词。"
           : "看看照片，选出它的英文。",
     options: [
@@ -456,27 +350,41 @@ function makeWordQuestions(words) {
 
 function Practice({ activity, progress, seen, answer, complete, exit, say }) {
   const words = activity.lesson?.words || [];
-  const questions = activity.questions || makeWordQuestions(words);
-  const [stage, setStage] = useState(words.length ? "learn" : "quiz");
-  const [index, setIndex] = useState(0);
-  const [responses, setResponses] = useState([]);
-  const [choice, setChoice] = useState(null);
+  const questions = activity.questions || activity.lesson?.questions || makeWordQuestions(words);
+  const guide = activity.lesson?.guide;
+  const sessionKey = `sparks_activity_${activity.lesson?.id || activity.title}`;
+  const fingerprint = JSON.stringify([activity.lesson ? null : localDay(), words.map((word) => word.id), questions.map((question) => question.id)]);
+  const [resume] = useState(() => {
+    const saved = safeReadStorage(sessionKey, null);
+    const limit = saved?.stage === "learn" ? words.length : questions.length;
+    return saved?.fingerprint === fingerprint && ["learn", "quiz", "guide"].includes(saved.stage) && Number.isInteger(saved.index) && saved.index >= 0 && saved.index < limit && Array.isArray(saved.responses) && saved.responses.length <= questions.length && saved.responses.every((value) => typeof value === "boolean") ? saved : null;
+  });
+  const [stage, setStage] = useState(resume?.stage || (guide ? "guide" : words.length ? "learn" : "quiz"));
+  const [index, setIndex] = useState(resume?.index || 0);
+  const [responses, setResponses] = useState(resume?.responses || []);
+  const [choice, setChoice] = useState(resume?.choice || null);
   const [typed, setTyped] = useState("");
   const [heard, setHeard] = useState(false);
   const [audioError, setAudioError] = useState(false);
+  const [guideAudio, setGuideAudio] = useState(resume?.guideAudio || false);
+  useEffect(() => {
+    safeWriteStorage(sessionKey, { fingerprint, stage, index, responses, choice, guideAudio });
+  }, [sessionKey, fingerprint, stage, index, responses, choice, guideAudio]);
   const currentWord = words[index];
   const question = questions[index];
   const score = responses.filter(Boolean).length;
   const total = stage === "learn" ? words.length : questions.length;
 
   function check(value) {
-    if (choice !== null) return;
-    const correct = question.correctWord
-      ? value.trim().toLowerCase() === question.correctWord
-      : value === question.answer;
+    if (choice !== null || ((question.audio || question.type === "listening") && !heard)) return;
+    const correct = question.acceptedAnswers
+      ? question.acceptedAnswers.some((accepted) => accepted.toLowerCase() === String(value).trim().toLowerCase())
+      : question.correctWord
+        ? String(value).trim().toLowerCase() === question.correctWord.toLowerCase()
+        : value === question.answer;
     setChoice({ value, correct });
     setResponses([...responses, correct]);
-    answer(question.correctWord ? question.wordId : question.id, correct);
+    answer(question.wordId || question.id, correct, { skill: question.audio || question.type === "listening" ? "listening" : "reading", hinted: question.skill === "reading" && (heard || guideAudio) });
     if (correct) playCorrectSound();
     else playIncorrectSound();
   }
@@ -491,10 +399,10 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
     } else if (index + 1 === questions.length) {
       complete({
         title: activity.title,
-        skill: activity.skill || "vocabulary",
+        skill: activity.skill || activity.lesson?.skill || "vocabulary",
         score,
         total: questions.length,
-        lessonId: activity.lesson?.id,
+        lessonId: activity.lesson?.completionId ?? activity.lesson?.id,
       });
       setStage("result");
       playVictoryFanfare();
@@ -532,31 +440,41 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
           {stage === "result" ? "完成" : `${index + 1} / ${total}`}
         </span>
       </div>
-      {stage !== "result" && (
+      {!["result", "guide"].includes(stage) && (
         <div className="progress-track">
           <span style={{ width: `${((index + 1) / total) * 100}%` }} />
         </div>
       )}
+      {stage === "guide" && <div className="lesson-guide">
+        <span className="eyebrow">先理解 · 再练习</span><h1>{activity.title}</h1>
+        <p>{guide.rule}</p>{guide.example && <div className="example"><blockquote lang="en">{guide.example}</blockquote><SoundButton text={guide.example} say={say} label="听讲解例句" /></div>}
+        {guide.sentences && <div className="sentence-list">{guide.sentences.map(([text, meaning], n) => <div key={text}><p lang="en">{text}</p><p className="muted">{meaning}</p><button className="icon-button" title={`听第 ${n + 1} 句`} aria-label={`听第 ${n + 1} 句`} onClick={() => { setGuideAudio(true); say(text); }}><Volume2 size={19} /></button></div>)}</div>}
+        {guide.passage && <><blockquote className="reading-passage" lang="en">{guide.passage}</blockquote><button className="secondary" onClick={() => { setGuideAudio(true); say(guide.passage); }}><Headphones size={19} /> 听完整故事</button><div className="story-sentences">{guide.passage.match(/[^.!?]+[.!?]+/g)?.map((sentence, n) => <button className="quiet-button" key={n} onClick={() => { setGuideAudio(true); say(sentence.trim()); }} aria-label={`听故事第 ${n + 1} 句`}><Volume2 size={16} /><span lang="en">{sentence.trim()}</span></button>)}</div></>}
+        <div className="guide-caution"><strong>小提醒</strong><p>{guide.caution}</p></div>
+        <button className="primary" onClick={() => { stopSpeech(); setStage(words.length ? "learn" : "quiz"); }}>开始练习 <ArrowRight size={18} /></button>
+      </div>}
       {stage === "learn" && (
-        <div className="learning-stage">
+        <div className={`learning-stage ${currentWord.image ? "" : "text-only"}`}>
           <WordIllustration word={currentWord} />
           <div className="word-detail">
             <span className="eyebrow">听一听 · 读一读</span>
             <h1 lang="en">{currentWord.word}</h1>
-            <p className="phonetic">UK {currentWord.phonetic}</p>
+            <p className="part-of-speech">{currentWord.partOfSpeechLabel}</p>
+            {currentWord.phonetic && <p className="phonetic">UK {currentWord.phonetic}</p>}
             <h2>{currentWord.translation}</h2>
+            {currentWord.image && currentWord.image.meaning !== currentWord.translation && <p className="tiny">照片对应：{currentWord.image.meaning}</p>}
             <div className="sound-controls">
-              <button className="primary" onClick={() => say(currentWord.word)}>
+              <button className="primary" onClick={() => say(getSpeakableWordText(currentWord))}>
                 <Volume2 size={19} /> 听发音
               </button>
               <SoundButton
                 slow
-                text={currentWord.word}
+                text={getSpeakableWordText(currentWord)}
                 say={say}
                 label="慢速播放单词"
               />
             </div>
-            <div className="example">
+            {currentWord.sentence && <div className="example">
               <div>
                 <p lang="en">{currentWord.sentence}</p>
                 <SoundButton
@@ -566,7 +484,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
                 />
               </div>
               <p>{currentWord.sentenceTranslation}</p>
-            </div>
+            </div>}
             <button className="secondary" onClick={next}>
               {index + 1 === words.length ? "开始小练习" : "下一个单词"}{" "}
               <ArrowRight size={18} />
@@ -593,9 +511,13 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
             <WordIllustration word={question.word} />
           )}
           {question.passage && (
+            <>
             <blockquote className="reading-passage" lang="en">
               {question.passage}
             </blockquote>
+            {(activity.lesson?.id?.startsWith("child-") || question.id.startsWith("child-")) && <button className="quiet-button" onClick={() => { setHeard(true); say(question.passage); }}><Volume2 size={17} /> 听这段文字</button>}
+            {heard && question.skill === "reading" && <p className="tiny">本题记录为听后理解，不计入独立阅读掌握。</p>}
+            </>
           )}
           {(question.audio || question.type === "listening") && (
             <div className="listening-control">
@@ -611,7 +533,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
               </p>
             </div>
           )}
-          {question.type === "spelling" ? (
+          {["spelling", "input"].includes(question.type) ? (
             <form
               className="spelling-form"
               onSubmit={(event) => {
@@ -621,9 +543,9 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
             >
               <input
                 autoFocus
-                aria-label="输入英文拼写"
+                aria-label={question.type === "input" ? "输入填空答案" : "输入英文拼写"}
                 value={typed}
-                disabled={choice !== null}
+                disabled={choice !== null || (question.audio && !heard)}
                 onChange={(event) => setTyped(event.target.value)}
                 autoComplete="off"
                 autoCapitalize="none"
@@ -631,9 +553,9 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
               />
               <button
                 className="primary"
-                disabled={!typed.trim() || choice !== null}
+                disabled={!typed.trim() || choice !== null || (question.audio && !heard)}
               >
-                检查拼写 <Check size={18} />
+                {question.type === "input" ? "检查答案" : "检查拼写"} <Check size={18} />
               </button>
             </form>
           ) : (
@@ -654,7 +576,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
                     <span className="option-letter">
                       {String.fromCharCode(65 + n)}
                     </span>
-                    <span lang="en">{option}</span>
+                    <span lang={/[\u4e00-\u9fff]/.test(option) ? "zh-CN" : "en"}>{option}</span>
                     {choice?.value === value &&
                       (choice.correct ? (
                         <CheckCircle2 size={20} />
@@ -693,6 +615,8 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
           <p>
             这次答对 <strong>{score}</strong> / {questions.length} 题
           </p>
+          {activity.lesson?.questions && <p className={score / questions.length >= 0.8 ? "positive" : "muted"}>{score / questions.length >= 0.8 ? "本课已通过。" : "还需巩固：答对至少 80% 后通过本课。"}</p>}
+          {activity.lesson && <button className="secondary" onClick={() => { setStage(guide ? "guide" : words.length ? "learn" : "quiz"); setIndex(0); setResponses([]); setChoice(null); setTyped(""); setHeard(false); setGuideAudio(false); setAudioError(false); }}>再练这课 <RotateCcw size={17} /></button>}
           <p>
             {score === questions.length
               ? "这些知识已经更熟悉了，继续探索吧。"
@@ -707,7 +631,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
   );
 }
 
-function Speaking({ say }) {
+function Speaking({ say, prompts = speakingPrompts }) {
   const [promptIndex, setPromptIndex] = useState(0);
   const [recording, setRecording] = useState(false);
   const [waitingForMic, setWaitingForMic] = useState(false);
@@ -781,10 +705,10 @@ function Speaking({ say }) {
   return (
     <section className="skill-workspace">
       <span className="eyebrow">SPEAK ABOUT YOU</span>
-      <h2 lang="en">{speakingPrompts[promptIndex]}</h2>
+      <h2 lang="en">{prompts[promptIndex]}</h2>
       <button
         className="quiet-button"
-        onClick={() => say(speakingPrompts[promptIndex])}
+        onClick={() => say(prompts[promptIndex])}
       >
         <Volume2 size={18} /> 听问题
       </button>
@@ -826,7 +750,7 @@ function Speaking({ say }) {
         className="quiet-button"
         disabled={recording || waitingForMic}
         onClick={() => {
-          setPromptIndex((promptIndex + 1) % speakingPrompts.length);
+          setPromptIndex((promptIndex + 1) % prompts.length);
           setChecks({});
           if (clipRef.current) URL.revokeObjectURL(clipRef.current);
           clipRef.current = "";
@@ -843,7 +767,8 @@ function Speaking({ say }) {
   );
 }
 
-function Assessment({ startTest, progress, update, say }) {
+function Assessment({ startTest, progress, update, say, curriculum, start, produce }) {
+  const [advanced, setAdvanced] = useLocalStorageState("sparks_advanced_courses", false);
   const [skill, setSkill] = useState("listening");
   const [submitted, setSubmitted] = useState(false);
   const [showExample, setShowExample] = useState(false);
@@ -851,9 +776,12 @@ function Assessment({ startTest, progress, update, say }) {
   const count = countEnglishWords(progress.draft);
   return (
     <>
+      <section className="child-assessment"><div className="section-heading"><h2>听懂了，也读懂了</h2><span className="muted">小挑战 · 不用拼写</span></div><p>先选一个喜欢的话题。答错也没关系，我们会安排再见一次。</p><div className="child-theme-row"><button className="primary" onClick={() => start({ title: "听力小挑战", skill: "listening", questions: curriculum.childThemes[0].sentences.questions.filter((question) => question.skill === "listening") })} disabled={!curriculum?.childThemes}>听力小挑战 <Headphones size={17} /></button><button className="secondary" onClick={() => start({ title: "阅读小挑战", skill: "reading", questions: curriculum.childThemes[0].story.questions })} disabled={!curriculum?.childThemes}>阅读小挑战 <BookOpen size={17} /></button></div></section>
+      <details className="advanced-courses" open={advanced} onToggle={(event) => { if (event.currentTarget.open !== advanced) setAdvanced(event.currentTarget.open); }}><summary>家长与进阶测试 · 完整 KET 训练</summary>
+      <CourseAssessment curriculum={curriculum} start={start} produce={produce} />
       <div className="assessment-intro">
         <div>
-          <span className="tag">A2 Key · 能力练习</span>
+          <span className="tag">入门热身 · 能力练习</span>
           <h2>不怕做错，才会更多。</h2>
           <p>听、读、写、说，各练一点。先从你喜欢的开始。</p>
         </div>
@@ -963,7 +891,7 @@ function Assessment({ startTest, progress, update, say }) {
       )}
       {skill === "speaking" && <Speaking say={say} />}
       <p className="assessment-disclaimer">
-        本页是自编的 KET 入门能力练习，不是完整模拟考试，也不预测 Cambridge
+        本页包含自编的 KET 专项与入门练习，不是完整模拟考试，也不预测 Cambridge
         成绩。正式 A2 Key 包含阅读与写作、听力和口语。
         <a
           href="https://www.cambridgeenglish.org/exams-and-tests/qualifications/key/format/"
@@ -973,20 +901,24 @@ function Assessment({ startTest, progress, update, say }) {
           了解官方考试结构
         </a>
       </p>
+      </details>
     </>
   );
 }
 
-function Progress({ progress, review }) {
-  const wordsToReview = progress.review.filter((id) => wordById[id]);
+function Progress({ progress, review, curriculum, reviewDue }) {
+  const registry = curriculum?.courseWordById || wordById;
+  const questionRegistry = { ...Object.fromEntries(abilityQuestions.map((question) => [question.id, question])), ...curriculum?.courseQuestionById, ...curriculum?.childQuestionById };
+  const wordsToReview = progress.review.filter((id) => registry[id]);
+  const due = dueReviews(progress).filter((item) => registry[item.id] || questionRegistry[item.id]);
   return (
     <>
       <section className="stats-grid">
         {[
           [
-            progress.mastered.filter((id) => wordById[id]).length,
+            progress.mastered.filter((id) => registry[id]).length,
             "已掌握单词",
-            "练习答对，不只看过",
+            "在不同日期成功复习，听读分别记录",
           ],
           [progress.completed.length, "完成课程", "属于你的探索足迹"],
           [Object.keys(progress.days).length, "学习天数", "每一天都值得鼓励"],
@@ -998,9 +930,9 @@ function Progress({ progress, review }) {
                 {" "}
                 /{" "}
                 {title === "已掌握单词"
-                  ? learningWords.length
+                  ? 1687
                   : title === "完成课程"
-                    ? lessons.length
+                    ? (curriculum?.courseLessons.length || 0) + lessons.length
                     : "天"}
               </span>
             </strong>
@@ -1009,6 +941,8 @@ function Progress({ progress, review }) {
           </div>
         ))}
       </section>
+      <div className="section-heading"><h2>间隔复习</h2><span className="muted">{due.length} 项到期 · 听读分别安排</span></div>
+      {due.length ? <section className="review-list">{due.slice(0, 12).map((item) => <div key={`${item.id}-${item.skill}`}><div><strong>{registry[item.id]?.word || questionRegistry[item.id]?.prompt}</strong><span>{item.skill === "listening" ? "听力" : "阅读"} · 已独立答对 {item.successDays.length} 个学习日 · {item.due} 到期</span></div><button className="quiet-button" onClick={() => reviewDue([item])}>开始复习 <ArrowRight size={16} /></button></div>)}<button className="primary" onClick={() => reviewDue(due.slice(0, 20))}>复习到期内容</button>{due.length > 20 && <p className="tiny">每次最多 20 项，其余内容保留，不要求一次补完。</p>}</section> : <p className="muted">今天没有到期内容。复习会在合适的日子回来。</p>}
       <div className="section-heading">
         <h2>再练一次</h2>
         <span className="muted">{progress.review.length} 项待复习</span>
@@ -1019,17 +953,15 @@ function Progress({ progress, review }) {
             <div key={id}>
               <div>
                 <strong>
-                  {wordById[id]?.word ||
-                    abilityQuestions.find((question) => question.id === id)
-                      ?.prompt ||
+                  {registry[id]?.word ||
+                    questionRegistry[id]?.prompt ||
                     "练习题"}
                 </strong>
                 <span>
-                  {wordById[id]?.translation ||
-                    (abilityQuestions.find((question) => question.id === id)
-                      ?.skill === "listening"
+                  {registry[id]?.translation ||
+                    (questionRegistry[id]?.skill === "listening"
                       ? "听力理解"
-                      : "阅读理解")}
+                      : questionRegistry[id]?.skill === "grammar" ? "语法应用" : "阅读理解")}
                 </span>
               </div>
               <button className="quiet-button" onClick={() => review([id])}>
@@ -1085,6 +1017,7 @@ function Progress({ progress, review }) {
           学习不需要账号，进度保存在本浏览器。清除浏览器数据会清除新版记录；旧版学习数据保持不变。
         </p>
       </div>
+      {!!progress.selfReviews.length && <p className="positive">已完成 {progress.selfReviews.length} 篇写作自查；自查记录不代表语言能力评分。</p>}
     </>
   );
 }
@@ -1106,6 +1039,12 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [activity, setActivity] = useState(null);
   const [notice, setNotice] = useState("");
+  const [curriculum, setCurriculum] = useState(null);
+  useEffect(() => {
+    let active = true;
+    Promise.all([import("./data/curriculum.js"), import("./data/child-course.js")]).then(([data, child]) => { if (active) setCurriculum({ ...data, ...child }); }).catch(() => { if (active) setNotice("完整课程暂时无法加载，请刷新重试。"); });
+    return () => { active = false; };
+  }, []);
   const noticeTimer = useRef(null);
   function update(fn) {
     setStored((previous) => fn(normalizeProgress(previous)));
@@ -1161,7 +1100,12 @@ export default function App() {
   }
   function start(lesson) {
     stopSpeech();
-    setActivity({ title: lesson.title, lesson, key: Date.now() });
+    setActivity({ title: lesson.title, lesson, key: crypto.randomUUID() });
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+  function produce(task, mode) {
+    stopSpeech();
+    setActivity({ production: task, mode, title: task.title, key: crypto.randomUUID() });
     window.scrollTo({ top: 0, behavior: "instant" });
   }
   function startTest(skill) {
@@ -1177,19 +1121,27 @@ export default function App() {
       questions: abilityQuestions.filter(
         (question) => skill === "mixed" || question.skill === skill,
       ),
-      key: Date.now(),
+      key: crypto.randomUUID(),
     });
   }
   function review(ids) {
-    const words = ids.map((id) => wordById[id]).filter(Boolean);
+    const registry = curriculum?.courseWordById || wordById;
+    const words = ids.map((id) => registry[id]).filter(Boolean);
     const questions = [
-      ...makeWordQuestions(words),
+      ...(curriculum ? reviewQuestions(words.map((word) => ({ id: word.id, skill: Object.entries(progress.memory[word.id] || {}).find(([, item]) => !item.lastCorrect)?.[0] || "reading" })), curriculum) : makeWordQuestions(words)),
       ...abilityQuestions.filter((question) => ids.includes(question.id)),
+      ...ids.map((id) => curriculum?.courseQuestionById[id]).filter(Boolean),
+      ...ids.map((id) => curriculum?.childQuestionById[id]).filter(Boolean),
     ];
     if (questions.length) {
       stopSpeech();
-      setActivity({ title: "温故知新", questions, key: Date.now() });
+      setActivity({ title: "温故知新", questions, key: crypto.randomUUID() });
     }
+  }
+  function reviewDue(items) {
+    if (!curriculum) return;
+    const questions = reviewQuestions(items, curriculum);
+    if (questions.length) { stopSpeech(); setActivity({ title: "间隔复习", questions, key: crypto.randomUUID() }); }
   }
   return (
     <div className="app">
@@ -1285,7 +1237,7 @@ export default function App() {
         </section>
       )}
       <main id="main-content" className="main-content">
-        {activity ? (
+        {activity?.production ? <ProductionWorkspace key={activity.key} task={activity.production} mode={activity.mode} progress={progress} update={update} say={say} exit={() => { stopSpeech(); setActivity(null); }} speaking={<Speaking say={say} prompts={activity.production.speaking} />} /> : activity ? (
           <Practice
             key={activity.key}
             activity={activity}
@@ -1296,15 +1248,15 @@ export default function App() {
               setActivity(null);
             }}
             seen={(id) =>
-              update((p) => ({ ...p, seen: [...new Set([...p.seen, id])] }))
+              update((p) => recordEncounter(p, id))
             }
-            answer={(id, correct) =>
-              update((p) => recordAnswer(p, id, correct))
+            answer={(id, correct, options) =>
+              update((p) => recordAnswer(p, id, correct, new Date(), options))
             }
             complete={(session) =>
               update((p) => ({
                 ...p,
-                completed: session.lessonId
+                completed: session.lessonId && (activity.lesson?.questions ? curriculum?.lessonPassed(session.score, session.total) : true)
                   ? [...new Set([...p.completed, session.lessonId])]
                   : p.completed,
                 sessions: [
@@ -1327,7 +1279,7 @@ export default function App() {
               </div>
               <span className="progress-pill">
                 <span className="green-dot" /> 已掌握{" "}
-                {progress.mastered.filter((id) => wordById[id]).length} 个词
+                {progress.mastered.filter((id) => (curriculum?.courseWordById || wordById)[id]).length} 个词
               </span>
             </div>
             {page === "today" && (
@@ -1336,10 +1288,12 @@ export default function App() {
                 start={start}
                 navigate={navigate}
                 say={say}
+                curriculum={curriculum}
+                savePlan={(plan) => update((p) => saveDailyPlan(p, plan))}
               />
             )}
             {page === "learn" && (
-              <Library progress={progress} start={start} say={say} />
+              <Library progress={progress} start={start} say={say} curriculum={curriculum} produce={produce} />
             )}
             {page === "assessment" && (
               <Assessment
@@ -1347,10 +1301,13 @@ export default function App() {
                 progress={progress}
                 update={update}
                 say={say}
+                curriculum={curriculum}
+                start={start}
+                produce={produce}
               />
             )}
             {page === "progress" && (
-              <Progress progress={progress} review={review} />
+              <Progress progress={progress} review={review} curriculum={curriculum} reviewDue={reviewDue} />
             )}
           </>
         )}

@@ -15,6 +15,8 @@ import { level11Words } from './level-11.js';
 import { level12Words } from './level-12.js';
 
 import { levels, topicCategories } from './levels.js';
+import { withCorrectMeaning } from '../ket-meanings.js';
+import { withVocabularyMetadata } from '../vocabulary-metadata.js';
 
 export { levels, topicCategories };
 
@@ -31,4 +33,4 @@ export const allKetWords = [
   ...level10Words,
   ...level11Words,
   ...level12Words
-];
+].map(withCorrectMeaning).map(withVocabularyMetadata);

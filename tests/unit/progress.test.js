@@ -9,15 +9,21 @@ import { safeReadStorage } from "../../src/hooks/useLocalStorageState.js";
 
 afterEach(() => vi.unstubAllGlobals());
 describe("learning records", () => {
-  it("records mastery only after a correct answer, deduplicates mistakes and clears them on review", () => {
+  it("requires successful retrieval across days, deduplicates mistakes and clears them on review", () => {
     let progress = recordAnswer(emptyProgress, "apple", false);
     progress = recordAnswer(progress, "apple", false);
     expect(progress.mastered).toEqual([]);
     expect(progress.review).toEqual(["apple"]);
     progress = recordAnswer(progress, "apple", true);
-    expect(progress.mastered).toEqual(["apple"]);
+    expect(progress.mastered).toEqual([]);
     expect(progress.review).toEqual([]);
     progress = recordAnswer(progress, "apple", true);
+    expect(progress.mastered).toEqual([]);
+    const first = new Date();
+    progress = recordAnswer(progress, "apple", true, new Date(first.getFullYear(), first.getMonth(), first.getDate() + 1));
+    progress = recordAnswer(progress, "apple", true, new Date(first.getFullYear(), first.getMonth(), first.getDate() + 3));
+    progress = recordAnswer(progress, "apple", true, new Date(first.getFullYear(), first.getMonth(), first.getDate() + 7));
+    for (const days of [1, 3, 7]) progress = recordAnswer(progress, "apple", true, new Date(first.getFullYear(), first.getMonth(), first.getDate() + days), { skill: "listening" });
     expect(progress.mastered).toEqual(["apple"]);
     progress = recordAnswer(progress, "apple", false);
     expect(progress.mastered).toEqual([]);

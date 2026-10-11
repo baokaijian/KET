@@ -17,8 +17,9 @@ import { imageReviews } from "../../src/data/image-reviews.js";
 import { getWordImage } from "../../src/data/word-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 import { pagesBase } from "../../scripts/pages-base.mjs";
+import { additionalImages } from "../../src/data/additional-images.js";
 
-describe("legacy vocabulary structure (not semantic acceptance)", () => {
+describe("complete vocabulary meanings", () => {
   it("preserves all 1687 entries without duplicate ids", () => {
     expect(allKetWords).toHaveLength(1687);
     expect(new Set(allKetWords.map((word) => word.id)).size).toBe(1687);
@@ -26,6 +27,9 @@ describe("legacy vocabulary structure (not semantic acceptance)", () => {
     for (const word of allKetWords) {
       expect(word.word).toBeTruthy();
       expect(word.translation).toBeTruthy();
+      expect(word.translation).not.toMatch(/词[：:]|待复核/);
+      expect(word.translation).toMatch(/[\u4e00-\u9fff]/);
+      expect(dictionaryEntry(word).translation).toBe(word.translation);
       expect(levels.some((level) => level.id === word.level)).toBe(true);
       expect(topicCategories.some((topic) => topic.id === word.topic)).toBe(
         true,
@@ -38,14 +42,28 @@ describe("legacy vocabulary structure (not semantic acceptance)", () => {
     expect(dictionaryEntry(word).image).toBeNull();
     expect(dictionaryEntry(word).phonetic).toBe("");
     expect(dictionaryEntry(word).sentence).toBe("");
-    const placeholder = allKetWords.find((item) =>
-      /词[：:]/.test(item.translation),
-    );
-    expect(dictionaryEntry(placeholder).translation).toBe("释义待复核");
+    expect(allKetWords.some((item) => /词[：:]|待复核/.test(item.translation))).toBe(false);
   });
 });
 
 describe("published curriculum acceptance", () => {
+  it("checks every added photograph's unique bytes and locked visual-review evidence", async () => {
+    const hashes = new Set();
+    for (const [id, image] of Object.entries(additionalImages)) {
+      expect(allKetWords.some((word) => word.id === id)).toBe(true);
+      expect(image.src).toBe(`word-images/${id}.webp`);
+      expect(["pass", "fixed"]).toContain(image.reviewStatus);
+      expect(image.alt.length).toBeGreaterThan(20);
+      expect(image.note.length).toBeGreaterThan(20);
+      const file = `public/${image.src}`;
+      const hash = createHash("sha256").update(readFileSync(file)).digest("hex");
+      expect(hash).toBe(image.sha256);
+      expect(hashes.has(hash)).toBe(false);
+      hashes.add(hash);
+      expect((await sharp(file).metadata()).width).toBe(640);
+      expect((await sharp(file).metadata()).format).toBe("webp");
+    }
+  });
   it("has distinct reviewed files tied to review evidence, not just distinct filenames", async () => {
     expect(learningWords).toHaveLength(12);
     const hashes = new Set();

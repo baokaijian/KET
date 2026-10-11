@@ -4,6 +4,7 @@ import process from "node:process";
 import { cp, mkdir, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pagesBase } from "./scripts/pages-base.mjs";
+import { additionalImages } from "./src/data/additional-images.js";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -24,6 +25,10 @@ export default defineConfig({
           resolve(destination, "learning-images"),
           { recursive: true },
         );
+        await mkdir(resolve(destination, "word-images"), { recursive: true });
+        for (const image of Object.values(additionalImages)) {
+          if (["pass", "fixed"].includes(image.reviewStatus)) await cp(resolve("public", image.src), resolve(destination, image.src));
+        }
       },
     },
   ],

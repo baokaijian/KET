@@ -51,9 +51,14 @@ async function readyPhotos(page) {
         ),
     )
     .toBe(true);
+  await page.locator("main img").evaluateAll(async (images) => {
+    await Promise.all(images.map((image) => image.decode()));
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  });
 }
 async function learnBreakfast(page) {
-  await page.getByRole("button", { name: "开始学习", exact: true }).click();
+  await navigate(page, "学习天地");
+  await page.getByRole("button", { name: "学习我的早餐", exact: true }).click();
   for (const word of ["apple", "banana", "bread", "milk"]) {
     await expect(
       page.getByRole("heading", { name: word, exact: true }),
@@ -71,20 +76,19 @@ async function learnBreakfast(page) {
   }
 }
 
-test("the first screen renders four distinct real photographs without legacy templates", async ({
+test("the first screen renders eight distinct real photographs without legacy templates", async ({
   page,
 }, info) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("./");
   await readyPhotos(page);
-  await expect(page.locator(".word-grid img")).toHaveCount(4);
+  await expect(page.locator(".word-grid img")).toHaveCount(8);
   const srcs = await page
     .locator(".word-grid img")
     .evaluateAll((images) => images.map((image) => image.getAttribute("src")));
-  expect(new Set(srcs).size).toBe(4);
-  expect(srcs.every((src) => src.includes("/learning-images/"))).toBe(true);
-  expect(await page.locator('img[src*="word-images/"]').count()).toBe(0);
+  expect(new Set(srcs).size).toBe(8);
+  expect(srcs.every((src) => /\/(learning-images|word-images)\//.test(src))).toBe(true);
   await page.screenshot({ path: info.outputPath("today.png"), fullPage: true });
   expect(errors).toEqual([]);
   expect(
@@ -130,7 +134,7 @@ for (const [title, words] of [
   });
 }
 
-test("learning, spelling error, hearing, result and successful review persist honestly", async ({
+test("learning, recognition error, hearing, result and successful review persist honestly", async ({
   page,
 }) => {
   await page.goto("./");
@@ -138,8 +142,8 @@ test("learning, spelling error, hearing, result and successful review persist ho
   await page.getByRole("button", { name: /A apple/ }).click();
   await expect(page.getByText("答对啦！", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "下一题" }).click();
-  await page.getByRole("textbox", { name: "输入英文拼写" }).fill("bananna");
-  await page.getByRole("button", { name: "检查拼写" }).click();
+  await expect(page.getByRole("textbox", { name: "输入英文拼写" })).toHaveCount(0);
+  await page.locator(".answer-option").nth(1).click();
   await expect(page.getByText("没关系，我们再认识一次。")).toBeVisible();
   await page.getByRole("button", { name: "下一题" }).click();
   await expect(page.getByRole("button", { name: /bread/ })).toBeDisabled();
@@ -156,7 +160,7 @@ test("learning, spelling error, hearing, result and successful review persist ho
   await page.reload();
   await expect(page.locator(".review-list")).toContainText("banana");
   await page.getByRole("button", { name: "复习", exact: true }).click();
-  await page.getByRole("button", { name: /banana/ }).click();
+  await page.getByRole("button", { name: /香蕉/ }).click();
   await page.getByRole("button", { name: "查看结果" }).click();
   await page.getByRole("button", { name: "完成练习" }).click();
   await expect(page.getByText("复习区空空的，很棒。")).toBeVisible();
@@ -165,13 +169,14 @@ test("learning, spelling error, hearing, result and successful review persist ho
       () =>
         JSON.parse(localStorage.getItem("sparks_learning_v2")).mastered.length,
     ),
-  ).toBe(4);
+  ).toBe(0);
 });
 
 test("all six listening and reading questions score correctly with explicit speech", async ({
   page,
 }) => {
   await page.goto("./#assessment");
+  await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
   await page.getByRole("button", { name: "综合小测" }).click();
   for (const [index, answer] of [
     "Bread and milk",
@@ -208,6 +213,7 @@ test("writing drafts persist and word count does not claim language scoring", as
   page,
 }) => {
   await page.goto("./#assessment");
+  await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
   await page.getByRole("tab", { name: /写作/ }).click();
   await page
     .getByRole("textbox", { name: "我的英文邮件" })
@@ -233,7 +239,7 @@ test("dictionary suppresses fake images and wrong old book phonetics", async ({
   await page.goto("./#learn");
   await page.getByRole("textbox", { name: "搜索单词或中文" }).fill("book");
   await page
-    .getByRole("button", { name: "book 书（名词）", exact: true })
+    .getByRole("button", { name: /^book n\. 名词/ })
     .click();
   await expect(page.getByRole("dialog")).toContainText("/bʊk/");
   await expect(page.getByRole("dialog").locator("img")).toHaveAttribute(
@@ -266,6 +272,7 @@ test("voice failure leaves listening unscored with a visible error", async ({
   page,
 }) => {
   await page.goto("./#assessment");
+  await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
   await page.evaluate(() => {
     window.speechSynthesis.speak = (utterance) =>
       setTimeout(() => utterance.onerror?.({ error: "synthesis-failed" }), 10);
@@ -282,6 +289,7 @@ test("speaking offers local self review and handles microphone denial", async ({
   page,
 }) => {
   await page.goto("./#assessment");
+  await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
   await page.getByRole("tab", { name: /口语/ }).click();
   await page.evaluate(() => {
     Object.defineProperty(navigator, "mediaDevices", {
@@ -309,6 +317,7 @@ test("native recorder creates a playable local clip and stops its microphone on 
 }) => {
   await context.grantPermissions(["microphone"]);
   await page.goto("./#assessment");
+  await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
   await page.evaluate(() => {
     const original = navigator.mediaDevices.getUserMedia.bind(
       navigator.mediaDevices,
@@ -349,6 +358,7 @@ test("incorrect reading answers are reviewed in their original context", async (
   page,
 }) => {
   await page.goto("./#assessment");
+  await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
   await page.getByRole("tab", { name: /阅读/ }).click();
   await page.getByRole("button", { name: "开始阅读练习" }).click();
   await page.getByRole("button", { name: /You must buy a book/ }).click();
