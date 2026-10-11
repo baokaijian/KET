@@ -23,7 +23,7 @@ test.beforeEach(async ({ page }) => {
     } });
   });
 });
-async function answerAll(page, questions, total = questions.length) {
+async function answerAll(page, questions, total = questions.length, score = total) {
   for (const [index, question] of questions.entries()) {
     await expect(page.getByRole("textbox", { name: /拼写|填空/ })).toHaveCount(0);
     if (question.audio) {
@@ -35,7 +35,7 @@ async function answerAll(page, questions, total = questions.length) {
     await expect(page.getByText("答对啦！", { exact: true })).toBeVisible();
     await page.getByRole("button", { name: index === questions.length - 1 ? "查看结果" : "下一题", exact: true }).click();
   }
-  await expect(page.locator(".result-stage")).toContainText(`${total} / ${total}`);
+  await expect(page.locator(".result-stage")).toContainText(`${score} / ${total}`);
   await page.getByRole("button", { name: "完成练习", exact: true }).click();
 }
 
@@ -63,6 +63,81 @@ test("daily eight-word lesson resumes after leaving and reloading without demand
   expect(stored.mastered).toEqual([]);
   expect(Object.keys(stored.dailyPlans)).toHaveLength(1);
   expect(Object.keys(stored.memory)).toHaveLength(8);
+});
+
+for (const correctionCorrect of [true, false]) test(`one correction (${correctionCorrect ? "right" : "wrong"}) survives reload without erasing evidence or changing first-attempt scores`, async ({ page }, info) => {
+  await page.clock.setFixedTime(new Date("2026-10-19T12:00:00Z"));
+  const theme = childThemes[0];
+  const first = theme.vocabulary.questions[0];
+  const id = first.wordId;
+  const evidence = ["2026-10-12", "2026-10-13", "2026-10-15"];
+  await page.addInitScript(({ id, evidence }) => {
+    if (localStorage.getItem("sparks_learning_v2")) return;
+    const memory = { step: 3, due: "2026-10-19", lastDay: "2026-10-15", successDays: evidence, lastCorrect: true, assessed: true };
+    localStorage.setItem("sparks_learning_v2", JSON.stringify({ seen: [id], mastered: [id], memory: { [id]: { reading: memory, listening: memory } } }));
+  }, { id, evidence });
+  await page.goto("./#learn");
+  const row = page.locator(".child-theme-row").filter({ has: page.getByText(theme.title, { exact: true }) });
+  await row.getByRole("button", { name: "认识新词", exact: true }).click();
+  for (let index = 0; index < 8; index++) await page.getByRole("button", { name: index === 7 ? "开始小练习" : "下一个单词", exact: true }).click();
+  const wrong = (first.answer + 1) % first.options.length;
+  await page.locator(".answer-option").nth(wrong).click();
+  const retry = page.getByRole("button", { name: "再试一次", exact: true });
+  const bounds = await retry.boundingBox();
+  expect(bounds.width).toBeGreaterThanOrEqual(44);
+  expect(bounds.height).toBeGreaterThanOrEqual(44);
+  await page.screenshot({ path: info.outputPath("correction-before.png"), fullPage: true });
+  await retry.click();
+  await page.getByRole("button", { name: "返回", exact: true }).click();
+  await page.reload();
+  await row.getByRole("button", { name: "认识新词", exact: true }).click();
+  await expect(page.locator(".practice-header")).toContainText("1 / 8");
+  await expect(page.locator(".answer-feedback")).toHaveCount(0);
+  await page.locator(".answer-option").nth(correctionCorrect ? first.answer : wrong).click();
+  await expect(page.getByText("订正不改变首次得分，也不计独立掌握。明天再试一试。")).toBeVisible();
+  if (correctionCorrect) await expect(page.getByText("订正好了！", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "再试一次", exact: true })).toHaveCount(0);
+  let stored = await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2")));
+  expect(stored.memory[id].reading).toMatchObject({ successDays: evidence, due: "2026-10-20", step: 0, lastCorrect: false });
+  expect(stored.memory[id].listening).toMatchObject({ successDays: evidence, due: "2026-10-19", step: 3, lastCorrect: true });
+  expect(stored.mastered).not.toContain(id);
+  expect(stored.review).toContain(id);
+  const session = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)), `sparks_activity_${theme.vocabulary.id}`);
+  expect(session.responses).toEqual([false]);
+  expect(session.retrying).toBe(true);
+  await page.screenshot({ path: info.outputPath("correction-after.png"), fullPage: true });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByRole("button", { name: "下一题", exact: true }).click();
+  await answerAll(page, theme.vocabulary.questions.slice(1), 8, 7);
+  stored = await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2")));
+  expect(stored.sessions.at(-1)).toMatchObject({ score: 7, total: 8 });
+  expect(stored.review).toContain(id);
+});
+
+test("restarting a lesson after correcting its final question resets correction state", async ({ page }) => {
+  const theme = childThemes[0];
+  const questions = theme.story.questions;
+  await page.goto("./#learn");
+  await page.locator(".child-theme-row").filter({ has: page.getByText(theme.title, { exact: true }) }).getByRole("button", { name: "阅读故事", exact: true }).click();
+  await page.getByRole("button", { name: "开始练习", exact: true }).click();
+  for (const question of questions.slice(0, -1)) {
+    await page.locator(".answer-option").nth(question.answer).click();
+    await page.getByRole("button", { name: "下一题", exact: true }).click();
+  }
+  const last = questions.at(-1);
+  await page.locator(".answer-option").nth((last.answer + 1) % last.options.length).click();
+  await page.getByRole("button", { name: "再试一次", exact: true }).click();
+  await page.locator(".answer-option").nth(last.answer).click();
+  await page.getByRole("button", { name: "查看结果", exact: true }).click();
+  await expect(page.locator(".result-stage")).toContainText("2 / 3");
+  await page.getByRole("button", { name: "再练这课", exact: true }).click();
+  await page.getByRole("button", { name: "开始练习", exact: true }).click();
+  await page.locator(".answer-option").nth(questions[0].answer).click();
+  await expect(page.getByText("答对啦！", { exact: true })).toBeVisible();
+  const session = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)), `sparks_activity_${theme.story.id}`);
+  expect(session.responses).toEqual([true]);
+  expect(session.retrying).toBe(false);
+  expect(session.choice.retried).toBe(false);
 });
 
 test("child navigation and learning controls provide at least 44-pixel touch targets", async ({ page }) => {
@@ -178,6 +253,53 @@ test("three fixed review batches resume midway without losing a reading hint", a
   await expect(page.getByRole("button", { name: "继续复习", exact: true })).toBeDisabled();
 });
 
+for (const count of [1, 30]) test(`daily review of ${count} questions resumes a final correction even after every first answer is recorded`, async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
+  const questions = childThemes.flatMap((theme) => theme.story.questions).slice(0, count).sort((a, b) => a.id.localeCompare(b.id));
+  await page.addInitScript((ids) => {
+    if (localStorage.getItem("sparks_learning_v2")) return;
+    localStorage.setItem("sparks_learning_v2", JSON.stringify({ memory: Object.fromEntries(ids.map((id) => [id, { reading: {
+      due: "2026-10-12", lastDay: "2026-10-11", step: 0, successDays: [], lastCorrect: false, assessed: true,
+    } }])) }));
+  }, questions.map((question) => question.id));
+  await page.goto("./#today");
+  await page.getByRole("button", { name: "开始复习", exact: true }).click();
+  for (const [index, question] of questions.slice(0, -1).entries()) {
+    await page.locator(".answer-option").nth(question.answer).click();
+    if (index % 10 === 9) {
+      await page.getByRole("button", { name: "查看结果", exact: true }).click();
+      await page.getByRole("button", { name: "完成练习", exact: true }).click();
+      await page.getByRole("button", { name: "继续复习", exact: true }).click();
+    } else await page.getByRole("button", { name: "下一题", exact: true }).click();
+  }
+  const last = questions.at(-1);
+  await page.locator(".answer-option").nth((last.answer + 1) % last.options.length).click();
+  await page.getByRole("button", { name: "再试一次", exact: true }).click();
+  await page.getByRole("button", { name: "返回", exact: true }).click();
+  await page.reload();
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText("本批还有订正或结果待完成");
+  await page.getByRole("button", { name: "继续复习", exact: true }).click();
+  const batchCount = Math.min(10, count);
+  await expect(page.locator(".practice-header")).toContainText(`${batchCount} / ${batchCount}`);
+  await expect(page.locator(".answer-feedback")).toHaveCount(0);
+  await page.locator(".answer-option").nth(last.answer).click();
+  await expect(page.getByText("订正好了！", { exact: true })).toBeVisible();
+  // The last feedback is resumable too, without asking for another answer.
+  await page.getByRole("button", { name: "返回", exact: true }).click();
+  await page.reload();
+  await page.getByRole("button", { name: "继续复习", exact: true }).click();
+  await expect(page.getByText("订正好了！", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "查看结果", exact: true }).click();
+  await expect(page.locator(".result-stage")).toContainText(`${batchCount - 1} / ${batchCount}`);
+  await page.getByRole("button", { name: "完成练习", exact: true }).click();
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText(`今天已完成 ${count} 项复习`);
+  await expect(page.getByRole("button", { name: "继续复习", exact: true })).toBeDisabled();
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2")));
+  expect(stored.memory[last.id].reading).toMatchObject({ lastCorrect: false, successDays: [], due: "2026-10-13" });
+  expect(stored.sessions.at(-1)).toMatchObject({ score: batchCount - 1, total: batchCount });
+});
+
 test("wrong-word reviews do not show the correct meaning before the child answers", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("sparks_learning_v2", JSON.stringify({ review: ["l2_apple"] })));
   await page.goto("./#progress");
@@ -199,8 +321,33 @@ for (const failure of ["missing", "silent"]) test(`listening can be skipped safe
   await expect(page.getByText("没有成功播放，请检查设备音量后重试。")).toBeVisible();
   await expect(page.locator(".answer-option").first()).toBeDisabled();
   await page.getByRole("button", { name: "暂时跳过", exact: true }).click();
+  await expect(page.getByRole("button", { name: "再试一次", exact: true })).toHaveCount(0);
   await expect(page.getByText("这题先放一放，不记录对错或掌握。")).toBeVisible();
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2"))?.memory || {})).toEqual({});
+  await page.getByRole("button", { name: "下一题", exact: true }).click();
+  await expect(page.locator(".practice-header")).toContainText("2 /");
+});
+
+test("skipping failed audio during a correction does not count the same question twice", async ({ page }) => {
+  await page.goto("./#assessment");
+  await page.getByRole("button", { name: "听力小挑战", exact: true }).click();
+  await page.getByRole("button", { name: "播放听力", exact: true }).click();
+  await expect(page.getByText("听完了，选一个答案吧。")).toBeVisible();
+  const question = childThemes[0].sentences.questions.find((item) => item.skill === "listening");
+  await page.locator(".answer-option").nth((question.answer + 1) % question.options.length).click();
+  await page.getByRole("button", { name: "再试一次", exact: true }).click();
+  await page.evaluate(() => { delete window.speechSynthesis; });
+  await page.getByRole("button", { name: "再听一次", exact: true }).click();
+  await expect(page.getByText("没有成功播放，请检查设备音量后重试。")).toBeVisible();
+  await page.getByRole("button", { name: "暂时跳过", exact: true }).click();
+  await expect(page.getByRole("button", { name: "再试一次", exact: true })).toHaveCount(0);
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_activity_听力小挑战")));
+  expect(saved.responses).toEqual([false]);
+  expect(saved.choice.skipped).toBe(true);
+  expect(saved.retrying).toBe(true);
+  const memory = await page.evaluate((id) => JSON.parse(localStorage.getItem("sparks_learning_v2")).memory[id].listening, question.id);
+  expect(memory.successDays).toEqual([]);
+  expect(memory.lastCorrect).toBe(false);
   await page.getByRole("button", { name: "下一题", exact: true }).click();
   await expect(page.locator(".practice-header")).toContainText("2 /");
 });

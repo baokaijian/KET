@@ -42,14 +42,14 @@ describe("adaptive spaced retrieval", () => {
     for (const day of [12, 13, 15]) p = recordAnswer(p, "l2_apple", true, date(day), { skill: "listening" });
     expect(p.mastered).toContain("l2_apple");
   });
-  it("keeps listening separate, resets errors and does not count hints as independent success", () => {
+  it("keeps listening separate, preserves error history and does not count hints as independent success", () => {
     let p = recordAnswer(emptyProgress, "l2_apple", true, date(12), { skill: "listening" });
     expect(p.memory.l2_apple.reading).toBeUndefined();
     p = recordAnswer(p, "l2_apple", true, date(13), { skill: "reading", hinted: true });
     expect(p.memory.l2_apple.reading.successDays).toEqual([]);
     expect(p.memory.l2_apple.reading.step).toBe(0);
     p = recordAnswer(p, "l2_apple", false, date(15), { skill: "listening" });
-    expect(p.memory.l2_apple.listening.successDays).toEqual([]);
+    expect(p.memory.l2_apple.listening.successDays).toEqual(["2026-10-12"]);
     expect(p.memory.l2_apple.listening.due).toBe("2026-10-16");
     expect(p.review).toEqual(["l2_apple"]);
     expect(dayAfter(new Date(2026, 9, 31), 1)).toBe("2026-11-01");
@@ -58,6 +58,40 @@ describe("adaptive spaced retrieval", () => {
     const p = normalizeProgress({ mastered: ["l2_apple"], memory: { broken: { reading: { due: "bad", step: 9 } } } });
     expect(p.mastered).toEqual([]);
     expect(p.memory).toEqual({});
+  });
+  for (const skill of ["reading", "listening"]) it(`preserves ${skill} evidence after a lapse, requires a due-day independent review and leaves the other skill intact`, () => {
+    let p = emptyProgress;
+    for (const name of ["reading", "listening"]) for (const day of [12, 13, 15]) p = recordAnswer(p, "l2_apple", true, date(day), { skill: name });
+    const before = structuredClone(p.memory.l2_apple);
+    expect(p.mastered).toContain("l2_apple");
+    p = recordAnswer(p, "l2_apple", false, date(19), { skill });
+    expect(p.memory.l2_apple[skill]).toMatchObject({ successDays: before[skill].successDays, step: 0, lastCorrect: false, due: "2026-10-20" });
+    expect(p.memory.l2_apple[skill === "reading" ? "listening" : "reading"]).toEqual(before[skill === "reading" ? "listening" : "reading"]);
+    expect(p.mastered).not.toContain("l2_apple");
+    expect(p.review).toContain("l2_apple");
+    p = normalizeProgress(JSON.parse(JSON.stringify(p)));
+    p = recordAnswer(p, "l2_apple", true, date(19), { skill });
+    expect(p.memory.l2_apple[skill].lastCorrect).toBe(false);
+    expect(p.memory.l2_apple[skill].successDays).toEqual(before[skill].successDays);
+    expect(p.mastered).not.toContain("l2_apple");
+    expect(p.review).toContain("l2_apple");
+    p = recordAnswer(p, "l2_apple", true, date(20), { skill });
+    expect(p.memory.l2_apple[skill].successDays).toEqual([...before[skill].successDays, "2026-10-20"]);
+    expect(p.mastered).toContain("l2_apple");
+    expect(p.review).not.toContain("l2_apple");
+  });
+  it("keeps historical evidence through hints without allowing a hinted correction to restore mastery", () => {
+    let p = emptyProgress;
+    for (const skill of ["reading", "listening"]) for (const day of [12, 13, 15]) p = recordAnswer(p, "l2_apple", true, date(day), { skill });
+    const evidence = p.memory.l2_apple.reading.successDays;
+    p = recordAnswer(p, "l2_apple", false, date(19));
+    p = recordAnswer(p, "l2_apple", true, date(20), { hinted: true });
+    expect(p.memory.l2_apple.reading).toMatchObject({ successDays: evidence, step: 0, lastCorrect: false, due: "2026-10-21" });
+    p = recordAnswer(p, "l2_apple", true, date(20));
+    expect(p.mastered).not.toContain("l2_apple");
+    expect(p.review).toContain("l2_apple");
+    p = recordAnswer(p, "l2_apple", true, date(21));
+    expect(p.mastered).toContain("l2_apple");
   });
   it("does not accelerate early practice and reaches the 60-day maintenance interval", () => {
     let p = recordAnswer(emptyProgress, "l2_apple", true, date(12));
@@ -174,6 +208,22 @@ describe("daily plan", () => {
     const saved = saveDailyPlan(p, plan);
     expect(buildDailyPlan(saved, curriculum, date(12))).toEqual(plan);
     expect(reviewBatch(buildDailyPlan(saved, curriculum, date(12)), p).done).toBe(true);
+  });
+  it("keeps the final answered batch available for pending correction even at the daily limit", () => {
+    let p = emptyProgress;
+    for (const word of course.courseWords.slice(0, 45)) p = recordAnswer(p, word.id, false, date(11), { skill: "reading" });
+    const plan = buildDailyPlan(p, curriculum, date(12));
+    for (const item of plan.review) p = recordAnswer(p, item.id, true, date(12), { skill: item.skill });
+    const resumed = reviewBatch(plan, p, { unfinishedBatches: [2] });
+    expect(resumed).toMatchObject({ answered: 30, remaining: 0, batchIndex: 2, unanswered: 0, pending: true, done: false });
+    expect(resumed.batch).toEqual(plan.review.slice(20, 30));
+    expect(reviewBatch(plan, p)).toMatchObject({ pending: false, done: true });
+  });
+  it("finishes a single review only after its pending feedback is closed", () => {
+    const plan = { day: "2026-10-12", review: [{ id: "l2_apple", skill: "reading" }] };
+    const p = recordAnswer(emptyProgress, "l2_apple", false, date(12), { skill: "reading" });
+    expect(reviewBatch(plan, p, { unfinishedBatches: [0] })).toMatchObject({ answered: 1, unanswered: 0, pending: true, done: false });
+    expect(reviewBatch(plan, p, { unfinishedBatches: [99] })).toMatchObject({ pending: false, done: true });
   });
   it("keeps a batch's members, order and id stable while it is only partly answered", () => {
     let p = emptyProgress;

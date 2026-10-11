@@ -762,6 +762,12 @@ select {
 .answer-feedback.try-again {
   background: #fff3ee;
 }
+.feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
 .reading-passage {
   white-space: pre-wrap;
   background: #f6f7f5;

@@ -55,6 +55,7 @@ import ProductionWorkspace from "./components/ProductionWorkspace.jsx";
 import CourseAssessment from "./components/CourseAssessment.jsx";
 import DailyLearning from "./components/DailyLearning.jsx";
 import { saveDailyPlan, reviewQuestions } from "./utils/dailyPlan.js";
+import { practiceFingerprint, resumablePractice } from "./utils/practiceSession.js";
 
 const navigation = [
   ["today", "今天", Home],
@@ -353,23 +354,20 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
   const questions = activity.questions || activity.lesson?.questions || makeWordQuestions(words);
   const guide = activity.lesson?.guide;
   const sessionKey = `sparks_activity_${activity.lesson?.id || activity.title}`;
-  const fingerprint = JSON.stringify([activity.lesson ? null : localDay(), words.map((word) => word.id), questions.map((question) => [question.id, question.options, question.answer, question.correctWord, question.acceptedAnswers, question.audio, question.passage, question.prompt])]);
-  const [resume] = useState(() => {
-    const saved = safeReadStorage(sessionKey, null);
-    const limit = saved?.stage === "learn" ? words.length : questions.length;
-    return saved?.fingerprint === fingerprint && ["learn", "quiz", "guide"].includes(saved.stage) && Number.isInteger(saved.index) && saved.index >= 0 && saved.index < limit && Array.isArray(saved.responses) && saved.responses.length <= questions.length && saved.responses.every((value) => typeof value === "boolean") ? saved : null;
-  });
+  const fingerprint = practiceFingerprint(words, questions, activity.lesson ? null : localDay());
+  const [resume] = useState(() => resumablePractice(safeReadStorage(sessionKey, null), fingerprint, words.length, questions.length));
   const [stage, setStage] = useState(resume?.stage || (guide ? "guide" : words.length ? "learn" : "quiz"));
   const [index, setIndex] = useState(resume?.index || 0);
   const [responses, setResponses] = useState(resume?.responses || []);
   const [choice, setChoice] = useState(resume?.choice || null);
+  const [retrying, setRetrying] = useState(Boolean(resume?.retrying));
   const [typed, setTyped] = useState("");
   const [heard, setHeard] = useState(Boolean(resume?.heard));
   const [audioError, setAudioError] = useState(false);
   const [guideAudio, setGuideAudio] = useState(resume?.guideAudio || false);
   useEffect(() => {
-    safeWriteStorage(sessionKey, { fingerprint, stage, index, responses, choice, guideAudio, heard });
-  }, [sessionKey, fingerprint, stage, index, responses, choice, guideAudio, heard]);
+    safeWriteStorage(sessionKey, { fingerprint, stage, index, responses, choice, retrying, guideAudio, heard });
+  }, [sessionKey, fingerprint, stage, index, responses, choice, retrying, guideAudio, heard]);
   const currentWord = words[index];
   const question = questions[index];
   const score = responses.filter(Boolean).length;
@@ -382,11 +380,18 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
       : question.correctWord
         ? String(value).trim().toLowerCase() === question.correctWord.toLowerCase()
         : value === question.answer;
-    setChoice({ value, correct });
-    setResponses([...responses, correct]);
-    answer(question.wordId || question.id, correct, { skill: question.audio || question.type === "listening" ? "listening" : "reading", hinted: question.skill === "reading" && (heard || guideAudio) });
+    setChoice({ value, correct, retried: retrying });
+    if (!retrying) setResponses([...responses, correct]);
+    answer(question.wordId || question.id, correct, { skill: question.audio || question.type === "listening" ? "listening" : "reading", hinted: retrying || (question.skill === "reading" && (heard || guideAudio)) });
     if (correct) playCorrectSound();
     else playIncorrectSound();
+  }
+  function retry() {
+    if (!choice || choice.correct || choice.skipped || choice.retried) return;
+    stopSpeech();
+    setRetrying(true);
+    setChoice(null);
+    setTyped("");
   }
   function next() {
     stopSpeech();
@@ -409,6 +414,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
     } else {
       setIndex(index + 1);
       setChoice(null);
+      setRetrying(false);
       setTyped("");
       setHeard(false);
       setAudioError(false);
@@ -433,7 +439,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
     if (choice !== null) return;
     stopSpeech();
     setChoice({ value: null, correct: false, skipped: true });
-    setResponses([...responses, false]);
+    if (!retrying) setResponses([...responses, false]);
   }
   return (
     <section className="practice-shell">
@@ -601,13 +607,17 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
               role="status"
             >
               <h3>
-                {choice.skipped ? "这题先放一放，不记录对错或掌握。" : choice.correct ? "答对啦！" : "没关系，我们再认识一次。"}
+                {choice.skipped ? "这题先放一放，不记录对错或掌握。" : choice.retried && choice.correct ? "订正好了！" : choice.correct ? "答对啦！" : "没关系，我们再认识一次。"}
               </h3>
               <p>{question.explanation}</p>
-              <button className="primary" onClick={next}>
-                {index + 1 === questions.length ? "查看结果" : "下一题"}{" "}
-                <ArrowRight size={17} />
-              </button>
+              {choice.retried && <p className="tiny">订正不改变首次得分，也不计独立掌握。明天再试一试。</p>}
+              <div className="feedback-actions">
+                {!choice.correct && !choice.skipped && !choice.retried && <button className="secondary" onClick={retry}><RotateCcw size={17} /> 再试一次</button>}
+                <button className="primary" onClick={next}>
+                  {index + 1 === questions.length ? "查看结果" : "下一题"}{" "}
+                  <ArrowRight size={17} />
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -620,10 +630,10 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
           <span className="eyebrow">WELL DONE</span>
           <h1>又向前迈了一小步。</h1>
           <p>
-            这次答对 <strong>{score}</strong> / {questions.length} 题
+            首次答对 <strong>{score}</strong> / {questions.length} 题
           </p>
           {activity.lesson?.questions && <p className={score / questions.length >= 0.8 ? "positive" : "muted"}>{score / questions.length >= 0.8 ? "本课已通过。" : "还需巩固：答对至少 80% 后通过本课。"}</p>}
-          {activity.lesson && <button className="secondary" onClick={() => { setStage(guide ? "guide" : words.length ? "learn" : "quiz"); setIndex(0); setResponses([]); setChoice(null); setTyped(""); setHeard(false); setGuideAudio(false); setAudioError(false); }}>再练这课 <RotateCcw size={17} /></button>}
+          {activity.lesson && <button className="secondary" onClick={() => { setStage(guide ? "guide" : words.length ? "learn" : "quiz"); setIndex(0); setResponses([]); setChoice(null); setRetrying(false); setTyped(""); setHeard(false); setGuideAudio(false); setAudioError(false); }}>再练这课 <RotateCcw size={17} /></button>}
           <p>
             {score === questions.length
               ? "这些知识已经更熟悉了，继续探索吧。"

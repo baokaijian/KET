@@ -124,6 +124,7 @@ test("extended vocabulary learns real meanings, safe pronunciation and records m
 });
 
 test("failed grammar does not pass the lesson, and wrong question review clears it", async ({ page }) => {
+  await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   const lesson = curriculumUnits[0].grammar[0];
   await page.goto("./#learn");
   await page.getByText("家长与进阶课程 · 完整 KET 体系", { exact: true }).click();
@@ -135,6 +136,8 @@ test("failed grammar does not pass the lesson, and wrong question review clears 
   await page.getByRole("button", { name: "完成练习", exact: true }).click();
   await page.getByRole("navigation").getByRole("link", { name: "成长记录", exact: true }).click();
   await expect(page.locator(".review-list")).toContainText(lesson.questions[0].prompt);
+  await page.clock.setFixedTime(new Date("2026-10-13T12:00:00Z"));
+  await page.reload();
   await page.getByRole("button", { name: "复习", exact: true }).click();
   await answer(page, lesson.questions[0]); await next(page, true);
   await page.getByRole("button", { name: "完成练习", exact: true }).click();
@@ -142,6 +145,7 @@ test("failed grammar does not pass the lesson, and wrong question review clears 
 });
 
 test("A2 listening gap-fill cannot score before hearing and preserves wrong original context", async ({ page }) => {
+  await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   const lesson = curriculumUnits[3].skillLesson;
   await page.goto("./#assessment");
   await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
@@ -152,10 +156,36 @@ test("A2 listening gap-fill cannot score before hearing and preserves wrong orig
   for (const [index, question] of lesson.questions.entries()) { await answer(page, question, index === 0); await next(page, index === 2); }
   await page.getByRole("button", { name: "完成练习", exact: true }).click();
   await page.getByRole("navigation").getByRole("link", { name: "成长记录", exact: true }).click();
+  await page.clock.setFixedTime(new Date("2026-10-13T12:00:00Z"));
+  await page.reload();
   await page.getByRole("button", { name: "复习", exact: true }).click();
   await expect(page.getByRole("heading", { name: lesson.questions[0].prompt, exact: true })).toBeVisible();
   await answer(page, lesson.questions[0]); await next(page, true);
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2")).review)).toEqual([]);
+});
+
+test("parent listening input corrections keep first-attempt scoring and do not become independent evidence", async ({ page }) => {
+  const lesson = curriculumUnits[3].skillLesson;
+  await page.goto("./#assessment");
+  await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
+  await page.getByLabel("选择专项").selectOption("L2");
+  await page.getByRole("button", { name: "开始专项", exact: true }).click();
+  await page.getByRole("button", { name: "开始练习", exact: true }).click();
+  await answer(page, lesson.questions[0], true);
+  await page.getByRole("button", { name: "再试一次", exact: true }).click();
+  await expect(page.getByRole("textbox", { name: "输入填空答案" })).toHaveValue("");
+  await page.getByRole("textbox", { name: "输入填空答案" }).fill(lesson.questions[0].acceptedAnswers[0]);
+  await page.getByRole("button", { name: "检查答案", exact: true }).click();
+  await expect(page.getByText("订正好了！", { exact: true })).toBeVisible();
+  const memory = await page.evaluate((id) => JSON.parse(localStorage.getItem("sparks_learning_v2")).memory[id].listening, lesson.questions[0].id);
+  expect(memory.lastCorrect).toBe(false);
+  expect(memory.successDays).toEqual([]);
+  await next(page);
+  for (const [index, question] of lesson.questions.slice(1).entries()) {
+    await answer(page, question);
+    await next(page, index === lesson.questions.length - 2);
+  }
+  await expect(page.locator(".result-stage")).toContainText("2 / 3");
 });
 
 test("course writing drafts stay separate, require word count and explicit self-checks", async ({ page }) => {

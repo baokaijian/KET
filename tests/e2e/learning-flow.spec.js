@@ -138,6 +138,7 @@ for (const [title, words] of [
 test("learning, recognition error, hearing, result and successful review persist honestly", async ({
   page,
 }) => {
+  await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   await page.goto("./");
   await learnBreakfast(page);
   await page.getByRole("button", { name: /A apple/ }).click();
@@ -160,6 +161,8 @@ test("learning, recognition error, hearing, result and successful review persist
   await expect(page.locator(".review-list")).toContainText("banana");
   await page.reload();
   await expect(page.locator(".review-list")).toContainText("banana");
+  await page.clock.setFixedTime(new Date("2026-10-13T12:00:00Z"));
+  await page.reload();
   await page.getByRole("button", { name: "复习", exact: true }).click();
   await page.getByRole("button", { name: /香蕉/ }).click();
   await page.getByRole("button", { name: "查看结果" }).click();
@@ -358,6 +361,7 @@ test("native recorder creates a playable local clip and stops its microphone on 
 test("incorrect reading answers are reviewed in their original context", async ({
   page,
 }) => {
+  await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   await page.goto("./#assessment");
   await page.getByText("家长与进阶测试 · 完整 KET 训练", { exact: true }).click();
   await page.getByRole("tab", { name: /阅读/ }).click();
@@ -375,6 +379,15 @@ test("incorrect reading answers are reviewed in their original context", async (
   await page
     .getByRole("button", { name: /You can borrow three books/ })
     .click();
+  await page.getByRole("button", { name: "查看结果" }).click();
+  await page.getByRole("button", { name: "完成练习" }).click();
+  await expect(page.getByText("复习区空空的，很棒。")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "复习", exact: true })).toBeVisible();
+  await page.clock.setFixedTime(new Date("2026-10-13T12:00:00Z"));
+  await page.reload();
+  await page.getByRole("button", { name: "复习", exact: true }).click();
+  await expect(page.locator(".reading-passage")).toContainText("LIBRARY");
+  await page.getByRole("button", { name: /You can borrow three books/ }).click();
   await page.getByRole("button", { name: "查看结果" }).click();
   await page.getByRole("button", { name: "完成练习" }).click();
   await expect(page.getByText("复习区空空的，很棒。")).toBeVisible();

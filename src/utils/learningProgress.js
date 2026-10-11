@@ -84,12 +84,14 @@ export function recordAnswer(progress, id, correct, date = new Date(), { skill =
   const independent = correct && !hinted;
   const newDay = old?.lastDay !== day;
   const eligible = old?.assessed === false || (newDay && (!old || old.due <= day));
+  // Preserve past evidence, but same-day correction cannot undo an error or hint.
+  const confirmed = independent && (eligible || old?.lastCorrect === true);
   const successDays = independent && eligible ? unique([...(old?.successDays || []), day]) : old?.successDays || [];
   const step = !independent ? 0 : eligible ? Math.min((old?.step || 0) + 1, maxReviewStep) : old?.step || 0;
   const memory = { ...p.memory, [id]: { ...p.memory[id], [skill]: {
-    step, successDays: correct ? successDays : [], lastDay: day,
+    step, successDays, lastDay: day,
     due: independent && !eligible && old ? old.due : dayAfter(date, independent ? reviewGaps[Math.max(0, step - 1)] : 1),
-    lastCorrect: independent,
+    lastCorrect: confirmed,
     assessed: true,
   } } };
   const retained = retainedWord(memory[id]);
@@ -99,7 +101,7 @@ export function recordAnswer(progress, id, correct, date = new Date(), { skill =
     mastered: retained
       ? unique([...p.mastered, id])
       : p.mastered.filter((item) => item !== id),
-    review: independent && Object.values(memory[id]).every((item) => item.assessed === false || item.lastCorrect)
+    review: confirmed && Object.values(memory[id]).every((item) => item.assessed === false || item.lastCorrect)
       ? p.review.filter((item) => item !== id)
       : !correct ? unique([...p.review, id]) : p.review,
     days: { ...p.days, [day]: (Number(p.days[day]) || 0) + 1 },

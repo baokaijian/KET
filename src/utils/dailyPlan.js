@@ -182,8 +182,8 @@ export function saveDailyPlan(progress, plan) {
 // order and its id while the child works through it, so leaving and coming back
 // restores the same practice snapshot (including "I already heard this passage")
 // and the answer positions stay where they were. The next batch only appears
-// once every question of the current one has been answered.
-export function reviewBatch(plan, progress, { batchSize = REVIEW_BATCH_SIZE, dailyLimit = REVIEW_DAILY_LIMIT } = {}) {
+// once every question is answered and its saved feedback/correction is finished.
+export function reviewBatch(plan, progress, { batchSize = REVIEW_BATCH_SIZE, dailyLimit = REVIEW_DAILY_LIMIT, unfinishedBatches = [] } = {}) {
   const memory = progress?.memory || {};
   const items = Array.isArray(plan.review) ? plan.review : [];
   const size = plan.batchSize ?? batchSize;
@@ -196,7 +196,7 @@ export function reviewBatch(plan, progress, { batchSize = REVIEW_BATCH_SIZE, dai
   const answered = items.filter(answeredItem).length;
   const batches = [];
   for (let index = 0; index < items.length; index += size) batches.push(items.slice(index, index + size));
-  let batchIndex = batches.findIndex((batch) => batch.some((item) => !answeredItem(item)));
+  let batchIndex = batches.findIndex((batch, index) => unfinishedBatches.includes(index) || batch.some((item) => !answeredItem(item)));
   if (batchIndex === -1) batchIndex = batches.length;
   const batch = batches[batchIndex] || [];
   return {
@@ -207,6 +207,7 @@ export function reviewBatch(plan, progress, { batchSize = REVIEW_BATCH_SIZE, dai
     batches: batches.length,
     batch,
     unanswered: batch.filter((item) => !answeredItem(item)).length,
+    pending: unfinishedBatches.includes(batchIndex),
     done: batchIndex >= batches.length,
   };
 }
