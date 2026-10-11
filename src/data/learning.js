@@ -131,7 +131,7 @@ export const learningWords = entries.map(
     speechText: word,
     contentReviewed: true,
     image: {
-      src: `learning-images/${word}.webp`,
+      src: `word-images/${ids[index]}.webp`,
       alt,
       meaning: translation,
       reviewStatus: imageReviews[word]?.status || "pending",

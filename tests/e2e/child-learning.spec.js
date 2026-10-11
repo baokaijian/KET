@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { childThemes } from "../../src/data/child-course.js";
-import { courseWords } from "../../src/data/curriculum.js";
+import { courseWords, courseWordById } from "../../src/data/curriculum.js";
+import { wordImages } from "../../src/data/word-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 
 test.beforeEach(async ({ page }) => {
@@ -130,6 +131,28 @@ test("restaurant search excludes health vocabulary and every dictionary entry ex
   await expect(page.locator(".dictionary-row")).toContainText("n. 名词");
   await page.locator(".dictionary-word").click();
   await expect(page.getByRole("dialog")).toContainText("n. 名词");
+});
+
+test("every published photograph loads in its own vocabulary entry with its specific sense", async ({ page }) => {
+  test.setTimeout(Object.keys(wordImages).length * 2000 + 30_000);
+  await page.goto("./#learn");
+  for (const [id, image] of Object.entries(wordImages)) {
+    const word = courseWordById[id];
+    await page.getByRole("textbox", { name: "搜索单词或中文" }).fill(word.word);
+    const row = page.locator(".dictionary-row").filter({ has: page.getByText(word.word, { exact: true }) });
+    await expect(page.locator(".dictionary-row").first()).toBeVisible();
+    for (let pageNumber = 0; pageNumber < 47 && !await row.count(); pageNumber++) {
+      await page.getByRole("button", { name: "下一页", exact: true }).click();
+    }
+    await row.locator(".dictionary-word").click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.getByRole("heading", { name: word.word, exact: true })).toBeVisible();
+    await expect(dialog).toContainText(`照片对应：${image.meaning}`);
+    await expect(dialog.locator("img")).toHaveAttribute("alt", image.alt);
+    await expect(dialog.locator("img")).toHaveAttribute("src", new RegExp(`/word-images/${id}\\.webp$`));
+    await expect.poll(() => dialog.locator("img").evaluate((img) => img.complete && img.naturalWidth === 640 && img.naturalHeight === 640)).toBe(true);
+    await page.getByRole("button", { name: "关闭词条", exact: true }).click();
+  }
 });
 
 test("children see listening and reading challenges while writing stays in the parent area", async ({ page }) => {

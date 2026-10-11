@@ -40,6 +40,6 @@ const byWord = Object.fromEntries(Object.entries(supplementaryTopics).flatMap(([
 export function courseUnitFor(word) {
   const unitByTopic = { daily_starters: 1, family_friends: 1, food_cafe: 2, body_health: 2, home_room: 3,
     school_library: 4, city_travel: 5, nature_weather: 6, sports_hobbies: 7, feelings_descriptions: 8,
-    shopping_work: 9, tech_media: 10, exam_expressions: 11, full_review: 12, animals: 6, clothes: 8 };
+    shopping_work: 9, tech_media: 10, exam_expressions: 11, full_review: 12, animals: 6, clothes: 8, time_calendar: 12, positions: 3 };
   return unitByTopic[word.topic] || byWord[word.word] || word.level;
 }

@@ -2,6 +2,8 @@
 // Generated from Cambridge A2 Key Vocabulary List PDF
 
 export const topicCategories = [
+  { id: "time_calendar", name: "时间日历 Time & Calendar", color: "#23794d", icon: "Calendar", levels: [12], scene: "时间日历", scenePrompt: "认识星期、月份与时段，理解先后顺序并安排生活。" },
+  { id: "positions", name: "位置方向 Positions", color: "#23794d", icon: "Move", levels: [3], scene: "位置方向", scenePrompt: "描述物品在哪里，理解上下、前后、旁边和移动方向。" },
   { id: "animals", name: "动物朋友 Animals", color: "#23794d", icon: "PawPrint", levels: [6], scene: "动物朋友", scenePrompt: "认识动物，描述它们的身体、动作与生活环境。" },
   { id: "clothes", name: "穿衣搭配 Clothes", color: "#23794d", icon: "Shirt", levels: [8], scene: "穿衣搭配", scenePrompt: "认识衣服、鞋帽和配饰，按天气选择合适的穿着。" },
   {
@@ -116,25 +118,25 @@ export const topicCategories = [
   },
   {
     "id": "shopping_work",
-    "name": "购物付款 Shopping & Work",
+    "name": "购物与工作 Shopping & Work",
     "color": "#be123c",
     "icon": "ShoppingCart",
     "levels": [
       9
     ],
-    "scene": "购物付款",
+    "scene": "购物与工作",
     "scenePrompt": "买东西、询价付款，并认识职业和工作场景。"
   },
   {
     "id": "tech_media",
-    "name": "科技媒体 Tech & Media",
+    "name": "科技与娱乐 Tech & Entertainment",
     "color": "#4f46e5",
     "icon": "Smartphone",
     "levels": [
       10
     ],
-    "scene": "科技媒体",
-    "scenePrompt": "使用手机、电脑、网络、媒体和娱乐内容。"
+    "scene": "科技与娱乐",
+    "scenePrompt": "使用科技工具，认识音乐、电影、表演和娱乐内容。"
   },
   {
     "id": "exam_expressions",
@@ -149,14 +151,14 @@ export const topicCategories = [
   },
   {
     "id": "full_review",
-    "name": "综合复习 Full Review",
+    "name": "日常行动 Everyday Actions",
     "color": "#059669",
     "icon": "Sparkles",
     "levels": [
       12
     ],
-    "scene": "综合复习",
-    "scenePrompt": "整理未归类词和高频综合表达，完成最后冲刺。"
+    "scene": "日常行动",
+    "scenePrompt": "描述常见动作、交流、思考和日常安排。"
   }
 ];
 

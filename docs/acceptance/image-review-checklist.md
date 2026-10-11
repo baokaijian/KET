@@ -1,11 +1,11 @@
 # 单词与图片复核
 
-图片范围：20 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1667 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：26 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1661 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
 
-生成提示词规则：ONE photorealistic educational vocabulary photograph；单一清楚主体、方形构图、明亮灰色背景（鱼为水下）、无文字、无拼图、无水印。逐词主体见 alt 列。
+生成提示词规则：每个 word ID 单独生成一张真实感词汇照片。具象物品清楚完整；人物角色与关系用具体生活场景；方形构图、自然光、无标语、无拼图、无水印。逐词主体和已检查语义见 alt 与视觉依据列。
 
 | ID | 单词 | 指定词义 | 图片 / alt | 状态 | 视觉依据 |
 | --- | --- | --- | --- | --- | --- |
@@ -98,13 +98,13 @@
 | l1_your | your | 你的；你们的 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_accident | accident | 事故 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_ambulance | ambulance | 救护车 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_apple | apple | 苹果 | learning-images/apple.webp / A single red apple with a green leaf. | pass | Red apple, stem and green leaf clearly visible; no competing object. |
+| l2_apple | apple | 苹果 | word-images/l2_apple.webp / A single red apple with a green leaf. | pass | Red apple, stem and green leaf clearly visible; no competing object. |
 | l2_appointment | appointment | 预约 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_arm | arm | 手臂 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_baby | baby | 宝宝 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_back | back | 背部；后面；回来；向后 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_bake | bake | 烘烤（用烤箱烤食物） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_banana | banana | 香蕉 | learning-images/banana.webp / One ripe yellow banana. | pass | Single whole yellow banana with curved shape and peel. |
+| l2_banana | banana | 香蕉 | word-images/l2_banana.webp / One ripe yellow banana. | pass | Single whole yellow banana with curved shape and peel. |
 | l2_bean | bean | 豆；豆子 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_biscuit | biscuit | 饼干（英式英语） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_blood | blood | 血；血液 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -114,7 +114,7 @@
 | l2_bottle | bottle | 瓶子 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_bowl | bowl | 碗 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_brain | brain | 大脑 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_bread | bread | 面包 | learning-images/bread.webp / A loaf of bread with cut slices. | pass | Bread loaf and slices, crust and crumb visible; not a cake. |
+| l2_bread | bread | 面包 | word-images/l2_bread.webp / A loaf of bread with cut slices. | pass | Bread loaf and slices, crust and crumb visible; not a cake. |
 | l2_break | break | 休息；打破 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_breakfast | breakfast | 早餐 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_burger | burger | 汉堡包 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -161,7 +161,7 @@
 | l2_fall | fall | 落下；跌倒；秋天（美式英语） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_feel | feel | 感觉 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_finger | finger | 手指 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_fish | fish | 鱼；鱼肉；钓鱼（动词） | learning-images/fish.webp / A live orange goldfish swimming underwater. | pass | Live goldfish underwater with fins and tail; noun animal sense, not cooked food. |
+| l2_fish | fish | 鱼；鱼肉；钓鱼（动词） | word-images/l2_fish.webp / A live orange goldfish swimming underwater. | pass | Live goldfish underwater with fins and tail; noun animal sense, not cooked food. |
 | l2_fit | fit | 健康的；合适的；合身 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_food | food | 食物 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_foot | foot | 脚 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -194,7 +194,7 @@
 | l2_meat | meat | 肉；食用的肉 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_medicine | medicine | 药 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_melon | melon | 瓜；甜瓜 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_milk | milk | 牛奶 | learning-images/milk.webp / A clear glass filled with white milk. | pass | White milk in a clear glass; liquid and container distinguishable. |
+| l2_milk | milk | 牛奶 | word-images/l2_milk.webp / A clear glass filled with white milk. | pass | White milk in a clear glass; liquid and container distinguishable. |
 | l2_neck | neck | 脖子；颈部 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_nose | nose | 鼻子 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_oil | oil | 油；食用油；石油 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -309,7 +309,7 @@
 | l4_coach | coach | 教练；长途公共汽车；训练（动词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l4_college | college | 学院；高等专科学校 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l4_course | course | 课程 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l4_desk | desk | 书桌 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l4_desk | desk | 书桌 | word-images/l4_desk.webp / desk: a wooden writing desk with drawers, one drawer partly open | pass | The writing surface and built-in drawers clearly identify a study desk, not a dining table. |
 | l4_dictionary | dictionary | 词典 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l4_eraser | eraser | 橡皮擦 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l4_geography | geography | 地理 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -338,7 +338,7 @@
 | l4_study | study | 学习 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l4_subject | subject | 学科；话题；主题 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l4_teach | teach | 教 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l4_teacher | teacher | 老师 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l4_teacher | teacher | 老师 | word-images/l4_teacher.webp / teacher: a school teacher showing a picture book to children seated at classroom desks | pass | An adult leading a picture-book lesson, pupils at school desks and a classroom board establish the teacher's role. |
 | l4_term | term | 学期；术语 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l4_test | test | 测试 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l4_textbook | textbook | 教科书；课本 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -356,7 +356,7 @@
 | l5_bookshop | bookshop | 书店（常用于英式英语） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_bookstore | bookstore | 书店（常用于美式英语） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_building | building | 大楼/建筑物 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_bus | bus | 公共汽车 | learning-images/bus.webp / A red city passenger bus. | pass | Red passenger bus, multiple windows, seats and passenger doors, not a truck. |
+| l5_bus | bus | 公共汽车 | word-images/l5_bus.webp / A red city passenger bus. | pass | Red passenger bus, multiple windows, seats and passenger doors, not a truck. |
 | l5_bus_stop | bus stop | 公共汽车站；公交站牌处 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_car | car | 小汽车 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_car_park | car park | 停车场（英式英语） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -407,7 +407,7 @@
 | l5_return | return | 回来；返回；归还；往返的 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_road | road | 马路 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_sailing | sailing | 帆船运动；航行 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_school | school | 学校 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_school | school | 学校 | word-images/l5_school.webp / school: a primary school building with a visible classroom and playground, children arriving with backpacks | pass | Classroom desks and board are visible through the building windows, with a fenced playground and arriving pupils. |
 | l5_seat | seat | 座位 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_ship | ship | 大船；轮船 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_shop | shop | 商店 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -480,7 +480,7 @@
 | l7_basketball | basketball | 篮球 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_bat | bat | 球棒；蝙蝠（另一名词含义） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_beach | beach | 沙滩/海滩 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l7_bicycle | bicycle | 自行车 | learning-images/bicycle.webp / A green bicycle with two wheels in side view. | pass | Green bicycle with two wheels, pedals, saddle and handlebar, no engine. |
+| l7_bicycle | bicycle | 自行车 | word-images/l7_bicycle.webp / A green bicycle with two wheels in side view. | pass | Green bicycle with two wheels, pedals, saddle and handlebar, no engine. |
 | l7_camp | camp | 露营/营地 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_camping | camping | 露营活动 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l7_campsite | campsite | 露营地 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -733,7 +733,7 @@
 | l10_article | article | 文章 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_at | at | 在（某地点或时刻）；朝；向 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_blog | blog | 博客；写博客 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l10_book | book | 书（名词）；预订（动词，如订房或订票） | learning-images/book.webp / An open hardcover book with visible pages. | pass | Open bound hardcover book with pages; teaches noun sense only, not booking a ticket. |
+| l10_book | book | 书（名词）；预订（动词，如订房或订票） | word-images/l10_book.webp / An open hardcover book with visible pages. | pass | Open bound hardcover book with pages; teaches noun sense only, not booking a ticket. |
 | l10_brother | brother | 哥哥/弟弟 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_call | call | 打电话/叫喊 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_camera | camera | 照相机 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -780,7 +780,7 @@
 | l10_file | file | 文件 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_film | film | 电影 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_fridge | fridge | 冰箱 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l10_friend | friend | 朋友 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l10_friend | friend | 朋友 | word-images/l10_friend.webp / friend: two young friends walking side by side, smiling and chatting on their way to school | pass | Two children make eye contact, smile and greet each other while walking together, illustrating friendly companionship. |
 | l10_friendly | friendly | 友好的 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_game | game | 游戏；比赛；一局 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_grandfather | grandfather | 爷爷/外公 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -933,7 +933,7 @@
 | l12_available | available | 可获得的 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_away | away | 离开；远离 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_badly | badly | 不好地；严重地；很，非常（如 badly need） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_bag | bag | 包 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_bag | bag | 包 | word-images/l12_bag.webp / bag: a green fabric school backpack with two shoulder straps and a zipped front pocket | pass | One whole backpack has a carrying handle, two shoulder straps and zipped pockets; no unrelated objects. |
 | l12_balloon | balloon | 气球 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_band | band | 乐队 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_barbecue_barbeque | barbecue / barbeque | 烧烤；户外烧烤聚餐（两种拼写） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -989,7 +989,7 @@
 | l12_career | career | 职业；职业生涯 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_carefully | carefully | 仔细地；小心地 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_carry | carry | 携带 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_cat | cat | 猫 | learning-images/cat.webp / A domestic tabby cat sitting. | pass | Domestic tabby cat sitting; ears, whiskers, paws and tail visible. |
+| l12_cat | cat | 猫 | word-images/l12_cat.webp / A domestic tabby cat sitting. | pass | Domestic tabby cat sitting; ears, whiskers, paws and tail visible. |
 | l12_cd_player | CD player | CD 播放器；光盘播放机 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_ceiling | ceiling | 天花板 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_celebrate | celebrate | 庆祝 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1015,7 +1015,7 @@
 | l12_come | come | 来 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_come_back | come back | 回来 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_comedy | comedy | 喜剧 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_complete | complete | 完成（动词）；完整的（形容词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_complete | complete | 完成（动词，如完成一项任务） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_congratulations | congratulations! | 祝贺你！；恭喜！ | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_contact | contact | 联系；接触；联系信息 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_continue | continue | 继续 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1029,7 +1029,7 @@
 | l12_cross | cross | 穿过 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_crossing | crossing | 交叉路口；人行横道；穿越 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_crowd | crowd | 人群；一群人 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_cry | cry | 哭；喊叫；哭声 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_cry | cry | 哭；喊叫（动词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_cut | cut | 切；割 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_daily | daily | 每日的 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_date | date | 日期 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1049,7 +1049,7 @@
 | l12_discuss | discuss | 讨论 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_dive | dive | 跳水/潜水 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_diving | diving | 跳水；潜水运动 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_dog | dog | 狗 | learning-images/dog.webp / A golden retriever dog sitting. | pass | Golden retriever dog sitting; muzzle, paws and tail visible. |
+| l12_dog | dog | 狗 | word-images/l12_dog.webp / A golden retriever dog sitting. | pass | Golden retriever dog sitting; muzzle, paws and tail visible. |
 | l12_doll | doll | 玩偶；洋娃娃 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_dolphin | dolphin | 海豚 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_donkey | donkey | 驴 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1080,7 +1080,7 @@
 | l12_environment | environment | 环境；自然环境 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_equipment | equipment | 设备；器材（不可数名词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_especially | especially | 尤其；特别地 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_even | even | 甚至；连……都；平坦的；偶数的 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_even | even | 甚至；连……都（副词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_event | event | 事件；活动；比赛项目 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_ever | ever | 曾经；在任何时候（常用于疑问句） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_every | every | 每一；每个（后接单数可数名词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1093,17 +1093,17 @@
 | l12_example | example | 例子 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_except | except | 除...之外 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_exciting | exciting | 令人兴奋的；刺激的 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_excuse | excuse | 借口（名词）；原谅（动词，如 excuse me） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_excuse | excuse | 原谅（动词，如 excuse me 表示劳驾、对不起） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_exit | exit | 出口；离开；退出 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_experience | experience | 经历；经验；体验 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_experiment | experiment | 实验；试验 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_explain | explain | 解释 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_explore | explore | 探索 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_extinct | extinct | 灭绝的；不再存在的（物种） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_extra | extra | 额外的；另外的；额外地 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_extra | extra | 额外的；另外的（形容词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_fact | fact | 事实；真实的事情 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_fail | fail | 失败；不及格；未能做到 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_fair | fair | 公平的；浅色的；集市（名词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_fair | fair | 公平的；浅色的（形容词，如浅色头发） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_fall_over | fall over | 摔倒；倒下 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_fan | fan | 风扇；爱好者；粉丝 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_fantastic | fantastic | 极好的；很棒的 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1115,7 +1115,7 @@
 | l12_feelings | feelings | 感受；情绪（复数形式） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_few | few | 很少的；几乎没有的（用于可数名词，a few 为一些） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_fill | fill | 装满；填满；填入 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_final | final | 最后的；最终的；决赛（名词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_final | final | 最后的；最终的（形容词） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_finally | finally | 最后；终于 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_find | find | 找到 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_finish | finish | 完成；结束 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1407,9 +1407,9 @@
 | l12_pass | pass | 通过；经过 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_past | past | 过去；过 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_path | path | 小路；路径 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_pen | pen | 钢笔 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_pen | pen | 钢笔 | word-images/l12_pen.webp / pen: an uncapped fountain pen with a visible metal nib and its cap beside it | pass | Visible fountain-pen nib and separate cap distinguish the pen from a graphite pencil or felt-tip marker. |
 | l12_pence | pence | 便士（penny 的复数，表示金额） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_pencil | pencil | 铅笔 | learning-images/pencil.webp / A sharpened yellow wooden graphite pencil. | pass | Sharpened wooden pencil with exposed graphite point, not a pen. |
+| l12_pencil | pencil | 铅笔 | word-images/l12_pencil.webp / A sharpened yellow wooden graphite pencil. | pass | Sharpened wooden pencil with exposed graphite point, not a pen. |
 | l12_pencil_case | pencil case | 铅笔盒；文具袋 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_penguin | penguin | 企鹅 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_people | people | 人们 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1454,7 +1454,7 @@
 | l12_puzzle | puzzle | 谜题；智力游戏；拼图 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_quickly | quickly | 迅速地；很快地 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_quite | quite | 相当；挺；完全（程度取决于搭配） | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_rabbit | rabbit | 兔子 | learning-images/rabbit.webp / A white rabbit with long upright ears. | pass | White rabbit with long upright ears; whole animal identifiable. |
+| l12_rabbit | rabbit | 兔子 | word-images/l12_rabbit.webp / A white rabbit with long upright ears. | pass | White rabbit with long upright ears; whole animal identifiable. |
 | l12_rainforest | rainforest | 热带雨林 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_rap | rap | 说唱音乐；说唱 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_reading | reading | 阅读；读书活动 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |

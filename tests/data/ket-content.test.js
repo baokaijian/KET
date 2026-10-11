@@ -14,10 +14,11 @@ import {
   dictionaryEntry,
 } from "../../src/data/learning.js";
 import { imageReviews } from "../../src/data/image-reviews.js";
-import { getWordImage } from "../../src/data/word-images.js";
+import { getWordImage, wordImages } from "../../src/data/word-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 import { pagesBase } from "../../scripts/pages-base.mjs";
 import { additionalImages } from "../../src/data/additional-images.js";
+import { wordImagePlans } from "../../src/data/word-image-plans.js";
 
 describe("complete vocabulary meanings", () => {
   it("preserves all 1687 entries without duplicate ids", () => {
@@ -47,6 +48,26 @@ describe("complete vocabulary meanings", () => {
 });
 
 describe("published curriculum acceptance", () => {
+  it("keeps a word-specific authoring plan for all 1687 words without approving unfinished assets", () => {
+    expect(Object.keys(wordImagePlans).sort()).toEqual(allKetWords.map((word) => word.id).sort());
+    expect(new Set(Object.values(wordImagePlans).map((plan) => plan.src)).size).toBe(1687);
+    for (const word of allKetWords) {
+      const plan = wordImagePlans[word.id];
+      expect(plan.prompt).toContain(`Target word: ${word.word}.`);
+      expect(plan.prompt).toContain(plan.meaning);
+      expect(plan.reviewStatus).toBe(wordImages[word.id]?.reviewStatus || "pending");
+      if (!wordImages[word.id]) expect(plan.alt).toBe("");
+    }
+  });
+  it("uses one canonical image path and unique file contents for each published word ID", () => {
+    const hashes = new Set();
+    for (const [id, image] of Object.entries(wordImages)) {
+      expect(image.src).toBe(`word-images/${id}.webp`);
+      const hash = createHash("sha256").update(readFileSync(`public/${image.src}`)).digest("hex");
+      expect(hashes.has(hash), id).toBe(false);
+      hashes.add(hash);
+    }
+  });
   it("checks every added photograph's unique bytes and locked visual-review evidence", async () => {
     const hashes = new Set();
     for (const [id, image] of Object.entries(additionalImages)) {
@@ -70,7 +91,7 @@ describe("published curriculum acceptance", () => {
     for (const word of learningWords) {
       const image = word.image;
       expect(["pass", "fixed"]).toContain(image.reviewStatus);
-      expect(image.src).toBe(`learning-images/${word.word}.webp`);
+      expect(image.src).toBe(`word-images/${word.id}.webp`);
       expect(image.alt.length).toBeGreaterThan(15);
       expect(image.meaning).toBe(word.translation);
       const file = `public/${image.src}`;

@@ -4,8 +4,24 @@ import { metadataFor, partOfSpeechLabels } from "../../src/data/vocabulary-metad
 import { vocabularyLessons, vocabularyQuestions } from "../../src/data/curriculum.js";
 import { childThemes, childLessons } from "../../src/data/child-course.js";
 import { countEnglishWords } from "../../src/utils/learningProgress.js";
+import { curatedTopics, curatedTopicGroups } from "../../src/data/curated-topics.js";
 
 describe("whole-bank meaning, POS and theme regressions", () => {
+  it("places calendar, spatial and formerly unclassified words into explicit semantic groups", () => {
+    const names = Object.values(curatedTopicGroups).flatMap((group) => group.split("|"));
+    expect(new Set(names).size).toBe(names.length);
+    for (const name of names) {
+      const word = allKetWords.find((w) => w.word === name);
+      expect(word, name).toBeTruthy();
+      expect(word.topic, name).toBe(curatedTopics[name]);
+    }
+    for (const name of ["January", "April", "December", "Monday", "Friday", "midday", "suddenly"]) expect(allKetWords.find((w) => w.word === name).topic).toBe("time_calendar");
+    for (const name of ["beside", "below", "between", "under"]) expect(allKetWords.find((w) => w.word === name).topic).toBe("positions");
+    expect(allKetWords.find((w) => w.word === "bag").topic).toBe("shopping_work");
+    expect(allKetWords.find((w) => w.word === "gas station").topic).toBe("city_travel");
+    expect(allKetWords.find((w) => w.word === "fish").topic).toBe("animals");
+    expect(allKetWords.filter((w) => w.topic === "full_review").every((w) => curatedTopics[w.word] === "full_review")).toBe(true);
+  });
   it("labels every word with its official POS, including multi-POS and plural forms", () => {
     for (const word of allKetWords) {
       const official = metadataFor(word.word);

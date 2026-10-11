@@ -4,7 +4,7 @@ import process from "node:process";
 import { cp, mkdir, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pagesBase } from "./scripts/pages-base.mjs";
-import { additionalImages } from "./src/data/additional-images.js";
+import { wordImages } from "./src/data/word-images.js";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -20,13 +20,8 @@ export default defineConfig({
         await rm(destination, { recursive: true, force: true });
         await mkdir(destination, { recursive: true });
         await cp("public/favicon.svg", resolve(destination, "favicon.svg"));
-        await cp(
-          "public/learning-images",
-          resolve(destination, "learning-images"),
-          { recursive: true },
-        );
         await mkdir(resolve(destination, "word-images"), { recursive: true });
-        for (const image of Object.values(additionalImages)) {
+        for (const image of Object.values(wordImages)) {
           if (["pass", "fixed"].includes(image.reviewStatus)) await cp(resolve("public", image.src), resolve(destination, image.src));
         }
       },

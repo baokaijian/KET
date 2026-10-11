@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { learningWords } from "../../src/data/learning.js";
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -88,7 +89,7 @@ test("the first screen renders eight distinct real photographs without legacy te
     .locator(".word-grid img")
     .evaluateAll((images) => images.map((image) => image.getAttribute("src")));
   expect(new Set(srcs).size).toBe(8);
-  expect(srcs.every((src) => /\/(learning-images|word-images)\//.test(src))).toBe(true);
+  expect(srcs.every((src) => /\/word-images\//.test(src))).toBe(true);
   await page.screenshot({ path: info.outputPath("today.png"), fullPage: true });
   expect(errors).toEqual([]);
   expect(
@@ -115,7 +116,7 @@ for (const [title, words] of [
       await readyPhotos(page);
       await expect(page.locator(".learning-stage img")).toHaveAttribute(
         "src",
-        new RegExp(`/learning-images/${word}\\.webp$`),
+        new RegExp(`/word-images/${learningWords.find((entry) => entry.word === word).id}\\.webp$`),
       );
       await page.screenshot({
         path: info.outputPath(`${word}.png`),
@@ -244,7 +245,7 @@ test("dictionary suppresses fake images and wrong old book phonetics", async ({
   await expect(page.getByRole("dialog")).toContainText("/bʊk/");
   await expect(page.getByRole("dialog").locator("img")).toHaveAttribute(
     "src",
-    /learning-images\/book.webp$/,
+    /word-images\/l10_book.webp$/,
   );
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).not.toBeVisible();

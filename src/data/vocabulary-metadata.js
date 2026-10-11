@@ -1,6 +1,7 @@
 import metadata from "./vocabulary-metadata.json" with { type: "json" };
 import { topicCategories } from "./ket-words/levels.js";
 import { supplementaryTopics } from "./course-topics.js";
+import { curatedTopics } from "./curated-topics.js";
 
 export const partOfSpeechLabels = {
   n: "n. 名词", v: "v. 动词", adj: "adj. 形容词", adv: "adv. 副词",
@@ -19,7 +20,7 @@ const topicMap = {
   "Communication and Technology": "tech_media", "Entertainment and Media": "tech_media",
   "Documents and Texts": "school_library", "Hobbies and Leisure": "sports_hobbies", Sport: "sports_hobbies",
   Shopping: "shopping_work", "Work and Jobs": "shopping_work", Services: "city_travel",
-  Measurements: "school_library", Time: "daily_starters",
+  Measurements: "school_library", Time: "time_calendar",
 };
 const unitTopic = { 1: "daily_starters", 2: "food_cafe", 3: "home_room", 4: "school_library", 5: "city_travel", 6: "nature_weather", 7: "sports_hobbies", 8: "feelings_descriptions", 9: "shopping_work", 10: "tech_media", 11: "exam_expressions" };
 const supplemental = Object.fromEntries(Object.entries(supplementaryTopics).flatMap(([unit, words]) => words.map((word) => [word, unitTopic[unit]])));
@@ -32,7 +33,7 @@ const explicit = {
   mouth: "body_health", nose: "body_health", pale: "body_health", pharmacy: "body_health", rest: "body_health",
   sick: "body_health", stomach: "body_health", toe: "body_health", tooth: "body_health", toothache: "body_health", toothbrush: "body_health",
   run: "sports_hobbies", walk: "sports_hobbies", up: "daily_starters", well: "feelings_descriptions",
-  clean: "home_room", wash: "home_room", fish: "food_cafe", book: "school_library",
+  clean: "home_room", wash: "home_room", fish: "animals", book: "school_library",
   kitchen: "home_room", fridge: "home_room", cooker: "home_room", coat: "clothes",
   "Dr": "body_health", "litre": "school_library", "litre / liter": "school_library",
   can: "daily_starters", break: "daily_starters", bit: "daily_starters", fat: "feelings_descriptions",
@@ -52,7 +53,7 @@ export function withVocabularyMetadata(word) {
   const pos = entry.pos.filter((value) => partOfSpeechLabels[value]);
   if (!pos.length) throw new Error(`Invalid official POS: ${word.word}`);
   const officialTopic = entry.topics.map((name) => topicMap[name]).find(Boolean);
-  const topic = animalWords.has(word.word) ? "animals" : clothesWords.has(word.word) ? "clothes" : explicit[word.word] || officialTopic || supplemental[word.word] || word.topic;
+  const topic = animalWords.has(word.word) ? "animals" : clothesWords.has(word.word) ? "clothes" : explicit[word.word] || curatedTopics[word.word] || officialTopic || supplemental[word.word] || word.topic;
   const category = topicCategories.find((item) => item.id === topic);
   return { ...word, topic, scene: category.scene, scenePrompt: category.scenePrompt,
     partOfSpeech: pos, partOfSpeechLabel: pos.map((value) => partOfSpeechLabels[value]).join(" / "),
