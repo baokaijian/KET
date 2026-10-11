@@ -187,10 +187,13 @@ function findBestVoice(lang) {
 
 const activeUtterances = new Set();
 let speechTimer = null;
+let speechWatchdog = null;
 let speechGeneration = 0;
 
 export function stopSpeech() {
   clearTimeout(speechTimer);
+  clearTimeout(speechWatchdog);
+  speechWatchdog = null;
   speechTimer = null;
   speechGeneration += 1;
   activeUtterances.clear();
@@ -215,6 +218,7 @@ export const speakText = (
 
   try {
     clearTimeout(speechTimer);
+    clearTimeout(speechWatchdog);
     const generation = ++speechGeneration;
     if (
       window.speechSynthesis.speaking ||
@@ -235,6 +239,7 @@ export const speakText = (
     speechTimer = setTimeout(() => {
       if (generation !== speechGeneration) return;
       speechTimer = null;
+      let failed = false;
       try {
         const utterance = new SpeechSynthesisUtterance(text.trim());
 
@@ -249,16 +254,34 @@ export const speakText = (
         }
 
         activeUtterances.add(utterance);
-        utterance.onend = () => {
+        let settled = false;
+        const settle = () => {
+          if (failed || settled || generation !== speechGeneration) return false;
+          settled = true;
+          clearTimeout(speechWatchdog);
+          speechWatchdog = null;
           activeUtterances.delete(utterance);
-          if (generation === speechGeneration && onEnd) onEnd();
+          return true;
+        };
+        const timedOut = () => {
+          if (!settle()) return;
+          window.speechSynthesis.cancel();
+          onError?.("speech-timeout");
+        };
+        // Some devices silently drop speech callbacks; never leave a quiz waiting forever.
+        speechWatchdog = setTimeout(timedOut, 4000);
+        utterance.onstart = () => {
+          if (settled || generation !== speechGeneration) return;
+          clearTimeout(speechWatchdog);
+          speechWatchdog = setTimeout(timedOut, Math.max(10000, text.length * 300 / utterance.rate));
+        };
+        utterance.onend = () => {
+          if (settle()) onEnd?.();
         };
         utterance.onerror = (event) => {
-          activeUtterances.delete(utterance);
           // 'interrupted' is normal when cancel() is called, not a real error
           if (
-            generation === speechGeneration &&
-            !["interrupted", "canceled"].includes(event.error)
+            !["interrupted", "canceled"].includes(event.error) && settle()
           ) {
             console.warn("Speech synthesis error:", event.error);
             onError?.(event.error);
@@ -267,6 +290,10 @@ export const speakText = (
 
         window.speechSynthesis.speak(utterance);
       } catch (innerErr) {
+        failed = true;
+        clearTimeout(speechWatchdog);
+        speechWatchdog = null;
+        activeUtterances.clear();
         console.error("Speech synthesis inner error:", innerErr);
         onError?.(innerErr);
       }

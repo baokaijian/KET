@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { allKetWords } from "../../src/data/ket-words/index.js";
 import { meaningCorrections, withCorrectMeaning } from "../../src/data/ket-meanings.js";
 import { courseWords, vocabularyLessons, vocabularyLessonId, courseLessons, curriculumUnits, courseQuestionById, examCoverage, lessonPassed, nextCourseLesson, vocabularyQuestions } from "../../src/data/curriculum.js";
-import { legacyRegroupedCourses } from "../../src/data/legacy-regrouped-courses.js";
+import courseGroupBaseline from "../../src/data/course-group-baseline.json" with { type: "json" };
 import { grammarLessons } from "../../src/data/grammar.js";
 import { skillLessons, productionTasks } from "../../src/data/skill-lessons.js";
 import { countEnglishWords, emptyProgress, normalizeProgress } from "../../src/utils/learningProgress.js";
@@ -30,20 +30,27 @@ describe("meaning regressions", () => {
 
 describe("the full A2 learning path", () => {
   it("keeps old completion IDs only for unchanged ordered word groups", () => {
-    for (const [id, ids] of Object.entries(legacyRegroupedCourses)) {
-      const [, unit, topic, number] = id.split("-");
+    expect(Object.keys(courseGroupBaseline)).toHaveLength(219);
+    expect(Object.values(courseGroupBaseline).flatMap((entry) => entry.words).sort()).toEqual(courseWords.map((word) => word.id).sort());
+    for (const [base, { id, words: ids }] of Object.entries(courseGroupBaseline)) {
+      const [, unit, topic, number] = base.split("-");
       const words = ids.map((wordId) => courseWords.find((word) => word.id === wordId));
       expect(words.every(Boolean), id).toBe(true);
       expect(vocabularyLessonId(Number(unit), topic, Number(number) - 1, words)).toBe(id);
       expect(vocabularyLessonId(Number(unit), topic, Number(number) - 1, words.slice(1))).not.toBe(id);
       if (words.length > 1) expect(vocabularyLessonId(Number(unit), topic, Number(number) - 1, [...words].reverse())).not.toBe(id);
     }
+    const previousById = Object.fromEntries(Object.values(courseGroupBaseline).map((entry) => [entry.id, entry]));
+    for (const lesson of vocabularyLessons) {
+      if (previousById[lesson.id]) expect(lesson.words.map((word) => word.id)).toEqual(previousById[lesson.id].words);
+      else expect(lesson.id).toContain(`--${lesson.words.map((word) => word.id).join("_")}`);
+    }
     expect(vocabularyLessons.find((lesson) => lesson.id === "vocabulary-2-body_health-1")).toBeTruthy();
     for (const oldId of ["vocabulary-5-city_travel-3", "vocabulary-6-nature_weather-1"]) {
       expect(vocabularyLessons.some((lesson) => lesson.id === oldId)).toBe(false);
       expect(vocabularyLessons.some((lesson) => lesson.id.startsWith(`${oldId}--`))).toBe(true);
     }
-    expect(vocabularyLessonId(1, "food_cafe", 0, courseWords.slice(0, 8))).toBe("vocabulary-1-food_cafe-1");
+    expect(vocabularyLessonId(1, "food_cafe", 0, courseWords.slice(0, 8))).toContain("--");
     expect(vocabularyLessonId(99, "nature_weather", 0, courseWords.slice(0, 8))).toContain("--");
   });
   it("never uses overlapping meanings as wrong answers, even when an input pool contains only synonyms", () => {

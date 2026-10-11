@@ -6,11 +6,11 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 - Every `fail` must be corrected and rechecked as `fixed` before final acceptance.
 - Cambridge baseline: A2 Key Vocabulary List, August 2025.
 
-| Level | Topic | ID | Word | Official POS | TTS Text | Published Phonetic | Chinese Meaning | Published Photo | Meaning | Independent Review | Notes |
+| Level | Topic | ID | Word | Teaching POS | TTS Text | Published Phonetic | Chinese Meaning | Published Photo | Meaning | Independent Review | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | daily_starters | l1_a_an | a / an | det. 限定词 | a or an | not published | 一个；一件（不定冠词，用于单数可数名词前） | not published | provided | pending |  |
 | 1 | daily_starters | l1_a_few | a few | adj. 形容词 / det. 限定词 / pron. 代词 | a few | not published | 一些；几个 | not published | provided | pending |  |
-| 1 | school_library | l1_able | able | adj. 形容词 | able | not published | 能够的 | not published | provided | pending |  |
+| 1 | feelings_descriptions | l1_able | able | adj. 形容词 | able | not published | 能够的 | not published | provided | pending |  |
 | 1 | daily_starters | l1_about | about | adv. 副词 / prep. 介词 | about | not published | 关于；大约（如 about ten 大约十） | not published | provided | pending |  |
 | 1 | family_friends | l1_adult | adult | adj. 形容词 / n. 名词 | adult | not published | 成年人（名词）；成年的（形容词） | not published | provided | pending |  |
 | 1 | time_calendar | l1_afternoon | afternoon | n. 名词 | afternoon | not published | 下午 | not published | provided | pending |  |
@@ -57,7 +57,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 1 | time_calendar | l1_morning | morning | n. 名词 | morning | not published | 早上 | not published | provided | pending |  |
 | 1 | daily_starters | l1_name | name | n. 名词 | name | not published | 名字 | not published | provided | pending |  |
 | 1 | daily_starters | l1_need | need | v. 动词 | need | not published | 需要 | not published | provided | pending |  |
-| 1 | school_library | l1_nice | nice | adj. 形容词 | nice | not published | 好的/和蔼的 | not published | provided | pending |  |
+| 1 | feelings_descriptions | l1_nice | nice | adj. 形容词 | nice | not published | 好的/和蔼的 | not published | provided | pending |  |
 | 1 | time_calendar | l1_night | night | n. 名词 | night | not published | 夜晚 | not published | provided | pending |  |
 | 1 | daily_starters | l1_no | no | adv. 副词 / det. 限定词 / pron. 代词 | no | not published | 不；没有 | not published | provided | pending |  |
 | 1 | time_calendar | l1_noon | noon | n. 名词 | noon | not published | 中午 | not published | provided | pending |  |
@@ -70,7 +70,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 1 | school_library | l1_second | second | adj. 形容词 / det. 限定词 / n. 名词 | second | not published | 秒；第二；第二的 | not published | provided | pending |  |
 | 1 | family_friends | l1_sister | sister | n. 名词 | sister | not published | 姐姐/妹妹 | word-images/l1_sister.webp | provided | pending |  |
 | 1 | daily_starters | l1_some | some | det. 限定词 / pron. 代词 | some | not published | 一些 | not published | provided | pending |  |
-| 1 | school_library | l1_sorry | sorry | adj. 形容词 | sorry | not published | 抱歉的 | not published | provided | pending |  |
+| 1 | feelings_descriptions | l1_sorry | sorry | adj. 形容词 | sorry | not published | 抱歉的 | not published | provided | pending |  |
 | 1 | nature_weather | l1_spring | spring | n. 名词 | spring | not published | 春天；弹簧（另一名词含义） | not published | provided | pending |  |
 | 1 | daily_starters | l1_thank | thank | v. 动词 | thank | not published | 感谢 | not published | provided | pending |  |
 | 1 | daily_starters | l1_thanks | thanks | exclam. 感叹词 | thanks | not published | 谢谢（非正式表达） | not published | provided | pending |  |
@@ -372,7 +372,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 5 | city_travel | l5_driver | driver | n. 名词 | driver | not published | 司机 | not published | provided | pending |  |
 | 5 | city_travel | l5_elevator | elevator | n. 名词 | elevator | not published | 电梯 | not published | provided | pending |  |
 | 5 | city_travel | l5_engine | engine | n. 名词 | engine | not published | 发动机；引擎 | not published | provided | pending |  |
-| 5 | city_travel | l5_engineer | engineer | n. 名词 | engineer | not published | 工程师 | not published | provided | pending |  |
+| 5 | shopping_work | l5_engineer | engineer | n. 名词 | engineer | not published | 工程师 | not published | provided | pending |  |
 | 5 | city_travel | l5_factory | factory | n. 名词 | factory | not published | 工厂 | not published | provided | pending |  |
 | 5 | city_travel | l5_far | far | adv. 副词 | far | not published | 远的 | not published | provided | pending |  |
 | 5 | city_travel | l5_flight | flight | n. 名词 | flight | not published | 航班/飞行 | not published | provided | pending |  |
@@ -419,7 +419,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 5 | city_travel | l5_tour | tour | n. 名词 | tour | not published | 游览；巡回旅行 | not published | provided | pending |  |
 | 5 | city_travel | l5_tourist | tourist | n. 名词 | tourist | not published | 游客 | not published | provided | pending |  |
 | 5 | city_travel | l5_traffic | traffic | n. 名词 | traffic | not published | 交通 | not published | provided | pending |  |
-| 5 | city_travel | l5_train | train | n. 名词 | train | not published | 火车；训练（动词） | not published | provided | pending |  |
+| 5 | city_travel | l5_train | train | n. 名词 / v. 动词 | train | not published | 火车；训练（动词） | not published | provided | pending |  |
 | 5 | city_travel | l5_tram | tram | n. 名词 | tram | not published | 有轨电车 | not published | provided | pending |  |
 | 5 | city_travel | l5_travel | travel | v. 动词 | travel | not published | 旅行 | not published | provided | pending |  |
 | 5 | city_travel | l5_trip | trip | n. 名词 | trip | not published | 短途旅行 | not published | provided | pending |  |
@@ -554,118 +554,118 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 7 | sports_hobbies | l7_winner | winner | n. 名词 | winner | not published | 获胜者；赢家 | not published | provided | pending |  |
 | 7 | nature_weather | l7_wool | wool | n. 名词 | wool | not published | 羊毛；毛线 | not published | provided | pending |  |
 | 7 | nature_weather | l7_world | world | n. 名词 | world | not published | 世界 | not published | provided | pending |  |
-| 8 | school_library | l8_afraid | afraid | adj. 形容词 | afraid | not published | 害怕的 | not published | provided | pending |  |
-| 8 | school_library | l8_alone | alone | adj. 形容词 / adv. 副词 | alone | not published | 独自的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_afraid | afraid | adj. 形容词 | afraid | not published | 害怕的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_alone | alone | adj. 形容词 / adv. 副词 | alone | not published | 独自的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_amazed | amazed | adj. 形容词 | amazed | not published | 感到惊讶的；十分惊奇的 | not published | provided | pending |  |
-| 8 | school_library | l8_amazing | amazing | adj. 形容词 | amazing | not published | 令人惊奇的 | not published | provided | pending |  |
-| 8 | school_library | l8_angry | angry | adj. 形容词 | angry | not published | 生气的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_amazing | amazing | adj. 形容词 | amazing | not published | 令人惊奇的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_angry | angry | adj. 形容词 | angry | not published | 生气的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_attractive | attractive | adj. 形容词 | attractive | not published | 有吸引力的；好看的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_awesome | awesome | adj. 形容词 | awesome | not published | 很棒的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_awful | awful | adj. 形容词 | awful | not published | 糟糕的 | not published | provided | pending |  |
-| 8 | city_travel | l8_backpack | backpack | n. 名词 | backpack | not published | 背包 | not published | provided | pending |  |
-| 8 | school_library | l8_bad | bad | adj. 形容词 | bad | not published | 坏的 | not published | provided | pending |  |
-| 8 | school_library | l8_beautiful | beautiful | adj. 形容词 | beautiful | not published | 漂亮的 | not published | provided | pending |  |
+| 8 | clothes | l8_backpack | backpack | n. 名词 | backpack | not published | 背包 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_bad | bad | adj. 形容词 | bad | not published | 坏的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_beautiful | beautiful | adj. 形容词 | beautiful | not published | 漂亮的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_best | best | adj. 形容词 / adv. 副词 | best | not published | 最好的 | not published | provided | pending |  |
-| 8 | school_library | l8_better | better | adj. 形容词 / adv. 副词 | better | not published | 更好的 | not published | provided | pending |  |
-| 8 | school_library | l8_big | big | adj. 形容词 | big | not published | 大的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_better | better | adj. 形容词 / adv. 副词 | better | not published | 更好的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_big | big | adj. 形容词 | big | not published | 大的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_black | black | adj. 形容词 / n. 名词 | black | not published | 黑色 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_blouse | blouse | n. 名词 | blouse | not published | 女式衬衫 | not published | provided | pending |  |
-| 8 | school_library | l8_bored | bored | adj. 形容词 | bored | not published | 感到无聊的（描述人的感受） | not published | provided | pending |  |
-| 8 | school_library | l8_boring | boring | adj. 形容词 | boring | not published | 令人觉得无聊的（描述事物） | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_bracelet | bracelet | n. 名词 | bracelet | not published | 手链；手镯 | not published | provided | pending |  |
-| 8 | school_library | l8_brave | brave | adj. 形容词 | brave | not published | 勇敢的 | not published | provided | pending |  |
-| 8 | school_library | l8_brilliant | brilliant | adj. 形容词 | brilliant | not published | 很棒的；出色的；明亮的 | not published | provided | pending |  |
+| 8 | clothes | l8_blouse | blouse | n. 名词 | blouse | not published | 女式衬衫 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_bored | bored | adj. 形容词 | bored | not published | 感到无聊的（描述人的感受） | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_boring | boring | adj. 形容词 | boring | not published | 令人觉得无聊的（描述事物） | not published | provided | pending |  |
+| 8 | clothes | l8_bracelet | bracelet | n. 名词 | bracelet | not published | 手链；手镯 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_brave | brave | adj. 形容词 | brave | not published | 勇敢的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_brilliant | brilliant | adj. 形容词 | brilliant | not published | 很棒的；出色的；明亮的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_brown | brown | adj. 形容词 / n. 名词 | brown | not published | 棕色 | not published | provided | pending |  |
-| 8 | school_library | l8_busy | busy | adj. 形容词 | busy | not published | 忙碌的 | not published | provided | pending |  |
-| 8 | school_library | l8_careful | careful | adj. 形容词 | careful | not published | 小心的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_chain | chain | n. 名词 | chain | not published | 链子；链条 | not published | provided | pending |  |
-| 8 | school_library | l8_clear | clear | adj. 形容词 | clear | not published | 清楚的；晴朗的；清理（动词） | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_clothes | clothes | n. 名词 | clothes | not published | 衣服 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_busy | busy | adj. 形容词 | busy | not published | 忙碌的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_careful | careful | adj. 形容词 | careful | not published | 小心的 | not published | provided | pending |  |
+| 8 | clothes | l8_chain | chain | n. 名词 | chain | not published | 链子；链条 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_clear | clear | adj. 形容词 | clear | not published | 清楚的；晴朗的；清理（动词） | not published | provided | pending |  |
+| 8 | clothes | l8_clothes | clothes | n. 名词 | clothes | not published | 衣服 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_comfortable | comfortable | adj. 形容词 | comfortable | not published | 舒适的 | not published | provided | pending |  |
-| 8 | school_library | l8_cool | cool | adj. 形容词 / exclam. 感叹词 | cool | not published | 凉爽的；酷的；很棒的（口语） | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_cool | cool | adj. 形容词 / exclam. 感叹词 | cool | not published | 凉爽的；酷的；很棒的（口语） | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_correct | correct | adj. 形容词 | correct | not published | 正确的；改正（动词） | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_costume | costume | n. 名词 | costume | not published | 戏服；化装服装 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_crowded | crowded | adj. 形容词 | crowded | not published | 拥挤的；人多的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_dark | dark | adj. 形容词 | dark | not published | 黑暗的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_deep | deep | adj. 形容词 | deep | not published | 深的 | not published | provided | pending |  |
-| 8 | school_library | l8_different | different | adj. 形容词 | different | not published | 不同的 | not published | provided | pending |  |
-| 8 | school_library | l8_difficult | difficult | adj. 形容词 | difficult | not published | 困难的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_different | different | adj. 形容词 | different | not published | 不同的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_difficult | difficult | adj. 形容词 | difficult | not published | 困难的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_dirty | dirty | adj. 形容词 | dirty | not published | 脏的 | not published | provided | pending |  |
 | 8 | clothes | l8_dress | dress | n. 名词 / v. 动词 | dress | not published | 连衣裙（名词）；穿衣；给……穿衣（动词） | word-images/l8_dress.webp | provided | pending |  |
-| 8 | feelings_descriptions | l8_earring | earring | n. 名词 | earring | not published | 耳环 | not published | provided | pending |  |
-| 8 | school_library | l8_excellent | excellent | adj. 形容词 | excellent | not published | 极好的；优秀的 | not published | provided | pending |  |
-| 8 | school_library | l8_excited | excited | adj. 形容词 | excited | not published | 感到兴奋的；激动的 | not published | provided | pending |  |
-| 8 | school_library | l8_famous | famous | adj. 形容词 | famous | not published | 著名的；有名的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_fashion | fashion | n. 名词 | fashion | not published | 时尚；流行款式 | not published | provided | pending |  |
-| 8 | school_library | l8_favourite | favourite | adj. 形容词 | favourite | not published | 最喜欢的；特别喜爱的人或事物 | not published | provided | pending |  |
-| 8 | school_library | l8_fine | fine | adj. 形容词 | fine | not published | 好的 | not published | provided | pending |  |
-| 8 | school_library | l8_free | free | adj. 形容词 / adv. 副词 | free | not published | 免费的；空闲的；自由的 | not published | provided | pending |  |
-| 8 | school_library | l8_funny | funny | adj. 形容词 | funny | not published | 滑稽有趣的 | not published | provided | pending |  |
+| 8 | clothes | l8_earring | earring | n. 名词 | earring | not published | 耳环 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_excellent | excellent | adj. 形容词 | excellent | not published | 极好的；优秀的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_excited | excited | adj. 形容词 | excited | not published | 感到兴奋的；激动的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_famous | famous | adj. 形容词 | famous | not published | 著名的；有名的 | not published | provided | pending |  |
+| 8 | clothes | l8_fashion | fashion | n. 名词 | fashion | not published | 时尚；流行款式 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_favourite | favourite | adj. 形容词 | favourite | not published | 最喜欢的；特别喜爱的人或事物 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_fine | fine | adj. 形容词 | fine | not published | 好的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_free | free | adj. 形容词 / adv. 副词 | free | not published | 免费的；空闲的；自由的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_funny | funny | adj. 形容词 | funny | not published | 滑稽有趣的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_golden | golden | adj. 形容词 | golden | not published | 金色的；金黄色的 | not published | provided | pending |  |
-| 8 | school_library | l8_good | good | adj. 形容词 | good | not published | 好的 | not published | provided | pending |  |
-| 8 | school_library | l8_great | great | adj. 形容词 | great | not published | 很棒的；伟大的；大的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_good | good | adj. 形容词 | good | not published | 好的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_great | great | adj. 形容词 | great | not published | 很棒的；伟大的；大的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_grey | grey | adj. 形容词 / n. 名词 | grey | not published | 灰色；灰色的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_handbag | handbag | n. 名词 | handbag | not published | 手提包；女式手袋 | not published | provided | pending |  |
-| 8 | school_library | l8_happy | happy | adj. 形容词 | happy | not published | 快乐的 | not published | provided | pending |  |
-| 8 | school_library | l8_hard | hard | adj. 形容词 / adv. 副词 | hard | not published | 困难的；努力地 | not published | provided | pending |  |
-| 8 | school_library | l8_heavy | heavy | adj. 形容词 | heavy | not published | 重的 | not published | provided | pending |  |
-| 8 | school_library | l8_high | high | adj. 形容词 | high | not published | 高的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_hoodie | hoodie | n. 名词 | hoodie | not published | 连帽卫衣 | not published | provided | pending |  |
-| 8 | school_library | l8_important | important | adj. 形容词 | important | not published | 重要的 | not published | provided | pending |  |
-| 8 | school_library | l8_interested | interested | adj. 形容词 | interested | not published | 感兴趣的（描述人的感受） | not published | provided | pending |  |
-| 8 | school_library | l8_interesting | interesting | adj. 形容词 | interesting | not published | 有趣的 | not published | provided | pending |  |
+| 8 | clothes | l8_handbag | handbag | n. 名词 | handbag | not published | 手提包；女式手袋 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_happy | happy | adj. 形容词 | happy | not published | 快乐的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_hard | hard | adj. 形容词 / adv. 副词 | hard | not published | 困难的；努力地 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_heavy | heavy | adj. 形容词 | heavy | not published | 重的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_high | high | adj. 形容词 | high | not published | 高的 | not published | provided | pending |  |
+| 8 | clothes | l8_hoodie | hoodie | n. 名词 | hoodie | not published | 连帽卫衣 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_important | important | adj. 形容词 | important | not published | 重要的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_interested | interested | adj. 形容词 | interested | not published | 感兴趣的（描述人的感受） | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_interesting | interesting | adj. 形容词 | interesting | not published | 有趣的 | not published | provided | pending |  |
 | 8 | clothes | l8_jeans | jeans | n. 名词 | jeans | not published | 牛仔裤 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_jewellery | jewellery | n. 名词 | jewellery | not published | 珠宝；首饰（英式拼写） | not published | provided | pending |  |
-| 8 | school_library | l8_kind | kind | adj. 形容词 / n. 名词 | kind | not published | 友善的；种类（名词） | not published | provided | pending |  |
-| 8 | school_library | l8_lovely | lovely | adj. 形容词 | lovely | not published | 可爱的；令人愉快的 | not published | provided | pending |  |
-| 8 | school_library | l8_lucky | lucky | adj. 形容词 | lucky | not published | 幸运的 | not published | provided | pending |  |
-| 8 | school_library | l8_modern | modern | adj. 形容词 | modern | not published | 现代的；新式的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_necklace | necklace | n. 名词 | necklace | not published | 项链 | not published | provided | pending |  |
-| 8 | school_library | l8_noisy | noisy | adj. 形容词 | noisy | not published | 吵闹的；有噪声的 | not published | provided | pending |  |
-| 8 | school_library | l8_old | old | adj. 形容词 | old | not published | 老的；旧的 | not published | provided | pending |  |
+| 8 | clothes | l8_jewellery | jewellery | n. 名词 | jewellery | not published | 珠宝；首饰（英式拼写） | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_kind | kind | adj. 形容词 / n. 名词 | kind | not published | 友善的；种类（名词） | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_lovely | lovely | adj. 形容词 | lovely | not published | 可爱的；令人愉快的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_lucky | lucky | adj. 形容词 | lucky | not published | 幸运的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_modern | modern | adj. 形容词 | modern | not published | 现代的；新式的 | not published | provided | pending |  |
+| 8 | clothes | l8_necklace | necklace | n. 名词 | necklace | not published | 项链 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_noisy | noisy | adj. 形容词 | noisy | not published | 吵闹的；有噪声的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_old | old | adj. 形容词 | old | not published | 老的；旧的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_orange | orange | adj. 形容词 / n. 名词 | orange | not published | 橙子；橙色；橙色的 | not published | provided | pending |  |
-| 8 | school_library | l8_pleasant | pleasant | adj. 形容词 | pleasant | not published | 令人愉快的；友好的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_pocket | pocket | n. 名词 | pocket | not published | 口袋 | not published | provided | pending |  |
-| 8 | school_library | l8_poor | poor | adj. 形容词 | poor | not published | 贫穷的；可怜的；差的 | not published | provided | pending |  |
-| 8 | school_library | l8_pretty | pretty | adj. 形容词 | pretty | not published | 可爱的/漂亮的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_purse | purse | n. 名词 | purse | not published | 钱包(女式) | not published | provided | pending |  |
-| 8 | school_library | l8_quick | quick | adj. 形容词 | quick | not published | 快的 | not published | provided | pending |  |
-| 8 | school_library | l8_quiet | quiet | adj. 形容词 | quiet | not published | 安静的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_raincoat | raincoat | n. 名词 | raincoat | not published | 雨衣 | not published | provided | pending |  |
-| 8 | school_library | l8_ready | ready | adj. 形容词 | ready | not published | 准备好的 | not published | provided | pending |  |
-| 8 | school_library | l8_real | real | adj. 形容词 | real | not published | 真实的；真正的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_pleasant | pleasant | adj. 形容词 | pleasant | not published | 令人愉快的；友好的 | not published | provided | pending |  |
+| 8 | clothes | l8_pocket | pocket | n. 名词 | pocket | not published | 口袋 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_poor | poor | adj. 形容词 | poor | not published | 贫穷的；可怜的；差的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_pretty | pretty | adj. 形容词 | pretty | not published | 可爱的/漂亮的 | not published | provided | pending |  |
+| 8 | clothes | l8_purse | purse | n. 名词 | purse | not published | 钱包(女式) | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_quick | quick | adj. 形容词 | quick | not published | 快的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_quiet | quiet | adj. 形容词 | quiet | not published | 安静的 | not published | provided | pending |  |
+| 8 | clothes | l8_raincoat | raincoat | n. 名词 | raincoat | not published | 雨衣 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_ready | ready | adj. 形容词 | ready | not published | 准备好的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_real | real | adj. 形容词 | real | not published | 真实的；真正的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_red | red | adj. 形容词 | red | not published | 红色 | not published | provided | pending |  |
-| 8 | school_library | l8_rich | rich | adj. 形容词 | rich | not published | 富有的；丰富的 | not published | provided | pending |  |
-| 8 | school_library | l8_right | right | adj. 形容词 / adv. 副词 / n. 名词 | right | not published | 右边；右边的；正确的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_rich | rich | adj. 形容词 | rich | not published | 富有的；丰富的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_right | right | adj. 形容词 / adv. 副词 / n. 名词 | right | not published | 右边；右边的；正确的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_sad | sad | adj. 形容词 | sad | not published | 难过的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_scarf | scarf | n. 名词 | scarf | not published | 围巾 | not published | provided | pending |  |
+| 8 | clothes | l8_scarf | scarf | n. 名词 | scarf | not published | 围巾 | not published | provided | pending |  |
 | 8 | clothes | l8_shorts | shorts | n. 名词 | shorts | not published | 短裤（复数形式） | not published | provided | pending |  |
-| 8 | school_library | l8_slow | slow | adj. 形容词 | slow | not published | 慢的 | not published | provided | pending |  |
-| 8 | school_library | l8_small | small | adj. 形容词 | small | not published | 小的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_slow | slow | adj. 形容词 | slow | not published | 慢的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_small | small | adj. 形容词 | small | not published | 小的 | not published | provided | pending |  |
 | 8 | clothes | l8_sock | sock | n. 名词 | sock | not published | 袜子 | word-images/l8_sock.webp | provided | pending |  |
-| 8 | school_library | l8_soft | soft | adj. 形容词 | soft | not published | 柔软的；轻柔的 | not published | provided | pending |  |
-| 8 | school_library | l8_special | special | adj. 形容词 | special | not published | 特别的；特殊的 | not published | provided | pending |  |
-| 8 | school_library | l8_strange | strange | adj. 形容词 | strange | not published | 奇怪的；陌生的 | not published | provided | pending |  |
-| 8 | school_library | l8_strong | strong | adj. 形容词 | strong | not published | 强壮的；坚固的；强烈的 | not published | provided | pending |  |
-| 8 | school_library | l8_sure | sure | adj. 形容词 | sure | not published | 确信的；肯定的；当然（口语回答） | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_sweater | sweater | n. 名词 | sweater | not published | 毛衣 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_soft | soft | adj. 形容词 | soft | not published | 柔软的；轻柔的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_special | special | adj. 形容词 | special | not published | 特别的；特殊的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_strange | strange | adj. 形容词 | strange | not published | 奇怪的；陌生的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_strong | strong | adj. 形容词 | strong | not published | 强壮的；坚固的；强烈的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_sure | sure | adj. 形容词 | sure | not published | 确信的；肯定的；当然（口语回答） | not published | provided | pending |  |
+| 8 | clothes | l8_sweater | sweater | n. 名词 | sweater | not published | 毛衣 | not published | provided | pending |  |
 | 8 | sports_hobbies | l8_swimming | swimming | n. 名词 | swimming | not published | 游泳；游泳运动 | not published | provided | pending |  |
-| 8 | sports_hobbies | l8_swimsuit | swimsuit | n. 名词 | swimsuit | not published | 泳衣 | not published | provided | pending |  |
-| 8 | school_library | l8_tall | tall | adj. 形容词 | tall | not published | 高的 | not published | provided | pending |  |
-| 8 | school_library | l8_terrible | terrible | adj. 形容词 | terrible | not published | 很糟的；可怕的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_tie | tie | n. 名词 | tie | not published | 领带 | not published | provided | pending |  |
+| 8 | clothes | l8_swimsuit | swimsuit | n. 名词 | swimsuit | not published | 泳衣 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_tall | tall | adj. 形容词 | tall | not published | 高的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_terrible | terrible | adj. 形容词 | terrible | not published | 很糟的；可怕的 | not published | provided | pending |  |
+| 8 | clothes | l8_tie | tie | n. 名词 | tie | not published | 领带 | not published | provided | pending |  |
 | 8 | body_health | l8_tired | tired | adj. 形容词 | tired | not published | 累的/疲倦的 | not published | provided | pending |  |
 | 8 | clothes | l8_trousers | trousers | n. 名词 | trousers | not published | 裤子 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_t_shirt | T-shirt | n. 名词 | T-shirt | not published | T 恤衫；短袖汗衫 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_umbrella | umbrella | n. 名词 | umbrella | not published | 雨伞 | not published | provided | pending |  |
-| 8 | school_library | l8_unhappy | unhappy | n. 名词 | unhappy | not published | 不开心的；难过的 | not published | provided | pending |  |
-| 8 | school_library | l8_useful | useful | adj. 形容词 | useful | not published | 有用的 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_wallet | wallet | n. 名词 | wallet | not published | 钱包 | not published | provided | pending |  |
-| 8 | feelings_descriptions | l8_wear | wear | v. 动词 | wear | not published | 穿戴 | not published | provided | pending |  |
-| 8 | school_library | l8_worried | worried | adj. 形容词 | worried | not published | 担心的 | not published | provided | pending |  |
-| 8 | school_library | l8_wrong | wrong | adj. 形容词 | wrong | not published | 错误的 | not published | provided | pending |  |
+| 8 | clothes | l8_t_shirt | T-shirt | n. 名词 | T-shirt | not published | T 恤衫；短袖汗衫 | not published | provided | pending |  |
+| 8 | clothes | l8_umbrella | umbrella | n. 名词 | umbrella | not published | 雨伞 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_unhappy | unhappy | adj. 形容词 | unhappy | not published | 不开心的；难过的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_useful | useful | adj. 形容词 | useful | not published | 有用的 | not published | provided | pending |  |
+| 8 | clothes | l8_wallet | wallet | n. 名词 | wallet | not published | 钱包 | not published | provided | pending |  |
+| 8 | clothes | l8_wear | wear | v. 动词 | wear | not published | 穿戴 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_worried | worried | adj. 形容词 | worried | not published | 担心的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_wrong | wrong | adj. 形容词 | wrong | not published | 错误的 | not published | provided | pending |  |
 | 8 | feelings_descriptions | l8_yellow | yellow | adj. 形容词 | yellow | not published | 黄色 | not published | provided | pending |  |
-| 8 | school_library | l8_young | young | adj. 形容词 | young | not published | 年轻的 | not published | provided | pending |  |
+| 8 | feelings_descriptions | l8_young | young | adj. 形容词 | young | not published | 年轻的 | not published | provided | pending |  |
 | 9 | shopping_work | l9_artist | artist | n. 名词 | artist | not published | 艺术家 | not published | provided | pending |  |
 | 9 | shopping_work | l9_assistant | assistant | n. 名词 | assistant | not published | 助手；店员 | not published | provided | pending |  |
 | 9 | school_library | l9_bill | bill | n. 名词 | bill | not published | 账单 | not published | provided | pending |  |
@@ -691,7 +691,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 9 | shopping_work | l9_expensive | expensive | adj. 形容词 | expensive | not published | 昂贵的 | not published | provided | pending |  |
 | 9 | shopping_work | l9_farmer | farmer | n. 名词 | farmer | not published | 农民 | not published | provided | pending |  |
 | 9 | shopping_work | l9_footballer | footballer | n. 名词 | footballer | not published | 足球运动员 | not published | provided | pending |  |
-| 9 | shopping_work | l9_for_sale | for sale | n. 名词 | for sale | not published | 待售；出售中 | not published | provided | pending |  |
+| 9 | shopping_work | l9_for_sale | for sale | phrase. 固定表达 | for sale | not published | 待售；出售中 | not published | provided | pending |  |
 | 9 | shopping_work | l9_guide | guide | n. 名词 | guide | not published | 导游；指南 | not published | provided | pending |  |
 | 9 | shopping_work | l9_job | job | n. 名词 | job | not published | 工作 | not published | provided | pending |  |
 | 9 | shopping_work | l9_journalist | journalist | n. 名词 | journalist | not published | 记者；新闻工作者 | not published | provided | pending |  |
@@ -717,8 +717,8 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 9 | shopping_work | l9_staff | staff | n. 名词 | staff | not published | 全体工作人员；职员（集合名词） | not published | provided | pending |  |
 | 9 | city_travel | l9_supermarket | supermarket | n. 名词 | supermarket | not published | 超市 | not published | provided | pending |  |
 | 9 | city_travel | l9_tour_guide | tour guide | n. 名词 | tour guide | not published | 导游 | not published | provided | pending |  |
-| 9 | shopping_work | l9_try_on | try on | phr. v. 短语动词 | try on | not published | 试穿 | not published | provided | pending |  |
-| 9 | shopping_work | l9_uniform | uniform | n. 名词 | uniform | not published | 制服；校服 | not published | provided | pending |  |
+| 9 | clothes | l9_try_on | try on | phr. v. 短语动词 | try on | not published | 试穿 | not published | provided | pending |  |
+| 9 | clothes | l9_uniform | uniform | n. 名词 | uniform | not published | 制服；校服 | not published | provided | pending |  |
 | 9 | food_cafe | l9_waitress | waitress | n. 名词 | waitress | not published | 女服务员 | not published | provided | pending |  |
 | 9 | shopping_work | l9_work | work | n. 名词 / v. 动词 | work | not published | 工作 | not published | provided | pending |  |
 | 9 | shopping_work | l9_worker | worker | n. 名词 | worker | not published | 工人 | not published | provided | pending |  |
@@ -768,8 +768,8 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | tech_media | l10_drawing | drawing | n. 名词 | drawing | not published | 绘画；图画；素描 | not published | provided | pending |  |
 | 10 | tech_media | l10_drum | drum | n. 名词 | drum | not published | 鼓；打鼓 | not published | provided | pending |  |
 | 10 | tech_media | l10_dvd | DVD | n. 名词 | DVD | not published | 数字影碟；DVD 光盘 | not published | provided | pending |  |
-| 10 | tech_media | l10_electric | electric | adj. 形容词 | electric | not published | 电的；用电的 | not published | provided | pending |  |
-| 10 | tech_media | l10_electricity | electricity | n. 名词 | electricity | not published | 电；电力 | not published | provided | pending |  |
+| 10 | home_room | l10_electric | electric | adj. 形容词 | electric | not published | 电的；用电的 | not published | provided | pending |  |
+| 10 | home_room | l10_electricity | electricity | n. 名词 | electricity | not published | 电；电力 | not published | provided | pending |  |
 | 10 | tech_media | l10_email | email | n. 名词 / v. 动词 | email | not published | 电子邮件 | not published | provided | pending |  |
 | 10 | tech_media | l10_envelope | envelope | n. 名词 | envelope | not published | 信封 | not published | provided | pending |  |
 | 10 | tech_media | l10_exhibition | exhibition | n. 名词 | exhibition | not published | 展览；展览会 | not published | provided | pending |  |
@@ -807,7 +807,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | family_friends | l10_married | married | adj. 形容词 | married | not published | 已婚的；结婚的 | not published | provided | pending |  |
 | 10 | school_library | l10_menu | menu | n. 名词 | menu | not published | 菜单；电脑中的功能菜单 | not published | provided | pending |  |
 | 10 | school_library | l10_message | message | n. 名词 / v. 动词 | message | not published | 信息 | not published | provided | pending |  |
-| 10 | family_friends | l10_miss | Miss | n. 名词 / v. 动词 | Miss | not published | 小姐（用于未婚女性姓名前的称呼） | not published | provided | pending |  |
+| 10 | family_friends | l10_miss | Miss | n. 名词 | Miss | not published | 小姐（用于未婚女性姓名前的称呼） | not published | provided | pending |  |
 | 10 | family_friends | l10_mother | mother | n. 名词 | mother | not published | 妈妈 | word-images/l10_mother.webp | provided | pending |  |
 | 10 | tech_media | l10_mouse | mouse | n. 名词 | mouse | not published | 老鼠；电脑鼠标 | not published | provided | pending |  |
 | 10 | family_friends | l10_ms | Ms | n. 名词 | Ms | not published | 女士（称呼女性，不说明婚姻状况） | not published | provided | pending |  |
@@ -853,7 +853,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | tech_media | l10_theatre | theatre | n. 名词 | theatre | not published | 剧院 | not published | provided | pending |  |
 | 10 | school_library | l10_ticket | ticket | n. 名词 | ticket | not published | 票/车票 | not published | provided | pending |  |
 | 10 | tech_media | l10_video | video | n. 名词 | video | not published | 视频；录像 | not published | provided | pending |  |
-| 10 | tech_media | l10_watch | watch | n. 名词 / v. 动词 | watch | not published | 手表（名词）；观看（动词） | not published | provided | pending |  |
+| 10 | clothes | l10_watch | watch | n. 名词 / v. 动词 | watch | not published | 手表（名词）；观看（动词） | not published | provided | pending |  |
 | 10 | tech_media | l10_web | web | n. 名词 | web | not published | 万维网；蜘蛛网 | not published | provided | pending |  |
 | 10 | tech_media | l10_web_page | web page | n. 名词 | web page | not published | 网页 | not published | provided | pending |  |
 | 10 | tech_media | l10_website | website | n. 名词 | website | not published | 网站 | not published | provided | pending |  |
@@ -994,7 +994,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | sports_hobbies | l12_celebrate | celebrate | v. 动词 | celebrate | not published | 庆祝 | not published | provided | pending |  |
 | 12 | tech_media | l12_celebrity | celebrity | n. 名词 | celebrity | not published | 名人；明星 | not published | provided | pending |  |
 | 12 | city_travel | l12_centre_center | centre / center | n. 名词 | centre or center | not published | 中心；中央（英式 centre，美式 center） | not published | provided | pending |  |
-| 12 | city_travel | l12_centimetre_centimeter | centimetre / centimeter | n. 名词 | centimetre or centimeter | not published | 厘米（英式 centimetre，美式 centimeter） | not published | provided | pending |  |
+| 12 | school_library | l12_centimetre_centimeter | centimetre / centimeter | n. 名词 | centimetre or centimeter | not published | 厘米（英式 centimetre，美式 centimeter） | not published | provided | pending |  |
 | 12 | daily_starters | l12_certainly | certainly | adv. 副词 | certainly | not published | 当然；肯定；无疑 | not published | provided | pending |  |
 | 12 | tech_media | l12_channel | channel | n. 名词 | channel | not published | 频道；渠道 | not published | provided | pending |  |
 | 12 | tech_media | l12_character | character | n. 名词 | character | not published | 人物；角色；性格；文字字符 | not published | provided | pending |  |
@@ -1039,7 +1039,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | city_travel | l12_deliver | deliver | v. 动词 | deliver | not published | 递送；送货；投递 | not published | provided | pending |  |
 | 12 | shopping_work | l12_department | department | n. 名词 | department | not published | 部门；科室；百货商店的售货部 | not published | provided | pending |  |
 | 12 | school_library | l12_describe | describe | v. 动词 | describe | not published | 描述 | not published | provided | pending |  |
-| 12 | tech_media | l12_design | design | v. 动词 | design | not published | 设计；设计图案 | not published | provided | pending |  |
+| 12 | tech_media | l12_design | design | n. 名词 / v. 动词 | design | not published | 设计；设计图案 | not published | provided | pending |  |
 | 12 | tech_media | l12_details | details | n. 名词 | details | not published | 细节；详细信息（复数形式） | not published | provided | pending |  |
 | 12 | school_library | l12_difference | difference | n. 名词 | difference | not published | 差别；不同之处 | not published | provided | pending |  |
 | 12 | animals | l12_dinosaur | dinosaur | n. 名词 | dinosaur | not published | 恐龙 | not published | provided | pending |  |
@@ -1047,7 +1047,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | full_review | l12_discover | discover | v. 动词 | discover | not published | 发现 | not published | provided | pending |  |
 | 12 | school_library | l12_discuss | discuss | v. 动词 | discuss | not published | 讨论 | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_dive | dive | v. 动词 | dive | not published | 跳水/潜水 | not published | provided | pending |  |
-| 12 | sports_hobbies | l12_diving | diving | adj. 形容词 | diving | not published | 跳水；潜水运动 | not published | provided | pending |  |
+| 12 | sports_hobbies | l12_diving | diving | n. 名词 | diving | not published | 跳水；潜水运动 | not published | provided | pending |  |
 | 12 | animals | l12_dog | dog | n. 名词 | dog | /dɒɡ/ | 狗 | word-images/l12_dog.webp | provided | pending |  |
 | 12 | sports_hobbies | l12_doll | doll | n. 名词 | doll | not published | 玩偶；洋娃娃 | not published | provided | pending |  |
 | 12 | animals | l12_dolphin | dolphin | n. 名词 | dolphin | not published | 海豚 | not published | provided | pending |  |
@@ -1107,7 +1107,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | sports_hobbies | l12_fan | fan | n. 名词 | fan | not published | 风扇；爱好者；粉丝 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_fantastic | fantastic | adj. 形容词 | fantastic | not published | 极好的；很棒的 | not published | provided | pending |  |
 | 12 | nature_weather | l12_farm | farm | n. 名词 | farm | not published | 农场 | not published | provided | pending |  |
-| 12 | school_library | l12_fast | fast | adj. 形容词 / adv. 副词 | fast | not published | 快的 | not published | provided | pending |  |
+| 12 | feelings_descriptions | l12_fast | fast | adj. 形容词 / adv. 副词 | fast | not published | 快的 | not published | provided | pending |  |
 | 12 | food_cafe | l12_fast_food | fast food | n. 名词 | fast food | not published | 快餐 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_fat | fat | adj. 形容词 | fat | not published | 胖的；厚的；脂肪（名词） | not published | provided | pending |  |
 | 12 | time_calendar | l12_february | February | n. 名词 | February | not published | 二月 | not published | provided | pending |  |
@@ -1147,7 +1147,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | city_travel | l12_gas_station | gas station | n. 名词 | gas station | not published | 加油站（美式英语） | not published | provided | pending |  |
 | 12 | exam_expressions | l12_get | get | v. 动词 | get | not published | 得到；到达 | not published | provided | pending |  |
 | 12 | exam_expressions | l12_get_back | get back | v. 动词 | get back | not published | 回来；返回；取回 | not published | provided | pending |  |
-| 12 | exam_expressions | l12_get_dressed | get dressed | v. 动词 | get dressed | not published | 穿好衣服 | not published | provided | pending |  |
+| 12 | clothes | l12_get_dressed | get dressed | v. 动词 | get dressed | not published | 穿好衣服 | not published | provided | pending |  |
 | 12 | exam_expressions | l12_get_fit | get fit | v. 动词 | get fit | not published | 变得健康；通过锻炼增强体质 | not published | provided | pending |  |
 | 12 | exam_expressions | l12_get_married | get married | v. 动词 | get married | not published | 结婚 | not published | provided | pending |  |
 | 12 | shopping_work | l12_gift | gift | n. 名词 | gift | not published | 礼物；天赋 | not published | provided | pending |  |
@@ -1172,10 +1172,10 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | family_friends | l12_grandchild | grandchild | n. 名词 | grandchild | not published | 孙子、孙女、外孙或外孙女中的一位 | not published | provided | pending |  |
 | 12 | family_friends | l12_granddaughter | granddaughter | n. 名词 | granddaughter | not published | 孙女；外孙女 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_green | green | adj. 形容词 | green | not published | 绿色 | not published | provided | pending |  |
-| 12 | city_travel | l12_grocery_store | grocery store | n. 名词 | grocery store | not published | 食品杂货店（美式英语） | not published | provided | pending |  |
+| 12 | shopping_work | l12_grocery_store | grocery store | n. 名词 | grocery store | not published | 食品杂货店（美式英语） | not published | provided | pending |  |
 | 12 | home_room | l12_ground | ground | n. 名词 | ground | not published | 地面 | not published | provided | pending |  |
 | 12 | full_review | l12_guess | guess | v. 动词 | guess | not published | 猜；猜测 | not published | provided | pending |  |
-| 12 | exam_expressions | l12_guess_what | Guess what? | v. 动词 | Guess what? | not published | 你猜怎么着？（引出消息的口语表达） | not published | provided | pending |  |
+| 12 | exam_expressions | l12_guess_what | Guess what? | phrase. 固定表达 | Guess what? | not published | 你猜怎么着？（引出消息的口语表达） | not published | provided | pending |  |
 | 12 | city_travel | l12_guidebook | guidebook | n. 名词 | guidebook | not published | 旅行指南 | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_gym | gym | n. 名词 | gym | not published | 健身房；体育馆 | not published | provided | pending |  |
 | 12 | shopping_work | l12_half_price | half-price | adj. 形容词 | half-price | not published | 半价的；以半价 | not published | provided | pending |  |
@@ -1238,7 +1238,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | tech_media | l12_invention | invention | n. 名词 | invention | not published | 发明；发明物 | not published | provided | pending |  |
 | 12 | tech_media | l12_invitation | invitation | n. 名词 | invitation | not published | 邀请；请柬 | not published | provided | pending |  |
 | 12 | tech_media | l12_invite | invite | v. 动词 | invite | not published | 邀请 | not published | provided | pending |  |
-| 12 | daily_starters | l12_it | it | n. 名词 / pron. 代词 | it | not published | 它 | not published | provided | pending |  |
+| 12 | daily_starters | l12_it | it | pron. 代词 | it | not published | 它 | not published | provided | pending |  |
 | 12 | daily_starters | l12_its | its | det. 限定词 | its | not published | 它的（物主限定词，没有撇号） | not published | provided | pending |  |
 | 12 | daily_starters | l12_itself | itself | pron. 代词 | itself | not published | 它自己（反身代词） | not published | provided | pending |  |
 | 12 | clothes | l12_jacket | jacket | n. 名词 | jacket | not published | 夹克 | word-images/l12_jacket.webp | provided | pending |  |
@@ -1301,7 +1301,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | time_calendar | l12_march | March | n. 名词 | March | not published | 三月 | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_match | match | n. 名词 | match | not published | 比赛；火柴；相配；匹配 | not published | provided | pending |  |
 | 12 | full_review | l12_matter | matter | n. 名词 / v. 动词 | matter | not published | 事情；问题；要紧（动词） | not published | provided | pending |  |
-| 12 | time_calendar | l12_may | May | modal v. 情态动词 / n. 名词 | May | not published | 五月 | not published | provided | pending |  |
+| 12 | time_calendar | l12_may | May | n. 名词 | May | not published | 五月 | not published | provided | pending |  |
 | 12 | daily_starters | l12_maybe | maybe | adv. 副词 | maybe | not published | 也许；可能 | not published | provided | pending |  |
 | 12 | daily_starters | l12_me | me | pron. 代词 | me | not published | 我（宾格，如 help me） | not published | provided | pending |  |
 | 12 | full_review | l12_mean | mean | v. 动词 | mean | not published | 意思是；意味着；打算 | not published | provided | pending |  |
@@ -1467,7 +1467,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | city_travel | l12_repair | repair | v. 动词 | repair | not published | 修理；维修 | not published | provided | pending |  |
 | 12 | school_library | l12_repeat | repeat | v. 动词 | repeat | not published | 重复；再说一遍；再做一次 | not published | provided | pending |  |
 | 12 | school_library | l12_review | review | n. 名词 | review | not published | 复习；回顾；评论；评价 | not published | provided | pending |  |
-| 12 | city_travel | l12_right_hand | right hand | adj. 形容词 | right hand | not published | 右手 | not published | provided | pending |  |
+| 12 | city_travel | l12_right_hand | right hand | adj. 形容词 | right hand | not published | 右边的；右侧的（修饰名词，如 right-hand side） | not published | provided | pending |  |
 | 12 | full_review | l12_ring | ring | n. 名词 / v. 动词 | ring | not published | 戒指；环；铃响；打电话（英式英语） | not published | provided | pending |  |
 | 12 | food_cafe | l12_roast | roast | adj. 形容词 / v. 动词 | roast | not published | 烤；烘烤；烤制的（食物） | not published | provided | pending |  |
 | 12 | positions | l12_round | round | adj. 形容词 | round | not published | 圆的；围绕；一轮（名词） | not published | provided | pending |  |
@@ -1586,7 +1586,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | feelings_descriptions | l12_surpris_ing | surprising | adj. 形容词 | surprising | not published | 令人惊讶的 | not published | provided | pending |  |
 | 12 | animals | l12_swan | swan | n. 名词 | swan | not published | 天鹅 | not published | provided | pending |  |
 | 12 | clothes | l12_swimming_costume | swimming costume | n. 名词 | swimming costume | not published | 泳衣（英式英语） | not published | provided | pending |  |
-| 12 | city_travel | l12_swimming_pool | swimming pool | n. 名词 | swimming pool | not published | 游泳池 | not published | provided | pending |  |
+| 12 | sports_hobbies | l12_swimming_pool | swimming pool | n. 名词 | swimming pool | not published | 游泳池 | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_table_tennis | table tennis | n. 名词 | table tennis | not published | 乒乓球；乒乓球运动 | not published | provided | pending |  |
 | 12 | nature_weather | l12_tail | tail | n. 名词 | tail | not published | 尾巴 | not published | provided | pending |  |
 | 12 | exam_expressions | l12_take | take | v. 动词 | take | not published | 拿；带；乘坐；花费（时间） | not published | provided | pending |  |
@@ -1643,7 +1643,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | tech_media | l12_type | type | n. 名词 | type | not published | 类型；种类；打字（动词） | not published | provided | pending |  |
 | 12 | positions | l12_under | under | prep. 介词 | under | not published | 在...下 | not published | provided | pending |  |
 | 12 | full_review | l12_understand | understand | v. 动词 | understand | not published | 理解 | not published | provided | pending |  |
-| 12 | feelings_descriptions | l12_unfortunately | unfortunately | adj. 形容词 | unfortunately | not published | 不幸地；遗憾的是 | not published | provided | pending |  |
+| 12 | feelings_descriptions | l12_unfortunately | unfortunately | adv. 副词 | unfortunately | not published | 不幸地；遗憾的是 | not published | provided | pending |  |
 | 12 | time_calendar | l12_until | until | prep. 介词 | until | not published | 直到；到……为止 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_unusual | unusual | adj. 形容词 | unusual | not published | 不寻常的；少见的 | not published | provided | pending |  |
 | 12 | tech_media | l12_upload | upload | v. 动词 | upload | not published | 上传（把文件从设备传到网络） | not published | provided | pending |  |
@@ -1656,7 +1656,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | daily_starters | l12_variety | variety | n. 名词 | variety | not published | 多样性；种类（a variety of 各种各样的） | not published | provided | pending |  |
 | 12 | daily_starters | l12_various | various | adj. 形容词 | various | not published | 各种各样的；不同的 | not published | provided | pending |  |
 | 12 | daily_starters | l12_very | very | adv. 副词 | very | not published | 非常 | not published | provided | pending |  |
-| 12 | sports_hobbies | l12_video_game | video game | n. 名词 | video game | not published | 电子游戏 | not published | provided | pending |  |
+| 12 | tech_media | l12_video_game | video game | n. 名词 | video game | not published | 电子游戏 | not published | provided | pending |  |
 | 12 | city_travel | l12_view | view | n. 名词 | view | not published | 景色；看法；观看（动词） | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_violin | violin | n. 名词 | violin | not published | 小提琴 | not published | provided | pending |  |
 | 12 | school_library | l12_vocabulary | vocabulary | n. 名词 | vocabulary | not published | 词汇；词汇量 | not published | provided | pending |  |

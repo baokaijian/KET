@@ -74,6 +74,18 @@ describe("adaptive spaced retrieval", () => {
   });
 });
 describe("daily plan", () => {
+  it("keeps parent-area typing tasks out of new and previously saved child review plans", () => {
+    const typing = Object.values(course.courseQuestionById).filter((q) => ["input", "spelling"].includes(q.type));
+    expect(typing.length).toBeGreaterThan(0);
+    let p = recordAnswer(emptyProgress, "l2_apple", false, date(11), { skill: "listening" });
+    for (const q of typing) p = recordAnswer(p, q.id, false, date(11), { skill: "listening" });
+    const plan = buildDailyPlan(p, curriculum, date(12));
+    expect(plan.review).toEqual([{ id: "l2_apple", skill: "listening" }]);
+    expect(reviewQuestions(typing.map((q) => ({ id: q.id, skill: "listening" })), curriculum)).toEqual([]);
+    const saved = saveDailyPlan(p, { ...plan, review: [...plan.review, { id: typing[0].id, skill: "listening" }] });
+    expect(buildDailyPlan(saved, curriculum, date(12))).toEqual(plan);
+    expect(p.memory[typing[0].id]).toBeTruthy();
+  });
   it("starts with eight meaningful new words and freezes a plan for the whole local day", () => {
     const plan = buildDailyPlan(emptyProgress, curriculum, date(12));
     expect(plan.newWords).toHaveLength(8);

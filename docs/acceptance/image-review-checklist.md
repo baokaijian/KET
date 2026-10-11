@@ -1468,7 +1468,7 @@
 | l12_repair | repair | 修理；维修 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_repeat | repeat | 重复；再说一遍；再做一次 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_review | review | 复习；回顾；评论；评价 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_right_hand | right hand | 右手 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_right_hand | right hand | 右边的；右侧的（修饰名词，如 right-hand side） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_ring | ring | 戒指；环；铃响；打电话（英式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_roast | roast | 烤；烘烤；烤制的（食物） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_round | round | 圆的；围绕；一轮（名词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |

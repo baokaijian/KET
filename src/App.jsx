@@ -364,12 +364,12 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
   const [responses, setResponses] = useState(resume?.responses || []);
   const [choice, setChoice] = useState(resume?.choice || null);
   const [typed, setTyped] = useState("");
-  const [heard, setHeard] = useState(false);
+  const [heard, setHeard] = useState(Boolean(resume?.heard));
   const [audioError, setAudioError] = useState(false);
   const [guideAudio, setGuideAudio] = useState(resume?.guideAudio || false);
   useEffect(() => {
-    safeWriteStorage(sessionKey, { fingerprint, stage, index, responses, choice, guideAudio });
-  }, [sessionKey, fingerprint, stage, index, responses, choice, guideAudio]);
+    safeWriteStorage(sessionKey, { fingerprint, stage, index, responses, choice, guideAudio, heard });
+  }, [sessionKey, fingerprint, stage, index, responses, choice, guideAudio, heard]);
   const currentWord = words[index];
   const question = questions[index];
   const score = responses.filter(Boolean).length;
@@ -428,6 +428,12 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
       },
     );
     if (!accepted) setAudioError(true);
+  }
+  function skipListening() {
+    if (choice !== null) return;
+    stopSpeech();
+    setChoice({ value: null, correct: false, skipped: true });
+    setResponses([...responses, false]);
   }
   return (
     <section className="practice-shell">
@@ -531,6 +537,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
                     ? "听完了，选一个答案吧。"
                     : "听完后再选择答案。"}
               </p>
+              {choice === null && <button className="quiet-button" onClick={skipListening}>暂时跳过</button>}
             </div>
           )}
           {["spelling", "input"].includes(question.type) ? (
@@ -594,7 +601,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
               role="status"
             >
               <h3>
-                {choice.correct ? "答对啦！" : "没关系，我们再认识一次。"}
+                {choice.skipped ? "这题先放一放，不记录对错或掌握。" : choice.correct ? "答对啦！" : "没关系，我们再认识一次。"}
               </h3>
               <p>{question.explanation}</p>
               <button className="primary" onClick={next}>
@@ -620,7 +627,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
           <p>
             {score === questions.length
               ? "这些知识已经更熟悉了，继续探索吧。"
-              : "需要巩固的题目已放进复习区。下次再见，就更熟悉。"}
+              : "答错的题目已放进复习区，跳过的题目不记录对错。"}
           </p>
           <button className="primary" onClick={exit}>
             完成练习 <Check size={18} />
@@ -960,7 +967,7 @@ function Progress({ progress, review, curriculum, reviewDue }) {
                     "练习题"}
                 </strong>
                 <span>
-                  {registry[id]?.translation ||
+                  {registry[id] ? "单词听读理解" :
                     (questionRegistry[id]?.skill === "listening"
                       ? "听力理解"
                       : questionRegistry[id]?.skill === "grammar" ? "语法应用" : "阅读理解")}

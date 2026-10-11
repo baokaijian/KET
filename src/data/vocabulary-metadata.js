@@ -2,25 +2,28 @@ import metadata from "./vocabulary-metadata.json" with { type: "json" };
 import { topicCategories } from "./ket-words/levels.js";
 import { supplementaryTopics } from "./course-topics.js";
 import { curatedTopics } from "./curated-topics.js";
+import { vocabularyCorrections } from "./vocabulary-corrections.js";
 
 export const partOfSpeechLabels = {
   n: "n. 名词", v: "v. 动词", adj: "adj. 形容词", adv: "adv. 副词",
   prep: "prep. 介词", pron: "pron. 代词", det: "det. 限定词", conj: "conj. 连词",
   av: "aux. 助动词", mv: "modal v. 情态动词", "phr v": "phr. v. 短语动词",
   "prep phr": "prep. phr. 介词短语", exclam: "exclam. 感叹词", abbrev: "abbr. 缩略词",
+  phrase: "phrase. 固定表达",
 };
 const topicMap = {
   "Food and Drink": "food_cafe", "Health, Medicine and Exercise": "body_health",
   "Family and Friends": "family_friends", Education: "school_library",
   "House and Home": "home_room", "The Natural World": "nature_weather",
-  "Clothes": "clothes", Colours: "feelings_descriptions",
-  "Personal Feelings, Opinions and Experiences": "feelings_descriptions",
+  "Clothes and Accessories": "clothes", Colours: "feelings_descriptions",
+  "Personal Feelings, Opinions and Experiences (adjectives)": "feelings_descriptions",
   "Travel and Transport": "city_travel", "Places: Town and City": "city_travel",
   "Places: Countryside": "nature_weather", "Places: Buildings": "city_travel",
   "Communication and Technology": "tech_media", "Entertainment and Media": "tech_media",
   "Documents and Texts": "school_library", "Hobbies and Leisure": "sports_hobbies", Sport: "sports_hobbies",
   Shopping: "shopping_work", "Work and Jobs": "shopping_work", Services: "city_travel",
   Measurements: "school_library", Time: "time_calendar",
+  Appliances: "tech_media", Weather: "nature_weather",
 };
 const unitTopic = { 1: "daily_starters", 2: "food_cafe", 3: "home_room", 4: "school_library", 5: "city_travel", 6: "nature_weather", 7: "sports_hobbies", 8: "feelings_descriptions", 9: "shopping_work", 10: "tech_media", 11: "exam_expressions" };
 const supplemental = Object.fromEntries(Object.entries(supplementaryTopics).flatMap(([unit, words]) => words.map((word) => [word, unitTopic[unit]])));
@@ -39,10 +42,15 @@ const explicit = {
   can: "daily_starters", break: "daily_starters", bit: "daily_starters", fat: "feelings_descriptions",
   box: "home_room", cut: "daily_starters",
   cold: "nature_weather",
+  heating: "home_room", lamp: "home_room", oven: "home_room", "washing machine": "home_room",
+  electricity: "home_room", electric: "home_room", clock: "home_room",
+  "grocery store": "shopping_work", "swimming pool": "sports_hobbies",
+  engineer: "shopping_work",
 };
 const animalWords = new Set("animal|bear|bee|beetle|bird|butterfly|camel|cat|cow|creature|crocodile|dinosaur|dog|dolphin|donkey|duck|eagle|elephant|frog|giraffe|goat|hippo|horse|insect|jellyfish|kangaroo|kitten|lion|lizard|monkey|octopus|panda|parrot|penguin|pet|polar bear|puppy|rabbit|shark|sheep|snail|snake|spider|swan|tiger|tortoise|whale|zebra".split("|"));
 const clothesWords = new Set("belt|boot|cap|coat|dress|glasses|glove|hat|jacket|jeans|jumper|shirt|shoe|shorts|skirt|sock|suit|sunglasses|tights|trousers|bathing suit|swimming costume".split("|"));
 export function vocabularyKey(word) {
+  if (["IT", "May", "Miss"].includes(word.trim())) return word.trim();
   return word.toLowerCase().replace("yog(h)urt", "yoghurt").replace(/[^a-z0-9]+/g, "");
 }
 export function metadataFor(word) {
@@ -51,12 +59,13 @@ export function metadataFor(word) {
 export function withVocabularyMetadata(word) {
   const entry = metadataFor(word.word);
   if (!entry) throw new Error(`Missing official POS: ${word.word}`);
-  const pos = entry.pos.filter((value) => partOfSpeechLabels[value]);
+  const correction = vocabularyCorrections[word.word];
+  const pos = (correction?.pos || entry.pos).filter((value) => partOfSpeechLabels[value]);
   if (!pos.length) throw new Error(`Invalid official POS: ${word.word}`);
   const officialTopic = entry.topics.map((name) => topicMap[name]).find(Boolean);
   const topic = animalWords.has(word.word) ? "animals" : clothesWords.has(word.word) ? "clothes" : explicit[word.word] || curatedTopics[word.word] || officialTopic || supplemental[word.word] || word.topic;
   const category = topicCategories.find((item) => item.id === topic);
   return { ...word, topic, scene: category.scene, scenePrompt: category.scenePrompt,
     partOfSpeech: pos, partOfSpeechLabel: pos.map((value) => partOfSpeechLabels[value]).join(" / "),
-    grammarNotes: entry.pos.includes("pl") ? "复数形式" : "", posSource: metadata.source };
+    grammarNotes: entry.pos.includes("pl") ? "复数形式" : "", posSource: correction?.source || metadata.source };
 }

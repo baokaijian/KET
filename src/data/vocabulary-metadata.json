@@ -24,7 +24,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "about": {
@@ -96,7 +96,8 @@
         "n"
       ],
       "topics": [
-        "Entertainment and Media"
+        "Entertainment and Media",
+        "Work and Jobs"
       ]
     },
     "actually": {
@@ -195,7 +196,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "after": {
@@ -359,7 +360,7 @@
         "adv"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "along": {
@@ -421,7 +422,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "ambulance": {
@@ -461,7 +462,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "animal": {
@@ -652,7 +653,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "as": {
       "headword": "as",
@@ -796,6 +799,7 @@
         "n"
       ],
       "topics": [
+        "Clothes and Accessories",
         "Travel and Transport"
       ]
     },
@@ -805,7 +809,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "badly": {
@@ -829,7 +833,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "bake": {
       "headword": "bake",
@@ -887,7 +893,10 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Food and Drink",
+        "Hobbies and Leisure"
+      ]
     },
     "baseball": {
       "headword": "baseball",
@@ -931,6 +940,7 @@
         "n"
       ],
       "topics": [
+        "Clothes and Accessories",
         "Sport"
       ]
     },
@@ -948,7 +958,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "House and Home"
+      ]
     },
     "battery": {
       "headword": "battery",
@@ -1004,7 +1016,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "because": {
@@ -1129,7 +1141,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "beside": {
       "headword": "beside",
@@ -1153,7 +1167,7 @@
         "adv"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "between": {
@@ -1179,7 +1193,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "bike": {
@@ -1325,7 +1339,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "blue": {
       "headword": "blue",
@@ -1448,7 +1464,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "bored": {
       "headword": "bored",
@@ -1456,7 +1474,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "boring": {
@@ -1465,7 +1483,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "born": {
@@ -1487,7 +1505,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "both": {
       "headword": "both",
@@ -1561,7 +1581,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "brain": {
       "headword": "brain",
@@ -1578,7 +1600,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "bread": {
@@ -1598,7 +1620,8 @@
       ],
       "topics": [
         "Food and Drink",
-        "Health, Medicine and Exercise"
+        "Health, Medicine and Exercise",
+        "Work and Jobs"
       ]
     },
     "breakdown": {
@@ -1640,7 +1663,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "bring": {
@@ -1730,21 +1753,27 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "businessman": {
       "headword": "businessman",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "businesswoman": {
       "headword": "businesswoman",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "businessperson": {
       "headword": "business person",
@@ -1779,7 +1808,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "but": {
@@ -1921,6 +1950,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology",
         "Hobbies and Leisure"
       ]
@@ -1958,7 +1988,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "capital": {
       "headword": "capital",
@@ -2025,7 +2057,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "carefully": {
@@ -2128,6 +2160,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology",
         "Entertainment and Media",
         "Hobbies and Leisure"
@@ -2138,7 +2171,12 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Appliances",
+        "Communication and Technology",
+        "Entertainment and Media",
+        "Hobbies and Leisure"
+      ]
     },
     "ceiling": {
       "headword": "ceiling",
@@ -2153,6 +2191,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology"
       ]
     },
@@ -2191,7 +2230,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Measurements"
+      ]
     },
     "century": {
       "headword": "century",
@@ -2223,7 +2264,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "chair": {
       "headword": "chair",
@@ -2316,7 +2359,8 @@
         "n"
       ],
       "topics": [
-        "Health, Medicine and Exercise"
+        "Health, Medicine and Exercise",
+        "Work and Jobs"
       ]
     },
     "chemistry": {
@@ -2487,7 +2531,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "clear": {
       "headword": "clear",
@@ -2495,7 +2541,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "clearly": {
@@ -2512,7 +2558,7 @@
       ],
       "topics": [
         "Education",
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "click": {
@@ -2547,6 +2593,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "House and Home",
         "Time"
       ]
@@ -2590,21 +2637,27 @@
         "n",
         "pl"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "cloud": {
       "headword": "cloud",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "cloudy": {
       "headword": "cloudy",
       "pos": [
         "adj"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "clown": {
       "headword": "clown",
@@ -2631,7 +2684,8 @@
       "topics": [
         "Education",
         "Sport",
-        "Travel and Transport"
+        "Travel and Transport",
+        "Work and Jobs"
       ]
     },
     "coat": {
@@ -2639,7 +2693,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "coast": {
       "headword": "coast",
@@ -2673,7 +2729,8 @@
         "n"
       ],
       "topics": [
-        "Health, Medicine and Exercise"
+        "Health, Medicine and Exercise",
+        "Weather"
       ]
     },
     "colleague": {
@@ -2761,7 +2818,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "competition": {
       "headword": "competition",
@@ -2786,9 +2845,11 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology",
         "Hobbies and Leisure",
-        "House and Home"
+        "House and Home",
+        "Work and Jobs"
       ]
     },
     "concert": {
@@ -2838,7 +2899,8 @@
         "v"
       ],
       "topics": [
-        "Food and Drink"
+        "Food and Drink",
+        "Work and Jobs"
       ]
     },
     "cooker": {
@@ -2847,6 +2909,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Food and Drink",
         "House and Home"
       ]
@@ -2872,7 +2935,7 @@
         "exclam"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "copy": {
@@ -3101,7 +3164,8 @@
         "n"
       ],
       "topics": [
-        "Shopping"
+        "Shopping",
+        "Work and Jobs"
       ]
     },
     "cut": {
@@ -3320,7 +3384,8 @@
       ],
       "topics": [
         "Health, Medicine and Exercise",
-        "Services"
+        "Services",
+        "Work and Jobs"
       ]
     },
     "department": {
@@ -3358,28 +3423,8 @@
     "design": {
       "headword": "design",
       "pos": [
+        "n",
         "v"
-      ],
-      "topics": []
-    },
-    "designplanning": {
-      "headword": "design (PLANNING)",
-      "pos": [
-        "n"
-      ],
-      "topics": []
-    },
-    "designprocess": {
-      "headword": "design (PROCESS)",
-      "pos": [
-        "n"
-      ],
-      "topics": []
-    },
-    "designdrawing": {
-      "headword": "design (DRAWING)",
-      "pos": [
-        "n"
       ],
       "topics": []
     },
@@ -3390,7 +3435,8 @@
       ],
       "topics": [
         "Education",
-        "House and Home"
+        "House and Home",
+        "Work and Jobs"
       ]
     },
     "dessert": {
@@ -3415,7 +3461,8 @@
         "n"
       ],
       "topics": [
-        "Time"
+        "Time",
+        "Work and Jobs"
       ]
     },
     "dictionary": {
@@ -3449,7 +3496,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "difficult": {
@@ -3458,7 +3505,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "digital": {
@@ -3476,6 +3523,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology"
       ]
     },
@@ -3511,7 +3559,8 @@
       ],
       "topics": [
         "Documents and Texts",
-        "Education"
+        "Education",
+        "Work and Jobs"
       ]
     },
     "directions": {
@@ -3597,7 +3646,8 @@
       ],
       "topics": [
         "Health, Medicine and Exercise",
-        "Services"
+        "Services",
+        "Work and Jobs"
       ]
     },
     "document": {
@@ -3702,7 +3752,8 @@
         "n"
       ],
       "topics": [
-        "Health, Medicine and Exercise"
+        "Health, Medicine and Exercise",
+        "Work and Jobs"
       ]
     },
     "draw": {
@@ -3747,7 +3798,9 @@
         "n",
         "v"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "dressed": {
       "headword": "dressed",
@@ -3781,7 +3834,8 @@
         "n"
       ],
       "topics": [
-        "Travel and Transport"
+        "Travel and Transport",
+        "Work and Jobs"
       ]
     },
     "drivingdriverslicence": {
@@ -3842,6 +3896,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology",
         "Entertainment and Media",
         "Hobbies and Leisure",
@@ -3853,7 +3908,13 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Appliances",
+        "Communication and Technology",
+        "Entertainment and Media",
+        "Hobbies and Leisure",
+        "House and Home"
+      ]
     },
     "each": {
       "headword": "each",
@@ -3899,14 +3960,18 @@
       "pos": [
         "v"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "earring": {
       "headword": "earring",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "easily": {
       "headword": "easily",
@@ -3956,14 +4021,18 @@
       "pos": [
         "adj"
       ],
-      "topics": []
+      "topics": [
+        "Appliances"
+      ]
     },
     "electricity": {
       "headword": "electricity",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Appliances"
+      ]
     },
     "elephant": {
       "headword": "elephant",
@@ -3996,7 +4065,8 @@
       ],
       "topics": [
         "Communication and Technology",
-        "Documents and Texts"
+        "Documents and Texts",
+        "Work and Jobs"
       ]
     },
     "empty": {
@@ -4029,7 +4099,8 @@
         "n"
       ],
       "topics": [
-        "Travel and Transport"
+        "Travel and Transport",
+        "Work and Jobs"
       ]
     },
     "enjoy": {
@@ -4190,7 +4261,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Education"
+      ]
     },
     "example": {
       "headword": "example",
@@ -4205,7 +4278,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "except": {
@@ -4222,7 +4295,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "exciting": {
@@ -4310,7 +4383,8 @@
         "n"
       ],
       "topics": [
-        "The Natural World"
+        "The Natural World",
+        "Work and Jobs"
       ]
     },
     "extinct": {
@@ -4358,7 +4432,8 @@
         "n"
       ],
       "topics": [
-        "Places: Buildings"
+        "Places: Buildings",
+        "Work and Jobs"
       ]
     },
     "fail": {
@@ -4407,7 +4482,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "fan": {
@@ -4439,7 +4514,8 @@
         "n"
       ],
       "topics": [
-        "Places: Countryside"
+        "Places: Countryside",
+        "Work and Jobs"
       ]
     },
     "farmer": {
@@ -4447,14 +4523,18 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "fashion": {
       "headword": "fashion",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "fast": {
       "headword": "fast",
@@ -4463,7 +4543,7 @@
         "adv"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "fastfood": {
@@ -4495,7 +4575,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "february": {
@@ -4616,7 +4696,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "finger": {
@@ -4752,14 +4832,18 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "foggy": {
       "headword": "foggy",
       "pos": [
         "adj"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "folder": {
       "headword": "folder",
@@ -4770,13 +4854,6 @@
     },
     "follow": {
       "headword": "follow",
-      "pos": [
-        "v"
-      ],
-      "topics": []
-    },
-    "followsocialmedia": {
-      "headword": "follow (SOCIAL MEDIA)",
       "pos": [
         "v"
       ],
@@ -4815,7 +4892,8 @@
         "n"
       ],
       "topics": [
-        "Sport"
+        "Sport",
+        "Work and Jobs"
       ]
     },
     "footballer": {
@@ -4823,7 +4901,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "for": {
       "headword": "for",
@@ -4890,7 +4970,7 @@
         "adv"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "frenchfries": {
@@ -4913,6 +4993,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Food and Drink",
         "House and Home"
       ]
@@ -4949,7 +5030,7 @@
       ],
       "topics": [
         "Family and Friends",
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "frightened": {
@@ -5012,7 +5093,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "fur": {
@@ -5097,6 +5178,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "House and Home"
       ]
     },
@@ -5144,7 +5226,9 @@
       "pos": [
         "v"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "getfit": {
       "headword": "get fit",
@@ -5255,14 +5339,18 @@
         "n",
         "pl"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "glove": {
       "headword": "glove",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "go": {
       "headword": "go",
@@ -5319,7 +5407,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "goodafternoon": {
@@ -5386,7 +5474,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Measurements"
+      ]
     },
     "grandchild": {
       "headword": "grandchild",
@@ -5402,7 +5492,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Family and Friends"
+      ]
     },
     "granddaughter": {
       "headword": "granddaughter",
@@ -5500,7 +5592,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "green": {
@@ -5593,7 +5685,8 @@
         "n"
       ],
       "topics": [
-        "Family and Friends"
+        "Family and Friends",
+        "Work and Jobs"
       ]
     },
     "guesthouse": {
@@ -5610,7 +5703,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "guidebook": {
       "headword": "guidebook",
@@ -5696,7 +5791,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "happen": {
       "headword": "happen",
@@ -5711,7 +5808,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "harbour": {
@@ -5728,7 +5825,7 @@
         "adv"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "hat": {
@@ -5736,7 +5833,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "hate": {
       "headword": "hate",
@@ -5844,6 +5943,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "House and Home"
       ]
     },
@@ -5853,7 +5953,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "helicopter": {
@@ -5936,7 +6036,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "hill": {
@@ -6068,7 +6168,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "hope": {
       "headword": "hope",
@@ -6114,7 +6216,8 @@
         "adj"
       ],
       "topics": [
-        "The Natural World"
+        "The Natural World",
+        "Weather"
       ]
     },
     "hotel": {
@@ -6181,7 +6284,7 @@
       ],
       "topics": [
         "Food and Drink",
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "hurry": {
@@ -6223,7 +6326,8 @@
       ],
       "topics": [
         "Food and Drink",
-        "The Natural World"
+        "The Natural World",
+        "Weather"
       ]
     },
     "icecream": {
@@ -6299,7 +6403,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "impossible": {
@@ -6412,7 +6516,8 @@
         "pl"
       ],
       "topics": [
-        "Education"
+        "Education",
+        "Work and Jobs"
       ]
     },
     "instrument": {
@@ -6428,7 +6533,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "interesting": {
@@ -6437,7 +6542,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "international": {
@@ -6504,8 +6609,14 @@
     "it": {
       "headword": "it",
       "pos": [
-        "n",
         "pron"
+      ],
+      "topics": []
+    },
+    "IT": {
+      "headword": "IT",
+      "pos": [
+        "n"
       ],
       "topics": []
     },
@@ -6528,7 +6639,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "jam": {
       "headword": "jam",
@@ -6559,7 +6672,9 @@
         "n",
         "pl"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "jellyfish": {
       "headword": "jellyfish",
@@ -6573,14 +6688,18 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "job": {
       "headword": "job",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "join": {
       "headword": "join",
@@ -6596,7 +6715,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "journey": {
       "headword": "journey",
@@ -6635,7 +6756,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "june": {
       "headword": "June",
@@ -6704,7 +6827,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Measurements"
+      ]
     },
     "kilometre": {
       "headword": "kilometre (km)",
@@ -6722,7 +6847,7 @@
         "n"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "king": {
@@ -6730,7 +6855,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "kiss": {
       "headword": "kiss",
@@ -6807,6 +6934,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "House and Home"
       ]
     },
@@ -6824,7 +6952,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Appliances"
+      ]
     },
     "large": {
       "headword": "large",
@@ -7002,7 +7132,8 @@
         "n"
       ],
       "topics": [
-        "Documents and Texts"
+        "Documents and Texts",
+        "Work and Jobs"
       ]
     },
     "level": {
@@ -7087,8 +7218,8 @@
       ],
       "topics": []
     },
-    "linktechnology": {
-      "headword": "link (technology)",
+    "link": {
+      "headword": "link",
       "pos": [
         "n"
       ],
@@ -7260,7 +7391,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "low": {
@@ -7292,7 +7423,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "luggage": {
@@ -7396,7 +7527,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "mango": {
       "headword": "mango",
@@ -7454,7 +7587,7 @@
       ],
       "topics": [
         "Family and Friends",
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "match": {
@@ -7469,7 +7602,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Education"
+      ]
     },
     "matter": {
       "headword": "matter",
@@ -7479,11 +7614,17 @@
       ],
       "topics": []
     },
-    "may": {
+    "May": {
       "headword": "May",
       "pos": [
-        "mv",
         "n"
+      ],
+      "topics": []
+    },
+    "may": {
+      "headword": "may",
+      "pos": [
+        "mv"
       ],
       "topics": []
     },
@@ -7532,7 +7673,8 @@
         "n"
       ],
       "topics": [
-        "Travel and Transport"
+        "Travel and Transport",
+        "Work and Jobs"
       ]
     },
     "medicine": {
@@ -7557,7 +7699,8 @@
         "n"
       ],
       "topics": [
-        "Time"
+        "Time",
+        "Work and Jobs"
       ]
     },
     "melon": {
@@ -7603,7 +7746,8 @@
         "v"
       ],
       "topics": [
-        "Documents and Texts"
+        "Documents and Texts",
+        "Work and Jobs"
       ]
     },
     "metal": {
@@ -7732,14 +7876,21 @@
         "Travel and Transport"
       ]
     },
-    "miss": {
+    "Miss": {
       "headword": "Miss",
       "pos": [
-        "n",
+        "n"
+      ],
+      "topics": [
+        "Family and Friends"
+      ]
+    },
+    "miss": {
+      "headword": "miss",
+      "pos": [
         "v"
       ],
       "topics": [
-        "Family and Friends",
         "Travel and Transport"
       ]
     },
@@ -7769,7 +7920,10 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Appliances",
+        "Communication and Technology"
+      ]
     },
     "model": {
       "headword": "model",
@@ -7784,7 +7938,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "mom": {
@@ -8062,7 +8216,8 @@
       ],
       "topics": [
         "Entertainment and Media",
-        "Hobbies and Leisure"
+        "Hobbies and Leisure",
+        "Work and Jobs"
       ]
     },
     "must": {
@@ -8114,8 +8269,8 @@
       ],
       "topics": []
     },
-    "naturalnotartificial": {
-      "headword": "natural (NOT ARTIFICIAL)",
+    "natural": {
+      "headword": "natural",
       "pos": [
         "adj"
       ],
@@ -8150,7 +8305,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "need": {
       "headword": "need",
@@ -8245,7 +8402,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "night": {
@@ -8286,7 +8443,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "noon": {
@@ -8400,7 +8557,8 @@
         "n"
       ],
       "topics": [
-        "Health, Medicine and Exercise"
+        "Health, Medicine and Exercise",
+        "Work and Jobs"
       ]
     },
     "ocean": {
@@ -8417,7 +8575,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "october": {
       "headword": "October",
@@ -8477,7 +8637,8 @@
         "n"
       ],
       "topics": [
-        "Places: Buildings"
+        "Places: Buildings",
+        "Work and Jobs"
       ]
     },
     "often": {
@@ -8524,7 +8685,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "olympic": {
@@ -8723,6 +8884,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "House and Home"
       ]
     },
@@ -8781,7 +8943,8 @@
         "n"
       ],
       "topics": [
-        "Entertainment and Media"
+        "Entertainment and Media",
+        "Work and Jobs"
       ]
     },
     "painting": {
@@ -8971,7 +9134,10 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Appliances",
+        "Communication and Technology"
+      ]
     },
     "pear": {
       "headword": "pear",
@@ -9066,15 +9232,15 @@
       ],
       "topics": []
     },
-    "performentertain": {
-      "headword": "perform (ENTERTAIN)",
+    "perform": {
+      "headword": "perform",
       "pos": [
         "v"
       ],
       "topics": []
     },
-    "performanceentertainment": {
-      "headword": "performance (ENTERTAINMENT)",
+    "performance": {
+      "headword": "performance",
       "pos": [
         "n"
       ],
@@ -9144,6 +9310,7 @@
         "v"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology"
       ]
     },
@@ -9164,7 +9331,8 @@
         "n"
       ],
       "topics": [
-        "Entertainment and Media"
+        "Entertainment and Media",
+        "Work and Jobs"
       ]
     },
     "photography": {
@@ -9243,7 +9411,8 @@
         "n"
       ],
       "topics": [
-        "Travel and Transport"
+        "Travel and Transport",
+        "Work and Jobs"
       ]
     },
     "pink": {
@@ -9363,7 +9532,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "please": {
@@ -9402,7 +9571,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "point": {
       "headword": "point",
@@ -9437,7 +9608,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "policestation": {
       "headword": "police station",
@@ -9470,7 +9643,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "poorthingyou": {
@@ -9618,7 +9791,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "price": {
@@ -9735,7 +9908,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "push": {
       "headword": "push",
@@ -9777,7 +9952,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "question": {
       "headword": "question",
@@ -9792,7 +9969,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "quickly": {
@@ -9808,7 +9985,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "quite": {
@@ -9859,6 +10036,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Entertainment and Media"
       ]
     },
@@ -9868,7 +10046,9 @@
         "n"
       ],
       "topics": [
-        "Places: Buildings"
+        "Places: Buildings",
+        "Places: Countryside",
+        "Travel and Transport"
       ]
     },
     "rain": {
@@ -9877,14 +10057,18 @@
         "n",
         "v"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "raincoat": {
       "headword": "raincoat",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "rainforest": {
       "headword": "rainforest",
@@ -9925,7 +10109,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "real": {
@@ -9934,7 +10118,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "really": {
@@ -9979,7 +10163,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "recipe": {
       "headword": "recipe",
@@ -10013,8 +10199,8 @@
         "House and Home"
       ]
     },
-    "relaxbecomehappy": {
-      "headword": "relax (become happy)",
+    "relax": {
+      "headword": "relax",
       "pos": [
         "v"
       ],
@@ -10112,7 +10298,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "ride": {
@@ -10143,7 +10329,7 @@
         "n"
       ],
       "topics": [
-        "Measurements",
+        "Personal Feelings, Opinions and Experiences (adjectives)",
         "Travel and Transport"
       ]
     },
@@ -10160,7 +10346,9 @@
         "n",
         "v"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "river": {
       "headword": "river",
@@ -10422,7 +10610,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "scary": {
       "headword": "scary",
@@ -10540,7 +10730,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "see": {
       "headword": "see",
@@ -10649,13 +10841,6 @@
       ],
       "topics": []
     },
-    "sharedigitally": {
-      "headword": "share (digitally)",
-      "pos": [
-        "v"
-      ],
-      "topics": []
-    },
     "shark": {
       "headword": "shark",
       "pos": [
@@ -10707,7 +10892,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "shoe": {
       "headword": "shoe",
@@ -10733,7 +10920,8 @@
         "n"
       ],
       "topics": [
-        "Shopping"
+        "Shopping",
+        "Work and Jobs"
       ]
     },
     "shopper": {
@@ -10742,7 +10930,8 @@
         "n"
       ],
       "topics": [
-        "Shopping"
+        "Shopping",
+        "Work and Jobs"
       ]
     },
     "shopping": {
@@ -10774,7 +10963,9 @@
         "n",
         "pl"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "should": {
       "headword": "should",
@@ -10899,7 +11090,8 @@
         "n"
       ],
       "topics": [
-        "Entertainment and Media"
+        "Entertainment and Media",
+        "Work and Jobs"
       ]
     },
     "singing": {
@@ -11026,7 +11218,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "sky": {
       "headword": "sky",
@@ -11067,7 +11261,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "slowly": {
@@ -11083,18 +11277,11 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
-    "smartstylish": {
-      "headword": "smart (stylish)",
-      "pos": [
-        "adj"
-      ],
-      "topics": []
-    },
-    "smartclever": {
-      "headword": "smart (clever)",
+    "smart": {
+      "headword": "smart",
       "pos": [
         "adj"
       ],
@@ -11143,7 +11330,9 @@
         "n",
         "v"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "snowboard": {
       "headword": "snowboard",
@@ -11218,7 +11407,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "software": {
@@ -11304,7 +11493,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "sort": {
@@ -11377,7 +11566,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "spell": {
@@ -11472,7 +11661,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "stage": {
       "headword": "stage",
@@ -11604,7 +11795,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "story": {
       "headword": "story",
@@ -11627,7 +11820,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "strawberry": {
@@ -11669,7 +11862,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "student": {
@@ -11678,7 +11871,8 @@
         "n"
       ],
       "topics": [
-        "Education"
+        "Education",
+        "Work and Jobs"
       ]
     },
     "studies": {
@@ -11763,7 +11957,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "suitcase": {
       "headword": "suitcase",
@@ -11789,7 +11985,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "sunday": {
       "headword": "Sunday",
@@ -11804,14 +12002,18 @@
         "n",
         "pl"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "sunny": {
       "headword": "sunny",
       "pos": [
         "adj"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "supermarket": {
       "headword": "supermarket",
@@ -11843,7 +12045,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "surf": {
@@ -11922,7 +12124,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "sweet": {
       "headword": "sweet",
@@ -11932,7 +12136,7 @@
       ],
       "topics": [
         "Food and Drink",
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "swim": {
@@ -11961,6 +12165,7 @@
         "n"
       ],
       "topics": [
+        "Clothes and Accessories",
         "Sport"
       ]
     },
@@ -11981,6 +12186,7 @@
         "n"
       ],
       "topics": [
+        "Clothes and Accessories",
         "Sport"
       ]
     },
@@ -12053,7 +12259,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "tasty": {
@@ -12096,7 +12302,8 @@
         "n"
       ],
       "topics": [
-        "Education"
+        "Education",
+        "Work and Jobs"
       ]
     },
     "team": {
@@ -12131,15 +12338,17 @@
         "v"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology"
       ]
     },
-    "televisiontv": {
-      "headword": "television (TV)",
+    "television": {
+      "headword": "television",
       "pos": [
         "n"
       ],
       "topics": [
+        "Appliances",
         "Entertainment and Media"
       ]
     },
@@ -12175,7 +12384,8 @@
         "n"
       ],
       "topics": [
-        "Sport"
+        "Sport",
+        "Work and Jobs"
       ]
     },
     "tent": {
@@ -12202,7 +12412,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "test": {
@@ -12420,7 +12630,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "thursday": {
       "headword": "Thursday",
@@ -12461,7 +12673,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "tiger": {
       "headword": "tiger",
@@ -12476,7 +12690,9 @@
         "n",
         "pl"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "till": {
       "headword": "till",
@@ -12508,7 +12724,7 @@
       ],
       "topics": [
         "Health, Medicine and Exercise",
-        "Measurements",
+        "Personal Feelings, Opinions and Experiences (adjectives)",
         "Sport"
       ]
     },
@@ -12675,7 +12891,8 @@
         "n"
       ],
       "topics": [
-        "Travel and Transport"
+        "Travel and Transport",
+        "Work and Jobs"
       ]
     },
     "tourist": {
@@ -12742,21 +12959,15 @@
     "train": {
       "headword": "train",
       "pos": [
-        "n"
+        "n",
+        "v"
       ],
       "topics": [
         "Travel and Transport"
       ]
     },
-    "traintransitiveandintransitive": {
-      "headword": "train (transitive and intransitive)",
-      "pos": [
-        "v"
-      ],
-      "topics": []
-    },
-    "trainingtransitiveandintransitive": {
-      "headword": "training (transitive and intransitive)",
+    "training": {
+      "headword": "training",
       "pos": [
         "n"
       ],
@@ -12825,7 +13036,9 @@
         "n",
         "pl"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "true": {
       "headword": "true",
@@ -12847,6 +13060,7 @@
         "phr v"
       ],
       "topics": [
+        "Clothes and Accessories",
         "Shopping"
       ]
     },
@@ -12855,7 +13069,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "tuesday": {
       "headword": "Tuesday",
@@ -12864,8 +13080,8 @@
       ],
       "topics": []
     },
-    "tunemusic": {
-      "headword": "tune (music)",
+    "tune": {
+      "headword": "tune",
       "pos": [
         "n"
       ],
@@ -12920,7 +13136,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "uncle": {
       "headword": "uncle",
@@ -12969,7 +13187,7 @@
         "n"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "uniform": {
@@ -12977,7 +13195,10 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories",
+        "Work and Jobs"
+      ]
     },
     "university": {
       "headword": "university",
@@ -13052,7 +13273,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "usual": {
@@ -13114,6 +13335,7 @@
         "n"
       ],
       "topics": [
+        "Appliances",
         "Communication and Technology",
         "Entertainment and Media"
       ]
@@ -13124,6 +13346,7 @@
         "n"
       ],
       "topics": [
+        "Entertainment and Media",
         "Hobbies and Leisure"
       ]
     },
@@ -13198,7 +13421,8 @@
         "n"
       ],
       "topics": [
-        "Food and Drink"
+        "Food and Drink",
+        "Work and Jobs"
       ]
     },
     "waitress": {
@@ -13207,7 +13431,8 @@
         "n"
       ],
       "topics": [
-        "Food and Drink"
+        "Food and Drink",
+        "Work and Jobs"
       ]
     },
     "wake": {
@@ -13254,7 +13479,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "want": {
       "headword": "want",
@@ -13275,7 +13502,9 @@
       "pos": [
         "adj"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "wash": {
       "headword": "wash",
@@ -13289,7 +13518,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Appliances"
+      ]
     },
     "washingup": {
       "headword": "washing-up",
@@ -13314,6 +13545,7 @@
         "v"
       ],
       "topics": [
+        "Clothes and Accessories",
         "Entertainment and Media",
         "Sport"
       ]
@@ -13348,14 +13580,18 @@
       "pos": [
         "v"
       ],
-      "topics": []
+      "topics": [
+        "Clothes and Accessories"
+      ]
     },
     "weather": {
       "headword": "weather",
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "web": {
       "headword": "web",
@@ -13445,7 +13681,7 @@
       ],
       "topics": [
         "Health, Medicine and Exercise",
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "wellknown": {
@@ -13471,7 +13707,9 @@
       "pos": [
         "adj"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "whale": {
       "headword": "whale",
@@ -13623,7 +13861,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "window": {
       "headword": "window",
@@ -13648,7 +13888,9 @@
       "pos": [
         "adj"
       ],
-      "topics": []
+      "topics": [
+        "Weather"
+      ]
     },
     "wing": {
       "headword": "wing",
@@ -13749,7 +13991,9 @@
         "n",
         "v"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "workout": {
       "headword": "work out",
@@ -13763,7 +14007,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "workinghours": {
       "headword": "working hours",
@@ -13789,7 +14035,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "worry": {
@@ -13846,7 +14092,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Work and Jobs"
+      ]
     },
     "writing": {
       "headword": "writing",
@@ -13861,7 +14109,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "yeah": {
@@ -13918,7 +14166,9 @@
       "pos": [
         "n"
       ],
-      "topics": []
+      "topics": [
+        "Food and Drink"
+      ]
     },
     "you": {
       "headword": "you",
@@ -13933,7 +14183,7 @@
         "adj"
       ],
       "topics": [
-        "Measurements"
+        "Personal Feelings, Opinions and Experiences (adjectives)"
       ]
     },
     "your": {

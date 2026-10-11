@@ -62,6 +62,65 @@ test("daily eight-word lesson resumes after leaving and reloading without demand
   expect(Object.keys(stored.memory)).toHaveLength(8);
 });
 
+test("child review rejects a saved parent typing task and keeps word listening available", async ({ page }) => {
+  await page.addInitScript(() => {
+    const now = new Date();
+    const day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    const memory = { due: day, step: 0, lastDay: day, lastCorrect: false, successDays: [] };
+    localStorage.setItem("sparks_learning_v2", JSON.stringify({ memory: {
+      "skill-4-1": { listening: memory }, l2_apple: { listening: memory },
+    }, dailyPlans: { [day]: { day, themeId: "breakfast", newWords: [], review: [{ id: "skill-4-1", skill: "listening" }], backlog: 0, mode: "learn" } } }));
+  });
+  await page.goto("./#today");
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText("1 项到期复习");
+  await page.getByRole("button", { name: "开始复习", exact: true }).click();
+  await expect(page.getByRole("textbox")).toHaveCount(0);
+  await expect(page.locator(".answer-option")).toHaveCount(3);
+  await page.getByRole("button", { name: "播放听力", exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe("apple");
+});
+
+test("reading hints survive a reload without becoming independent reading evidence", async ({ page }) => {
+  await page.goto("./#assessment");
+  await page.getByRole("button", { name: "阅读小挑战", exact: true }).click();
+  await page.getByRole("button", { name: "听这段文字", exact: true }).click();
+  await expect(page.getByText("本题记录为听后理解，不计入独立阅读掌握。")).toBeVisible();
+  await page.reload();
+  await page.getByRole("button", { name: "阅读小挑战", exact: true }).click();
+  await expect(page.getByText("本题记录为听后理解，不计入独立阅读掌握。")).toBeVisible();
+  await page.locator(".answer-option").nth(childThemes[0].story.questions[0].answer).click();
+  const memory = await page.evaluate((id) => JSON.parse(localStorage.getItem("sparks_learning_v2")).memory[id].reading, childThemes[0].story.questions[0].id);
+  expect(memory.successDays).toEqual([]);
+  expect(memory.lastCorrect).toBe(false);
+});
+
+test("wrong-word reviews do not show the correct meaning before the child answers", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("sparks_learning_v2", JSON.stringify({ review: ["l2_apple"] })));
+  await page.goto("./#progress");
+  const row = page.locator(".review-list > div").filter({ has: page.getByText("apple", { exact: true }) });
+  await expect(row).not.toContainText("苹果");
+  await row.getByRole("button", { name: "复习", exact: true }).click();
+  await page.getByRole("button", { name: /苹果/ }).click();
+  await expect(page.getByText("答对啦！", { exact: true })).toBeVisible();
+});
+
+for (const failure of ["missing", "silent"]) test(`listening can be skipped safely when speech is ${failure}`, async ({ page }) => {
+  await page.goto("./#assessment");
+  await page.evaluate((mode) => {
+    if (mode === "missing") delete window.speechSynthesis;
+    else window.speechSynthesis.speak = () => {};
+  }, failure);
+  await page.getByRole("button", { name: "听力小挑战", exact: true }).click();
+  await page.getByRole("button", { name: "播放听力", exact: true }).click();
+  await expect(page.getByText("没有成功播放，请检查设备音量后重试。")).toBeVisible();
+  await expect(page.locator(".answer-option").first()).toBeDisabled();
+  await page.getByRole("button", { name: "暂时跳过", exact: true }).click();
+  await expect(page.getByText("这题先放一放，不记录对错或掌握。")).toBeVisible();
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("sparks_learning_v2"))?.memory || {})).toEqual({});
+  await page.getByRole("button", { name: "下一题", exact: true }).click();
+  await expect(page.locator(".practice-header")).toContainText("2 /");
+});
+
 for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"], ["clothes", clothesImages, "l8_dress"], ["weather", weatherImages, "l2_cold"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
   await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   const theme = childThemes.find((item) => item.id === themeId);

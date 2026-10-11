@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { allKetWords } from "../../src/data/ket-words/index.js";
 import { metadataFor, partOfSpeechLabels } from "../../src/data/vocabulary-metadata.js";
+import { vocabularyCorrections } from "../../src/data/vocabulary-corrections.js";
 import { vocabularyLessons, vocabularyQuestions } from "../../src/data/curriculum.js";
 import { childThemes, childLessons } from "../../src/data/child-course.js";
 import { countEnglishWords } from "../../src/utils/learningProgress.js";
@@ -44,15 +45,42 @@ describe("whole-bank meaning, POS and theme regressions", () => {
     expect(allKetWords.find((w) => w.word === "fish").topic).toBe("animals");
     expect(allKetWords.filter((w) => w.topic === "full_review").every((w) => curatedTopics[w.word] === "full_review")).toBe(true);
   });
-  it("labels every word with its official POS, including multi-POS and plural forms", () => {
+  it("labels every word with source POS or a documented dictionary correction", () => {
     for (const word of allKetWords) {
       const official = metadataFor(word.word);
       expect(official, word.word).toBeTruthy();
-      expect(word.partOfSpeech, word.word).toEqual(official.pos.filter((pos) => partOfSpeechLabels[pos]));
+      const correction = vocabularyCorrections[word.word];
+      expect(word.partOfSpeech, word.word).toEqual((correction?.pos || official.pos).filter((pos) => partOfSpeechLabels[pos]));
+      if (correction) expect(word.posSource).toBe(correction.source);
       expect(word.partOfSpeechLabel, word.word).toBeTruthy();
     }
     expect(allKetWords.find((w) => w.word === "book").partOfSpeech).toEqual(["n", "v"]);
     expect(allKetWords.find((w) => w.word === "chips").grammarNotes).toBe("复数形式");
+  });
+  it("corrects importer omissions and dictionary-verified PDF errata without erasing source facts", () => {
+    const find = (name) => allKetWords.find((word) => word.word === name);
+    for (const name of ["design", "train"]) expect(find(name).partOfSpeech).toEqual(["n", "v"]);
+    expect(find("it").partOfSpeech).toEqual(["pron"]);
+    expect(metadataFor("IT").pos).toEqual(["n"]);
+    expect(find("May").partOfSpeech).toEqual(["n"]);
+    expect(metadataFor("may").pos).toEqual(["mv"]);
+    expect(find("Miss").partOfSpeech).toEqual(["n"]);
+    expect(metadataFor("miss").pos).toEqual(["v"]);
+    expect(find("as well").partOfSpeech).toEqual(["adv"]);
+    for (const [name, pos] of [["unhappy", "adj"], ["unfortunately", "adv"], ["diving", "n"], ["for sale", "phrase"], ["Guess what?", "phrase"]]) {
+      expect(find(name).partOfSpeech, name).toEqual([pos]);
+    }
+    expect(metadataFor("unhappy").pos).toEqual(["n"]);
+    expect(metadataFor("unfortunately").pos).toEqual(["adj"]);
+    for (const name of ["afraid", "happy", "unhappy", "angry", "young", "difficult"]) expect(find(name).topic, name).toBe("feelings_descriptions");
+    expect(find("clever").topic).toBe("school_library");
+    for (const name of ["earring", "necklace", "get dressed", "wear", "raincoat"]) expect(find(name).topic, name).toBe("clothes");
+    for (const name of ["fog", "thunderstorm"]) expect(find(name).topic, name).toBe("nature_weather");
+    expect(find("engineer").topic).toBe("shopping_work");
+    expect(find("grocery store").topic).toBe("shopping_work");
+    expect(find("swimming pool").topic).toBe("sports_hobbies");
+    expect(find("right hand").translation).toContain("右边的");
+    expect(metadataFor("give somebody a call/ring").topics).not.toContain("Clothes and Accessories");
   });
   it("excludes ALL health words from restaurant word lists and keeps every vocabulary lesson on one topic", () => {
     const restaurant = allKetWords.filter((word) => word.topic === "food_cafe");

@@ -34,7 +34,7 @@ const header = [
   '- Every `fail` must be corrected and rechecked as `fixed` before final acceptance.',
   '- Cambridge baseline: A2 Key Vocabulary List, August 2025.',
   '',
-  '| Level | Topic | ID | Word | Official POS | TTS Text | Published Phonetic | Chinese Meaning | Published Photo | Meaning | Independent Review | Notes |',
+  '| Level | Topic | ID | Word | Teaching POS | TTS Text | Published Phonetic | Chinese Meaning | Published Photo | Meaning | Independent Review | Notes |',
   '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
 ];
 

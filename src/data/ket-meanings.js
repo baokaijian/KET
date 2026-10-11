@@ -764,7 +764,7 @@ export const meaningCorrections = {
   "repair": "修理；维修",
   "repeat": "重复；再说一遍；再做一次",
   "review": "复习；回顾；评论；评价",
-  "right hand": "右手",
+  "right hand": "右边的；右侧的（修饰名词，如 right-hand side）",
   "ring": "戒指；环；铃响；打电话（英式英语）",
   "roast": "烤；烘烤；烤制的（食物）",
   "round": "圆的；围绕；一轮（名词）",

@@ -173,4 +173,38 @@ describe("audio effects", () => {
     utterance.onerror({ error: "synthesis-failed" });
     expect(onError).toHaveBeenCalledWith("synthesis-failed");
   });
+  it("reports silent start and finish failures once, never as successful listening", async () => {
+    speechSynthesis.speak = vi.fn();
+    const { speakText } = await loadAudioModule(fakeContext, speechSynthesis);
+    const onEnd = vi.fn();
+    const onError = vi.fn();
+    speakText("milk", 0.8, onEnd, "en-GB", onError);
+    await vi.advanceTimersByTimeAsync(4121);
+    expect(onError).toHaveBeenCalledExactlyOnceWith("speech-timeout");
+    const first = speechSynthesis.speak.mock.calls[0][0];
+    first.onend();
+    expect(onEnd).not.toHaveBeenCalled();
+    onError.mockClear();
+    speakText("apple", 0.8, onEnd, "en-GB", onError);
+    await vi.advanceTimersByTimeAsync(121);
+    const second = speechSynthesis.speak.mock.calls[1][0];
+    second.onstart();
+    await vi.advanceTimersByTimeAsync(10001);
+    expect(onError).toHaveBeenCalledExactlyOnceWith("speech-timeout");
+    expect(onEnd).not.toHaveBeenCalled();
+  });
+  it("clears watchdogs on stop, replacement and thrown synthesis errors", async () => {
+    speechSynthesis.speak = vi.fn();
+    const { speakText, stopSpeech } = await loadAudioModule(fakeContext, speechSynthesis);
+    const onError = vi.fn();
+    speakText("milk", 0.8, null, "en-GB", onError);
+    await vi.advanceTimersByTimeAsync(121);
+    stopSpeech();
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(onError).not.toHaveBeenCalled();
+    speechSynthesis.speak = vi.fn(() => { throw new Error("broken device"); });
+    speakText("milk", 0.8, null, "en-GB", onError);
+    await vi.advanceTimersByTimeAsync(5121);
+    expect(onError).toHaveBeenCalledTimes(1);
+  });
 });

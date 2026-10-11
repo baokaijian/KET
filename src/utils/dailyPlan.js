@@ -1,17 +1,23 @@
 import { dueReviews, localDay, normalizeProgress } from "./learningProgress.js";
 import { getSpeakableWordText } from "./speechText.js";
 
+function childReviewAllowed(id, curriculum) {
+  if (curriculum.courseWordById[id]) return true;
+  const question = curriculum.childQuestionById[id] || curriculum.courseQuestionById[id];
+  return Boolean(question && !["input", "spelling"].includes(question.type));
+}
+
 export function buildDailyPlan(progress, curriculum, date = new Date()) {
   const p = normalizeProgress(progress);
   const day = localDay(date);
   const saved = p.dailyPlans[day];
   if (saved?.day === day && curriculum.childThemes.some((theme) => theme.id === saved.themeId) &&
     Array.isArray(saved.newWords) && saved.newWords.length <= 8 && new Set(saved.newWords).size === saved.newWords.length && saved.newWords.every((id) => curriculum.courseWordById[id]) &&
-    Array.isArray(saved.review) && saved.review.length <= 20 && saved.review.every((item) => item && ["reading", "listening"].includes(item.skill) && (curriculum.courseWordById[item.id] || curriculum.courseQuestionById[item.id] || curriculum.childQuestionById[item.id])) &&
+    Array.isArray(saved.review) && saved.review.length <= 20 && saved.review.every((item) => item && ["reading", "listening"].includes(item.skill) && childReviewAllowed(item.id, curriculum)) &&
     (saved.readingStage === undefined || [1, 2].includes(saved.readingStage)) &&
     (!saved.vocabularyLessonId || [...curriculum.vocabularyLessons, ...curriculum.childThemes.map((theme) => theme.vocabulary)].some((lesson) => lesson.id === saved.vocabularyLessonId)) &&
     Number.isInteger(saved.backlog) && saved.backlog >= 0 && ["light", "story", "learn"].includes(saved.mode)) return saved;
-  const due = dueReviews(p, date).filter((item) => curriculum.courseWordById[item.id] || curriculum.courseQuestionById[item.id] || curriculum.childQuestionById[item.id]);
+  const due = dueReviews(p, date).filter((item) => childReviewAllowed(item.id, curriculum));
   const light = date.getDay() === 0 && p.seen.length > 0;
   const integration = date.getDay() === 6 && p.seen.length > 0;
   const foundation = curriculum.childThemes.find((item) => item.vocabulary.words.some((word) => !p.seen.includes(word.id)) || [item.sentences, item.story].some((lesson) => !p.completed.includes(lesson.id)));
@@ -37,7 +43,7 @@ export function saveDailyPlan(progress, plan) {
 }
 
 export function reviewQuestions(items, curriculum) {
-  return items.map(({ id, skill }, index) => {
+  return items.filter(({ id }) => childReviewAllowed(id, curriculum)).map(({ id, skill }, index) => {
     const word = curriculum.courseWordById[id];
     if (!word) return curriculum.childQuestionById[id] || curriculum.courseQuestionById[id];
     const question = curriculum.vocabularyQuestions([word])[0];
