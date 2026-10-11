@@ -38,11 +38,12 @@ describe("complete vocabulary meanings", () => {
     }
   });
   it("does not publish unreviewed pictures, phonetics or boilerplate examples", () => {
-    const word = allKetWords.find((item) => item.word === "all");
-    expect(getWordImage(word.id)).toBeNull();
-    expect(dictionaryEntry(word).image).toBeNull();
-    expect(dictionaryEntry(word).phonetic).toBe("");
-    expect(dictionaryEntry(word).sentence).toBe("");
+    for (const word of allKetWords.filter((item) => !wordImages[item.id])) {
+      expect(getWordImage(word.id)).toBeNull();
+      expect(dictionaryEntry(word).image).toBeNull();
+      expect(dictionaryEntry(word).phonetic).toBe("");
+      expect(dictionaryEntry(word).sentence).toBe("");
+    }
     expect(allKetWords.some((item) => /词[：:]|待复核/.test(item.translation))).toBe(false);
   });
 });

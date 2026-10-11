@@ -9,5 +9,6 @@ export function getSpeakableWordText(wordOrText) {
     .replace(/\(([^)]*)\)/g, '$1')
     .replace(/\s+/g, ' ')
     .trim()
+    .replace(/^a\.m\.$/i, 'A M')
     .replace(/^Dr\.?$/, 'doctor');
 }

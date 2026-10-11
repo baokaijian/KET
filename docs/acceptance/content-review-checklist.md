@@ -16,12 +16,12 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 1 | time_calendar | l1_afternoon | afternoon | n. 名词 | afternoon | not published | 下午 | word-images/l1_afternoon.webp | provided | pending |  |
 | 1 | daily_starters | l1_again | again | adv. 副词 | again | not published | 再一次 | not published | provided | pending |  |
 | 1 | family_friends | l1_age | age | n. 名词 | age | not published | 年龄 | not published | provided | pending |  |
-| 1 | daily_starters | l1_all | all | adv. 副词 / det. 限定词 / pron. 代词 | all | not published | 全部 | not published | provided | pending |  |
-| 1 | daily_starters | l1_also | also | adv. 副词 | also | not published | 也 | not published | provided | pending |  |
-| 1 | daily_starters | l1_always | always | adv. 副词 | always | not published | 总是 | not published | provided | pending |  |
-| 1 | time_calendar | l1_a_m | a.m. | adv. 副词 | a.m. | not published | 上午；午夜十二点到中午十二点之间 | not published | provided | pending |  |
-| 1 | daily_starters | l1_and | and | conj. 连词 | and | not published | 和 | not published | provided | pending |  |
-| 1 | daily_starters | l1_answer | answer | n. 名词 / v. 动词 | answer | not published | 答案；回答；应答（如接电话） | not published | provided | pending |  |
+| 1 | daily_starters | l1_all | all | adv. 副词 / det. 限定词 / pron. 代词 | all | not published | 全部；所有的；完全（表示整个数量或程度） | word-images/l1_all.webp | provided | pending |  |
+| 1 | daily_starters | l1_also | also | adv. 副词 | also | not published | 也；还（表示增加另一件事） | word-images/l1_also.webp | provided | pending |  |
+| 1 | daily_starters | l1_always | always | adv. 副词 | always | not published | 总是；每次都；一直 | word-images/l1_always.webp | provided | pending |  |
+| 1 | time_calendar | l1_a_m | a.m. | adv. 副词 | A M | not published | 上午；午夜十二点到中午十二点之间 | word-images/l1_a_m.webp | provided | pending |  |
+| 1 | daily_starters | l1_and | and | conj. 连词 | and | not published | 和；并且；然后（用于连接词语或句子） | word-images/l1_and.webp | provided | pending |  |
+| 1 | daily_starters | l1_answer | answer | n. 名词 / v. 动词 | answer | not published | 答案；回答；应答（如接电话） | word-images/l1_answer.webp | provided | pending |  |
 | 1 | daily_starters | l1_any | any | det. 限定词 / pron. 代词 | any | not published | 任何；一些 | not published | provided | pending |  |
 | 1 | daily_starters | l1_ask | ask | v. 动词 | ask | not published | 问 | not published | provided | pending |  |
 | 1 | family_friends | l1_aunt | aunt | n. 名词 | aunt | not published | 阿姨；姑姑 | not published | provided | pending |  |

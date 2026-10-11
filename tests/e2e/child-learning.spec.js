@@ -11,6 +11,7 @@ import { weatherImages } from "../../src/data/weather-images.js";
 import { bodyImages } from "../../src/data/body-images.js";
 import { shoppingImages } from "../../src/data/shopping-images.js";
 import { dayImages } from "../../src/data/day-images.js";
+import { starterImages } from "../../src/data/starter-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 
 test.beforeEach(async ({ page }) => {
@@ -519,6 +520,34 @@ test("health photographs keep their clinical context, spoken examples and restau
   await page.getByRole("textbox", { name: "搜索单词或中文" }).fill("Dr");
   await page.locator(".dictionary-row").filter({ has: page.getByText("Dr", { exact: true }) }).getByRole("button", { name: "听 Dr 的发音", exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe("doctor");
+});
+
+test("the six originally mismatched starter words show separate scenes, contexts, POS and precise spoken text", async ({ page }, info) => {
+  await page.goto("./#learn");
+  for (const [id, image] of Object.entries(starterImages)) {
+    const word = courseWordById[id];
+    await page.getByRole("textbox", { name: "搜索单词或中文" }).fill(word.word);
+    await page.locator(".dictionary-row").filter({ has: page.getByText(word.word, { exact: true }) }).locator(".dictionary-word").click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toContainText(word.translation);
+    await expect(dialog).toContainText(word.partOfSpeechLabel);
+    await expect(dialog).toContainText(`照片对应：${image.meaning}`);
+    await expect(dialog).toContainText(image.context.sentence);
+    await expect(dialog).toContainText(image.context.translation);
+    await expect(dialog.locator("img")).toHaveAttribute("alt", image.alt);
+    await expect.poll(() => dialog.locator("img").evaluate((img) => img.complete && img.naturalWidth === 640 && img.naturalHeight === 640)).toBe(true);
+    await dialog.evaluate((element) => { element.scrollTop = 0; });
+    await page.screenshot({ path: info.outputPath(`${id}-dictionary.png`) });
+    await dialog.getByRole("button", { name: "播放单词发音", exact: true }).click();
+    await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(id === "l1_a_m" ? "A M" : word.word);
+    await dialog.getByRole("button", { name: "朗读例句", exact: true }).click();
+    await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(image.context.sentence);
+    await expect(dialog.getByText(image.context.sentence, { exact: true })).toBeInViewport();
+    await expect(dialog.getByText(image.context.translation, { exact: true })).toBeInViewport();
+    await page.screenshot({ path: info.outputPath(`${id}-context.png`) });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    await dialog.getByRole("button", { name: "关闭词条", exact: true }).click();
+  }
 });
 
 test("every published photograph loads in its own vocabulary entry with its specific sense", async ({ page }) => {

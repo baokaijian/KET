@@ -1,6 +1,6 @@
 # 单词与图片复核
 
-图片范围：103 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1584 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：109 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1578 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
@@ -17,12 +17,12 @@
 | l1_afternoon | afternoon | 下午 | 下午（图中为三点） | word-images/l1_afternoon.webp / afternoon: a child draws at a desk in daylight beside a clock showing 3:00 PM | pass | Drawing in daylight and a legible 3:00 PM clock establish an afternoon example; the activity alone does not define the time. |
 | l1_again | again | 再一次 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_age | age | 年龄 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_all | all | 全部 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_also | also | 也 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_always | always | 总是 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_a_m | a.m. | 上午；午夜十二点到中午十二点之间 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_and | and | 和 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l1_answer | answer | 答案；回答；应答（如接电话） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l1_all | all | 全部；所有的；完全（表示整个数量或程度） | 全部；所有的（四个孩子全都戴着帽子） | word-images/l1_all.webp / all: all four children in the pictured group are wearing hats | fixed | All four visible children wear hats of different colours; no member of this specific group is left out. The paired sentence supplies the quantifier, not the name of a person or a hat. Replaces an unpublished template. |
+| l1_also | also | 也；还（表示增加另一件事） | 也；还（已有苹果，又有香蕉） | word-images/l1_also.webp / also: a child already holds an apple and receives an additional banana from an adult | fixed | The apple is already held while the adult and child both hold the arriving banana. The two-sentence context makes the added item explicit; the photo alone is not a synonym for a fruit. Replaces an unpublished template. |
+| l1_always | always | 总是；每次都；一直 | 总是；每次都（把鞋放在门旁的习惯） | word-images/l1_always.webp / always: a child puts shoes by the door beside a weekly chart with all seven days checked | fixed | The shoe-placement action accompanies seven distinct checked columns, Mon through Sun. This is an illustrative routine paired with the word always, not evidence of a real child's lifelong behaviour. Replaces an unpublished template. |
+| l1_a_m | a.m. | 上午；午夜十二点到中午十二点之间 | 上午（图中为上午九点，属于午夜到中午之间） | word-images/l1_a_m.webp / a.m.: a real classroom clock clearly reads 9:00 AM while a child reads a book | fixed | The large physical display reads 9:00 AM, with AM distinct from PM. Nine is one before-noon example, not a definition limited to sunlight or school hours. Replaces an unpublished template. |
+| l1_and | and | 和；并且；然后（用于连接词语或句子） | 和（连接书与杯子这两个事物） | word-images/l1_and.webp / and: one blue book and one red cup appear side by side as two different objects | fixed | One complete blue book and one complete red cup are distinct, equally visible objects. The phrase joins their names with and; neither object alone is labelled as the conjunction. Replaces an unpublished template. |
+| l1_answer | answer | 答案；回答；应答（如接电话） | 答案（名词，图中答案是三） | word-images/l1_answer.webp / answer: a child responds with a card showing 3 to the teacher's question 2 + 1 = ? | fixed | The physical board shows 2 + 1 = ? and the child's response card shows 3, the correct answer. The sentence teaches the noun sense, not every use including answering a phone. Replaces an unpublished template. |
 | l1_any | any | 任何；一些 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_ask | ask | 问 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l1_aunt | aunt | 阿姨；姑姑 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
