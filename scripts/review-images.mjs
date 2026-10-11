@@ -16,8 +16,8 @@ const lines = [
   "",
   "生成提示词规则：每个 word ID 单独生成一张真实感词汇照片。具象物品清楚完整；人物角色与关系用具体生活场景；方形构图、自然光、无标语、无拼图、无水印。逐词主体和已检查语义见 alt 与视觉依据列。",
   "",
-  "| ID | 单词 | 指定词义 | 图片 / alt | 状态 | 视觉依据 |",
-  "| --- | --- | --- | --- | --- | --- |",
+  "| ID | 单词 | 中文释义 | 图片对应词义 | 图片 / alt | 状态 | 视觉依据 |",
+  "| --- | --- | --- | --- | --- | --- | --- |",
 ];
 let reviewed = 0;
 for (const original of allKetWords) {
@@ -42,6 +42,7 @@ for (const original of allKetWords) {
     original.id,
     original.word,
     word?.translation || original.translation,
+    word.image?.meaning || "待制作",
     word.image ? `${word.image.src} / ${word.image.alt}` : "未发布",
     status,
     note,

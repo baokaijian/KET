@@ -6,6 +6,7 @@ import { grammarLessons } from "../../src/data/grammar.js";
 import { skillLessons, productionTasks } from "../../src/data/skill-lessons.js";
 import { countEnglishWords, emptyProgress, normalizeProgress } from "../../src/utils/learningProgress.js";
 import { supplementaryTopics, courseUnitFor } from "../../src/data/course-topics.js";
+import { meaningGroups, meaningKey } from "../../src/data/meaning-groups.js";
 
 describe("meaning regressions", () => {
   it("rejects placeholders and explains easily confused senses", () => {
@@ -18,11 +19,31 @@ describe("meaning regressions", () => {
       ["p.m.", "下午或晚上"], ["a.m.", "上午"], ["make-up", "化妆"], ["surprising", "令人惊讶"],
     ]) expect(meaning(word), word).toContain(expected);
     for (const translation of Object.values(meaningCorrections)) expect(translation).not.toMatch(/待复核|词[：:]/);
+    expect(meaning("mix")).toBe("混合；拌匀");
+    expect(allKetWords.find((word) => word.word === "mix").partOfSpeech).toEqual(["v"]);
     expect(allKetWords.every((word) => !/ -|board ing|pris ing/.test(word.word))).toBe(true);
   });
 });
 
 describe("the full A2 learning path", () => {
+  it("never uses overlapping meanings as wrong answers, even when an input pool contains only synonyms", () => {
+    const names = Object.values(meaningGroups).flat();
+    expect(new Set(names).size).toBe(names.length);
+    for (const group of Object.values(meaningGroups)) {
+      const words = group.map((name) => courseWords.find((word) => word.word === name));
+      expect(words.every(Boolean), group.join(", ")).toBe(true);
+      for (const word of words) {
+        const q = vocabularyQuestions([word], words)[0];
+        expect(q.options).toHaveLength(3);
+        for (const other of words) if (other.translation !== word.translation) expect(q.options).not.toContain(other.translation);
+        expect(q.options[q.answer]).toBe(word.translation);
+      }
+    }
+    const mother = courseWords.find((word) => word.word === "mother");
+    const q = vocabularyQuestions([mother])[0];
+    expect(q.options).not.toContain("妈妈（美式非正式称呼）");
+    expect(q.options.filter((option) => option !== mother.translation).every((option) => courseWords.some((word) => word.topic === mother.topic && word.translation === option && meaningKey(word) !== meaningKey(mother)))).toBe(true);
+  });
   it("assigns all 1687 words to exactly one short course, with real Chinese meanings", () => {
     const ids = vocabularyLessons.flatMap((lesson) => lesson.words.map((word) => word.id));
     expect(ids.slice().sort()).toEqual(courseWords.map((word) => word.id).sort());

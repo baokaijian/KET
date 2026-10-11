@@ -2,6 +2,8 @@ import { test, expect } from "@playwright/test";
 import { childThemes } from "../../src/data/child-course.js";
 import { courseWords, courseWordById } from "../../src/data/curriculum.js";
 import { wordImages } from "../../src/data/word-images.js";
+import { familyImages } from "../../src/data/family-images.js";
+import { homeImages } from "../../src/data/home-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 
 test.beforeEach(async ({ page }) => {
@@ -54,6 +56,53 @@ test("daily eight-word lesson resumes after leaving and reloading without demand
   expect(stored.mastered).toEqual([]);
   expect(Object.keys(stored.dailyPlans)).toHaveLength(1);
   expect(Object.keys(stored.memory)).toHaveLength(8);
+});
+
+for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
+  await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
+  const theme = childThemes.find((item) => item.id === themeId);
+  const completed = childThemes.slice(0, childThemes.indexOf(theme));
+  await page.addInitScript((snapshot) => localStorage.setItem("sparks_learning_v2", JSON.stringify(snapshot)), {
+    seen: completed.flatMap((theme) => theme.vocabulary.words.map((word) => word.id)),
+    completed: completed.flatMap((theme) => [theme.vocabulary.id, theme.sentences.id, theme.story.id]),
+  });
+  await page.goto("./#today");
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText(theme.title);
+  await expect(page.locator(".preview-word img")).toHaveCount(8);
+  for (const word of theme.vocabulary.words) {
+    const image = images[word.id];
+    const card = page.locator(".preview-word").filter({ has: page.getByRole("heading", { name: word.word, exact: true }) });
+    await expect(card).toContainText(image.context.sentence);
+    await expect(card).toContainText(image.context.translation);
+    await expect(card.locator("img")).toHaveAttribute("alt", image.alt);
+    const play = card.getByRole("button", { name: `听 ${word.word} 的图片例句`, exact: true });
+    const buttonBounds = await play.boundingBox();
+    const cardBounds = await card.boundingBox();
+    expect(buttonBounds.width).toBeGreaterThanOrEqual(44);
+    expect(buttonBounds.height).toBeGreaterThanOrEqual(44);
+    expect(buttonBounds.x + buttonBounds.width).toBeLessThanOrEqual(cardBounds.x + cardBounds.width);
+    await play.click();
+    await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(image.context.sentence);
+  }
+  await page.locator(".preview-word img").evaluateAll(async (images) => { await Promise.all(images.map((img) => img.decode())); });
+  await page.evaluate(() => { window.scrollTo(0, 0); });
+  await page.screenshot({ path: info.outputPath(`${themeId}-daily.png`), fullPage: true });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByRole("button", { name: "开始学习", exact: true }).click();
+  const firstImage = images[theme.vocabulary.words[0].id];
+  await expect(page.locator(".word-detail")).toContainText(firstImage.context.translation);
+  await page.getByRole("button", { name: "朗读例句", exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(firstImage.context.sentence);
+  await page.getByRole("button", { name: "返回", exact: true }).click();
+  await page.getByRole("navigation").getByRole("link", { name: "学习天地", exact: true }).click();
+  const dictionaryWord = courseWordById[dictionaryId];
+  const dictionaryImage = images[dictionaryId];
+  await page.getByRole("textbox", { name: "搜索单词或中文" }).fill(dictionaryWord.word);
+  await page.locator(".dictionary-row").filter({ has: page.getByText(dictionaryWord.word, { exact: true }) }).locator(".dictionary-word").click();
+  await expect(page.getByRole("dialog")).toContainText(`照片对应：${dictionaryImage.meaning}`);
+  await expect(page.getByRole("dialog")).toContainText(dictionaryImage.context.translation);
+  await page.getByRole("button", { name: "朗读例句", exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__spoken.at(-1))).toBe(dictionaryImage.context.sentence);
 });
 
 test("all twelve child themes support every word, sentence and story activity", async ({ page }, info) => {

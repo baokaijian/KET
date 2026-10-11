@@ -311,7 +311,7 @@ function Library({ progress, start, say, curriculum, produce }) {
               label="播放单词发音"
             />
             {selected.sentence && (
-              <blockquote lang="en">{selected.sentence}</blockquote>
+              <div className="example"><blockquote lang="en">{selected.sentence}</blockquote><p>{selected.sentenceTranslation}</p><SoundButton text={selected.sentence} say={say} label="朗读例句" /></div>
             )}
             <button className="quiet-button" onClick={() => setSelected(null)}>
               返回词库

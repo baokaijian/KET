@@ -4,13 +4,26 @@ import { grammarLessons } from "./grammar.js";
 import { skillLessons, productionTasks } from "./skill-lessons.js";
 import { getSpeakableWordText } from "../utils/speechText.js";
 import { courseUnitFor } from "./course-topics.js";
+import { meaningKey } from "./meaning-groups.js";
 
 export const courseWords = allKetWords.map(dictionaryEntry);
 export const courseWordById = Object.fromEntries(courseWords.map((word) => [word.id, word]));
+const wordsByTopic = Object.fromEntries(topicCategories.map((topic) => [topic.id, courseWords.filter((word) => word.topic === topic.id)]));
 
-export function vocabularyQuestions(words, pool = courseWords) {
+export function vocabularyQuestions(words, pool) {
   return words.map((word, index) => {
-    const remaining = [...new Map(pool.filter((other) => other.id !== word.id && other.translation !== word.translation).map((other) => [other.translation, other])).values()];
+    const sameTopic = wordsByTopic[word.topic] || [];
+    const distinct = new Map();
+    const addCandidates = (candidates) => {
+      for (const other of candidates) {
+        const key = meaningKey(other);
+        if (other.id !== word.id && key !== meaningKey(word) && !distinct.has(key)) distinct.set(key, other);
+      }
+    };
+    addCandidates(pool || sameTopic);
+    if (distinct.size < 2) addCandidates(sameTopic);
+    if (distinct.size < 2) addCandidates(courseWords);
+    const remaining = [...distinct.values()];
     const offsetInPool = index % remaining.length;
     const distractors = [...remaining.slice(offsetInPool), ...remaining.slice(0, offsetInPool)].slice(0, 2);
     const choices = [word, ...distractors];

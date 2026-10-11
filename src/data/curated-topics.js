@@ -5,7 +5,7 @@ export const curatedTopicGroups = {
   daily_starters: "actually|almost|as|as well|at all|but|certainly|else|enough|especially|even|exactly|except|few|for|however|if|including|instead|lots / a lot|maybe|mine|of|only|or|other|per|perhaps|possibly|probably|quite|really|several|so|such|than|the|to|together|too|variety|various|very|whole|with|without",
   exam_expressions: "advice|anyway|excuse|Guess what?|oh|oh dear!|OK / okay|pardon|poor thing / you|wow",
   shopping_work: "available|bag",
-  family_friends: "birth|born|crowd|kiss|life|national|nationality",
+  family_friends: "birth|born|crowd|kiss|life|national|nationality|mom|mum|dad|grandma|grandpa",
   feelings_descriptions: "broken|colour|extra|fair|fantastic|full|impossible|little|luckily|missing|pity|possible|shame|trouble|unfortunately|worry",
   home_room: "build|fix|gas|indoor|indoors|shampoo|sleep|tidy",
   city_travel: "gas station|lost|stamp",

@@ -654,7 +654,7 @@ export const meaningCorrections = {
   "mineral water": "矿泉水",
   "minus": "减；减去；负的",
   "missing": "丢失的；失踪的；缺少的",
-  "mix": "混合；拌匀；混合物",
+  "mix": "混合；拌匀",
   "model": "模型；型号；模特",
   "mom": "妈妈（美式非正式称呼）",
   "more": "更多的；更；另外（much、many 的比较级）",

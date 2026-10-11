@@ -17,6 +17,31 @@
 
 共同限制：真实感摄影、方形构图、清楚主体、自然光，无标语、品牌标记、水印、拼图或泛用图标。
 
+## 家庭与房间主题（2026-10-11）
+
+使用内置 imagegen，每个词独立调用。十六张源图均实际查看后通过代理视觉复核，转换为 640 × 640 WebP；未使用共享场景裁剪来充当不同词的图片。提示词主体、场景句子、视觉依据与哈希分别保存在 `src/data/family-images.js` 和 `src/data/home-images.js`，按逐词 ID 记录。
+
+| 单词 | 最终图片 | 提示词主体 / 实际核验的场景 |
+| --- | --- | --- |
+| mother | public/word-images/l10_mother.webp | 母亲在家给孩子梳头，上学前照料；句子明确母亲角色。 |
+| father | public/word-images/l10_father.webp | 父亲在家门口蹲下帮孩子系鞋带；句子明确父亲角色。 |
+| sister | public/word-images/l1_sister.webp | 年长女孩和年幼男孩一起画画；对应“姐姐”，不用成人肖像。 |
+| brother | public/word-images/l10_brother.webp | 年长男孩帮年幼女孩搭积木塔；对应“哥哥”，不与爸爸图混用。 |
+| family | public/word-images/l10_family.webp | 一家人在家一起吃饭交谈，所有人物清楚，不只拍食物。 |
+| grandmother | public/word-images/l10_grandmother.webp | 年长女性在家给孩子读绘本；句子明确奶奶角色，而不是授课老师。 |
+| grandfather | public/word-images/l10_grandfather.webp | 年长男性与孩子在家中花园种花；句子明确爷爷角色。 |
+| baby | public/word-images/l2_baby.webp | 清醒婴儿在游戏垫上微笑，身体与婴儿特征可见。 |
+| house | public/word-images/l3_house.webp | 完整两层房屋外观，有屋顶、入口、窗户和花园，不是玩具或单个房间。 |
+| room | public/word-images/l3_room.webp | 房间全景，有墙角、天花板、地板、窗户、床与书架，空间而非单个物件为主体。 |
+| door | public/word-images/l3_door.webp | 打开的蓝色实心室内门，门板、把手、合页与门框清楚。 |
+| window | public/word-images/l5_window.webp | 白色窗框、透明玻璃、窗台与打开的窗扇，透过玻璃能看到花园。 |
+| chair | public/word-images/l3_chair.webp | 单把木椅，靠背、绿色坐垫与四条腿完整可见，没有桌子。 |
+| table | public/word-images/l3_table.webp | 单张圆形木桌，平桌面与四条腿可见，没有抽屉、文具或椅子。 |
+| bed | public/word-images/l3_bed.webp | 单人床，床头、床尾、床垫、枕头与绿色毯子完整可见。 |
+| lamp | public/word-images/l10_lamp.webp | 点亮的红灯罩台灯，白色支柱、底座和电线清楚，不用吊灯代替。 |
+
+共同限制：方形真实感照片、明亮自然或柔和光照、清楚完整主体、无文字、水印、品牌、图标或拼图。家庭关系由明确教学语境建立，不能从照片外貌推断人物的真实亲属关系。不同家庭结构均成立，该照片只是一个例子。
+
 ## 后续完整队列
 
 `src/data/word-image-plans.js` 为全部 1687 个词建立唯一文件路径、指定 KET 词义、词性、教学场景和逐词提示词。该队列只用于制作，不把提示词视作图片已存在的证明，不自动写入通过状态。抽象词必须继续检查生成场景是否真的能表达其含义。

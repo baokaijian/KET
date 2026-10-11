@@ -28,7 +28,7 @@ export function dailyVocabularyLesson(plan, theme, curriculum, progress) {
   const base = curriculum.vocabularyLessons.find((lesson) => lesson.id === plan.vocabularyLessonId) || theme.vocabulary;
   const covered = base.words.every((word) => progress.seen.includes(word.id) || plan.newWords.includes(word.id));
   return { ...base, id: `daily-words-${plan.day}`, completionId: covered ? base.id : "", words,
-    questions: curriculum.vocabularyQuestions(words) };
+    questions: curriculum.vocabularyQuestions(words, base.words) };
 }
 
 export function saveDailyPlan(progress, plan) {

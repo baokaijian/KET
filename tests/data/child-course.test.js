@@ -5,6 +5,8 @@ import { vocabularyLessons, vocabularyQuestions } from "../../src/data/curriculu
 import { childThemes, childLessons } from "../../src/data/child-course.js";
 import { countEnglishWords } from "../../src/utils/learningProgress.js";
 import { curatedTopics, curatedTopicGroups } from "../../src/data/curated-topics.js";
+import { familyImages } from "../../src/data/family-images.js";
+import { homeImages } from "../../src/data/home-images.js";
 
 describe("whole-bank meaning, POS and theme regressions", () => {
   it("places calendar, spatial and formerly unclassified words into explicit semantic groups", () => {
@@ -45,6 +47,24 @@ describe("whole-bank meaning, POS and theme regressions", () => {
   });
 });
 describe("six-year-old listening and reading", () => {
+  for (const [themeId, images] of [["family", familyImages], ["home", homeImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
+    const words = childThemes.find((theme) => theme.id === themeId).vocabulary.words;
+    expect(Object.keys(images).sort()).toEqual(words.map((word) => word.id).sort());
+    for (const word of words) {
+      const image = images[word.id];
+      expect(word.image).toEqual(image);
+      expect(word.sentence).toBe(image.context.sentence);
+      expect(word.sentenceTranslation).toBe(image.context.translation);
+      expect(word.sentence.toLowerCase()).toContain(word.word.toLowerCase());
+      expect(word.sentenceTranslation).toMatch(/[\u4e00-\u9fff]/);
+      expect(image.generationPrompt.length).toBeGreaterThan(80);
+      expect(countEnglishWords(word.sentence)).toBeLessThanOrEqual(10);
+    }
+    if (themeId === "family") {
+      expect(familyImages.l1_sister.meaning).toBe("姐姐");
+      expect(familyImages.l10_brother.meaning).toBe("哥哥");
+    }
+  });
   it("provides twelve themes with eight words, six sentences and one original short story each", () => {
     expect(childThemes).toHaveLength(12);
     for (const theme of childThemes) {

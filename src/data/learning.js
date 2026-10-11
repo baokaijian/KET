@@ -251,12 +251,13 @@ export const speakingPrompts = [
 export function dictionaryEntry(word) {
   const entry = withCorrectMeaning(word);
   const reviewed = wordById[word.id];
+  const image = reviewed?.image || additionalImages[word.id] || null;
   return {
     ...entry,
     phonetic: reviewed?.phonetic || "",
-    image: reviewed?.image || additionalImages[word.id] || null,
+    image,
     contentReviewed: true,
-    sentence: reviewed?.sentence || "",
-    sentenceTranslation: reviewed?.sentenceTranslation || "",
+    sentence: reviewed?.sentence || image?.context?.sentence || "",
+    sentenceTranslation: reviewed?.sentenceTranslation || image?.context?.translation || "",
   };
 }

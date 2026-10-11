@@ -1,4 +1,4 @@
-import { BookOpen, Headphones, RotateCcw, ArrowRight, CheckCircle2 } from "lucide-react";
+import { BookOpen, Headphones, RotateCcw, ArrowRight, CheckCircle2, Volume2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import WordIllustration from "./WordIllustration.jsx";
 import { buildDailyPlan, dailyVocabularyLesson, reviewQuestions } from "../utils/dailyPlan.js";
@@ -27,7 +27,7 @@ export default function DailyLearning({ curriculum, progress, launch, save, say 
       <article><Headphones size={23} /><div><h3>听懂句子</h3><p>6 个句子 · 先听，再理解</p></div><button className="secondary" onClick={() => begin(theme.sentences)}>{progress.completed.includes(theme.sentences.id) ? <CheckCircle2 size={17} /> : null}听读句子</button></article>
       <article><BookOpen size={23} /><div><h3>{plan.readingStage === 2 ? "阅读进阶故事" : "阅读小故事"}</h3><p>{plan.readingStage === 2 ? "分句听读 · 慢慢连成一篇" : "1 篇生活故事"} · {story.questions.length} 道理解题</p></div><button className="secondary" onClick={() => begin(story)}>{progress.completed.includes(story.id) ? <CheckCircle2 size={17} /> : null}打开故事</button></article>
     </div>
-    {!!words.length && <><div className="section-heading"><h2>今天的新朋友</h2><span className="tiny">听一听，看看它的意思</span></div><div className="word-grid">{words.map((word) => <article className="preview-word" key={word.id}><WordIllustration word={word} /><div className="word-caption"><div><h3 lang="en">{word.word}</h3><small className="part-of-speech">{word.partOfSpeechLabel}</small><p>{word.translation}</p></div><button className="icon-button" aria-label={`听 ${word.word} 的发音`} title={`听 ${word.word} 的发音`} onClick={() => say(getSpeakableWordText(word))}><Headphones size={19} /></button></div></article>)}</div></>}
+    {!!words.length && <><div className="section-heading"><h2>今天的新朋友</h2><span className="tiny">听一听，看看它的意思</span></div><div className="word-grid">{words.map((word) => <article className="preview-word" key={word.id}><WordIllustration word={word} /><div className="word-caption"><div><h3 lang="en">{word.word}</h3><small className="part-of-speech">{word.partOfSpeechLabel}</small><p>{word.translation}</p></div><button className="icon-button" aria-label={`听 ${word.word} 的发音`} title={`听 ${word.word} 的发音`} onClick={() => say(getSpeakableWordText(word))}><Headphones size={19} /></button></div>{word.image?.context && <div className="photo-context"><div><p lang="en">{word.image.context.sentence}</p><p className="translation">{word.image.context.translation}</p></div><button className="icon-button" aria-label={`听 ${word.word} 的图片例句`} title={`听 ${word.word} 的图片例句`} onClick={() => say(word.image.context.sentence)}><Volume2 size={17} /></button></div>}</article>)}</div></>}
     <p className="tiny">学习当天再见一次，之后逐步延长复习间隔。听懂和读懂分别记录；漏学不清零，复习多时自动减少新词。</p>
   </section>;
 }

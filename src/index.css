@@ -421,6 +421,18 @@ button:not(:disabled):active {
   height: 33px;
   background: #eef5f0;
 }
+.photo-context {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  align-items: start;
+  gap: 8px;
+  margin: 0 14px;
+  padding: 12px 0 16px;
+  border-top: 1px solid var(--line);
+}
+.photo-context p { font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.photo-context .translation { color: var(--muted); font-size: 12px; margin-top: 5px; }
+.photo-context .icon-button { width: 44px; height: 44px; }
 .lesson-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -68,7 +68,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 1 | daily_starters | l1_question | question | n. 名词 | question | not published | 问题 | not published | provided | pending |  |
 | 1 | daily_starters | l1_say | say | v. 动词 | say | not published | 说；说出 | not published | provided | pending |  |
 | 1 | school_library | l1_second | second | adj. 形容词 / det. 限定词 / n. 名词 | second | not published | 秒；第二；第二的 | not published | provided | pending |  |
-| 1 | family_friends | l1_sister | sister | n. 名词 | sister | not published | 姐姐/妹妹 | not published | provided | pending |  |
+| 1 | family_friends | l1_sister | sister | n. 名词 | sister | not published | 姐姐/妹妹 | word-images/l1_sister.webp | provided | pending |  |
 | 1 | daily_starters | l1_some | some | det. 限定词 / pron. 代词 | some | not published | 一些 | not published | provided | pending |  |
 | 1 | school_library | l1_sorry | sorry | adj. 形容词 | sorry | not published | 抱歉的 | not published | provided | pending |  |
 | 1 | nature_weather | l1_spring | spring | n. 名词 | spring | not published | 春天；弹簧（另一名词含义） | not published | provided | pending |  |
@@ -97,13 +97,13 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 1 | daily_starters | l1_your | your | det. 限定词 | your | not published | 你的；你们的 | not published | provided | pending |  |
 | 2 | body_health | l2_accident | accident | n. 名词 | accident | not published | 事故 | not published | provided | pending |  |
 | 2 | body_health | l2_ambulance | ambulance | n. 名词 | ambulance | not published | 救护车 | not published | provided | pending |  |
-| 2 | food_cafe | l2_apple | apple | n. 名词 | apple | /ˈæp.əl/ | 苹果 | learning-images/apple.webp | provided | pending |  |
+| 2 | food_cafe | l2_apple | apple | n. 名词 | apple | /ˈæp.əl/ | 苹果 | word-images/l2_apple.webp | provided | pending |  |
 | 2 | body_health | l2_appointment | appointment | n. 名词 | appointment | not published | 预约 | not published | provided | pending |  |
 | 2 | body_health | l2_arm | arm | n. 名词 | arm | not published | 手臂 | not published | provided | pending |  |
-| 2 | family_friends | l2_baby | baby | n. 名词 | baby | not published | 宝宝 | not published | provided | pending |  |
+| 2 | family_friends | l2_baby | baby | n. 名词 | baby | not published | 宝宝 | word-images/l2_baby.webp | provided | pending |  |
 | 2 | body_health | l2_back | back | adj. 形容词 / adv. 副词 / n. 名词 | back | not published | 背部；后面；回来；向后 | not published | provided | pending |  |
 | 2 | food_cafe | l2_bake | bake | v. 动词 | bake | not published | 烘烤（用烤箱烤食物） | not published | provided | pending |  |
-| 2 | food_cafe | l2_banana | banana | n. 名词 | banana | /bəˈnɑː.nə/ | 香蕉 | learning-images/banana.webp | provided | pending |  |
+| 2 | food_cafe | l2_banana | banana | n. 名词 | banana | /bəˈnɑː.nə/ | 香蕉 | word-images/l2_banana.webp | provided | pending |  |
 | 2 | food_cafe | l2_bean | bean | n. 名词 | bean | not published | 豆；豆子 | not published | provided | pending |  |
 | 2 | food_cafe | l2_biscuit | biscuit | n. 名词 | biscuit | not published | 饼干（英式英语） | not published | provided | pending |  |
 | 2 | body_health | l2_blood | blood | n. 名词 | blood | not published | 血；血液 | not published | provided | pending |  |
@@ -113,7 +113,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | food_cafe | l2_bottle | bottle | n. 名词 | bottle | not published | 瓶子 | not published | provided | pending |  |
 | 2 | food_cafe | l2_bowl | bowl | n. 名词 | bowl | not published | 碗 | not published | provided | pending |  |
 | 2 | body_health | l2_brain | brain | n. 名词 | brain | not published | 大脑 | not published | provided | pending |  |
-| 2 | food_cafe | l2_bread | bread | n. 名词 | bread | /bred/ | 面包 | learning-images/bread.webp | provided | pending |  |
+| 2 | food_cafe | l2_bread | bread | n. 名词 | bread | /bred/ | 面包 | word-images/l2_bread.webp | provided | pending |  |
 | 2 | daily_starters | l2_break | break | n. 名词 / v. 动词 | break | not published | 休息；打破 | not published | provided | pending |  |
 | 2 | food_cafe | l2_breakfast | breakfast | n. 名词 | breakfast | not published | 早餐 | not published | provided | pending |  |
 | 2 | food_cafe | l2_burger | burger | n. 名词 | burger | not published | 汉堡包 | not published | provided | pending |  |
@@ -160,7 +160,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | body_health | l2_fall | fall | n. 名词 / v. 动词 | fall | not published | 落下；跌倒；秋天（美式英语） | not published | provided | pending |  |
 | 2 | body_health | l2_feel | feel | v. 动词 | feel | not published | 感觉 | not published | provided | pending |  |
 | 2 | body_health | l2_finger | finger | n. 名词 | finger | not published | 手指 | not published | provided | pending |  |
-| 2 | animals | l2_fish | fish | n. 名词 / v. 动词 | fish | /fɪʃ/ | 鱼；鱼肉；钓鱼（动词） | learning-images/fish.webp | provided | pending |  |
+| 2 | animals | l2_fish | fish | n. 名词 / v. 动词 | fish | /fɪʃ/ | 鱼；鱼肉；钓鱼（动词） | word-images/l2_fish.webp | provided | pending |  |
 | 2 | body_health | l2_fit | fit | adj. 形容词 | fit | not published | 健康的；合适的；合身 | not published | provided | pending |  |
 | 2 | food_cafe | l2_food | food | n. 名词 | food | not published | 食物 | not published | provided | pending |  |
 | 2 | body_health | l2_foot | foot | n. 名词 | foot | not published | 脚 | not published | provided | pending |  |
@@ -193,7 +193,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 2 | food_cafe | l2_meat | meat | n. 名词 | meat | not published | 肉；食用的肉 | not published | provided | pending |  |
 | 2 | body_health | l2_medicine | medicine | n. 名词 | medicine | not published | 药 | not published | provided | pending |  |
 | 2 | food_cafe | l2_melon | melon | n. 名词 | melon | not published | 瓜；甜瓜 | not published | provided | pending |  |
-| 2 | food_cafe | l2_milk | milk | n. 名词 | milk | /mɪlk/ | 牛奶 | learning-images/milk.webp | provided | pending |  |
+| 2 | food_cafe | l2_milk | milk | n. 名词 | milk | /mɪlk/ | 牛奶 | word-images/l2_milk.webp | provided | pending |  |
 | 2 | body_health | l2_neck | neck | n. 名词 | neck | not published | 脖子；颈部 | not published | provided | pending |  |
 | 2 | body_health | l2_nose | nose | n. 名词 | nose | not published | 鼻子 | not published | provided | pending |  |
 | 2 | food_cafe | l2_oil | oil | n. 名词 | oil | not published | 油；食用油；石油 | not published | provided | pending |  |
@@ -247,18 +247,18 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 3 | home_room | l3_armchair | armchair | n. 名词 | armchair | not published | 扶手椅 | not published | provided | pending |  |
 | 3 | home_room | l3_bath | bath | n. 名词 | bath | not published | 浴缸；洗澡；泡澡 | not published | provided | pending |  |
 | 3 | home_room | l3_bathroom | bathroom | n. 名词 | bathroom | not published | 浴室 | not published | provided | pending |  |
-| 3 | home_room | l3_bed | bed | n. 名词 | bed | not published | 床 | not published | provided | pending |  |
+| 3 | home_room | l3_bed | bed | n. 名词 | bed | not published | 床 | word-images/l3_bed.webp | provided | pending |  |
 | 3 | home_room | l3_bedroom | bedroom | n. 名词 | bedroom | not published | 卧室 | not published | provided | pending |  |
 | 3 | home_room | l3_blanket | blanket | n. 名词 | blanket | not published | 毛毯 | not published | provided | pending |  |
 | 3 | home_room | l3_bookcase | bookcase | n. 名词 | bookcase | not published | 书柜 | not published | provided | pending |  |
 | 3 | home_room | l3_box | box | n. 名词 | box | not published | 盒子 | not published | provided | pending |  |
 | 3 | home_room | l3_carpet | carpet | n. 名词 | carpet | not published | 地毯 | not published | provided | pending |  |
-| 3 | home_room | l3_chair | chair | n. 名词 | chair | not published | 椅子 | not published | provided | pending |  |
+| 3 | home_room | l3_chair | chair | n. 名词 | chair | not published | 椅子 | word-images/l3_chair.webp | provided | pending |  |
 | 3 | home_room | l3_cupboard | cupboard | n. 名词 | cupboard | not published | 碗橱 | not published | provided | pending |  |
 | 3 | home_room | l3_curtain | curtain | n. 名词 | curtain | not published | 窗帘；帘子 | not published | provided | pending |  |
 | 3 | school_library | l3_degree | degree | n. 名词 | degree | not published | 度（角度或温度的单位）；学位 | not published | provided | pending |  |
 | 3 | home_room | l3_dining_room | dining room | n. 名词 | dining room | not published | 餐厅；家中用餐的房间 | not published | provided | pending |  |
-| 3 | home_room | l3_door | door | n. 名词 | door | not published | 门 | not published | provided | pending |  |
+| 3 | home_room | l3_door | door | n. 名词 | door | not published | 门 | word-images/l3_door.webp | provided | pending |  |
 | 3 | home_room | l3_downstairs | downstairs | adv. 副词 | downstairs | not published | 在楼下；往楼下；楼下的 | not published | provided | pending |  |
 | 3 | home_room | l3_drawer | drawer | n. 名词 | drawer | not published | 抽屉 | not published | provided | pending |  |
 | 3 | home_room | l3_entrance | entrance | n. 名词 | entrance | not published | 入口；进入 | not published | provided | pending |  |
@@ -270,7 +270,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 3 | home_room | l3_gate | gate | n. 名词 | gate | not published | 大门 | not published | provided | pending |  |
 | 3 | home_room | l3_hall | hall | n. 名词 | hall | not published | 大厅 | not published | provided | pending |  |
 | 3 | home_room | l3_home | home | adv. 副词 / n. 名词 | home | not published | 家 | not published | provided | pending |  |
-| 3 | home_room | l3_house | house | n. 名词 | house | not published | 房子 | not published | provided | pending |  |
+| 3 | home_room | l3_house | house | n. 名词 | house | not published | 房子 | word-images/l3_house.webp | provided | pending |  |
 | 3 | home_room | l3_key | key | n. 名词 | key | not published | 钥匙 | not published | provided | pending |  |
 | 3 | home_room | l3_living_room | living room | n. 名词 | living room | not published | 客厅 | not published | provided | pending |  |
 | 3 | time_calendar | l3_moment | moment | n. 名词 | moment | not published | 片刻；某个时刻 | not published | provided | pending |  |
@@ -278,14 +278,14 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 3 | home_room | l3_quarter | quarter | n. 名词 | quarter | not published | 四分之一；十五分钟 | not published | provided | pending |  |
 | 3 | home_room | l3_refrigerator | refrigerator | n. 名词 | refrigerator | not published | 冰箱（也可简称 fridge） | not published | provided | pending |  |
 | 3 | home_room | l3_roof | roof | n. 名词 | roof | not published | 屋顶 | not published | provided | pending |  |
-| 3 | home_room | l3_room | room | n. 名词 | room | not published | 房间 | not published | provided | pending |  |
+| 3 | home_room | l3_room | room | n. 名词 | room | not published | 房间 | word-images/l3_room.webp | provided | pending |  |
 | 3 | home_room | l3_rubbish | rubbish | n. 名词 | rubbish | not published | 垃圾（英式英语） | not published | provided | pending |  |
 | 3 | home_room | l3_safe | safe | adj. 形容词 | safe | not published | 安全的 | not published | provided | pending |  |
 | 3 | home_room | l3_shelf | shelf | n. 名词 | shelf | not published | 搁板/书架 | not published | provided | pending |  |
 | 3 | home_room | l3_shower | shower | n. 名词 | shower | not published | 淋浴 | not published | provided | pending |  |
 | 3 | home_room | l3_sink | sink | n. 名词 | sink | not published | 洗涤槽；洗手池；下沉（动词） | not published | provided | pending |  |
 | 3 | home_room | l3_sofa | sofa | n. 名词 | sofa | not published | 沙发 | not published | provided | pending |  |
-| 3 | home_room | l3_table | table | n. 名词 | table | not published | 桌子 | not published | provided | pending |  |
+| 3 | home_room | l3_table | table | n. 名词 | table | not published | 桌子 | word-images/l3_table.webp | provided | pending |  |
 | 3 | body_health | l3_temperature | temperature | n. 名词 | temperature | not published | 温度 | not published | provided | pending |  |
 | 3 | home_room | l3_toilet | toilet | n. 名词 | toilet | not published | 厕所；坐便器 | not published | provided | pending |  |
 | 3 | home_room | l3_towel | towel | n. 名词 | towel | not published | 毛巾 | not published | provided | pending |  |
@@ -355,7 +355,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 5 | city_travel | l5_bookshop | bookshop | n. 名词 | bookshop | not published | 书店（常用于英式英语） | not published | provided | pending |  |
 | 5 | city_travel | l5_bookstore | bookstore | n. 名词 | bookstore | not published | 书店（常用于美式英语） | not published | provided | pending |  |
 | 5 | city_travel | l5_building | building | n. 名词 | building | not published | 大楼/建筑物 | not published | provided | pending |  |
-| 5 | city_travel | l5_bus | bus | n. 名词 | bus | /bʌs/ | 公共汽车 | learning-images/bus.webp | provided | pending |  |
+| 5 | city_travel | l5_bus | bus | n. 名词 | bus | /bʌs/ | 公共汽车 | word-images/l5_bus.webp | provided | pending |  |
 | 5 | city_travel | l5_bus_stop | bus stop | n. 名词 | bus stop | not published | 公共汽车站；公交站牌处 | not published | provided | pending |  |
 | 5 | city_travel | l5_car | car | n. 名词 | car | not published | 小汽车 | not published | provided | pending |  |
 | 5 | city_travel | l5_car_park | car park | n. 名词 | car park | not published | 停车场（英式英语） | not published | provided | pending |  |
@@ -432,7 +432,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 5 | city_travel | l5_weather | weather | n. 名词 | weather | not published | 天气 | not published | provided | pending |  |
 | 5 | city_travel | l5_wheel | wheel | n. 名词 | wheel | not published | 轮子；车轮 | not published | provided | pending |  |
 | 5 | city_travel | l5_wind | wind | n. 名词 | wind | not published | 风 | not published | provided | pending |  |
-| 5 | city_travel | l5_window | window | n. 名词 | window | not published | 窗户 | not published | provided | pending |  |
+| 5 | city_travel | l5_window | window | n. 名词 | window | not published | 窗户 | word-images/l5_window.webp | provided | pending |  |
 | 5 | city_travel | l5_windy | windy | adj. 形容词 | windy | not published | 刮风的 | not published | provided | pending |  |
 | 6 | nature_weather | l6_air | air | n. 名词 | air | not published | 空气 | not published | provided | pending |  |
 | 6 | city_travel | l6_airport | airport | n. 名词 | airport | not published | 机场 | not published | provided | pending |  |
@@ -479,7 +479,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 7 | sports_hobbies | l7_basketball | basketball | n. 名词 | basketball | not published | 篮球 | not published | provided | pending |  |
 | 7 | sports_hobbies | l7_bat | bat | n. 名词 | bat | not published | 球棒；蝙蝠（另一名词含义） | not published | provided | pending |  |
 | 7 | sports_hobbies | l7_beach | beach | n. 名词 | beach | not published | 沙滩/海滩 | not published | provided | pending |  |
-| 7 | sports_hobbies | l7_bicycle | bicycle | n. 名词 | bicycle | /ˈbaɪ.sɪ.kəl/ | 自行车 | learning-images/bicycle.webp | provided | pending |  |
+| 7 | sports_hobbies | l7_bicycle | bicycle | n. 名词 | bicycle | /ˈbaɪ.sɪ.kəl/ | 自行车 | word-images/l7_bicycle.webp | provided | pending |  |
 | 7 | sports_hobbies | l7_camp | camp | v. 动词 | camp | not published | 露营/营地 | not published | provided | pending |  |
 | 7 | sports_hobbies | l7_camping | camping | n. 名词 | camping | not published | 露营活动 | not published | provided | pending |  |
 | 7 | sports_hobbies | l7_campsite | campsite | n. 名词 | campsite | not published | 露营地 | not published | provided | pending |  |
@@ -732,8 +732,8 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | school_library | l10_article | article | n. 名词 | article | not published | 文章 | not published | provided | pending |  |
 | 10 | tech_media | l10_at | at | prep. 介词 | at | not published | 在（某地点或时刻）；朝；向 | not published | provided | pending |  |
 | 10 | tech_media | l10_blog | blog | n. 名词 | blog | not published | 博客；写博客 | not published | provided | pending |  |
-| 10 | school_library | l10_book | book | n. 名词 / v. 动词 | book | /bʊk/ | 书（名词）；预订（动词，如订房或订票） | learning-images/book.webp | provided | pending |  |
-| 10 | family_friends | l10_brother | brother | n. 名词 | brother | not published | 哥哥/弟弟 | not published | provided | pending |  |
+| 10 | school_library | l10_book | book | n. 名词 / v. 动词 | book | /bʊk/ | 书（名词）；预订（动词，如订房或订票） | word-images/l10_book.webp | provided | pending |  |
+| 10 | family_friends | l10_brother | brother | n. 名词 | brother | not published | 哥哥/弟弟 | word-images/l10_brother.webp | provided | pending |  |
 | 10 | tech_media | l10_call | call | n. 名词 / v. 动词 | call | not published | 打电话/叫喊 | not published | provided | pending |  |
 | 10 | tech_media | l10_camera | camera | n. 名词 | camera | not published | 照相机 | not published | provided | pending |  |
 | 10 | tech_media | l10_cartoon | cartoon | n. 名词 | cartoon | not published | 卡通片 | not published | provided | pending |  |
@@ -773,8 +773,8 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | tech_media | l10_email | email | n. 名词 / v. 动词 | email | not published | 电子邮件 | not published | provided | pending |  |
 | 10 | tech_media | l10_envelope | envelope | n. 名词 | envelope | not published | 信封 | not published | provided | pending |  |
 | 10 | tech_media | l10_exhibition | exhibition | n. 名词 | exhibition | not published | 展览；展览会 | not published | provided | pending |  |
-| 10 | family_friends | l10_family | family | n. 名词 | family | not published | 家庭 | not published | provided | pending |  |
-| 10 | family_friends | l10_father | father | n. 名词 | father | not published | 爸爸 | not published | provided | pending |  |
+| 10 | family_friends | l10_family | family | n. 名词 | family | not published | 家庭 | word-images/l10_family.webp | provided | pending |  |
+| 10 | family_friends | l10_father | father | n. 名词 | father | not published | 爸爸 | word-images/l10_father.webp | provided | pending |  |
 | 10 | tech_media | l10_festival | festival | n. 名词 | festival | not published | 节日；庆典；艺术节 | not published | provided | pending |  |
 | 10 | tech_media | l10_file | file | n. 名词 | file | not published | 文件 | not published | provided | pending |  |
 | 10 | tech_media | l10_film | film | n. 名词 / v. 动词 | film | not published | 电影 | not published | provided | pending |  |
@@ -782,9 +782,9 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | family_friends | l10_friend | friend | n. 名词 | friend | not published | 朋友 | word-images/l10_friend.webp | provided | pending |  |
 | 10 | family_friends | l10_friendly | friendly | adj. 形容词 | friendly | not published | 友好的 | not published | provided | pending |  |
 | 10 | sports_hobbies | l10_game | game | n. 名词 | game | not published | 游戏；比赛；一局 | not published | provided | pending |  |
-| 10 | family_friends | l10_grandfather | grandfather | n. 名词 | grandfather | not published | 爷爷/外公 | not published | provided | pending |  |
+| 10 | family_friends | l10_grandfather | grandfather | n. 名词 | grandfather | not published | 爷爷/外公 | word-images/l10_grandfather.webp | provided | pending |  |
 | 10 | family_friends | l10_grandma | grandma | n. 名词 | grandma | not published | 奶奶；外婆（非正式称呼） | not published | provided | pending |  |
-| 10 | family_friends | l10_grandmother | grandmother | n. 名词 | grandmother | not published | 奶奶/外婆 | not published | provided | pending |  |
+| 10 | family_friends | l10_grandmother | grandmother | n. 名词 | grandmother | not published | 奶奶/外婆 | word-images/l10_grandmother.webp | provided | pending |  |
 | 10 | family_friends | l10_grandpa | grandpa | n. 名词 | grandpa | not published | 爷爷；外公（非正式称呼） | not published | provided | pending |  |
 | 10 | family_friends | l10_grandparent | grandparent | n. 名词 | grandparent | not published | 祖父、祖母、外公或外婆中的一位 | not published | provided | pending |  |
 | 10 | family_friends | l10_grandson | grandson | n. 名词 | grandson | not published | 孙子；外孙 | not published | provided | pending |  |
@@ -797,7 +797,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | tech_media | l10_instrument | instrument | n. 名词 | instrument | not published | 乐器 | not published | provided | pending |  |
 | 10 | tech_media | l10_internet | internet | n. 名词 | internet | not published | 互联网 | not published | provided | pending |  |
 | 10 | tech_media | l10_keyboard | keyboard | n. 名词 | keyboard | not published | 电脑键盘；电子键盘乐器 | not published | provided | pending |  |
-| 10 | home_room | l10_lamp | lamp | n. 名词 | lamp | not published | 台灯 | not published | provided | pending |  |
+| 10 | home_room | l10_lamp | lamp | n. 名词 | lamp | not published | 台灯 | word-images/l10_lamp.webp | provided | pending |  |
 | 10 | tech_media | l10_laugh | laugh | v. 动词 | laugh | not published | 笑；大笑；笑声（名词） | not published | provided | pending |  |
 | 10 | school_library | l10_licence | licence | n. 名词 | licence | not published | 许可证；执照（英式名词拼写） | not published | provided | pending |  |
 | 10 | tech_media | l10_list | list | n. 名词 | list | not published | 清单；列表；列出 | not published | provided | pending |  |
@@ -808,7 +808,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | school_library | l10_menu | menu | n. 名词 | menu | not published | 菜单；电脑中的功能菜单 | not published | provided | pending |  |
 | 10 | school_library | l10_message | message | n. 名词 / v. 动词 | message | not published | 信息 | not published | provided | pending |  |
 | 10 | family_friends | l10_miss | Miss | n. 名词 / v. 动词 | Miss | not published | 小姐（用于未婚女性姓名前的称呼） | not published | provided | pending |  |
-| 10 | family_friends | l10_mother | mother | n. 名词 | mother | not published | 妈妈 | not published | provided | pending |  |
+| 10 | family_friends | l10_mother | mother | n. 名词 | mother | not published | 妈妈 | word-images/l10_mother.webp | provided | pending |  |
 | 10 | tech_media | l10_mouse | mouse | n. 名词 | mouse | not published | 老鼠；电脑鼠标 | not published | provided | pending |  |
 | 10 | family_friends | l10_ms | Ms | n. 名词 | Ms | not published | 女士（称呼女性，不说明婚姻状况） | not published | provided | pending |  |
 | 10 | family_friends | l10_mum | mum | n. 名词 | mum | not published | 妈妈 | not published | provided | pending |  |
@@ -988,7 +988,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | shopping_work | l12_career | career | n. 名词 | career | not published | 职业；职业生涯 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_carefully | carefully | adv. 副词 | carefully | not published | 仔细地；小心地 | not published | provided | pending |  |
 | 12 | full_review | l12_carry | carry | v. 动词 | carry | not published | 携带 | not published | provided | pending |  |
-| 12 | animals | l12_cat | cat | n. 名词 | cat | /kæt/ | 猫 | learning-images/cat.webp | provided | pending |  |
+| 12 | animals | l12_cat | cat | n. 名词 | cat | /kæt/ | 猫 | word-images/l12_cat.webp | provided | pending |  |
 | 12 | tech_media | l12_cd_player | CD player | n. 名词 | CD player | not published | CD 播放器；光盘播放机 | not published | provided | pending |  |
 | 12 | home_room | l12_ceiling | ceiling | n. 名词 | ceiling | not published | 天花板 | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_celebrate | celebrate | v. 动词 | celebrate | not published | 庆祝 | not published | provided | pending |  |
@@ -1048,7 +1048,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | school_library | l12_discuss | discuss | v. 动词 | discuss | not published | 讨论 | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_dive | dive | v. 动词 | dive | not published | 跳水/潜水 | not published | provided | pending |  |
 | 12 | sports_hobbies | l12_diving | diving | adj. 形容词 | diving | not published | 跳水；潜水运动 | not published | provided | pending |  |
-| 12 | animals | l12_dog | dog | n. 名词 | dog | /dɒɡ/ | 狗 | learning-images/dog.webp | provided | pending |  |
+| 12 | animals | l12_dog | dog | n. 名词 | dog | /dɒɡ/ | 狗 | word-images/l12_dog.webp | provided | pending |  |
 | 12 | sports_hobbies | l12_doll | doll | n. 名词 | doll | not published | 玩偶；洋娃娃 | not published | provided | pending |  |
 | 12 | animals | l12_dolphin | dolphin | n. 名词 | dolphin | not published | 海豚 | not published | provided | pending |  |
 | 12 | animals | l12_donkey | donkey | n. 名词 | donkey | not published | 驴 | not published | provided | pending |  |
@@ -1320,9 +1320,9 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | school_library | l12_minus | minus | prep. 介词 | minus | not published | 减；减去；负的 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_missing | missing | adj. 形容词 | missing | not published | 丢失的；失踪的；缺少的 | not published | provided | pending |  |
 | 12 | school_library | l12_mistake | mistake | n. 名词 | mistake | not published | 错误 | not published | provided | pending |  |
-| 12 | full_review | l12_mix | mix | v. 动词 | mix | not published | 混合；拌匀；混合物 | not published | provided | pending |  |
+| 12 | full_review | l12_mix | mix | v. 动词 | mix | not published | 混合；拌匀 | not published | provided | pending |  |
 | 12 | shopping_work | l12_model | model | n. 名词 | model | not published | 模型；型号；模特 | not published | provided | pending |  |
-| 12 | daily_starters | l12_mom | mom | n. 名词 | mom | not published | 妈妈（美式非正式称呼） | not published | provided | pending |  |
+| 12 | family_friends | l12_mom | mom | n. 名词 | mom | not published | 妈妈（美式非正式称呼） | not published | provided | pending |  |
 | 12 | time_calendar | l12_monday | Monday | n. 名词 | Monday | not published | 星期一 | not published | provided | pending |  |
 | 12 | shopping_work | l12_money | money | n. 名词 | money | not published | 钱 | not published | provided | pending |  |
 | 12 | animals | l12_monkey | monkey | n. 名词 | monkey | not published | 猴子 | not published | provided | pending |  |
@@ -1408,7 +1408,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | nature_weather | l12_path | path | n. 名词 | path | not published | 小路；路径 | not published | provided | pending |  |
 | 12 | school_library | l12_pen | pen | n. 名词 | pen | not published | 钢笔 | word-images/l12_pen.webp | provided | pending |  |
 | 12 | shopping_work | l12_pence | pence | n. 名词 | pence | not published | 便士（penny 的复数，表示金额） | not published | provided | pending |  |
-| 12 | school_library | l12_pencil | pencil | n. 名词 | pencil | /ˈpen.səl/ | 铅笔 | learning-images/pencil.webp | provided | pending |  |
+| 12 | school_library | l12_pencil | pencil | n. 名词 | pencil | /ˈpen.səl/ | 铅笔 | word-images/l12_pencil.webp | provided | pending |  |
 | 12 | school_library | l12_pencil_case | pencil case | n. 名词 | pencil case | not published | 铅笔盒；文具袋 | not published | provided | pending |  |
 | 12 | animals | l12_penguin | penguin | n. 名词 | penguin | not published | 企鹅 | not published | provided | pending |  |
 | 12 | daily_starters | l12_people | people | n. 名词 | people | not published | 人们 | not published | provided | pending |  |
@@ -1453,7 +1453,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | sports_hobbies | l12_puzzle | puzzle | n. 名词 | puzzle | not published | 谜题；智力游戏；拼图 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_quickly | quickly | adv. 副词 | quickly | not published | 迅速地；很快地 | not published | provided | pending |  |
 | 12 | daily_starters | l12_quite | quite | adv. 副词 | quite | not published | 相当；挺；完全（程度取决于搭配） | not published | provided | pending |  |
-| 12 | animals | l12_rabbit | rabbit | n. 名词 | rabbit | /ˈræb.ɪt/ | 兔子 | learning-images/rabbit.webp | provided | pending |  |
+| 12 | animals | l12_rabbit | rabbit | n. 名词 | rabbit | /ˈræb.ɪt/ | 兔子 | word-images/l12_rabbit.webp | provided | pending |  |
 | 12 | nature_weather | l12_rainforest | rainforest | n. 名词 | rainforest | not published | 热带雨林 | not published | provided | pending |  |
 | 12 | tech_media | l12_rap | rap | n. 名词 | rap | not published | 说唱音乐；说唱 | not published | provided | pending |  |
 | 12 | school_library | l12_reading | reading | n. 名词 | reading | not published | 阅读；读书活动 | not published | provided | pending |  |
