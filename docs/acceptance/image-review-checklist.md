@@ -1,6 +1,6 @@
 # 单词与图片复核
 
-图片范围：89 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1598 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：95 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1592 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
@@ -358,7 +358,7 @@
 | l5_building | building | 大楼/建筑物 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_bus | bus | 公共汽车 | 公共汽车 | word-images/l5_bus.webp / A red city passenger bus. | pass | Red passenger bus, multiple windows, seats and passenger doors, not a truck. |
 | l5_bus_stop | bus stop | 公共汽车站；公交站牌处 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_car | car | 小汽车 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_car | car | 小汽车 | 小汽车 | word-images/l5_car.webp / car: a whole blue compact passenger car seen from the front and side | pass | The entire small passenger car has doors, a windscreen, headlights, mirrors and road wheels; not a bus, train or emergency vehicle. |
 | l5_car_park | car park | 停车场（英式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_case | case | 箱子；盒子；情况；案例 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_castle | castle | 城堡 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -405,14 +405,14 @@
 | l5_post_office | post office | 邮局 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_restaurant | restaurant | 饭馆 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_return | return | 回来；返回；归还；往返的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_road | road | 马路 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_road | road | 道路；马路 | 道路；马路 | word-images/l5_road.webp / road: a paved neighbourhood road with a dashed centre line and separate pavements | pass | The broad paved road, centre line, kerbs and separate pavements distinguish the vehicle road from a park path; no children stand in the road. |
 | l5_sailing | sailing | 帆船运动；航行 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_school | school | 学校 | 学校 | word-images/l5_school.webp / school: a primary school building with a visible classroom and playground, children arriving with backpacks | pass | Classroom desks and board are visible through the building windows, with a fenced playground and arriving pupils. |
 | l5_seat | seat | 座位 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_ship | ship | 大船；轮船 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_shop | shop | 商店（名词）；购物（动词） | 商店（名词） | word-images/l5_shop.webp / shop: an open grocery shop with shelves, produce, a checkout counter and a shopper | pass | The whole shop entrance, stocked shelves, produce and checkout establish a grocery shop rather than a cafe or one isolated item. |
 | l5_stadium | stadium | 体育场 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_station | station | 车站 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_station | station | 车站（如火车站、长途汽车站） | 车站（以火车站为例） | word-images/l5_station.webp / station: a railway station with a covered platform, benches, tracks and passengers behind a yellow safety line | pass | Station platform, canopy, entrance building and waiting benches dominate; a train is secondary. Passengers stand or sit behind the yellow safety line. |
 | l5_store | store | 商店（美式英语）；储存（动词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_storm | storm | 暴风雨 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_suitcase | suitcase | 手提箱 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -420,7 +420,7 @@
 | l5_tour | tour | 游览；巡回旅行 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_tourist | tourist | 游客 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_traffic | traffic | 交通 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l5_train | train | 火车；训练（动词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l5_train | train | 火车；列车（名词）；训练（动词） | 火车；列车（名词） | word-images/l5_train.webp / train: a passenger train with a cab and connected carriages on steel railway tracks | pass | The driver cab and three connected passenger sections are fully visible on parallel steel rails; this photo teaches the vehicle noun, not the training verb. |
 | l5_tram | tram | 有轨电车 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_travel | travel | 旅行 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l5_trip | trip | 短途旅行 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -852,7 +852,7 @@
 | l10_telephone | telephone | 电话 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_text | text | 文本；发短信 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_theatre | theatre | 剧院 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l10_ticket | ticket | 票/车票 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l10_ticket | ticket | 票；车票；入场券 | 票（以火车票为例） | word-images/l10_ticket.webp / ticket: a paper train ticket marked TRAIN TICKET and ONE WAY, with a railway platform behind it | pass | A full paper card with legible TRAIN TICKET and ONE WAY sits beside railway context; a fictional teaching example, not a usable ticket, credit card or price label. |
 | l10_video | video | 视频；录像 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_watch | watch | 手表（名词）；观看（动词） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l10_web | web | 万维网；蜘蛛网 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1564,7 +1564,7 @@
 | l12_stay | stay | 停留；待 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_steal | steal | 偷；盗取 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_still | still | 仍然；还；静止的；不动的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_stop | stop | 停止；停下；车站；停留 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_stop | stop | 停止；停下（动词）；停靠站；短暂停留（名词） | 停下（动词） | word-images/l12_stop.webp / stop: an adult and child stand still behind the kerb at a crossing, beside a red pedestrian signal | pass | Both people's feet remain on the pavement behind the kerb; the adult's open palm and illuminated red standing pedestrian show stopping before crossing. The green signal is off. |
 | l12_story | story | 故事；叙述 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_straight | straight | 直的；笔直地；直接地 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_striped | striped | 有条纹的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |

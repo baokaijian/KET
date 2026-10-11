@@ -1,4 +1,4 @@
-# 词性与释义证据复核（购物照片批次）
+# 词性与释义证据复核（购物与出行照片批次）
 
 这是主任务对 Antigravity 报告线索的独立复核，不是 1687 词教师签字验收。英文与原始词性记录仍保留在官方元数据中，教学标签覆盖单独写入 `vocabulary-corrections.js`；中文解释为项目原创简述，不复制词典例句。
 
@@ -29,3 +29,15 @@
 ## 验证范围
 
 新增数据回归检查六个颜色词、far/opposite 的词性与释义、wood/temperature 的核心义和 spring 备注移除；shop/walk 加入名词、动词解释完整性回归。已有全词库回归继续验证每个标签来自源记录或带证据的教学覆盖。浏览器语音 mock 与数据测试不能替代教师语义复核或真机听辨。
+
+## 出行批次补充
+
+| 单词 | 本批处理 | 独立核实依据与边界 |
+| --- | --- | --- |
+| train | 明确“火车；列车（名词）；训练（动词）”，照片只解释列车 | [Cambridge Learner's Dictionary](https://dictionary.cambridge.org/dictionary/learner-english/train) 分列交通工具与训练用法；不同词典给出的动词难度等级不一致，不据此删除官方词表已有 n/v 元数据，也不宣称两义均为该词典 A2 |
+| stop | “车站”细化为“停靠站”，短暂停留明确为名词；停止、停下明确为动词 | [Cambridge Learner's Dictionary](https://dictionary.cambridge.org/dictionary/learner-english/stop) 区分活动结束、短时停下、上下客地点与途中停留；照片为过路前停下，不把公交站或 stop 标语当成动词图片 |
+| station | 用火车站、长途汽车站举例说明“车站” | [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english/station) 的交通义说明建筑与周围上下客区域；照片中的站台、候车棚、座椅与轨道明确该例，不声称 station 只有交通义 |
+| ticket | “票；车票；入场券”，不局限于车票 | [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english/ticket) 的核心名词义包括出行与活动的付费凭证；照片为虚构教学火车票，不是可使用的证件，也不是所有票的样式 |
+| road | “道路；马路”，覆盖供车辆行驶的路面 | [Cambridge Learner's Dictionary](https://dictionary.cambridge.org/dictionary/learner-english/road) 的道路名词义；照片有铺装路面、中心线及独立人行道，不用公园小径代替 |
+
+bus 与 bicycle 的照片文件未改变，主任务再次查看后，把图片例句改为可见的红色公交车、两个车轮；原“上学”“去公园”仍在儿童句子课语境中，不让静物图承担看不到的目的地信息。train/stop 新增名词、动词完整性回归；出行八词检查图片、双语短句和朗读文本。

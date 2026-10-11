@@ -1,6 +1,6 @@
 # KET 词库全量内容独立只读审计报告（修订版 · Antigravity Content Audit）
 
-> 主任务复核注：本报告对比的是 `b0663dc` 与 `433ab40` 历史快照，不是本轮最新实现。最新图片为 89 / 1687（1598 pending），每日复习改为固定十题一批、最多三十题；部分主主题已再次调整。报告中的 155/146 等修复数量及逐词词典核验声明仍属代理报告，尚未全部独立复现，不作为全词库通过证据。语法课基线已由主任务核实为 24 节并勘误。all the time、poor thing / you、tidy up 与部分释义的后续独立处理见 [主任务证据复核](/Users/baokaijian/Project/KET/docs/acceptance/content-corrections-2026-10-11.md)，下文历史状态不自动更新为全词库通过。
+> 主任务复核注：本报告对比的是 `b0663dc` 与 `433ab40` 历史快照，不是本轮最新实现。最新图片为 95 / 1687（1592 pending），每日复习改为固定十题一批、最多三十题；部分主主题已再次调整。报告中的 155/146 等修复数量及逐词词典核验声明仍属代理报告，尚未全部独立复现，不作为全词库通过证据。语法课基线已由主任务核实为 24 节并勘误。all the time、poor thing / you、tidy up 与部分释义的后续独立处理见 [主任务证据复核](/Users/baokaijian/Project/KET/docs/acceptance/content-corrections-2026-10-11.md)，下文历史状态不自动更新为全词库通过。
 
 - **审计对象**：本地项目 `/Users/baokaijian/Project/KET` 全量 **1,687** 个 KET 词条（`allKetWords`）
 - **目标用户画像**：**6 岁儿童**（儿童学习主流程以**听力、阅读、句子与故事**理解为主，无拼写/键盘输入要求）

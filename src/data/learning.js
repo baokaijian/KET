@@ -89,16 +89,16 @@ const entries = [
     "bicycle",
     "自行车",
     "/ˈbaɪ.sɪ.kəl/",
-    "I ride my bicycle to the park.",
-    "我骑自行车去公园。",
+    "This bicycle has two wheels.",
+    "这辆自行车有两个车轮。",
     "A green bicycle with two wheels in side view.",
   ],
   [
     "bus",
     "公共汽车",
     "/bʌs/",
-    "We go to school by bus.",
-    "我们乘公共汽车上学。",
+    "This bus is red.",
+    "这辆公共汽车是红色的。",
     "A red city passenger bus.",
   ],
 ];
@@ -135,6 +135,7 @@ export const learningWords = entries.map(
       alt,
       meaning: translation,
       reviewStatus: imageReviews[word]?.status || "pending",
+      ...(["bus", "bicycle"].includes(word) ? { context: { sentence, translation: sentenceTranslation } } : {}),
     },
   }),
 );

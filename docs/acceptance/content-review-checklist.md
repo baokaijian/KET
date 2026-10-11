@@ -357,7 +357,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 5 | city_travel | l5_building | building | n. 名词 | building | not published | 大楼/建筑物 | not published | provided | pending |  |
 | 5 | city_travel | l5_bus | bus | n. 名词 | bus | /bʌs/ | 公共汽车 | word-images/l5_bus.webp | provided | pending |  |
 | 5 | city_travel | l5_bus_stop | bus stop | n. 名词 | bus stop | not published | 公共汽车站；公交站牌处 | not published | provided | pending |  |
-| 5 | city_travel | l5_car | car | n. 名词 | car | not published | 小汽车 | not published | provided | pending |  |
+| 5 | city_travel | l5_car | car | n. 名词 | car | not published | 小汽车 | word-images/l5_car.webp | provided | pending |  |
 | 5 | city_travel | l5_car_park | car park | n. 名词 | car park | not published | 停车场（英式英语） | not published | provided | pending |  |
 | 5 | city_travel | l5_case | case | n. 名词 | case | not published | 箱子；盒子；情况；案例 | not published | provided | pending |  |
 | 5 | city_travel | l5_castle | castle | n. 名词 | castle | not published | 城堡 | not published | provided | pending |  |
@@ -404,14 +404,14 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 5 | city_travel | l5_post_office | post office | n. 名词 | post office | not published | 邮局 | not published | provided | pending |  |
 | 5 | food_cafe | l5_restaurant | restaurant | n. 名词 | restaurant | not published | 饭馆 | not published | provided | pending |  |
 | 5 | city_travel | l5_return | return | n. 名词 / v. 动词 | return | not published | 回来；返回；归还；往返的 | not published | provided | pending |  |
-| 5 | city_travel | l5_road | road | n. 名词 | road | not published | 马路 | not published | provided | pending |  |
+| 5 | city_travel | l5_road | road | n. 名词 | road | not published | 道路；马路 | word-images/l5_road.webp | provided | pending |  |
 | 5 | sports_hobbies | l5_sailing | sailing | n. 名词 | sailing | not published | 帆船运动；航行 | not published | provided | pending |  |
 | 5 | school_library | l5_school | school | n. 名词 | school | not published | 学校 | word-images/l5_school.webp | provided | pending |  |
 | 5 | city_travel | l5_seat | seat | n. 名词 | seat | not published | 座位 | not published | provided | pending |  |
 | 5 | city_travel | l5_ship | ship | n. 名词 | ship | not published | 大船；轮船 | not published | provided | pending |  |
 | 5 | shopping_work | l5_shop | shop | n. 名词 / v. 动词 | shop | not published | 商店（名词）；购物（动词） | word-images/l5_shop.webp | provided | pending |  |
 | 5 | sports_hobbies | l5_stadium | stadium | n. 名词 | stadium | not published | 体育场 | not published | provided | pending |  |
-| 5 | city_travel | l5_station | station | n. 名词 | station | not published | 车站 | not published | provided | pending |  |
+| 5 | city_travel | l5_station | station | n. 名词 | station | not published | 车站（如火车站、长途汽车站） | word-images/l5_station.webp | provided | pending |  |
 | 5 | shopping_work | l5_store | store | n. 名词 | store | not published | 商店（美式英语）；储存（动词） | not published | provided | pending |  |
 | 5 | nature_weather | l5_storm | storm | n. 名词 | storm | not published | 暴风雨 | not published | provided | pending |  |
 | 5 | city_travel | l5_suitcase | suitcase | n. 名词 | suitcase | not published | 手提箱 | not published | provided | pending |  |
@@ -419,7 +419,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 5 | city_travel | l5_tour | tour | n. 名词 | tour | not published | 游览；巡回旅行 | not published | provided | pending |  |
 | 5 | city_travel | l5_tourist | tourist | n. 名词 | tourist | not published | 游客 | not published | provided | pending |  |
 | 5 | city_travel | l5_traffic | traffic | n. 名词 | traffic | not published | 交通 | not published | provided | pending |  |
-| 5 | city_travel | l5_train | train | n. 名词 / v. 动词 | train | not published | 火车；训练（动词） | not published | provided | pending |  |
+| 5 | city_travel | l5_train | train | n. 名词 / v. 动词 | train | not published | 火车；列车（名词）；训练（动词） | word-images/l5_train.webp | provided | pending |  |
 | 5 | city_travel | l5_tram | tram | n. 名词 | tram | not published | 有轨电车 | not published | provided | pending |  |
 | 5 | city_travel | l5_travel | travel | v. 动词 | travel | not published | 旅行 | not published | provided | pending |  |
 | 5 | city_travel | l5_trip | trip | n. 名词 | trip | not published | 短途旅行 | not published | provided | pending |  |
@@ -851,7 +851,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 10 | tech_media | l10_telephone | telephone | n. 名词 / v. 动词 | telephone | not published | 电话 | not published | provided | pending |  |
 | 10 | tech_media | l10_text | text | n. 名词 / v. 动词 | text | not published | 文本；发短信 | not published | provided | pending |  |
 | 10 | tech_media | l10_theatre | theatre | n. 名词 | theatre | not published | 剧院 | not published | provided | pending |  |
-| 10 | city_travel | l10_ticket | ticket | n. 名词 | ticket | not published | 票/车票 | not published | provided | pending |  |
+| 10 | city_travel | l10_ticket | ticket | n. 名词 | ticket | not published | 票；车票；入场券 | word-images/l10_ticket.webp | provided | pending |  |
 | 10 | tech_media | l10_video | video | n. 名词 | video | not published | 视频；录像 | not published | provided | pending |  |
 | 10 | clothes | l10_watch | watch | n. 名词 / v. 动词 | watch | not published | 手表（名词）；观看（动词） | not published | provided | pending |  |
 | 10 | tech_media | l10_web | web | n. 名词 | web | not published | 万维网；蜘蛛网 | not published | provided | pending |  |
@@ -1563,7 +1563,7 @@ All 1687 entries have authored Chinese meanings and no application placeholders.
 | 12 | home_room | l12_stay | stay | v. 动词 | stay | not published | 停留；待 | not published | provided | pending |  |
 | 12 | full_review | l12_steal | steal | v. 动词 | steal | not published | 偷；盗取 | not published | provided | pending |  |
 | 12 | time_calendar | l12_still | still | adv. 副词 | still | not published | 仍然；还；静止的；不动的 | not published | provided | pending |  |
-| 12 | city_travel | l12_stop | stop | n. 名词 / v. 动词 | stop | not published | 停止；停下；车站；停留 | not published | provided | pending |  |
+| 12 | city_travel | l12_stop | stop | n. 名词 / v. 动词 | stop | not published | 停止；停下（动词）；停靠站；短暂停留（名词） | word-images/l12_stop.webp | provided | pending |  |
 | 12 | school_library | l12_story | story | n. 名词 | story | not published | 故事；叙述 | not published | provided | pending |  |
 | 12 | city_travel | l12_straight | straight | adj. 形容词 / adv. 副词 | straight | not published | 直的；笔直地；直接地 | not published | provided | pending |  |
 | 12 | feelings_descriptions | l12_striped | striped | adj. 形容词 | striped | not published | 有条纹的 | not published | provided | pending |  |

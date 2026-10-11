@@ -15,6 +15,8 @@ import { clothesImages } from "../../src/data/clothes-images.js";
 import { weatherImages } from "../../src/data/weather-images.js";
 import { bodyImages } from "../../src/data/body-images.js";
 import { shoppingImages } from "../../src/data/shopping-images.js";
+import { travelImages } from "../../src/data/travel-images.js";
+import { learningWords } from "../../src/data/learning.js";
 import { dictionaryEntry } from "../../src/data/learning.js";
 
 describe("whole-bank meaning, POS and theme regressions", () => {
@@ -23,7 +25,7 @@ describe("whole-bank meaning, POS and theme regressions", () => {
     for (const name of ["cloud", "cloudy", "foggy", "storm", "warm", "weather", "wind", "windy", "cold", "hot", "sun", "rain", "snow"]) {
       expect(find(name).topic, name).toBe("nature_weather");
     }
-    for (const name of ["dress", "rain", "snow", "shop", "walk"]) {
+    for (const name of ["dress", "rain", "snow", "shop", "walk", "train", "stop"]) {
       expect(find(name).partOfSpeech).toEqual(["n", "v"]);
       expect(find(name).translation).toContain("名词");
       expect(find(name).translation).toContain("动词");
@@ -117,6 +119,44 @@ describe("whole-bank meaning, POS and theme regressions", () => {
   });
 });
 describe("six-year-old listening and reading", () => {
+  it("provides all eight travel words with distinct reviewed photographs and speakable examples", () => {
+    const words = childThemes.find((theme) => theme.id === "travel").vocabulary.words;
+    expect(Object.keys(travelImages).sort()).toEqual(words.filter((word) => !["bus", "bicycle"].includes(word.word)).map((word) => word.id).sort());
+    expect(new Set(words.map((word) => word.image.src)).size).toBe(8);
+    for (const word of words) {
+      expect(["pass", "fixed"]).toContain(word.image.reviewStatus);
+      expect(word.sentence.toLowerCase()).toContain(word.word);
+      expect(word.sentenceTranslation).toMatch(/[\u4e00-\u9fff]/);
+      expect(countEnglishWords(word.sentence)).toBeLessThanOrEqual(10);
+      expect(word.image.context.sentence).toBe(word.sentence);
+      expect(word.image.context.translation).toBe(word.sentenceTranslation);
+      const image = travelImages[word.id];
+      if (image) {
+        expect(word.image).toEqual(image);
+        expect(word.sentence).toBe(image.context.sentence);
+        expect(word.sentenceTranslation).toBe(image.context.translation);
+        expect(image.generationPrompt.length).toBeGreaterThan(80);
+      } else {
+        const starter = learningWords.find((item) => item.id === word.id);
+        expect(starter).toBeTruthy();
+        expect(word.image).toEqual(starter.image);
+        expect(word.sentence).toBe(starter.sentence);
+      }
+    }
+  });
+  it("distinguishes a train, railway station, ticket and stopping action in travel content", () => {
+    const words = childThemes.find((theme) => theme.id === "travel").vocabulary.words;
+    const find = (name) => words.find((word) => word.word === name);
+    expect(travelImages.l5_train.meaning).toBe("火车；列车（名词）");
+    expect(travelImages.l5_station.meaning).toBe("车站（以火车站为例）");
+    expect(travelImages.l10_ticket.alt).toContain("TRAIN TICKET and ONE WAY");
+    expect(travelImages.l12_stop.meaning).toBe("停下（动词）");
+    expect(travelImages.l12_stop.alt).toContain("red pedestrian signal");
+    expect(find("stop").translation).toContain("停靠站");
+    expect(find("ticket").translation).toContain("入场券");
+    expect(find("road").translation).toBe("道路；马路");
+    expect(new Set(Object.values(travelImages).map((image) => image.sha256)).size).toBe(6);
+  });
   for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages], ["clothes", clothesImages], ["weather", weatherImages], ["body", bodyImages], ["shopping", shoppingImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
     const words = childThemes.find((theme) => theme.id === themeId).vocabulary.words;
     expect(Object.keys(images).sort()).toEqual(words.map((word) => word.id).sort());
