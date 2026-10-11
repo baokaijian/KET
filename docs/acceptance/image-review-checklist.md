@@ -1,6 +1,6 @@
 # 单词与图片复核
 
-图片范围：74 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1613 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
+图片范围：82 个词有已复核的照片。全词库 1687 词的中文释义已补齐；其余 1605 个词的图片仍待复核，不展示旧模板图片，不宣称全词库图片验收通过。
 
 复核者：Codex 逐张视觉检查（不是家长人工签字）。图片使用内置 imagegen 分别生成，缩放为 640px WebP，未使用网络照片。
 文件哈希锁定已检查版本；任何替换都必须重新视觉复核。系统 TTS 实际音色与听感仍需要目标设备听辨。
@@ -100,7 +100,7 @@
 | l2_ambulance | ambulance | 救护车 | 救护车 | word-images/l2_ambulance.webp / ambulance: a white ambulance with emergency lights, a medical emblem and a stretcher inside its open side door | fixed | Emergency light bar, medical emblem and a secured stretcher identify an ambulance. Initial tight framing was regenerated; final roof, bumpers and wheels fit inside the frame. |
 | l2_apple | apple | 苹果 | 苹果 | word-images/l2_apple.webp / A single red apple with a green leaf. | pass | Red apple, stem and green leaf clearly visible; no competing object. |
 | l2_appointment | appointment | 预约 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_arm | arm | 手臂 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_arm | arm | 手臂 | 手臂 | word-images/l2_arm.webp / arm: one outstretched human arm from a blue short sleeve through the elbow to the wrist and hand | pass | Upper arm, elbow, forearm, wrist and hand are visible together with the sleeve connection; not just a hand. |
 | l2_baby | baby | 宝宝 | 宝宝 | word-images/l2_baby.webp / baby: one awake smiling infant in a yellow romper lying on a plain play mat | pass | Whole awake infant has a round baby face, small hands and feet and is lying on a play mat; not an older standing child or a generic person. |
 | l2_back | back | 背部；后面；回来；向后 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_bake | bake | 烘烤（用烤箱烤食物） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -152,11 +152,11 @@
 | l2_dish | dish | 盘子；一道菜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_doctor | doctor | 医生 | 医生 | word-images/l2_doctor.webp / doctor: a doctor listening to a fully dressed child's chest with a stethoscope during a clinic checkup | pass | Clinical examination equipment and visible stethoscope examination establish the teaching scene; the caption identifies the doctor role, not gender or appearance alone. |
 | l2_drink | drink | 饮料；喝 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_ear | ear | 耳朵 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_ear | ear | 耳朵 | 耳朵 | word-images/l2_ear.webp / ear: one human outer ear with its rim, folds and earlobe visible | pass | The complete outer ear rim and earlobe are visible against hair and nearby skin, without accessories or a whole face. |
 | l2_eat | eat | 吃 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_egg | egg | 鸡蛋 | 鸡蛋 | word-images/l2_egg.webp / egg: a whole chicken egg and a boiled egg half showing its yolk | pass | Whole egg and exposed yellow yolk identify a chicken egg, not a generic breakfast. |
 | l2_exercise | exercise | 锻炼/运动 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_eye | eye | 眼睛 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_eye | eye | 眼睛 | 眼睛 | word-images/l2_eye.webp / eye: one open brown human eye with a pupil, iris, eyelids and eyelashes | pass | A single eye is dominant, with iris, pupil, white of the eye and eyelids identifiable; no full face used as a substitute. |
 | l2_face | face | 脸 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_fall | fall | 落下；跌倒；秋天（美式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_feel | feel | 感觉 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -172,8 +172,8 @@
 | l2_grape | grape | 葡萄 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_grilled | grilled | 烤的；炙烤的 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_hair | hair | 头发 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_hand | hand | 手 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_head | head | 头部 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_hand | hand | 手 | 手 | word-images/l2_hand.webp / hand: one open human palm with five spread fingers and the wrist visible | pass | All five fingers, the thumb, palm creases and wrist are visible; a single hand, not a generic person photo. |
+| l2_head | head | 头部 | 头部 | word-images/l2_head.webp / head: a child's complete head in side profile, with hair crown, face, ear and chin visible | pass | The entire head from hair crown to chin fits in frame, with the back of the head and neck providing context; not an isolated face part. |
 | l2_health | health | 健康 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_hear | hear | 听见 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_heart | heart | 心脏 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -186,7 +186,7 @@
 | l2_juice | juice | 果汁 | 果汁 | word-images/l2_juice.webp / juice: a glass of orange juice beside an orange half | pass | The glass of orange liquid is the main subject; the orange half explains the fruit juice. |
 | l2_kitchen | kitchen | 厨房 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_knife | knife | 小刀 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_leg | leg | 腿 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_leg | leg | 腿 | 腿 | word-images/l2_leg.webp / leg: one human leg from blue shorts through the knee and ankle to a white shoe | pass | A clothed person's thigh, knee, shin and ankle are visible above the complete shoe; the leg, not the shoe, is dominant. |
 | l2_lemon | lemon | 柠檬 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_lemonade | lemonade | 柠檬饮料 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_lunch | lunch | 午餐 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -196,7 +196,7 @@
 | l2_melon | melon | 瓜；甜瓜 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_milk | milk | 牛奶 | 牛奶 | word-images/l2_milk.webp / A clear glass filled with white milk. | pass | White milk in a clear glass; liquid and container distinguishable. |
 | l2_neck | neck | 脖子；颈部 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l2_nose | nose | 鼻子 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l2_nose | nose | 鼻子 | 鼻子 | word-images/l2_nose.webp / nose: a close-up human nose with a bridge, rounded tip and two nostrils | pass | The nose dominates the frame, with its rounded tip and both nostrils visible, excluding eyes and mouth. |
 | l2_oil | oil | 油；食用油；石油 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_omelette | omelette | 煎蛋饼；煎蛋卷 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l2_pain | pain | 疼痛 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
@@ -1330,7 +1330,7 @@
 | l12_month | month | 月份 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_more | more | 更多的；更；另外（much、many 的比较级） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_most | most | 最多的；最；大多数（much、many 的最高级） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
-| l12_mouth | mouth | 嘴巴 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
+| l12_mouth | mouth | 嘴巴 | 嘴巴 | word-images/l12_mouth.webp / mouth: a gently smiling open human mouth with both lips and teeth visible | pass | Both lips surround a clearly open mouth; teeth are inside the mouth rather than a standalone tooth subject. |
 | l12_movie | movie | 电影 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_movie_star | movie star | 电影明星 | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |
 | l12_movie_theater | movie theater | 电影院（美式英语） | 待制作 | 未发布 | pending | 旧模板图未通过语义复核，已停用。 |

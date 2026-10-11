@@ -34,6 +34,8 @@ textarea {
 }
 button {
   cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
 }
 button:disabled {
   cursor: default;
@@ -144,6 +146,8 @@ button:not(:disabled):active {
   color: var(--muted);
   font-size: 14px;
   border-radius: 7px;
+  min-width: 44px;
+  min-height: 44px;
 }
 .header-inner nav a[aria-current] {
   background: #edf5f0;
@@ -154,8 +158,8 @@ button:not(:disabled):active {
   background: #f1f3f3;
 }
 .icon-button {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -283,7 +287,7 @@ button:not(:disabled):active {
   gap: 9px;
   font-size: 13px;
   font-weight: 550;
-  min-height: 42px;
+  min-height: 44px;
   padding: 10px 18px;
   border-radius: 7px;
 }
@@ -421,8 +425,8 @@ button:not(:disabled):active {
   color: var(--muted);
 }
 .word-caption .icon-button {
-  width: 33px;
-  height: 33px;
+  width: 44px;
+  height: 44px;
   background: #eef5f0;
 }
 .photo-context {
@@ -465,8 +469,8 @@ button:not(:disabled):active {
   font-size: 10px;
 }
 .lesson-tile .icon-button {
-  width: 30px;
-  height: 30px;
+  width: 44px;
+  height: 44px;
 }
 .lesson-tile h3 {
   font-size: 16px;
@@ -562,7 +566,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  min-width: 0;
+  min-width: 44px;
 }
 .dictionary-word strong {
   font-size: 15px;
@@ -1347,8 +1351,8 @@ select {
     font-size: 11px;
   }
   .dictionary-row .icon-button {
-    width: 29px;
-    height: 29px;
+    width: 44px;
+    height: 44px;
   }
   .practice-shell {
     min-height: unset;

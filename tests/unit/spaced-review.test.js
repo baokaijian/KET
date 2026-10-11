@@ -1,10 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { emptyProgress, recordAnswer, recordEncounter, dueReviews, normalizeProgress, dayAfter } from "../../src/utils/learningProgress.js";
-import { buildDailyPlan, dailyVocabularyLesson, saveDailyPlan, reviewQuestions } from "../../src/utils/dailyPlan.js";
+import { emptyProgress, recordAnswer, recordEncounter, dueReviews, normalizeProgress, dayAfter, reviewGaps } from "../../src/utils/learningProgress.js";
+import { buildDailyPlan, dailyVocabularyLesson, planReadingLessons, saveDailyPlan, reviewQuestions, reviewBatch, reviewLoadForecast } from "../../src/utils/dailyPlan.js";
 import * as course from "../../src/data/curriculum.js";
 import * as child from "../../src/data/child-course.js";
 const curriculum = { ...course, ...child };
 const date = (day) => new Date(2026, 9, day, 12);
+const childLessonById = Object.fromEntries(child.childLessons.map((lesson) => [lesson.id, lesson]));
+
+function completedTheme(theme) {
+  let p = emptyProgress;
+  for (const question of theme.sentences.questions) p = recordAnswer(p, question.id, true, date(11), { skill: question.audio ? "listening" : "reading" });
+  for (const question of theme.story.questions) p = recordAnswer(p, question.id, true, date(11), { skill: "reading" });
+  return { ...p, completed: [theme.sentences.id, theme.story.id] };
+}
 
 describe("adaptive spaced retrieval", () => {
   it("schedules both skills on first encounter without inventing correct answers or mistakes", () => {
@@ -72,6 +80,27 @@ describe("adaptive spaced retrieval", () => {
     expect(p.memory.bad).toBeUndefined();
     expect(p.memory.l2_apple.reading.successDays).toHaveLength(1);
   });
+  it("keeps the original seven intervals and adds 120/180/365-day maintenance for old records", () => {
+    expect(reviewGaps.slice(0, 7)).toEqual([1, 2, 4, 7, 16, 30, 60]);
+    expect(reviewGaps).toHaveLength(10);
+    const legacyItem = { due: "2026-10-12", lastDay: "2026-10-11", step: 7, successDays: ["2026-09-01", "2026-09-15", "2026-10-11"], lastCorrect: true, assessed: true };
+    const legacy = normalizeProgress({ memory: { l2_apple: { reading: legacyItem } } });
+    expect(legacy.memory.l2_apple.reading.step).toBe(7);
+    let p = recordAnswer(legacy, "l2_apple", true, date(12), { skill: "reading" });
+    expect(p.memory.l2_apple.reading.step).toBe(8);
+    expect(p.memory.l2_apple.reading.due).toBe(dayAfter(date(12), 120));
+    p = recordAnswer(p, "l2_apple", true, new Date(`${p.memory.l2_apple.reading.due}T12:00:00`), { skill: "reading" });
+    expect(p.memory.l2_apple.reading.step).toBe(9);
+    expect(p.memory.l2_apple.reading.due).toBe(dayAfter(new Date("2027-02-09T12:00:00"), 180));
+    p = recordAnswer(p, "l2_apple", true, new Date(`${p.memory.l2_apple.reading.due}T12:00:00`), { skill: "reading" });
+    expect(p.memory.l2_apple.reading.step).toBe(10);
+    expect(p.memory.l2_apple.reading.due).toBe(dayAfter(new Date("2027-08-08T12:00:00"), 365));
+    const capped = recordAnswer(p, "l2_apple", true, new Date(`${p.memory.l2_apple.reading.due}T12:00:00`), { skill: "reading" });
+    expect(capped.memory.l2_apple.reading.step).toBe(10);
+    const keep = { due: "2026-10-15", lastDay: "2026-10-12", step: 10, successDays: ["2026-10-12"], lastCorrect: true, assessed: true };
+    const normalized = normalizeProgress({ memory: { keep: { reading: keep }, drop: { reading: { ...keep, step: 11 } } } });
+    expect(Object.keys(normalized.memory)).toEqual(["keep"]);
+  });
 });
 describe("daily plan", () => {
   it("keeps parent-area typing tasks out of new and previously saved child review plans", () => {
@@ -92,17 +121,180 @@ describe("daily plan", () => {
     expect(plan.themeId).toBe("breakfast");
     const p = { ...saveDailyPlan(emptyProgress, plan), seen: plan.newWords };
     expect(buildDailyPlan(p, curriculum, date(12))).toEqual(plan);
-    expect(buildDailyPlan(p, curriculum, date(13)).newWords).toEqual([]);
+    const next = buildDailyPlan(p, curriculum, date(13));
+    expect(next.newWords.length).toBeGreaterThan(0);
+    expect(next.newWords.every((id) => !p.seen.includes(id))).toBe(true);
   });
-  it("caps reviews, retains backlog, reduces new words and preserves the exact skill", () => {
+  it("keeps a no-backlog day at eight words, six sentences and the short story", () => {
+    const plan = buildDailyPlan(emptyProgress, curriculum, date(12));
+    const theme = child.childThemes.find((item) => item.id === plan.themeId);
+    expect(plan.mode).toBe("learn");
+    expect(plan.review).toHaveLength(0);
+    expect(plan.backlog).toBe(0);
+    expect(plan.pressure).toBe(0);
+    expect(plan.forecast).toHaveLength(7);
+    expect(plan.reviewLimit).toBe(30);
+    expect(plan.batchSize).toBe(10);
+    expect(plan.sentencesLessonId).toBe(theme.sentences.id);
+    expect(plan.storyLessonId).toBe(theme.story.id);
+    expect(plan.newQuestions).toBe(9);
+  });
+  it("caps reviews at thirty a day, serves ten at a time and reduces new words under pressure", () => {
     let p = emptyProgress;
-    for (const word of course.courseWords.slice(0, 25)) p = recordAnswer(p, word.id, false, date(11), { skill: "listening" });
+    for (const word of course.courseWords.slice(0, 35)) p = recordAnswer(p, word.id, false, date(11), { skill: "listening" });
     const plan = buildDailyPlan(p, curriculum, date(12));
-    expect(plan.review).toHaveLength(20);
+    expect(plan.review).toHaveLength(30);
     expect(plan.backlog).toBe(5);
+    expect(plan.reviewLimit).toBe(30);
+    expect(plan.batchSize).toBe(10);
+    expect(plan.pressure).toBeGreaterThanOrEqual(35);
     expect(plan.newWords).toHaveLength(4);
-    expect(dueReviews(p, date(12))).toHaveLength(25);
+    expect(dueReviews(p, date(12))).toHaveLength(35);
     expect(reviewQuestions(plan.review, curriculum).every((q) => q.skill === "listening" && q.audio)).toBe(true);
+  });
+  it("does not count a same-day encounter or imported overdue record as a completed review", () => {
+    const plan = { day: "2026-10-12", review: [{ id: "l2_apple", skill: "listening" }] };
+    const legacy = { due: plan.day, lastDay: plan.day, step: 0, lastCorrect: false, successDays: [] };
+    const p = normalizeProgress({ memory: { l2_apple: { listening: legacy } } });
+    expect(reviewBatch(plan, p)).toMatchObject({ answered: 0, unanswered: 1, done: false });
+    expect(reviewBatch(plan, recordEncounter(emptyProgress, "l2_apple", date(12)))).toMatchObject({ answered: 0, done: false });
+    const answered = recordAnswer(p, "l2_apple", false, date(12), { skill: "listening" });
+    expect(reviewBatch(plan, answered)).toMatchObject({ answered: 1, done: true });
+  });
+  it("moves reviews in fixed batches and never asks again for what was already answered", () => {
+    let p = emptyProgress;
+    for (const word of course.courseWords.slice(0, 45)) p = recordAnswer(p, word.id, false, date(11), { skill: "listening" });
+    const plan = buildDailyPlan(p, curriculum, date(12));
+    expect(plan.review).toHaveLength(30);
+    let batch = reviewBatch(plan, p);
+    expect(batch).toMatchObject({ answered: 0, remaining: 30, total: 30, batchIndex: 0, batches: 3, unanswered: 10, done: false });
+    expect(batch.batch).toEqual(plan.review.slice(0, 10));
+    for (const item of plan.review) p = recordAnswer(p, item.id, true, date(12), { skill: item.skill });
+    expect(reviewBatch(plan, p)).toMatchObject({ answered: 30, remaining: 0, batchIndex: 3, batch: [], unanswered: 0, done: true });
+    const saved = saveDailyPlan(p, plan);
+    expect(buildDailyPlan(saved, curriculum, date(12))).toEqual(plan);
+    expect(reviewBatch(buildDailyPlan(saved, curriculum, date(12)), p).done).toBe(true);
+  });
+  it("keeps a batch's members, order and id stable while it is only partly answered", () => {
+    let p = emptyProgress;
+    for (const word of course.courseWords.slice(0, 45)) p = recordAnswer(p, word.id, false, date(11), { skill: "listening" });
+    const plan = buildDailyPlan(p, curriculum, date(12));
+    const first = reviewBatch(plan, p);
+    const members = first.batch.map((item) => `${item.id}:${item.skill}`);
+    // what the app fingerprints for resume: local day + question ids, options and answers
+    const fingerprintOf = (batch) => JSON.stringify([plan.day, reviewQuestions(batch, curriculum).map((question) => [question.id, question.options, question.answer])]);
+    const before = fingerprintOf(first.batch);
+    const activityOf = (batch) => ({ id: `daily-review-${plan.day}-b${batch.batchIndex}`, title: batch.batchIndex === 0 ? "复习老朋友" : `复习老朋友 · 第 ${batch.batchIndex + 1} 批` });
+    expect(activityOf(first)).toEqual({ id: "daily-review-2026-10-12-b0", title: "复习老朋友" });
+    for (const item of first.batch.slice(0, 3)) p = recordAnswer(p, item.id, true, date(12), { skill: item.skill });
+    const resumed = reviewBatch(plan, p);
+    expect(resumed.batchIndex).toBe(0);
+    expect(resumed.batch.map((item) => `${item.id}:${item.skill}`)).toEqual(members);
+    expect(activityOf(resumed)).toEqual(activityOf(first));
+    // identical question ids, option order and answer positions -> the saved session (with its hint state) stays valid
+    expect(fingerprintOf(resumed.batch)).toBe(before);
+    expect(resumed).toMatchObject({ answered: 3, unanswered: 7, remaining: 27, done: false });
+    for (const item of first.batch.slice(3)) p = recordAnswer(p, item.id, true, date(12), { skill: item.skill });
+    const next = reviewBatch(plan, p);
+    expect(next.batchIndex).toBe(1);
+    expect(next.batch.map((item) => `${item.id}:${item.skill}`)).not.toEqual(members);
+    expect(fingerprintOf(next.batch)).not.toBe(before);
+    expect(next).toMatchObject({ answered: 10, unanswered: 10, remaining: 20, done: false });
+  });
+  it("switches a heavy queue to familiar stories, two new words and zero new questions", () => {
+    const theme = child.childThemes[0];
+    let p = completedTheme(theme);
+    for (const word of course.courseWords.slice(0, 70)) p = recordAnswer(p, word.id, false, date(11), { skill: "reading" });
+    const plan = buildDailyPlan(p, curriculum, date(12));
+    expect(plan.pressure).toBeGreaterThan(60);
+    expect(plan.mode).toBe("catchup");
+    expect(plan.newWords).toHaveLength(2);
+    expect(plan.newQuestions).toBe(0);
+    expect(plan.sentencesLessonId).toBe(theme.sentences.id);
+    expect(plan.storyLessonId).toBe(theme.story.id);
+    expect(plan.backlog).toBeGreaterThan(0);
+    expect(plan.newWords.every((id) => !p.seen.includes(id))).toBe(true);
+  });
+  it("leaves out a reading task that is not familiar instead of quietly adding its questions", () => {
+    const theme = child.childThemes[1];
+    const heavy = (base) => {
+      let p = base;
+      for (const word of course.courseWords.slice(0, 70)) p = recordAnswer(p, word.id, false, date(11), { skill: "reading" });
+      return p;
+    };
+    let storyOnly = heavy({ ...emptyProgress, completed: [theme.story.id] });
+    for (const question of theme.story.questions) storyOnly = recordAnswer(storyOnly, question.id, true, date(11), { skill: "reading" });
+    const storyPlan = buildDailyPlan(storyOnly, curriculum, date(12));
+    expect(storyPlan.mode).toBe("catchup");
+    expect(storyPlan.storyLessonId).toBe(theme.story.id);
+    expect(storyPlan.sentencesLessonId).toBe("");
+    expect(storyPlan.newQuestions).toBe(0);
+    let sentencesOnly = heavy({ ...emptyProgress, completed: [theme.sentences.id] });
+    for (const question of theme.sentences.questions) sentencesOnly = recordAnswer(sentencesOnly, question.id, true, date(11), { skill: question.audio ? "listening" : "reading" });
+    const sentencesPlan = buildDailyPlan(sentencesOnly, curriculum, date(12));
+    expect(sentencesPlan.mode).toBe("catchup");
+    expect(sentencesPlan.sentencesLessonId).toBe(theme.sentences.id);
+    expect(sentencesPlan.storyLessonId).toBe("");
+    expect(sentencesPlan.newQuestions).toBe(0);
+  });
+  it("counts the reading questions a weekend still offers instead of reporting zero", () => {
+    const saturday = buildDailyPlan({ ...emptyProgress, seen: ["l2_apple"] }, curriculum, date(17));
+    expect(saturday.mode).toBe("story");
+    expect(saturday.newWords).toEqual([]);
+    expect(saturday.newQuestions).toBe(9);
+    const sunday = buildDailyPlan({ ...emptyProgress, seen: ["l2_apple"] }, curriculum, date(18));
+    expect(sunday.mode).toBe("light");
+    expect(sunday.newWords).toEqual([]);
+    expect(sunday.newQuestions).toBe(9);
+  });
+  it("keeps parent typing practice out of the child load forecast and the intake decision", () => {
+    const typing = Object.values(course.courseQuestionById).filter((q) => ["input", "spelling"].includes(q.type));
+    let p = emptyProgress;
+    for (const word of course.courseWords.slice(0, 20)) p = recordAnswer(p, word.id, false, date(11), { skill: "reading" });
+    const clean = buildDailyPlan(p, curriculum, date(12));
+    expect(clean.pressure).toBe(20);
+    expect(clean.newWords).toHaveLength(8);
+    const cleanForecast = reviewLoadForecast(p, curriculum, date(12));
+    for (const question of typing) p = recordAnswer(p, question.id, false, date(11), { skill: "reading" });
+    const withTyping = buildDailyPlan(p, curriculum, date(12));
+    // six typing questions exist; counting them would push the day to 26 and cut the new words to four
+    expect(typing.length).toBeGreaterThanOrEqual(6);
+    expect(reviewLoadForecast(p, curriculum, date(12))).toEqual(cleanForecast);
+    expect(cleanForecast[0]).toBe(20);
+    expect(withTyping.pressure).toBe(20);
+    expect(withTyping.newWords).toHaveLength(8);
+    expect(withTyping.review).toEqual(clean.review);
+  });
+  it("tops new words up to the daily minimum when a theme is nearly finished", () => {
+    const theme = child.childThemes[0];
+    const seen = theme.vocabulary.words.slice(0, 7).map((word) => word.id);
+    let p = { ...emptyProgress, seen };
+    for (const word of course.courseWords.slice(0, 70)) p = recordAnswer(p, word.id, false, date(11), { skill: "reading" });
+    const plan = buildDailyPlan(p, curriculum, date(12));
+    expect(plan.themeId).toBe(theme.id);
+    expect(plan.newWords).toHaveLength(2);
+    expect(plan.newWords[0]).toBe(theme.vocabulary.words[7].id);
+    expect(plan.newWords.every((id) => !seen.includes(id))).toBe(true);
+  });
+  it("never stops new words while a theme's own stories are still waiting", () => {
+    const theme = child.childThemes[0];
+    const seen = theme.vocabulary.words.map((word) => word.id);
+    let p = { ...emptyProgress, seen };
+    for (const word of course.courseWords.slice(0, 70)) p = recordAnswer(p, word.id, false, date(11), { skill: "reading" });
+    const plan = buildDailyPlan(p, curriculum, date(12));
+    expect(plan.themeId).toBe(theme.id);
+    expect(plan.vocabularyLessonId).not.toBe(theme.vocabulary.id);
+    expect(plan.newWords).toHaveLength(2);
+    expect(plan.newWords.every((id) => !seen.includes(id))).toBe(true);
+    expect(plan.mode).toBe("learn");
+    expect(plan.newQuestions).toBe(9);
+  });
+  it("forecasts the next seven days of already-scheduled load", () => {
+    let p = emptyProgress;
+    for (const word of course.courseWords.slice(0, 12)) p = recordAnswer(p, word.id, true, date(12), { skill: "reading" });
+    expect(reviewLoadForecast(p, curriculum, date(12))).toEqual([12, 0, 0, 0, 0, 0, 0]);
+    for (const word of course.courseWords.slice(0, 12)) p = recordAnswer(p, word.id, true, date(13), { skill: "reading" });
+    expect(reviewLoadForecast(p, curriculum, date(13))).toEqual([0, 12, 0, 0, 0, 0, 0]);
   });
   it("uses Saturday for integration and Sunday for light review without wiping missed days", () => {
     const p = { ...emptyProgress, seen: ["l2_apple"] };
@@ -128,6 +320,25 @@ describe("daily plan", () => {
     expect(next.newWords.every((id) => !p.seen.includes(id))).toBe(true);
     expect(new Set(next.newWords.map((id) => course.courseWordById[id].topic)).size).toBe(1);
     expect(dailyVocabularyLesson(next, child.childThemes[0], curriculum, p).id).toBe("daily-words-2026-10-12");
+  });
+  it("keeps reading entries for a stored plan written before the lesson fields existed", () => {
+    const theme = child.childThemes[0];
+    const legacyPlan = { day: "2026-10-12", themeId: theme.id, readingStage: 1, vocabularyLessonId: theme.vocabulary.id, newWords: theme.vocabulary.words.map((word) => word.id), review: [], backlog: 0, mode: "learn" };
+    const stored = { ...emptyProgress, dailyPlans: { "2026-10-12": legacyPlan } };
+    // the day's stored plan is still honoured exactly as written
+    expect(buildDailyPlan(stored, curriculum, date(12))).toEqual(legacyPlan);
+    const lessons = planReadingLessons(legacyPlan, theme, childLessonById);
+    expect(lessons.legacy).toBe(true);
+    expect(lessons.sentences.id).toBe(theme.sentences.id);
+    expect(lessons.story.id).toBe(theme.story.id);
+    // an explicit empty string means "not offered today"
+    expect(planReadingLessons({ ...legacyPlan, sentencesLessonId: "", storyLessonId: "" }, theme, childLessonById))
+      .toEqual({ sentences: null, story: null, legacy: false });
+    // a legacy stage-2 plan falls back to the long story
+    expect(planReadingLessons({ ...legacyPlan, readingStage: 2 }, theme, childLessonById).story.id).toBe(theme.longStory.id);
+    // a plan that names familiar lessons keeps naming them
+    expect(planReadingLessons({ ...legacyPlan, sentencesLessonId: theme.sentences.id, storyLessonId: theme.story.id }, theme, childLessonById).sentences.id).toBe(theme.sentences.id);
+    expect(planReadingLessons({ ...legacyPlan, sentencesLessonId: "child-stale-lesson", storyLessonId: "" }, theme, childLessonById).sentences.id).toBe(theme.sentences.id);
   });
   it("rebuilds a corrupt stored plan instead of crashing the homepage", () => {
     const p = { ...emptyProgress, dailyPlans: { "2026-10-12": { day: "2026-10-12", themeId: "breakfast", newWords: ["missing"] } } };

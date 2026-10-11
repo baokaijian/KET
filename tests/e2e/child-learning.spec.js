@@ -8,6 +8,7 @@ import { parkImages } from "../../src/data/park-images.js";
 import { healthImages } from "../../src/data/health-images.js";
 import { clothesImages } from "../../src/data/clothes-images.js";
 import { weatherImages } from "../../src/data/weather-images.js";
+import { bodyImages } from "../../src/data/body-images.js";
 import { getSpeakableWordText } from "../../src/utils/speechText.js";
 
 test.beforeEach(async ({ page }) => {
@@ -20,7 +21,7 @@ test.beforeEach(async ({ page }) => {
     } });
   });
 });
-async function answerAll(page, questions) {
+async function answerAll(page, questions, total = questions.length) {
   for (const [index, question] of questions.entries()) {
     await expect(page.getByRole("textbox", { name: /拼写|填空/ })).toHaveCount(0);
     if (question.audio) {
@@ -32,7 +33,7 @@ async function answerAll(page, questions) {
     await expect(page.getByText("答对啦！", { exact: true })).toBeVisible();
     await page.getByRole("button", { name: index === questions.length - 1 ? "查看结果" : "下一题", exact: true }).click();
   }
-  await expect(page.locator(".result-stage")).toContainText(`${questions.length} / ${questions.length}`);
+  await expect(page.locator(".result-stage")).toContainText(`${total} / ${total}`);
   await page.getByRole("button", { name: "完成练习", exact: true }).click();
 }
 
@@ -60,6 +61,21 @@ test("daily eight-word lesson resumes after leaving and reloading without demand
   expect(stored.mastered).toEqual([]);
   expect(Object.keys(stored.dailyPlans)).toHaveLength(1);
   expect(Object.keys(stored.memory)).toHaveLength(8);
+});
+
+test("child navigation and learning controls provide at least 44-pixel touch targets", async ({ page }) => {
+  for (const route of ["today", "learn", "assessment", "progress"]) {
+    await page.goto(`./#${route}`);
+    await expect(page.getByRole("navigation")).toBeVisible();
+    if (route === "today") await expect(page.getByRole("region", { name: "今日听读计划" })).toBeVisible();
+    if (route === "learn") await expect(page.locator(".dictionary-row").first()).toBeVisible();
+    const small = await page.locator("button, nav a").evaluateAll((elements) => elements.filter((element) => {
+      const { width, height } = element.getBoundingClientRect();
+      return width > 0 && height > 0 && (width < 44 || height < 44);
+    }).map((element) => ({ label: element.getAttribute("aria-label") || element.textContent.trim(), width: element.getBoundingClientRect().width, height: element.getBoundingClientRect().height })));
+    expect(small, route).toEqual([]);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  }
 });
 
 test("child review rejects a saved parent typing task and keeps word listening available", async ({ page }) => {
@@ -94,6 +110,72 @@ test("reading hints survive a reload without becoming independent reading eviden
   expect(memory.lastCorrect).toBe(false);
 });
 
+test("changed question content rejects stale answer positions in saved sessions", async ({ page }) => {
+  await page.goto("./#assessment");
+  await page.getByRole("button", { name: "阅读小挑战", exact: true }).click();
+  const correct = childThemes[0].story.questions[0].answer;
+  await page.locator(".answer-option").nth(correct).click();
+  await expect(page.getByText("答对啦！", { exact: true })).toBeVisible();
+  await page.evaluate(() => {
+    const key = "sparks_activity_阅读小挑战";
+    const saved = JSON.parse(localStorage.getItem(key));
+    const fingerprint = JSON.parse(saved.fingerprint);
+    fingerprint[2][0][1].reverse();
+    saved.fingerprint = JSON.stringify(fingerprint);
+    localStorage.setItem(key, JSON.stringify(saved));
+  });
+  await page.reload();
+  await page.getByRole("button", { name: "阅读小挑战", exact: true }).click();
+  await expect(page.getByText("答对啦！", { exact: true })).toHaveCount(0);
+  await expect(page.locator(".answer-option").nth(correct)).toBeEnabled();
+  await page.locator(".answer-option").nth(correct).click();
+  await expect(page.getByText("答对啦！", { exact: true })).toBeVisible();
+});
+
+test("three fixed review batches resume midway without losing a reading hint", async ({ page }) => {
+  test.setTimeout(60_000);
+  await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
+  const questions = childThemes.flatMap((theme) => theme.story.questions).slice(0, 30).sort((a, b) => a.id.localeCompare(b.id));
+  await page.addInitScript((ids) => {
+    if (localStorage.getItem("sparks_learning_v2")) return;
+    localStorage.setItem("sparks_learning_v2", JSON.stringify({ memory: Object.fromEntries(ids.map((id) => [id, { reading: {
+      due: "2026-10-12", lastDay: "2026-10-11", step: 0, successDays: [], lastCorrect: false, assessed: true,
+    } }])) }));
+  }, questions.map((question) => question.id));
+  await page.goto("./#today");
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText("30 项到期复习");
+  await page.getByRole("button", { name: "开始复习", exact: true }).click();
+  for (const question of questions.slice(0, 3)) {
+    await page.locator(".answer-option").nth(question.answer).click();
+    await page.getByRole("button", { name: "下一题", exact: true }).click();
+  }
+  await expect(page.locator(".practice-header")).toContainText("4 / 10");
+  await page.getByRole("button", { name: "听这段文字", exact: true }).click();
+  await expect(page.getByText("本题记录为听后理解，不计入独立阅读掌握。")).toBeVisible();
+  const key = "sparks_activity_daily-review-2026-10-12-b0";
+  const original = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)), key);
+  await page.getByRole("button", { name: "返回", exact: true }).click();
+  await page.reload();
+  await page.getByRole("button", { name: "继续复习", exact: true }).click();
+  await expect(page.locator(".practice-header")).toContainText("4 / 10");
+  await expect(page.getByText("本题记录为听后理解，不计入独立阅读掌握。")).toBeVisible();
+  expect(await page.evaluate((key) => JSON.parse(localStorage.getItem(key)).fingerprint, key)).toBe(original.fingerprint);
+  await page.locator(".answer-option").nth(questions[3].answer).click();
+  const hinted = await page.evaluate((id) => JSON.parse(localStorage.getItem("sparks_learning_v2")).memory[id].reading, questions[3].id);
+  expect(hinted.successDays).toEqual([]);
+  expect(hinted.lastCorrect).toBe(false);
+  await page.getByRole("button", { name: "下一题", exact: true }).click();
+  await answerAll(page, questions.slice(4, 10), 10);
+  for (const offset of [10, 20]) {
+    await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText(`已完成 ${offset} / 30 项`);
+    await page.getByRole("button", { name: "继续复习", exact: true }).click();
+    await expect(page.locator(".practice-header")).toContainText(`第 ${offset / 10 + 1} 批`);
+    await answerAll(page, questions.slice(offset, offset + 10));
+  }
+  await expect(page.getByRole("region", { name: "今日听读计划" })).toContainText("今天已完成 30 项复习");
+  await expect(page.getByRole("button", { name: "继续复习", exact: true })).toBeDisabled();
+});
+
 test("wrong-word reviews do not show the correct meaning before the child answers", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("sparks_learning_v2", JSON.stringify({ review: ["l2_apple"] })));
   await page.goto("./#progress");
@@ -121,7 +203,7 @@ for (const failure of ["missing", "silent"]) test(`listening can be skipped safe
   await expect(page.locator(".practice-header")).toContainText("2 /");
 });
 
-for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"], ["clothes", clothesImages, "l8_dress"], ["weather", weatherImages, "l2_cold"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
+for (const [themeId, images, dictionaryId] of [["family", familyImages, "l1_sister"], ["home", homeImages, "l10_lamp"], ["park", parkImages, "l7_park"], ["clothes", clothesImages, "l8_dress"], ["weather", weatherImages, "l2_cold"], ["body", bodyImages, "l12_mouth"]]) test(`${themeId} photos show their specific context and pronounce it on the daily page and dictionary`, async ({ page }, info) => {
   await page.clock.setFixedTime(new Date("2026-10-12T12:00:00Z"));
   const theme = childThemes.find((item) => item.id === themeId);
   const completed = childThemes.slice(0, childThemes.indexOf(theme));

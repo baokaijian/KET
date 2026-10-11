@@ -1,8 +1,18 @@
 import { BookOpen, Headphones, RotateCcw, ArrowRight, CheckCircle2, Volume2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import WordIllustration from "./WordIllustration.jsx";
-import { buildDailyPlan, dailyVocabularyLesson, reviewQuestions } from "../utils/dailyPlan.js";
+import { buildDailyPlan, dailyVocabularyLesson, planReadingLessons, reviewBatch, reviewQuestions, REVIEW_BATCH_SIZE, REVIEW_DAILY_LIMIT } from "../utils/dailyPlan.js";
 import { getSpeakableWordText } from "../utils/speechText.js";
+
+function reviewSummary(plan, review) {
+  if (!review.total) return "今天还没有到期的复习";
+  if (review.done) return `今天已完成 ${review.answered} 项复习，剩下的明天再来`;
+  const head = review.answered ? `已完成 ${review.answered} / ${review.total} 项` : `${review.total} 项到期复习`;
+  const parts = [head, `本批还剩 ${review.unanswered} 题`];
+  if (review.batches > 1) parts.push(`共 ${review.batches} 批，答完一批再换下一批`);
+  if (plan.backlog > 0) parts.push(`另有 ${plan.backlog} 项保留在队列中`);
+  return parts.join(" · ");
+}
 
 export default function DailyLearning({ curriculum, progress, launch, save, say }) {
   const [date, setDate] = useState(() => new Date());
@@ -17,17 +27,25 @@ export default function DailyLearning({ curriculum, progress, launch, save, say 
   const theme = curriculum.childThemes.find((item) => item.id === plan.themeId);
   const words = plan.newWords.map((id) => curriculum.courseWordById[id]);
   const vocabulary = dailyVocabularyLesson(plan, theme, curriculum, progress);
-  const story = plan.readingStage === 2 ? theme.longStory : theme.story;
+  const lessonById = Object.fromEntries((curriculum.childLessons || []).map((lesson) => [lesson.id, lesson]));
+  // undefined = a day plan saved before the fields existed -> keep the theme's own
+  // sentence and story lessons; only "" means "no new reading task today".
+  const { sentences, story, legacy: legacyReading } = planReadingLessons(plan, theme, lessonById);
+  const review = reviewBatch(plan, progress, { batchSize: REVIEW_BATCH_SIZE, dailyLimit: REVIEW_DAILY_LIMIT });
+  const batchSize = plan.batchSize ?? REVIEW_BATCH_SIZE;
+  const batchTitle = review.batchIndex === 0 ? "复习老朋友" : `复习老朋友 · 第 ${review.batchIndex + 1} 批`;
+  const catchingUp = plan.familiar === true || (plan.mode === "catchup" && !legacyReading);
+  const readingPaused = !sentences || !story;
   const begin = (lesson) => { save(plan); launch(lesson); };
   return <section className="daily-child" aria-label="今日听读计划">
-    <div className="section-heading"><div><span className="eyebrow">LISTEN · READ · DISCOVER</span><h2>{theme.title}</h2></div><span className="muted">{plan.mode === "light" ? "轻量复习日" : plan.mode === "story" ? "综合故事日" : "20–25 分钟 · 可以分三次学"}</span></div>
+    <div className="section-heading"><div><span className="eyebrow">LISTEN · READ · DISCOVER</span><h2>{theme.title}</h2></div><span className="muted">{plan.mode === "light" ? "轻量复习日" : plan.mode === "story" ? "综合故事日" : catchingUp ? "老朋友读熟一点 · 今天不加新阅读题" : "20–25 分钟 · 可以分三次学"}</span></div>
     <div className="daily-task-list">
-      <article><RotateCcw size={23} /><div><h3>复习老朋友</h3><p>{plan.review.length ? `${plan.review.length} 项到期复习` : "今天还没有到期的复习"}{plan.backlog > 0 ? ` · 另有 ${plan.backlog} 项保留在队列中` : ""}</p></div><button className="secondary" disabled={!plan.review.length} onClick={() => begin({ id: `daily-review-${plan.day}`, title: "复习老朋友", skill: "mixed", questions: reviewQuestions(plan.review, curriculum) })}>开始复习</button></article>
-      <article><BookOpen size={23} /><div><h3>认识新朋友</h3><p>{words.length ? `${words.length} 个新词 · 听音与认读，不用拼写` : plan.mode === "learn" ? "今天的词已经见过啦，继续听读句子" : "今天不安排强制新词"}</p></div><button className="primary" disabled={!words.length} onClick={() => begin(vocabulary)}>开始学习 <ArrowRight size={16} /></button></article>
-      <article><Headphones size={23} /><div><h3>听懂句子</h3><p>6 个句子 · 先听，再理解</p></div><button className="secondary" onClick={() => begin(theme.sentences)}>{progress.completed.includes(theme.sentences.id) ? <CheckCircle2 size={17} /> : null}听读句子</button></article>
-      <article><BookOpen size={23} /><div><h3>{plan.readingStage === 2 ? "阅读进阶故事" : "阅读小故事"}</h3><p>{plan.readingStage === 2 ? "分句听读 · 慢慢连成一篇" : "1 篇生活故事"} · {story.questions.length} 道理解题</p></div><button className="secondary" onClick={() => begin(story)}>{progress.completed.includes(story.id) ? <CheckCircle2 size={17} /> : null}打开故事</button></article>
+      <article><RotateCcw size={23} /><div><h3>复习老朋友</h3><p>{reviewSummary(plan, review)}</p></div><button className="secondary" disabled={review.done || !review.batch.length || !review.remaining} onClick={() => begin({ id: `daily-review-${plan.day}-b${review.batchIndex}`, title: batchTitle, skill: "mixed", questions: reviewQuestions(review.batch, curriculum) })}>{review.answered ? "继续复习" : "开始复习"}</button></article>
+      <article><BookOpen size={23} /><div><h3>认识新朋友</h3><p>{words.length ? `${words.length} 个新词 · 听音与认读，不用拼写` : plan.mode === "light" || plan.mode === "story" ? "今天不安排强制新词" : "今天的词已经见过啦，继续听读句子"}</p></div><button className="primary" disabled={!words.length} onClick={() => begin(vocabulary)}>开始学习 <ArrowRight size={16} /></button></article>
+      <article><Headphones size={23} /><div><h3>{catchingUp ? "熟悉句子听读" : "听懂句子"}</h3><p>{sentences ? catchingUp ? "6 个学过的句子 · 只复习，不加新题" : "6 个句子 · 先听，再理解" : "积压偏高，今天先不加新的句子题"}</p></div>{sentences ? <button className="secondary" onClick={() => begin(sentences)}>{progress.completed.includes(sentences.id) ? <CheckCircle2 size={17} /> : null}{catchingUp ? "再读一遍" : "听读句子"}</button> : <span className="tiny">今天不加新题</span>}</article>
+      <article><BookOpen size={23} /><div><h3>{catchingUp ? "熟悉故事听读" : plan.readingStage === 2 ? "阅读进阶故事" : "阅读小故事"}</h3><p>{story ? `${catchingUp ? "读过的故事 · 不再新增理解题" : plan.readingStage === 2 ? "分句听读 · 慢慢连成一篇" : "1 篇生活故事"} · ${story.questions.length} 道理解题` : "积压偏高，今天先不加新的故事题"}</p></div>{story ? <button className="secondary" onClick={() => begin(story)}>{progress.completed.includes(story.id) ? <CheckCircle2 size={17} /> : null}{catchingUp ? "读熟悉的故事" : "打开故事"}</button> : <span className="tiny">今天不加新题</span>}</article>
     </div>
     {!!words.length && <><div className="section-heading"><h2>今天的新朋友</h2><span className="tiny">听一听，看看它的意思</span></div><div className="word-grid">{words.map((word) => <article className="preview-word" key={word.id}><WordIllustration word={word} /><div className="word-caption"><div><h3 lang="en">{word.word}</h3><small className="part-of-speech">{word.partOfSpeechLabel}</small><p>{word.translation}</p></div><button className="icon-button" aria-label={`听 ${word.word} 的发音`} title={`听 ${word.word} 的发音`} onClick={() => say(getSpeakableWordText(word))}><Headphones size={19} /></button></div>{word.image && word.image.meaning !== word.translation && <p className="tiny">照片对应：{word.image.meaning}</p>}{word.image?.context && <div className="photo-context"><div><p lang="en">{word.image.context.sentence}</p><p className="translation">{word.image.context.translation}</p></div><button className="icon-button" aria-label={`听 ${word.word} 的图片例句`} title={`听 ${word.word} 的图片例句`} onClick={() => say(word.image.context.sentence)}><Volume2 size={17} /></button></div>}</article>)}</div></>}
-    <p className="tiny">学习当天再见一次，之后逐步延长复习间隔。听懂和读懂分别记录；漏学不清零，复习多时自动减少新词。</p>
+    <p className="tiny">学习当天再见一次，之后逐步延长复习间隔；听懂和读懂分别记录。复习每批最多 {batchSize} 题、一天通常不超过 {plan.reviewLimit ?? REVIEW_DAILY_LIMIT} 题，批次题目固定，答过的不用再答一遍；未来一周已知负荷偏高时先减少新词{readingPaused ? "，并把阅读换成熟悉的听读" : ""}，今天最多新增 {plan.newQuestions} 道阅读题，漏学不清零。</p>
   </section>;
 }

@@ -3,7 +3,8 @@ import { allKetWords } from "../../src/data/ket-words/index.js";
 import { metadataFor, partOfSpeechLabels } from "../../src/data/vocabulary-metadata.js";
 import { vocabularyCorrections } from "../../src/data/vocabulary-corrections.js";
 import { vocabularyLessons, vocabularyQuestions } from "../../src/data/curriculum.js";
-import { childThemes, childLessons } from "../../src/data/child-course.js";
+import { childThemes, childLessons, childQuestionById } from "../../src/data/child-course.js";
+import { growingStories } from "../../src/data/child-reading.js";
 import { countEnglishWords } from "../../src/utils/learningProgress.js";
 import { curatedTopics, curatedTopicGroups } from "../../src/data/curated-topics.js";
 import { familyImages } from "../../src/data/family-images.js";
@@ -12,6 +13,7 @@ import { parkImages } from "../../src/data/park-images.js";
 import { healthImages } from "../../src/data/health-images.js";
 import { clothesImages } from "../../src/data/clothes-images.js";
 import { weatherImages } from "../../src/data/weather-images.js";
+import { bodyImages } from "../../src/data/body-images.js";
 import { dictionaryEntry } from "../../src/data/learning.js";
 
 describe("whole-bank meaning, POS and theme regressions", () => {
@@ -57,6 +59,25 @@ describe("whole-bank meaning, POS and theme regressions", () => {
     expect(allKetWords.find((w) => w.word === "book").partOfSpeech).toEqual(["n", "v"]);
     expect(allKetWords.find((w) => w.word === "chips").grammarNotes).toBe("复数形式");
   });
+  it("chooses a child-friendly primary context instead of the first appendix heading", () => {
+    const groups = {
+      food_cafe: ["menu", "bill", "restaurant"],
+      time_calendar: ["day", "hour", "minute", "second", "week", "year", "early", "late", "later", "quarter"],
+      home_room: ["window", "mirror", "washing-up", "tidy up", "get up", "wake up"],
+      city_travel: ["passport", "ticket", "postcard"],
+      shopping_work: ["shop", "supermarket"],
+      sports_hobbies: ["sports centre", "stadium", "playground", "footballer", "walking", "swim"],
+      clothes: ["costume", "dressed", "put on", "make-up"],
+      animals: ["zoo", "tail", "wing", "fur", "nest", "wildlife", "extinct"],
+      tech_media: ["turn on", "turn off"],
+      body_health: ["get fit", "pale"],
+    };
+    for (const [topic, names] of Object.entries(groups)) for (const name of names) {
+      expect(allKetWords.find((word) => word.word === name)?.topic, name).toBe(topic);
+    }
+    expect(allKetWords.find((word) => word.word === "ice").topic).toBe("food_cafe");
+    expect(allKetWords.find((word) => word.word === "half").topic).toBe("school_library");
+  });
   it("corrects importer omissions and dictionary-verified PDF errata without erasing source facts", () => {
     const find = (name) => allKetWords.find((word) => word.word === name);
     for (const name of ["design", "train"]) expect(find(name).partOfSpeech).toEqual(["n", "v"]);
@@ -95,7 +116,7 @@ describe("whole-bank meaning, POS and theme regressions", () => {
   });
 });
 describe("six-year-old listening and reading", () => {
-  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages], ["clothes", clothesImages], ["weather", weatherImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
+  for (const [themeId, images] of [["family", familyImages], ["home", homeImages], ["park", parkImages], ["clothes", clothesImages], ["weather", weatherImages], ["body", bodyImages]]) it(`pairs all eight ${themeId} photographs with a specific, speakable bilingual scene`, () => {
     const words = childThemes.find((theme) => theme.id === themeId).vocabulary.words;
     expect(Object.keys(images).sort()).toEqual(words.map((word) => word.id).sort());
     for (const word of words) {
@@ -158,6 +179,43 @@ describe("six-year-old listening and reading", () => {
       expect(new Set(q.options).size).toBe(3);
       expect(q.options[q.answer]).toBeTruthy();
       expect(q.audio || q.passage || q.wordId).toBeTruthy();
+    }
+  });
+  it("covers every theme word in its six sentences, including regular plurals", () => {
+    for (const theme of childThemes) {
+      const text = theme.sentences.guide.sentences.map(([sentence]) => sentence).join(" ");
+      for (const word of theme.vocabulary.words) {
+        expect(text, `${theme.id}: ${word.word}`).toMatch(new RegExp(`\\b${word.word}(?:s|es)?\\b`, "i"));
+      }
+    }
+    const body = childThemes.find((theme) => theme.id === "body");
+    expect(body.story.guide.passage).toMatch(/\bmouth\b/);
+    expect(body.longStory.guide.passage).toMatch(/\bmouth\b/);
+  });
+  it("keeps contextual vocabulary question IDs unique while sharing the same word memory", () => {
+    const questions = childLessons.flatMap((lesson) => lesson.questions);
+    expect(new Set(questions.map((question) => question.id)).size).toBe(questions.length);
+    expect(Object.keys(childQuestionById)).toHaveLength(questions.length);
+    const bags = childThemes.flatMap((theme) => theme.vocabulary.questions).filter((question) => question.wordId === "l12_bag");
+    expect(bags).toHaveLength(2);
+    expect(new Set(bags.map((question) => question.id)).size).toBe(2);
+    expect(new Set(bags.map((question) => question.wordId)).size).toBe(1);
+  });
+  it("varies story answer positions without changing the correct meaning", () => {
+    for (const kind of ["story", "longStory"]) {
+      const patterns = childThemes.map((theme) => theme[kind].questions.map((question) => question.answer).join(","));
+      expect(new Set(patterns).size).toBeGreaterThan(6);
+      const answers = childThemes.flatMap((theme) => theme[kind].questions.map((question) => question.answer));
+      for (const position of [0, 1, 2]) expect(answers.filter((answer) => answer === position).length).toBeGreaterThan(5);
+      for (const theme of childThemes) for (const question of theme[kind].questions) {
+        expect(question.explanation).toBe(`故事中的答案是：${question.options[question.answer]}。`);
+      }
+    }
+    expect(childThemes[0].story.questions[0].options[childThemes[0].story.questions[0].answer]).toBe("牛奶");
+    for (const theme of childThemes) for (const [index, question] of theme.longStory.questions.entries()) {
+      const [, originalOptions, originalAnswer] = growingStories[theme.id].questions[index];
+      expect(question.options[question.answer]).toBe(originalOptions[originalAnswer]);
+      expect([...question.options].sort()).toEqual([...originalOptions].sort());
     }
   });
 });

@@ -17,10 +17,17 @@ export function localDay(date = new Date()) {
 function retainedWord(skills) {
   return ["reading", "listening"].every((skill) => skills?.[skill]?.successDays.length >= 3 && skills[skill].lastCorrect);
 }
+// The same handful of day strings is re-validated on every answer, so remember
+// the answer for any well-formed date (the key space is bounded by real days).
+const validDayCache = new Map();
 function validDay(day) {
   if (typeof day !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(day)) return false;
+  const cached = validDayCache.get(day);
+  if (cached !== undefined) return cached;
   const date = new Date(`${day}T12:00:00`);
-  return !Number.isNaN(date.getTime()) && localDay(date) === day;
+  const valid = !Number.isNaN(date.getTime()) && localDay(date) === day;
+  validDayCache.set(day, valid);
+  return valid;
 }
 export function normalizeProgress(value) {
   const result = { ...emptyProgress };
@@ -38,7 +45,7 @@ export function normalizeProgress(value) {
   result.memory = {};
   for (const [id, skills] of Object.entries(value?.memory && typeof value.memory === "object" ? value.memory : {})) {
     if (!skills || typeof skills !== "object") continue;
-    const valid = Object.fromEntries(Object.entries(skills).filter(([skill, item]) => ["reading", "listening"].includes(skill) && item && validDay(item.due) && validDay(item.lastDay) && Number.isInteger(item.step) && item.step >= 0 && item.step <= 7 && Array.isArray(item.successDays) && item.successDays.every(validDay) && typeof item.lastCorrect === "boolean")
+    const valid = Object.fromEntries(Object.entries(skills).filter(([skill, item]) => ["reading", "listening"].includes(skill) && item && validDay(item.due) && validDay(item.lastDay) && Number.isInteger(item.step) && item.step >= 0 && item.step <= maxReviewStep && Array.isArray(item.successDays) && item.successDays.every(validDay) && typeof item.lastCorrect === "boolean")
       .map(([skill, item]) => [skill, { ...item, successDays: [...new Set(item.successDays)] }]));
     if (Object.keys(valid).length) result.memory[id] = valid;
   }
@@ -52,7 +59,13 @@ export function dayAfter(date, days) {
   next.setDate(next.getDate() + days);
   return localDay(next);
 }
-export const reviewGaps = [1, 2, 4, 7, 16, 30, 60];
+// Teaching defaults for when a child should meet a word or question again, not a
+// scientific law: the first week is dense, then the interval widens, and once a
+// word is retained (three different days per skill) it only comes back for
+// long-term maintenance. Steps 0-7 keep the original 1/2/4/7/16/30/60 gaps, so
+// records written before the maintenance steps existed stay valid.
+export const reviewGaps = [1, 2, 4, 7, 16, 30, 60, 120, 180, 365];
+export const maxReviewStep = reviewGaps.length;
 
 export function recordEncounter(progress, id, date = new Date()) {
   const p = normalizeProgress(progress);
@@ -72,7 +85,7 @@ export function recordAnswer(progress, id, correct, date = new Date(), { skill =
   const newDay = old?.lastDay !== day;
   const eligible = old?.assessed === false || (newDay && (!old || old.due <= day));
   const successDays = independent && eligible ? unique([...(old?.successDays || []), day]) : old?.successDays || [];
-  const step = !independent ? 0 : eligible ? Math.min((old?.step || 0) + 1, 7) : old?.step || 0;
+  const step = !independent ? 0 : eligible ? Math.min((old?.step || 0) + 1, maxReviewStep) : old?.step || 0;
   const memory = { ...p.memory, [id]: { ...p.memory[id], [skill]: {
     step, successDays: correct ? successDays : [], lastDay: day,
     due: independent && !eligible && old ? old.due : dayAfter(date, independent ? reviewGaps[Math.max(0, step - 1)] : 1),

@@ -49,14 +49,14 @@ const themes = [
   },
   {
     id: "clothes", title: "今天穿什么", words: "shirt|coat|hat|shoe|sock|dress|skirt|jacket",
-    sentences: [["I put on my shirt in the morning.", "我早上穿上衬衫。"], ["My coat is warm and very soft.", "我的外套暖和又柔软。"], ["This hat keeps my head warm.", "这顶帽子让我的头暖和。"], ["I cannot find my other shoe.", "我找不到另一只鞋。"], ["My sister likes her new dress and skirt.", "我的姐姐喜欢她的新连衣裙和裙子。"], ["I wear a jacket when it is cold.", "天气冷时我穿夹克。"]],
+    sentences: [["I put on my shirt in the morning.", "我早上穿上衬衫。"], ["My coat is warm and very soft.", "我的外套暖和又柔软。"], ["This hat keeps my head warm.", "这顶帽子让我的头暖和。"], ["I put on my sock and my shoe.", "我穿上袜子和鞋。"], ["My sister likes her new dress and skirt.", "我的姐姐喜欢她的新连衣裙和裙子。"], ["I wear a jacket when it is cold.", "天气冷时我穿夹克。"]],
     story: "It is cold today. Lily puts on a shirt and a warm coat. She finds one shoe by the door, but the other shoe is under her bed. Her little brother brings her hat. Lily says thank you. Now she is ready to go outside with her family.",
     questions: [["今天天气怎么样？", ["冷", "炎热", "很暖和"], 0], ["另一只鞋在哪里？", ["桌子上", "床下面", "窗户旁"], 1], ["谁拿来了帽子？", ["妈妈", "老师", "弟弟"], 2]],
   },
   {
     id: "body", title: "照顾好自己", words: "hand|head|eye|ear|mouth|nose|arm|leg",
-    sentences: [["I wash my hands before I eat.", "我吃饭前洗手。"], ["My hat is on my head.", "我的帽子戴在头上。"], ["I use my eyes to read books.", "我用眼睛读书。"], ["I listen to music with my ears.", "我用耳朵听音乐。"], ["My nose helps me smell the flowers.", "我的鼻子帮助我闻到花香。"], ["I move my arms and legs when I swim.", "游泳时我移动手臂和腿。"]],
-    story: "Before lunch, Max washes his hands. Then he sits down and eats slowly. After lunch, he goes outside. His eyes see a bright flower, and his nose smells it. He hears a bird with his ears. Max waves his arm to Mum, who is standing by the door.",
+    sentences: [["I wash my hands before I eat.", "我吃饭前洗手。"], ["My hat is on my head.", "我的帽子戴在头上。"], ["I see with my eyes and speak with my mouth.", "我用眼睛看，用嘴巴说话。"], ["I listen to music with my ears.", "我用耳朵听音乐。"], ["My nose helps me smell the flowers.", "我的鼻子帮助我闻到花香。"], ["I move my arms and legs when I swim.", "游泳时我移动手臂和腿。"]],
+    story: "Before lunch, Max washes his hands. Then he sits down and eats slowly. After lunch, he goes outside. His eyes see a bright flower, and his nose smells it. He hears a bird with his ears. Max waves his arm to Mum by the door. He opens his mouth to say hello.",
     questions: [["Max 吃饭前做什么？", ["洗手", "画画", "跑步"], 0], ["Max 用什么闻花香？", ["耳朵", "鼻子", "手臂"], 1], ["谁在门边？", ["爸爸", "老师", "妈妈"], 2]],
   },
   {
@@ -86,13 +86,31 @@ const themes = [
 ];
 
 const byName = Object.fromEntries(allKetWords.map((word) => [word.word, dictionaryEntry(word)]));
+
+function storyQuestion(id, passage, [prompt, options, answer]) {
+  // Stable per-question ordering keeps resumed sessions consistent without a fixed answer pattern.
+  let seed = 2166136261;
+  for (const char of id) seed = Math.imul(seed ^ char.charCodeAt(0), 16777619) >>> 0;
+  const order = options.map((_, index) => index);
+  for (let index = order.length - 1; index > 0; index -= 1) {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    const target = seed % (index + 1);
+    [order[index], order[target]] = [order[target], order[index]];
+  }
+  return {
+    id, skill: "reading", passage, prompt,
+    options: order.map((index) => options[index]), answer: order.indexOf(answer),
+    explanation: `故事中的答案是：${options[answer]}。`,
+  };
+}
+
 export const childThemes = themes.map((theme) => {
   const words = theme.words.split("|").map((name) => {
     if (!byName[name]) throw new Error(`Missing child vocabulary: ${name}`);
     return byName[name];
   });
   const prefix = `child-${theme.id}`;
-  const vocabulary = { id: `${prefix}-words`, title: `${theme.title} · 新朋友`, skill: "vocabulary", minutes: 5, words, questions: vocabularyQuestions(words, words) };
+  const vocabulary = { id: `${prefix}-words`, title: `${theme.title} · 新朋友`, skill: "vocabulary", minutes: 5, words, questions: vocabularyQuestions(words, words).map((question) => ({ ...question, id: `${prefix}-${question.id}` })) };
   const sentences = {
     id: `${prefix}-sentences`, title: `${theme.title} · 听读句子`, skill: "reading", minutes: 5,
     guide: { rule: "先听一听，再读一读。", sentences: theme.sentences, caution: "不需要拼写，理解句子的意思就很好。" },
@@ -109,19 +127,13 @@ export const childThemes = themes.map((theme) => {
   const story = {
     id: `${prefix}-story`, title: `${theme.title} · 小故事`, skill: "reading", minutes: 8,
     guide: { rule: "听完整个故事，再逐句读。", passage: theme.story, caution: "需要帮助时可以听朗读；听后理解会与独立阅读分开记录。" },
-    questions: theme.questions.map(([prompt, options, answer], index) => ({
-      id: `${prefix}-story-${index}`, skill: "reading", passage: theme.story, prompt, options, answer,
-      explanation: `故事中的答案是：${options[answer]}。`,
-    })),
+    questions: theme.questions.map((question, index) => storyQuestion(`${prefix}-story-${index}`, theme.story, question)),
   };
   const growing = growingStories[theme.id];
   const longStory = {
     id: `${prefix}-long-story`, title: `${theme.title} · ${growing.title}`, skill: "reading", minutes: 10,
     guide: { rule: "先分句听读，再把故事连起来。", passage: growing.passage, caution: "这是进阶故事，不要求一次读完。需要帮助时可以逐句听。" },
-    questions: growing.questions.map(([prompt, options, answer], index) => ({
-      id: `${prefix}-long-story-${index}`, skill: "reading", passage: growing.passage, prompt, options, answer,
-      explanation: `故事中的答案是：${options[answer]}。`,
-    })),
+    questions: growing.questions.map((question, index) => storyQuestion(`${prefix}-long-story-${index}`, growing.passage, question)),
   };
   return { id: theme.id, title: theme.title, vocabulary, sentences, story, longStory };
 });

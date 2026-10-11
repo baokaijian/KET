@@ -37,7 +37,7 @@ export const growingStories = {
   },
   body: {
     title: "用感官寻找答案",
-    passage: "Max and Mum play a guessing game at home. Mum puts an orange in a small bag, but Max cannot see inside. First, he uses his hands to feel its round shape. Then he smells it with his nose and guesses that it is fruit. Mum lets him look with his eyes, and he sees the orange skin. He has found the answer. Next, Mum shakes a box. Max listens with his ears and hears a gentle sound. There are little stones inside. Before they eat the orange, they wash their hands together. Max learns that his eyes, ears, nose and hands can all help him understand the world.",
+    passage: "Max and Mum play a guessing game at home. Mum puts an orange in a small bag, but Max cannot see inside. First, he uses his hands to feel its round shape. Then he smells it with his nose and guesses that it is fruit. Mum lets him look with his eyes, and he sees the orange skin. He has found the answer. Next, Mum shakes a box. Max listens with his ears and hears a gentle sound. There are little stones inside. Before they eat the orange, they wash their hands together. Max puts a piece in his mouth. He learns that his senses help him understand the world.",
     questions: [["袋子里是什么？", ["橙子", "书", "帽子"], 0], ["Max 首先用了身体的哪个部分？", ["耳朵", "手", "眼睛"], 1], ["盒子里是什么？", ["牛奶", "花", "小石头"], 2], ["吃橙子之前他们做什么？", ["洗手", "去学校", "换鞋"], 0]],
   },
   weather: {

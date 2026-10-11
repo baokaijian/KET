@@ -353,7 +353,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
   const questions = activity.questions || activity.lesson?.questions || makeWordQuestions(words);
   const guide = activity.lesson?.guide;
   const sessionKey = `sparks_activity_${activity.lesson?.id || activity.title}`;
-  const fingerprint = JSON.stringify([activity.lesson ? null : localDay(), words.map((word) => word.id), questions.map((question) => question.id)]);
+  const fingerprint = JSON.stringify([activity.lesson ? null : localDay(), words.map((word) => word.id), questions.map((question) => [question.id, question.options, question.answer, question.correctWord, question.acceptedAnswers, question.audio, question.passage, question.prompt])]);
   const [resume] = useState(() => {
     const saved = safeReadStorage(sessionKey, null);
     const limit = saved?.stage === "learn" ? words.length : questions.length;
