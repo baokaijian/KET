@@ -25,6 +25,7 @@ export default function AccountPanel({ close }) {
       const messages = {
         invalid_credentials: "邮箱或密码不正确，请重试。",
         email_not_confirmed: "请先打开邮箱中的确认邮件，然后回来登录。",
+        email_address_not_authorized: "当前网站暂时无法向此邮箱发送确认邮件，请联系网站管理员开通邮件服务。",
         user_already_exists: "此邮箱已注册，请切换到登录。",
         over_email_send_rate_limit: "邮件发送次数较多，请稍后再试。",
         weak_password: "请使用至少 8 位密码，包含字母和数字。",

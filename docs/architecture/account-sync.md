@@ -48,12 +48,12 @@ flowchart LR
 
 以后复制到其他项目时：
 
-1. 创建 Supabase 项目，启用 Email 登录。保留邮箱确认，生产注册邮件配置自己的 SMTP；默认邮件服务存在发送限制，详见 [Supabase 邮件说明](https://supabase.com/docs/guides/auth/passwords#email-sending)。
+1. 创建 Supabase 项目，启用 Email 登录。保留邮箱确认。默认邮件服务只能发送到 Supabase 组织成员的邮箱，目前限每小时 2 封；向其他家长开放注册前，必须在 Authentication → Emails → SMTP Settings 配置自己的邮件服务。填写服务商提供的 SMTP 主机、端口、用户名、密码以及已验证的发件邮箱，敏感凭据只填在 Supabase 控制台。详见 [Supabase 邮件服务配置](https://supabase.com/docs/guides/auth/auth-smtp)。
 2. 在 SQL Editor 中执行迁移脚本，或使用 Supabase migrations 工作流应用该文件。
 3. Authentication → URL Configuration：Site URL 与 Redirect URLs 设置为实际 GitHub Pages 地址，包含项目路径及末尾 `/`。本地注册/找回密码调试时另添加实际开发地址。
 4. Project Settings → API Keys：复制 project URL 与公开 publishable key。只使用公开客户端密钥；不要在 `VITE_*`、仓库或前端填入 service role、secret key 或数据库密码。
 5. 修改 `.env.production`；本地复制 `.env.example` 为 `.env.local` 并填写公开值。GitHub Actions 可通过同名 repository variables 覆盖当前默认配置：`VITE_SUPABASE_URL`、`VITE_SUPABASE_PUBLISHABLE_KEY`。部署工作流读取这两个值后构建静态前端。
-6. 推送默认分支，等待 GitHub Pages 工作流成功。在网站右上角“账户与同步”中注册、确认邮箱、登录并导入记录，再用其他浏览器登录同一账户验证。
+6. 在 GitHub 仓库 Settings → Pages 将 Source 设为 GitHub Actions。推送默认分支，等待 GitHub Pages 工作流成功。在网站右上角“账户与同步”中注册、确认邮箱、登录并导入记录，再用其他浏览器登录同一账户验证。
 
 公开密钥会出现在网站构建资源中，这是预期行为。权限由 RLS 和数据库函数中的 `auth.uid()` 校验负责。[Supabase RLS 文档](https://supabase.com/docs/guides/database/postgres/row-level-security)说明了公开客户端访问与账户隔离机制。
 
