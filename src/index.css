@@ -1630,3 +1630,34 @@ select {
   .child-theme-row > strong { width: 100%; }
   .child-theme-row .quiet-button { padding: 10px 12px; }
 }
+
+.header-actions { display: flex; align-items: center; gap: 6px; }
+.account-button { position: relative; }
+.account-dot { position: absolute; width: 7px; height: 7px; border-radius: 50%; right: 6px; bottom: 7px; background: #a7afb3; }
+.account-dot.synced { background: var(--green); }
+.account-dot.pending, .account-dot.syncing { background: #c39328; }
+.account-dot.offline, .account-dot.auth-error, .account-dot.storage-error { background: #c57356; }
+.account-dialog { width: min(480px, calc(100vw - 28px)); max-height: calc(100dvh - 40px); padding: 26px; border: 1px solid var(--line); border-radius: 14px; color: inherit; box-shadow: 0 20px 80px #152a3033; overflow-y: auto; }
+.account-dialog::backdrop { background: #192c3b66; }
+.account-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.account-heading h2 { flex: 1; }
+.account-dialog p { margin-bottom: 12px; }
+.account-dialog form, .account-dialog label { display: grid; gap: 8px; }
+.account-dialog form { gap: 16px; margin: 16px 0; }
+.account-dialog input, .account-dialog textarea { width: 100%; min-width: 0; border: 1px solid #c9d8ce; border-radius: 6px; padding: 11px 12px; background: white; color: inherit; }
+.account-dialog textarea { min-height: 100px; }
+.account-dialog .primary { justify-content: center; }
+.account-note { background: #f1f6f3; padding: 16px; border-radius: 8px; margin: 16px 0; overflow-wrap: anywhere; }
+.account-note p { margin: 8px 0 0; }
+.account-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.account-tabs { display: flex; gap: 8px; margin-top: 20px; }
+.account-tabs button { padding: 8px 20px; border-radius: 6px; background: #f2f4f3; color: var(--muted); }
+.account-tabs button.active { background: #e7f2ec; color: var(--green); }
+.account-error { color: #a05d48; }
+.draft-conflicts { margin: 16px 0; }
+.draft-conflicts label { margin: 12px 0; }
+@media (max-width: 760px) {
+  .header-actions { grid-column: 2; grid-row: 1; }
+  .header-actions .settings-button { position: static; }
+  .account-dialog { padding: 20px; }
+}

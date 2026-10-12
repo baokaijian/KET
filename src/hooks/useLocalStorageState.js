@@ -1,37 +1,18 @@
-import { useEffect, useState } from "react";
+import { useCallback, useRef, useSyncExternalStore } from "react";
+import { accountCache } from "../sync/account.js";
 
 export function safeReadStorage(key, fallback) {
-  let raw;
-  try {
-    raw = localStorage.getItem(key);
-    if (raw === null) return fallback;
-    return JSON.parse(raw);
-  } catch (error) {
-    if (raw === undefined) return fallback;
-    if (typeof fallback === "string") return raw ?? fallback;
-    if (typeof fallback === "number") {
-      const numeric = Number(raw);
-      return Number.isFinite(numeric) ? numeric : fallback;
-    }
-    console.warn(`Failed to read ${key} from localStorage:`, error);
-    return fallback;
-  }
+  return accountCache.read(key, fallback);
 }
-
 export function safeWriteStorage(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {
-    console.warn(`Failed to write ${key} to localStorage:`, error);
-  }
+  return accountCache.write(key, value);
 }
-
 export function useLocalStorageState(key, fallback) {
-  const [value, setValue] = useState(() => safeReadStorage(key, fallback));
-
-  useEffect(() => {
-    safeWriteStorage(key, value);
-  }, [key, value]);
-
+  const initial = useRef(fallback);
+  const value = useSyncExternalStore(accountCache.subscribe, () => accountCache.read(key, initial.current));
+  const setValue = useCallback((next) => {
+    const previous = accountCache.read(key, initial.current);
+    accountCache.write(key, typeof next === "function" ? next(previous) : next);
+  }, [key]);
   return [value, setValue];
 }

@@ -25,10 +25,13 @@ jobs:
       - run: npm run review:images
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - run: npm run test:sync
       - run: npm run test:pages
       - run: npm run build
         env:
           VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL || 'https://oeyirzlgqixvcxofimit.supabase.co' }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_9nM-eI3_fni6X_Y3_NiKHQ_V3TcVYlh' }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

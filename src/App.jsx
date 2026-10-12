@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -21,6 +21,7 @@ import {
   Volume2,
   X,
   PenLine,
+  UserRound,
 } from "lucide-react";
 import {
   abilityQuestions,
@@ -55,6 +56,8 @@ import CourseHub from "./components/CourseHub.jsx";
 import ProductionWorkspace from "./components/ProductionWorkspace.jsx";
 import CourseAssessment from "./components/CourseAssessment.jsx";
 import DailyLearning from "./components/DailyLearning.jsx";
+import AccountPanel from "./components/AccountPanel.jsx";
+import { accountCache, syncLabels } from "./sync/account.js";
 import { saveDailyPlan, reviewQuestions } from "./utils/dailyPlan.js";
 import { practiceFingerprint, resumablePractice } from "./utils/practiceSession.js";
 
@@ -924,7 +927,7 @@ function Assessment({ startTest, progress, update, say, curriculum, start, produ
   );
 }
 
-function Progress({ progress, review, curriculum, reviewDue }) {
+function Progress({ progress, review, curriculum, reviewDue, account }) {
   const registry = curriculum?.courseWordById || wordById;
   const currentLessonIds = new Set([...lessons, ...(curriculum?.courseLessons || []), ...(curriculum?.childLessons || [])].map((lesson) => lesson.id));
   const completedCount = new Set(progress.completed.filter((id) => currentLessonIds.has(id))).size;
@@ -1004,7 +1007,7 @@ function Progress({ progress, review, curriculum, reviewDue }) {
       )}
       <div className="section-heading">
         <h2>我的练习记录</h2>
-        <span className="muted">只保存在这台设备</span>
+        <span className="muted">{account.user ? syncLabels[account.status] : "登录账户可在不同浏览器同步"}</span>
       </div>
       {progress.sessions.length ? (
         <div className="session-list">
@@ -1034,7 +1037,7 @@ function Progress({ progress, review, curriculum, reviewDue }) {
       <div className="privacy-note">
         <BookOpen size={20} />
         <p>
-          学习不需要账号，进度保存在本浏览器。清除浏览器数据会清除新版记录；旧版学习数据保持不变。
+          {account.user ? "学习记录会同步到当前账户。断网时可继续学习，联网后补传。清除浏览器数据前，请确认记录已同步。" : "学习不需要账号，进度保存在本浏览器。登录后可导入原有记录，在其他浏览器继续学习。清除浏览器数据会清除尚未同步的记录。"}
         </p>
       </div>
       {!!progress.selfReviews.length && <p className="positive">已完成 {progress.selfReviews.length} 篇写作自查；自查记录不代表语言能力评分。</p>}
@@ -1043,6 +1046,8 @@ function Progress({ progress, review, curriculum, reviewDue }) {
 }
 
 export default function App() {
+  const account = useSyncExternalStore(accountCache.subscribe, accountCache.getState);
+  const [accountOpen, setAccountOpen] = useState(false);
   const initialPage = window.location.hash.slice(1);
   const [page, setPage] = useState(
     navigation.some(([id]) => id === initialPage) ? initialPage : "today",
@@ -1204,7 +1209,7 @@ export default function App() {
               </a>
             ))}
           </nav>
-          <button
+          <div className="header-actions"><button className="icon-button account-button" aria-label="账户与同步" title={account.user ? syncLabels[account.status] : "账户与同步"} onClick={() => setAccountOpen(true)}><UserRound size={20} /><span className={`account-dot ${account.status}`} /></button><button
             className={`icon-button settings-button ${settingsOpen ? "active" : ""}`}
             aria-label="发音设置"
             title="发音设置"
@@ -1212,7 +1217,7 @@ export default function App() {
             onClick={() => setSettingsOpen(!settingsOpen)}
           >
             <Settings2 size={20} />
-          </button>
+          </button></div>
         </div>
       </header>
       {settingsOpen && (
@@ -1335,15 +1340,16 @@ export default function App() {
               />
             )}
             {page === "progress" && (
-              <Progress progress={progress} review={review} curriculum={curriculum} reviewDue={reviewDue} />
+              <Progress progress={progress} review={review} curriculum={curriculum} reviewDue={reviewDue} account={account} />
             )}
           </>
         )}
       </main>
       <footer>
         <span>Sparks · 让好奇心，带着英语长大。</span>
-        <span>无需账号 · 本地保存 · 慢慢学，也很好</span>
+        <span>{account.user ? syncLabels[account.status] : "无需账号即可学习 · 登录后跨浏览器同步"}</span>
       </footer>
+      {(accountOpen || account.recovery) && <AccountPanel close={() => setAccountOpen(false)} />}
       {notice && (
         <div className="toast" role="alert">
           {notice}

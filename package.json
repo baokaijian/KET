@@ -10,22 +10,25 @@
     "preview": "vite preview",
     "test:data": "vitest run tests/data tests/unit",
     "test:e2e": "playwright test",
-    "test:functional": "npm run lint && npm run build && npm run test:data && npm run test:e2e && npm run test:pages",
+    "test:functional": "npm run lint && npm run build && npm run test:data && npm run test:e2e && npm run test:sync && npm run test:pages",
     "test:acceptance": "npm run test:functional && npm run test:full-content",
     "test:release": "npm run test:functional && npm run review:images",
     "test:pages": "node scripts/test-pages.mjs",
     "review:content": "node scripts/generate-content-review.mjs",
     "review:images": "node scripts/review-images.mjs",
     "test:full-content": "node scripts/review-images.mjs --full",
-    "generate:word-images": "node scripts/generate-word-image-assets.mjs"
+    "generate:word-images": "node scripts/generate-word-image-assets.mjs",
+    "test:sync": "playwright test --config playwright.sync.config.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.117.3",
     "canvas-confetti": "^1.9.4",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.60.0",
     "@types/react": "^19.2.14",
