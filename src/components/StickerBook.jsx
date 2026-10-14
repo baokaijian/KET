@@ -50,7 +50,7 @@ export default function StickerBook({ progress }) {
     idCounterRef.current += 1;
     const offset = ((placedStickers.length + idCounterRef.current) % 5) * 24 - 48;
     const newSticker = {
-      uniqueId: `${sticker.id}_${Date.now()}_${idCounterRef.current}`,
+      uniqueId: `${sticker.id}_${placedStickers.length}_${idCounterRef.current}`,
       id: sticker.id,
       icon: sticker.icon,
       name: sticker.name,
