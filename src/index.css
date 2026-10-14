@@ -1661,3 +1661,538 @@ select {
   .header-actions .settings-button { position: static; }
   .account-dialog { padding: 20px; }
 }
+
+/* Phonics Breakdown & Mini-Chunks */
+.preview-phonics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 6px 0 4px;
+}
+.phonics-mini-chunk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  border: 1px solid transparent;
+}
+.phonics-chunk.kind-vowel,
+.phonics-mini-chunk.kind-vowel,
+.phonics-pool-btn.kind-vowel,
+.phonics-slot.filled.kind-vowel {
+  background: #fff0ec;
+  color: #b5472a;
+  border-color: #f3b8a7;
+}
+.phonics-chunk.kind-r-vowel,
+.phonics-mini-chunk.kind-r-vowel,
+.phonics-pool-btn.kind-r-vowel,
+.phonics-slot.filled.kind-r-vowel {
+  background: #f4efff;
+  color: #5d38a8;
+  border-color: #cdb7f6;
+}
+.phonics-chunk.kind-digraph,
+.phonics-mini-chunk.kind-digraph,
+.phonics-pool-btn.kind-digraph,
+.phonics-slot.filled.kind-digraph {
+  background: #eef6ff;
+  color: #1f5ea8;
+  border-color: #a8cdf5;
+}
+.phonics-chunk.kind-consonant,
+.phonics-mini-chunk.kind-consonant,
+.phonics-pool-btn.kind-consonant,
+.phonics-slot.filled.kind-consonant {
+  background: #e8f5ee;
+  color: #1e6b43;
+  border-color: #a5d9bc;
+}
+.phonics-chunk.kind-silent,
+.phonics-mini-chunk.kind-silent,
+.phonics-pool-btn.kind-silent,
+.phonics-slot.filled.kind-silent {
+  background: #f3f5f4;
+  color: #607066;
+  border: 1px dashed #b5c2ba;
+}
+
+.phonics-card {
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f7faf8;
+  border: 1px solid #d9e6de;
+  text-align: left;
+}
+.phonics-card.phonics-compact {
+  margin: 12px 0;
+  padding: 12px;
+}
+.phonics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.phonics-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #23794d;
+}
+.phonics-legend-hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+.phonics-chunks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.phonics-chunk {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  min-height: 48px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.phonics-chunk strong {
+  font-size: 18px;
+  line-height: 1.2;
+}
+.phonics-chunk small {
+  font-size: 10px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+.phonics-chunk.active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(35, 121, 77, 0.18);
+}
+.phonics-blend-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #23794d;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+.phonics-chunk-detail {
+  margin: 10px 0 4px;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #26372d;
+  border: 1px solid #e2ece6;
+}
+.phonics-rule {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #36493e;
+}
+.phonics-puzzle-box {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed #cfe0d5;
+}
+.phonics-puzzle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.phonics-puzzle-top strong {
+  font-size: 13px;
+  color: #23794d;
+}
+.phonics-puzzle-body {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+.phonics-slots {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.phonics-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 2px dashed #b9ccc0;
+  background: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  color: #829489;
+}
+.phonics-slot.filled {
+  border-style: solid;
+}
+.phonics-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.phonics-pool-btn {
+  min-width: 48px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.phonics-pool-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.phonics-family {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #e2ece6;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.phonics-family-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+.phonics-family-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.phonics-family-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #cfe0d5;
+  font-size: 13px;
+  color: #26372d;
+  cursor: pointer;
+}
+
+/* Mascot Companion Banner */
+.mascot-banner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  margin: 0 0 24px;
+  background: linear-gradient(135deg, #f1f8f4 0%, #fffdf5 100%);
+  border: 1px solid #cfe2d6;
+  border-radius: 14px;
+}
+.mascot-avatar-btn {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  min-height: 54px;
+  padding: 4px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #83b99c;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.mascot-svg {
+  width: 44px;
+  height: 44px;
+}
+.mascot-bubble {
+  min-width: 0;
+}
+.mascot-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f3327;
+  line-height: 1.5;
+  margin: 0;
+}
+.mascot-en {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Sticker Book Rewards */
+.sticker-book-section {
+  margin: 28px 0 36px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.sticker-status-banner {
+  background: #f3f8f5;
+  border: 1px solid #d5e5dc;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #26372d;
+  margin-bottom: 16px;
+}
+.sticker-badge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.sticker-badge-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 60px;
+  min-width: 44px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d5e2da;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+}
+.sticker-badge-card.locked {
+  opacity: 0.65;
+  background: #f6f8f7;
+}
+.sticker-badge-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.sticker-badge-info {
+  min-width: 0;
+  display: block;
+}
+.sticker-badge-info strong {
+  display: block;
+  font-size: 13px;
+  color: #1f3327;
+}
+.sticker-badge-info small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+.sticker-canvas-shell {
+  border: 1px solid #d5e2da;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fbfdfc;
+}
+.sticker-canvas-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.scenery-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.scenery-buttons .active-scene {
+  background: #e5f2ea;
+  border-color: #83b99c;
+  color: #1e6b43;
+}
+.sticker-Interactive-canvas {
+  position: relative;
+  height: 220px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  user-select: none;
+}
+.sticker-canvas-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  color: rgba(30, 41, 59, 0.75);
+  font-size: 13px;
+  font-weight: 600;
+}
+.placed-sticker-node {
+  position: absolute;
+  font-size: 34px;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.18));
+}
+
+/* Interactive Story Reader & Phonics Story Corner */
+.story-reader-wrap {
+  margin: 14px 0;
+}
+.story-tap-word {
+  border-bottom: 2px dotted #68a885;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.15s ease;
+}
+.story-tap-word.target-word {
+  background: #eef8f2;
+  border-bottom: 2px solid #23794d;
+  font-weight: 600;
+}
+.story-tap-word.active-peek,
+.story-tap-word:hover {
+  background: #dcf2e5;
+}
+.story-tap-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 8px 0 12px;
+}
+.story-word-peek {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  margin: 12px 0 16px;
+  border-radius: 12px;
+  background: #f5faf7;
+  border: 1px solid #b8dcc7;
+}
+.story-peek-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.story-peek-info {
+  min-width: 0;
+}
+.story-peek-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+.story-peek-title strong {
+  font-size: 18px;
+  color: #1e6b43;
+}
+.story-peek-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.story-sentences .active-sentence {
+  background: #e7f4ec;
+  border-color: #83b99c;
+}
+.phonics-story-corner {
+  margin: 28px 0;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+.phonics-story-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0;
+}
+.phonics-story-tabs button {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  min-height: 54px;
+  padding: 10px 12px;
+}
+.phonics-story-tabs button small {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.phonics-story-tabs button.active-phonics-story {
+  background: #e5f2ea;
+  border-color: #83b99c;
+}
+.phonics-story-card {
+  padding: 18px;
+  border-radius: 12px;
+  background: #fafcfb;
+  border: 1px solid #dce7e0;
+}
+.phonics-story-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.phonics-story-translation {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+@media (max-width: 760px) {
+  .sticker-badge-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .phonics-story-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .story-word-peek {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -57,6 +57,11 @@ import ProductionWorkspace from "./components/ProductionWorkspace.jsx";
 import CourseAssessment from "./components/CourseAssessment.jsx";
 import DailyLearning from "./components/DailyLearning.jsx";
 import AccountPanel from "./components/AccountPanel.jsx";
+import PhonicsBreakdown from "./components/PhonicsBreakdown.jsx";
+import Mascot from "./components/Mascot.jsx";
+import StickerBook from "./components/StickerBook.jsx";
+import StoryReader from "./components/StoryReader.jsx";
+import { phonicsStories } from "./data/phonics-stories.js";
 import { accountCache, syncLabels } from "./sync/account.js";
 import { saveDailyPlan, reviewQuestions } from "./utils/dailyPlan.js";
 import { practiceFingerprint, resumablePractice } from "./utils/practiceSession.js";
@@ -120,11 +125,17 @@ function LessonTile({ lesson, completed, start }) {
 }
 
 function Today({ progress, start, say, curriculum, savePlan }) {
-  return <DailyLearning curriculum={curriculum} progress={progress} launch={start} say={say} save={savePlan} />;
+  return (
+    <>
+      <Mascot say={say} />
+      <DailyLearning curriculum={curriculum} progress={progress} launch={start} say={say} save={savePlan} />
+    </>
+  );
 }
 
 function Library({ progress, start, say, curriculum, produce }) {
   const [advanced, setAdvanced] = useLocalStorageState("sparks_advanced_courses", false);
+  const [activePhonicsStory, setActivePhonicsStory] = useState(phonicsStories[0].id);
   const [dictionary, setDictionary] = useState(null);
   const [loadError, setLoadError] = useState(false);
   const [query, setQuery] = useState("");
@@ -152,8 +163,10 @@ function Library({ progress, start, say, curriculum, produce }) {
   }, []);
   const allKetWords = dictionary?.allKetWords || [];
   const topicCategories = dictionary?.topicCategories || [];
-  const results = allKetWords
-    .map(dictionaryEntry)
+  const entries = allKetWords.map(dictionaryEntry);
+  const wordLookup = Object.fromEntries(entries.map((w) => [w.word.toLowerCase(), w]));
+  const currentPhonicsStory = phonicsStories.find((s) => s.id === activePhonicsStory) || phonicsStories[0];
+  const results = entries
     .filter(
       (word) =>
         (topic === "all" || word.topic === topic) &&
@@ -164,6 +177,7 @@ function Library({ progress, start, say, curriculum, produce }) {
   return (
     <>
       {curriculum?.childThemes && <section className="child-library" aria-label="听读故事课程"><div className="section-heading"><h2>听读故事课程</h2><span className="muted">短句 · 小故事 · 进阶阅读</span></div>{curriculum.childThemes.map((theme) => <div className="child-theme-row" key={theme.id}><strong>{theme.title}</strong><div>{[theme.vocabulary, theme.sentences, theme.story, theme.longStory].map((lesson) => <button className="quiet-button" key={lesson.id} onClick={() => start(lesson)}>{lesson.id.endsWith("words") ? "认识新词" : lesson.id.endsWith("sentences") ? "听读句子" : lesson.id.endsWith("long-story") ? "进阶故事" : "阅读故事"}{progress.completed.includes(lesson.id) && <Check size={14} />}</button>)}</div></div>)}</section>}
+      <section className="phonics-story-corner" aria-label="自然拼读韵律绘本"><div className="section-heading"><div><span className="eyebrow">PHONICS RHYMING STORIES</span><h2>自然拼读韵律绘本角</h2></div><span className="muted">同音家族串联 · 点读短文不死背</span></div><div className="phonics-story-tabs" role="group" aria-label="选择自然拼读绘本">{phonicsStories.map((story) => <button type="button" key={story.id} aria-pressed={currentPhonicsStory.id === story.id} className={`quiet-button ${currentPhonicsStory.id === story.id ? "active-phonics-story" : ""}`} onClick={() => setActivePhonicsStory(story.id)}><strong>{story.title}</strong><small>{story.family.pattern}</small></button>)}</div><article className="phonics-story-card"><div className="phonics-story-meta"><div><h3 lang="en">{currentPhonicsStory.englishTitle}</h3><p className="tiny">{currentPhonicsStory.family.tip}</p></div><button type="button" className="secondary" onClick={() => say(currentPhonicsStory.passage)}><Headphones size={18} /> 听韵律短文</button></div><StoryReader passage={currentPhonicsStory.passage} wordLookup={wordLookup} highlightWords={currentPhonicsStory.highlightWords} say={say} /><p className="phonics-story-translation">{currentPhonicsStory.translation}</p></article></section>
       <details className="advanced-courses" open={advanced} onToggle={(event) => { if (event.currentTarget.open !== advanced) setAdvanced(event.currentTarget.open); }}><summary>家长与进阶课程 · 完整 KET 体系</summary><CourseHub curriculum={curriculum} progress={progress} launch={start} produce={produce} /></details>
       <div className="section-heading"><h2>照片启蒙课</h2><span className="muted">刚开始学英语，从这里热身</span></div>
       <section className="lesson-list">
@@ -318,6 +332,7 @@ function Library({ progress, start, say, curriculum, produce }) {
             {selected.sentence && (
               <div className="example"><blockquote lang="en">{selected.sentence}</blockquote><p>{selected.sentenceTranslation}</p><SoundButton text={selected.sentence} say={say} label="朗读例句" /></div>
             )}
+            <PhonicsBreakdown key={selected.id} word={selected} say={say} compact />
             <button className="quiet-button" onClick={() => setSelected(null)}>
               返回词库
             </button>
@@ -353,7 +368,7 @@ function makeWordQuestions(words) {
   }));
 }
 
-function Practice({ activity, progress, seen, answer, complete, exit, say }) {
+function Practice({ activity, progress, seen, answer, complete, exit, say, wordLookup }) {
   const words = activity.lesson?.words || [];
   const questions = activity.questions || activity.lesson?.questions || makeWordQuestions(words);
   const guide = activity.lesson?.guide;
@@ -465,7 +480,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
         <span className="eyebrow">先理解 · 再练习</span><h1>{activity.title}</h1>
         <p>{guide.rule}</p>{guide.example && <div className="example"><blockquote lang="en">{guide.example}</blockquote><SoundButton text={guide.example} say={say} label="听讲解例句" /></div>}
         {guide.sentences && <div className="sentence-list">{guide.sentences.map(([text, meaning], n) => <div key={text}><p lang="en">{text}</p><p className="muted">{meaning}</p><button className="icon-button" title={`听第 ${n + 1} 句`} aria-label={`听第 ${n + 1} 句`} onClick={() => { setGuideAudio(true); say(text); }}><Volume2 size={19} /></button></div>)}</div>}
-        {guide.passage && <><blockquote className="reading-passage" lang="en">{guide.passage}</blockquote><button className="secondary" onClick={() => { setGuideAudio(true); say(guide.passage); }}><Headphones size={19} /> 听完整故事</button><div className="story-sentences">{guide.passage.match(/[^.!?]+[.!?]+/g)?.map((sentence, n) => <button className="quiet-button" key={n} onClick={() => { setGuideAudio(true); say(sentence.trim()); }} aria-label={`听故事第 ${n + 1} 句`}><Volume2 size={16} /><span lang="en">{sentence.trim()}</span></button>)}</div></>}
+        {guide.passage && <StoryReader passage={guide.passage} wordLookup={wordLookup} say={say} onAudioHint={() => setGuideAudio(true)} showFullControls />}
         <div className="guide-caution"><strong>小提醒</strong><p>{guide.caution}</p></div>
         <button className="primary" onClick={() => { stopSpeech(); setStage(words.length ? "learn" : "quiz"); }}>开始练习 <ArrowRight size={18} /></button>
       </div>}
@@ -501,6 +516,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
               </div>
               <p>{currentWord.sentenceTranslation}</p>
             </div>}
+            <PhonicsBreakdown key={currentWord.id} word={currentWord} say={say} interactive />
             <button className="secondary" onClick={next}>
               {index + 1 === words.length ? "开始小练习" : "下一个单词"}{" "}
               <ArrowRight size={18} />
@@ -528,9 +544,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say }) {
           )}
           {question.passage && (
             <>
-            <blockquote className="reading-passage" lang="en">
-              {question.passage}
-            </blockquote>
+            <StoryReader passage={question.passage} wordLookup={wordLookup} say={say} onAudioHint={() => setHeard(true)} />
             {(activity.lesson?.id?.startsWith("child-") || question.id.startsWith("child-")) && <button className="quiet-button" onClick={() => { setHeard(true); say(question.passage); }}><Volume2 size={17} /> 听这段文字</button>}
             {heard && question.skill === "reading" && <p className="tiny">本题记录为听后理解，不计入独立阅读掌握。</p>}
             </>
@@ -964,6 +978,7 @@ function Progress({ progress, review, curriculum, reviewDue, account }) {
           </div>
         ))}
       </section>
+      <StickerBook progress={progress} />
       <div className="section-heading"><h2>间隔复习</h2><span className="muted">{due.length} 项到期 · 听读分别安排</span></div>
       {due.length ? <section className="review-list">{due.slice(0, 12).map((item) => <div key={`${item.id}-${item.skill}`}><div><strong>{registry[item.id]?.word || questionRegistry[item.id]?.prompt}</strong><span>{item.skill === "listening" ? "听力" : "阅读"} · 已独立答对 {item.successDays.length} 个学习日 · {item.due} 到期</span></div><button className="quiet-button" onClick={() => reviewDue([item])}>开始复习 <ArrowRight size={16} /></button></div>)}<button className="primary" onClick={() => reviewDue(due.slice(0, 20))}>复习到期内容</button>{due.length > 20 && <p className="tiny">每次最多 20 项，其余内容保留，不要求一次补完。</p>}</section> : <p className="muted">今天没有到期内容。复习会在合适的日子回来。</p>}
       <div className="section-heading">
@@ -1276,6 +1291,7 @@ export default function App() {
             activity={activity}
             progress={progress}
             say={say}
+            wordLookup={Object.fromEntries((curriculum?.courseWords || learningWords).map((w) => [w.word.toLowerCase(), w]))}
             exit={() => {
               stopSpeech();
               setActivity(null);
