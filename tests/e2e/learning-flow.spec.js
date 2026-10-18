@@ -392,3 +392,112 @@ test("incorrect reading answers are reviewed in their original context", async (
   await page.getByRole("button", { name: "完成练习" }).click();
   await expect(page.getByText("复习区空空的，很棒。")).toBeVisible();
 });
+
+test("4-stage roadmap, phonics workshop, situational dialogues, graded long reading and guided writing work end to end", async ({
+  page,
+}) => {
+  await page.goto("./#today");
+  const roadmap = page.getByRole("region", { name: "全周期四阶英语学习规划" });
+  await expect(roadmap).toBeVisible();
+  await expect(roadmap).toContainText("阶段一：自然拼读与音素解码");
+  await expect(roadmap).toContainText("阶段四：长文深度阅读与篇章观点表达");
+  await roadmap.getByRole("button", { name: "进入自然拼读工坊" }).click();
+
+  await expect(
+    page.getByRole("region", { name: "自然拼读交互工坊" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "2. CVC 三明治动态拼词机" }).click();
+  await page
+    .getByRole("group", { name: "选择首辅音" })
+    .getByRole("button", { name: "b", exact: true })
+    .click();
+  await page
+    .getByRole("group", { name: "选择短元音" })
+    .getByRole("button", { name: "e", exact: true })
+    .click();
+  await page
+    .getByRole("group", { name: "选择尾辅音" })
+    .getByRole("button", { name: "d", exact: true })
+    .click();
+  await expect(page.locator(".cvc-result-banner")).toContainText("bed");
+  await page.getByRole("button", { name: "拼读发音合并" }).click();
+  await page.getByRole("button", { name: "3. Magic E 魔法静音 e 实验室" }).click();
+  await expect(page.getByText("cap", { exact: true })).toBeVisible();
+
+  // Situational Dialogue Simulator
+  const dialogueSection = page.getByRole("region", {
+    name: "自然情景交际对话舱",
+  });
+  await expect(dialogueSection).toBeVisible();
+  await dialogueSection
+    .getByRole("button", { name: /Good morning, Sam! My name is Mia/ })
+    .click();
+  await expect(dialogueSection.getByText("回答得自然又得体！")).toBeVisible();
+  await dialogueSection.getByRole("button", { name: "继续下一轮对话" }).click();
+  await dialogueSection
+    .getByRole("button", { name: /I like science best because/ })
+    .click();
+  await dialogueSection.getByRole("button", { name: "继续下一轮对话" }).click();
+  await dialogueSection
+    .getByRole("button", { name: /Good idea! Let's go/ })
+    .click();
+  await dialogueSection.getByRole("button", { name: "完成本场景交际" }).click();
+  await expect(
+    dialogueSection.getByText(/已完成“新朋友与早晨问候”全部三轮真实英语交际/),
+  ).toBeVisible();
+
+  // Graded Long-Passage Reading Hub
+  const longReading = page.getByRole("region", { name: "分级长文深度阅读馆" });
+  await expect(longReading).toBeVisible();
+  await longReading
+    .getByRole("button", { name: /Gentle rain and the warm sun/ })
+    .click();
+  await longReading
+    .getByRole("button", {
+      name: /She brings her watering can and checks on the plant/,
+    })
+    .click();
+  await longReading
+    .getByRole("button", {
+      name: /How a tiny seed grows step by step into a tall flower/,
+    })
+    .click();
+  await longReading.getByRole("button", { name: "提交长文理解答案" }).click();
+  await expect(
+    longReading.getByText("本次长文理解得分：3 / 3"),
+  ).toBeVisible();
+
+  // Guided Writing Workshop
+  const writingSection = page.getByRole("region", {
+    name: "阶梯式引导写作工坊",
+  });
+  await expect(writingSection).toBeVisible();
+  await writingSection
+    .getByRole("button", { name: /\+ Hi Alex,/ })
+    .click();
+  await writingSection
+    .getByRole("button", {
+      name: /\+ Let's meet at the park gate at ten o'clock on Saturday\./,
+    })
+    .click();
+  await writingSection
+    .getByRole("button", {
+      name: /\+ I will bring some delicious sandwiches and fresh apples\./,
+    })
+    .click();
+  await writingSection
+    .getByRole("button", { name: /\+ Could you bring some water or juice\?/ })
+    .click();
+  for (const checkbox of await writingSection
+    .locator(".guided-checklist-box input[type='checkbox']")
+    .all()) {
+    await checkbox.check();
+  }
+  await writingSection
+    .getByRole("button", { name: "完成写作并记录自查" })
+    .click();
+  await expect(
+    writingSection.getByRole("button", { name: "已完成本篇写作自查" }),
+  ).toBeDisabled();
+});
+

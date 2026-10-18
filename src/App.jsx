@@ -61,6 +61,11 @@ import PhonicsBreakdown from "./components/PhonicsBreakdown.jsx";
 import Mascot from "./components/Mascot.jsx";
 import StickerBook from "./components/StickerBook.jsx";
 import StoryReader from "./components/StoryReader.jsx";
+import LearningRoadmap from "./components/LearningRoadmap.jsx";
+import PhonicsWorkshop from "./components/PhonicsWorkshop.jsx";
+import DialogueSimulator from "./components/DialogueSimulator.jsx";
+import LongReadingHub from "./components/LongReadingHub.jsx";
+import GuidedWritingWorkshop from "./components/GuidedWritingWorkshop.jsx";
 import { phonicsStories } from "./data/phonics-stories.js";
 import { accountCache, syncLabels } from "./sync/account.js";
 import { saveDailyPlan, reviewQuestions } from "./utils/dailyPlan.js";
@@ -124,16 +129,30 @@ function LessonTile({ lesson, completed, start }) {
   );
 }
 
-function Today({ progress, start, say, curriculum, savePlan }) {
+function Today({ progress, start, navigate, say, curriculum, savePlan }) {
+  function handleNavigateStage(targetPage, sectionId) {
+    navigate(targetPage);
+    if (sectionId) {
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+      }, 60);
+    }
+  }
   return (
     <>
       <Mascot say={say} />
       <DailyLearning curriculum={curriculum} progress={progress} launch={start} say={say} save={savePlan} />
+      <LearningRoadmap
+        progress={progress}
+        curriculum={curriculum}
+        say={say}
+        onNavigateStage={handleNavigateStage}
+      />
     </>
   );
 }
 
-function Library({ progress, start, say, curriculum, produce }) {
+function Library({ progress, start, say, curriculum, produce, update }) {
   const [advanced, setAdvanced] = useLocalStorageState("sparks_advanced_courses", false);
   const [activePhonicsStory, setActivePhonicsStory] = useState(phonicsStories[0].id);
   const [dictionary, setDictionary] = useState(null);
@@ -174,10 +193,20 @@ function Library({ progress, start, say, curriculum, produce }) {
           .toLowerCase()
           .includes(query.trim().toLowerCase()),
     );
+  function recordModuleComplete(moduleId) {
+    update?.((p) => ({
+      ...p,
+      completed: [...new Set([...(p.completed || []), moduleId])],
+    }));
+  }
   return (
     <>
       {curriculum?.childThemes && <section className="child-library" aria-label="听读故事课程"><div className="section-heading"><h2>听读故事课程</h2><span className="muted">短句 · 小故事 · 进阶阅读</span></div>{curriculum.childThemes.map((theme) => <div className="child-theme-row" key={theme.id}><strong>{theme.title}</strong><div>{[theme.vocabulary, theme.sentences, theme.story, theme.longStory].map((lesson) => <button className="quiet-button" key={lesson.id} onClick={() => start(lesson)}>{lesson.id.endsWith("words") ? "认识新词" : lesson.id.endsWith("sentences") ? "听读句子" : lesson.id.endsWith("long-story") ? "进阶故事" : "阅读故事"}{progress.completed.includes(lesson.id) && <Check size={14} />}</button>)}</div></div>)}</section>}
+      <PhonicsWorkshop say={say} progress={progress} onRecordComplete={recordModuleComplete} />
       <section className="phonics-story-corner" aria-label="自然拼读韵律绘本"><div className="section-heading"><div><span className="eyebrow">PHONICS RHYMING STORIES</span><h2>自然拼读韵律绘本角</h2></div><span className="muted">同音家族串联 · 点读短文不死背</span></div><div className="phonics-story-tabs" role="group" aria-label="选择自然拼读绘本">{phonicsStories.map((story) => <button type="button" key={story.id} aria-pressed={currentPhonicsStory.id === story.id} className={`quiet-button ${currentPhonicsStory.id === story.id ? "active-phonics-story" : ""}`} onClick={() => setActivePhonicsStory(story.id)}><strong>{story.title}</strong><small>{story.family.pattern}</small></button>)}</div><article className="phonics-story-card"><div className="phonics-story-meta"><div><h3 lang="en">{currentPhonicsStory.englishTitle}</h3><p className="tiny">{currentPhonicsStory.family.tip}</p></div><button type="button" className="secondary" onClick={() => say(currentPhonicsStory.passage)}><Headphones size={18} /> 听韵律短文</button></div><StoryReader passage={currentPhonicsStory.passage} wordLookup={wordLookup} highlightWords={currentPhonicsStory.highlightWords} say={say} /><p className="phonics-story-translation">{currentPhonicsStory.translation}</p></article></section>
+      <DialogueSimulator say={say} progress={progress} onCompleteDialogue={recordModuleComplete} />
+      <LongReadingHub say={say} wordLookup={wordLookup} progress={progress} onCompletePassage={recordModuleComplete} />
+      <GuidedWritingWorkshop progress={progress} update={update} say={say} />
       <details className="advanced-courses" open={advanced} onToggle={(event) => { if (event.currentTarget.open !== advanced) setAdvanced(event.currentTarget.open); }}><summary>家长与进阶课程 · 完整 KET 体系</summary><CourseHub curriculum={curriculum} progress={progress} launch={start} produce={produce} /></details>
       <div className="section-heading"><h2>照片启蒙课</h2><span className="muted">刚开始学英语，从这里热身</span></div>
       <section className="lesson-list">
@@ -1342,7 +1371,14 @@ export default function App() {
               />
             )}
             {page === "learn" && (
-              <Library progress={progress} start={start} say={say} curriculum={curriculum} produce={produce} />
+              <Library
+                progress={progress}
+                start={start}
+                say={say}
+                curriculum={curriculum}
+                produce={produce}
+                update={update}
+              />
             )}
             {page === "assessment" && (
               <Assessment
