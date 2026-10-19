@@ -152,10 +152,25 @@ function Today({ progress, start, navigate, say, curriculum, savePlan }) {
   );
 }
 
+let cachedDictionary = null;
+let dictionaryPromise = null;
+function loadDictionaryBundle() {
+  if (cachedDictionary) return Promise.resolve(cachedDictionary);
+  if (!dictionaryPromise) {
+    dictionaryPromise = import("./data/ket-words/index.js").then((data) => {
+      const entries = (data.allKetWords || []).map(dictionaryEntry);
+      const wordLookup = Object.fromEntries(entries.map((w) => [w.word.toLowerCase(), w]));
+      cachedDictionary = { ...data, entries, wordLookup };
+      return cachedDictionary;
+    });
+  }
+  return dictionaryPromise;
+}
+
 function Library({ progress, start, say, curriculum, produce, update }) {
   const [advanced, setAdvanced] = useLocalStorageState("sparks_advanced_courses", false);
   const [activePhonicsStory, setActivePhonicsStory] = useState(phonicsStories[0].id);
-  const [dictionary, setDictionary] = useState(null);
+  const [dictionary, setDictionary] = useState(() => cachedDictionary);
   const [loadError, setLoadError] = useState(false);
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState("all");
@@ -168,8 +183,9 @@ function Library({ progress, start, say, curriculum, produce, update }) {
     return () => opener?.focus();
   }, [selected]);
   useEffect(() => {
+    if (dictionary) return undefined;
     let active = true;
-    import("./data/ket-words/index.js")
+    loadDictionaryBundle()
       .then((data) => {
         if (active) setDictionary(data);
       })
@@ -179,20 +195,19 @@ function Library({ progress, start, say, curriculum, produce, update }) {
     return () => {
       active = false;
     };
-  }, []);
+  }, [dictionary]);
   const allKetWords = dictionary?.allKetWords || [];
   const topicCategories = dictionary?.topicCategories || [];
-  const entries = allKetWords.map(dictionaryEntry);
-  const wordLookup = Object.fromEntries(entries.map((w) => [w.word.toLowerCase(), w]));
+  const entries = dictionary?.entries || [];
+  const wordLookup = dictionary?.wordLookup || {};
   const currentPhonicsStory = phonicsStories.find((s) => s.id === activePhonicsStory) || phonicsStories[0];
-  const results = entries
-    .filter(
-      (word) =>
-        (topic === "all" || word.topic === topic) &&
-        `${word.word} ${word.translation}`
-          .toLowerCase()
-          .includes(query.trim().toLowerCase()),
-    );
+  const normalizedQuery = query.trim().toLowerCase();
+  const results = entries.filter(
+    (word) =>
+      (topic === "all" || word.topic === topic) &&
+      (!normalizedQuery ||
+        `${word.word} ${word.translation}`.toLowerCase().includes(normalizedQuery)),
+  );
   function recordModuleComplete(moduleId) {
     update?.((p) => ({
       ...p,
@@ -1031,13 +1046,21 @@ function Progress({ progress, review, curriculum, reviewDue, account }) {
                       : questionRegistry[id]?.skill === "grammar" ? "语法应用" : "阅读理解")}
                 </span>
               </div>
-              <button className="quiet-button" onClick={() => review([id])}>
+              <button
+                className="quiet-button"
+                disabled={!curriculum || (!registry[id] && !questionRegistry[id])}
+                onClick={() => review([id])}
+              >
                 复习 <ArrowRight size={16} />
               </button>
             </div>
           ))}
           {wordsToReview.length > 1 && (
-            <button className="primary" onClick={() => review(wordsToReview)}>
+            <button
+              className="primary"
+              disabled={!curriculum}
+              onClick={() => review(wordsToReview)}
+            >
               复习这些单词 <RotateCcw size={17} />
             </button>
           )}
@@ -1089,6 +1112,31 @@ function Progress({ progress, review, curriculum, reviewDue, account }) {
   );
 }
 
+const defaultWordLookup = Object.fromEntries(
+  learningWords.map((w) => [w.word.toLowerCase(), w]),
+);
+let cachedCurriculum = null;
+let curriculumPromise = null;
+function loadCurriculumBundle() {
+  if (cachedCurriculum) return Promise.resolve(cachedCurriculum);
+  if (!curriculumPromise) {
+    curriculumPromise = Promise.all([
+      import("./data/curriculum.js"),
+      import("./data/child-course.js"),
+    ]).then(([data, child]) => {
+      const wordLookup = Object.fromEntries(
+        (data.courseWords || learningWords).map((w) => [w.word.toLowerCase(), w]),
+      );
+      cachedCurriculum = { ...data, ...child, wordLookup };
+      return cachedCurriculum;
+    });
+  }
+  return curriculumPromise;
+}
+if (typeof window !== "undefined") {
+  loadCurriculumBundle().catch(() => {});
+}
+
 export default function App() {
   const account = useSyncExternalStore(accountCache.subscribe, accountCache.getState);
   const [accountOpen, setAccountOpen] = useState(false);
@@ -1116,12 +1164,21 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [activity, setActivity] = useState(null);
   const [notice, setNotice] = useState("");
-  const [curriculum, setCurriculum] = useState(null);
+  const [curriculum, setCurriculum] = useState(() => cachedCurriculum);
   useEffect(() => {
+    if (curriculum) return undefined;
     let active = true;
-    Promise.all([import("./data/curriculum.js"), import("./data/child-course.js")]).then(([data, child]) => { if (active) setCurriculum({ ...data, ...child }); }).catch(() => { if (active) setNotice("完整课程暂时无法加载，请刷新重试。"); });
-    return () => { active = false; };
-  }, []);
+    loadCurriculumBundle()
+      .then((loaded) => {
+        if (active) setCurriculum(loaded);
+      })
+      .catch(() => {
+        if (active) setNotice("完整课程暂时无法加载，请刷新重试。");
+      });
+    return () => {
+      active = false;
+    };
+  }, [curriculum]);
   const noticeTimer = useRef(null);
   function update(fn) {
     setStored((previous) => fn(normalizeProgress(previous)));
@@ -1201,24 +1258,42 @@ export default function App() {
       key: crypto.randomUUID(),
     });
   }
-  function review(ids) {
-    const registry = curriculum?.courseWordById || wordById;
+  function launchReviewWithCurriculum(ids, cur) {
+    const registry = cur?.courseWordById || wordById;
     const words = ids.map((id) => registry[id]).filter(Boolean);
     const questions = [
-      ...(curriculum ? reviewQuestions(words.map((word) => ({ id: word.id, skill: Object.entries(progress.memory[word.id] || {}).find(([, item]) => !item.lastCorrect)?.[0] || "reading" })), curriculum) : makeWordQuestions(words)),
+      ...(cur ? reviewQuestions(words.map((word) => ({ id: word.id, skill: Object.entries(progress.memory[word.id] || {}).find(([, item]) => !item.lastCorrect)?.[0] || "reading" })), cur) : makeWordQuestions(words)),
       ...abilityQuestions.filter((question) => ids.includes(question.id)),
-      ...ids.map((id) => curriculum?.courseQuestionById[id]).filter(Boolean),
-      ...ids.map((id) => curriculum?.childQuestionById[id]).filter(Boolean),
+      ...ids.map((id) => cur?.courseQuestionById[id]).filter(Boolean),
+      ...ids.map((id) => cur?.childQuestionById[id]).filter(Boolean),
     ];
     if (questions.length) {
       stopSpeech();
       setActivity({ title: "温故知新", questions, key: crypto.randomUUID() });
+      return true;
+    }
+    return false;
+  }
+  function review(ids) {
+    if (launchReviewWithCurriculum(ids, curriculum)) return;
+    if (!curriculum) {
+      loadCurriculumBundle().then((loaded) => {
+        setCurriculum(loaded);
+        launchReviewWithCurriculum(ids, loaded);
+      });
     }
   }
   function reviewDue(items) {
-    if (!curriculum) return;
-    const questions = reviewQuestions(items, curriculum);
-    if (questions.length) { stopSpeech(); setActivity({ title: "间隔复习", questions, key: crypto.randomUUID() }); }
+    const run = (cur) => {
+      if (!cur) return;
+      const questions = reviewQuestions(items, cur);
+      if (questions.length) {
+        stopSpeech();
+        setActivity({ title: "间隔复习", questions, key: crypto.randomUUID() });
+      }
+    };
+    if (curriculum) run(curriculum);
+    else loadCurriculumBundle().then((loaded) => { setCurriculum(loaded); run(loaded); });
   }
   return (
     <div className="app">
@@ -1320,7 +1395,7 @@ export default function App() {
             activity={activity}
             progress={progress}
             say={say}
-            wordLookup={Object.fromEntries((curriculum?.courseWords || learningWords).map((w) => [w.word.toLowerCase(), w]))}
+            wordLookup={curriculum?.wordLookup || defaultWordLookup}
             exit={() => {
               stopSpeech();
               setActivity(null);

@@ -11,6 +11,56 @@ export default defineConfig({
   base: pagesBase(process.env),
   // Only approved assets are copied or served, never the legacy templates.
   publicDir: "public/learning-assets",
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              name: "vendor-supabase",
+              test: /node_modules[\\/]@supabase/,
+              priority: 30,
+            },
+            {
+              name: "vendor-icons",
+              test: /node_modules[\\/]lucide-react/,
+              priority: 30,
+            },
+            {
+              name: "vendor-react",
+              test: /node_modules/,
+              priority: 20,
+            },
+            {
+              name: "ket-words-ext",
+              test: /src[\\/]data[\\/]ket-words[\\/]level-12\.js$/,
+              priority: 25,
+            },
+            {
+              name: "ket-words-core",
+              test: /src[\\/]data[\\/]ket-words[\\/]level-(0[1-9]|1[01])\.js$/,
+              priority: 25,
+            },
+            {
+              name: "vocab-metadata",
+              test: /src[\\/]data[\\/](vocabulary-metadata|ket-meanings|vocabulary-corrections|curated-topics|ket-words[\\/]levels\.js)/,
+              priority: 20,
+            },
+            {
+              name: "word-images-meta",
+              test: /(-images|image-reviews)\.js$/,
+              priority: 20,
+            },
+            {
+              name: "progressive-learning",
+              test: /src[\\/]data[\\/](phonics|long-passages|communication-dialogues|writing-scaffolds|learning-roadmap)/,
+              priority: 20,
+            },
+          ],
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     {

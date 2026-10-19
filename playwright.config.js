@@ -7,7 +7,9 @@ const origin = `http://127.0.0.1:${production ? 5174 : 5173}`;
 
 export default defineConfig({
   testDir: "./tests/e2e",
-  timeout: 30_000,
+  fullyParallel: true,
+  workers: process.env.CI ? 4 : undefined,
+  timeout: 45_000,
   expect: {
     timeout: 8_000,
   },

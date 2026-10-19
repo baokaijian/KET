@@ -3,8 +3,9 @@ import process from "node:process";
 
 export default defineConfig({
   testDir: "./tests/sync-e2e",
+  fullyParallel: true,
   timeout: 60000,
-  workers: 1,
+  workers: 2,
   expect: { timeout: 10000 },
   webServer: [
     { command: "node tests/support/sync-server.mjs", url: "http://127.0.0.1:54321/health", reuseExistingServer: false, timeout: 30000 },
