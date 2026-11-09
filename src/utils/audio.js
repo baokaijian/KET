@@ -44,7 +44,7 @@ export const playCorrectSound = () => {
   }
 };
 
-// 2. Play incorrect answer buzzer (gentle sliding warning tone)
+// 2. Play gentle prompt chime for retry (no negative error buzzer per Zero-Literacy P4/B5)
 export const playIncorrectSound = () => {
   try {
     const ctx = getAudioContext();
@@ -56,22 +56,23 @@ export const playIncorrectSound = () => {
     osc.connect(gain);
     gain.connect(ctx.destination);
 
-    osc.type = "triangle";
+    osc.type = "sine";
 
-    // Slid down from 220Hz (A3) to 147Hz (D3)
-    osc.frequency.setValueAtTime(220, now);
-    osc.frequency.exponentialRampToValueAtTime(147, now + 0.25);
+    // Soft encouraging two-note warm prompt (A4 440Hz -> C5 523.25Hz)
+    osc.frequency.setValueAtTime(440, now);
+    osc.frequency.exponentialRampToValueAtTime(523.25, now + 0.22);
 
     gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.15, now + 0.05);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+    gain.gain.linearRampToValueAtTime(0.1, now + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
 
     osc.start(now);
-    osc.stop(now + 0.4);
+    osc.stop(now + 0.35);
   } catch (e) {
     console.warn("AudioContext not supported or blocked:", e);
   }
 };
+export const playGentlePromptSound = playIncorrectSound;
 
 // 3. Play victory fanfare (trumpet-like celebration)
 export const playVictoryFanfare = () => {

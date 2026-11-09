@@ -14,6 +14,7 @@ import {
   RotateCcw,
   Search,
   Settings2,
+  Shield,
   Sparkles,
   Square,
   Target,
@@ -41,6 +42,7 @@ import {
   dueReviews,
   localDay,
   retainDailyPlans,
+  updateProfile,
 } from "./utils/learningProgress.js";
 import { useLocalStorageState, safeReadStorage, safeWriteStorage } from "./hooks/useLocalStorageState.js";
 import {
@@ -66,6 +68,8 @@ import PhonicsWorkshop from "./components/PhonicsWorkshop.jsx";
 import DialogueSimulator from "./components/DialogueSimulator.jsx";
 import LongReadingHub from "./components/LongReadingHub.jsx";
 import GuidedWritingWorkshop from "./components/GuidedWritingWorkshop.jsx";
+import DualModeShell, { ModeSelectorCard } from "./components/DualModeShell.jsx";
+import ParentCenter from "./components/ParentCenter.jsx";
 import { phonicsStories } from "./data/phonics-stories.js";
 import { accountCache, syncLabels } from "./sync/account.js";
 import { saveDailyPlan, reviewQuestions } from "./utils/dailyPlan.js";
@@ -656,7 +660,7 @@ function Practice({ activity, progress, seen, answer, complete, exit, say, wordL
                       (choice.correct ? (
                         <CheckCircle2 size={20} />
                       ) : (
-                        <X size={20} />
+                        <RotateCcw size={20} />
                       ))}
                   </button>
                 );
@@ -1162,6 +1166,8 @@ export default function App() {
     rate: 0.85,
   });
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [parentCenterOpen, setParentCenterOpen] = useState(false);
+  const [customStuckWords, setCustomStuckWords] = useState(null);
   const [activity, setActivity] = useState(null);
   const [notice, setNotice] = useState("");
   const [curriculum, setCurriculum] = useState(() => cachedCurriculum);
@@ -1228,6 +1234,7 @@ export default function App() {
     stopSpeech();
     setActivity(null);
     setSettingsOpen(false);
+    setParentCenterOpen(false);
     setPage(id);
     window.location.hash = id;
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -1328,7 +1335,7 @@ export default function App() {
               </a>
             ))}
           </nav>
-          <div className="header-actions"><button className="icon-button account-button" aria-label="账户与同步" title={account.user ? syncLabels[account.status] : "账户与同步"} onClick={() => setAccountOpen(true)}><UserRound size={20} /><span className={`account-dot ${account.status}`} /></button><button
+          <div className="header-actions"><button className={`icon-button parent-center-button ${parentCenterOpen ? "active" : ""}`} aria-label="家长中心" title="家长中心" onClick={() => { stopSpeech(); setParentCenterOpen(!parentCenterOpen); }}><Shield size={20} /></button><button className="icon-button account-button" aria-label="账户与同步" title={account.user ? syncLabels[account.status] : "账户与同步"} onClick={() => setAccountOpen(true)}><UserRound size={20} /><span className={`account-dot ${account.status}`} /></button><button
             className={`icon-button settings-button ${settingsOpen ? "active" : ""}`}
             aria-label="发音设置"
             title="发音设置"
@@ -1389,7 +1396,33 @@ export default function App() {
         </section>
       )}
       <main id="main-content" className="main-content">
-        {activity?.production ? <ProductionWorkspace key={activity.key} task={activity.production} mode={activity.mode} progress={progress} update={update} say={say} exit={() => { stopSpeech(); setActivity(null); }} speaking={<Speaking say={say} prompts={activity.production.speaking} />} /> : activity ? (
+        {parentCenterOpen ? (
+          <ParentCenter
+            progress={progress}
+            update={update}
+            curriculum={curriculum}
+            settings={settings}
+            setSettings={setSettings}
+            say={say}
+            account={account}
+            onOpenAccount={() => setAccountOpen(true)}
+            onClose={() => setParentCenterOpen(false)}
+            onSwitchMode={(nextMode) => {
+              setParentCenterOpen(false);
+              if (nextMode === "solo" || nextMode === "colearn") {
+                setPage("today");
+                window.location.hash = "today";
+              }
+            }}
+            onLaunchStuckWords={(words) => {
+              setCustomStuckWords(words);
+              update((p) => updateProfile(p, { modePreference: "colearn" }));
+              setParentCenterOpen(false);
+              setPage("today");
+              window.location.hash = "today";
+            }}
+          />
+        ) : activity?.production ? <ProductionWorkspace key={activity.key} task={activity.production} mode={activity.mode} progress={progress} update={update} say={say} exit={() => { stopSpeech(); setActivity(null); }} speaking={<Speaking say={say} prompts={activity.production.speaking} />} /> : activity ? (
           <Practice
             key={activity.key}
             activity={activity}
@@ -1423,6 +1456,20 @@ export default function App() {
               }))
             }
           />
+        ) : page === "today" && (progress.profile?.modePreference === "solo" || progress.profile?.modePreference === "colearn") ? (
+          <DualModeShell
+            mode={progress.profile.modePreference}
+            progress={progress}
+            update={update}
+            curriculum={curriculum}
+            say={say}
+            onOpenParentCenter={() => setParentCenterOpen(true)}
+            onSwitchMode={(nextMode) => {
+              update((p) => updateProfile(p, { modePreference: nextMode }));
+            }}
+            customStuckWords={customStuckWords}
+            onClearCustomStuckWords={() => setCustomStuckWords(null)}
+          />
         ) : (
           <>
             <div className="page-heading">
@@ -1436,14 +1483,24 @@ export default function App() {
               </span>
             </div>
             {page === "today" && (
-              <Today
-                progress={progress}
-                start={start}
-                navigate={navigate}
-                say={say}
-                curriculum={curriculum}
-                savePlan={(plan) => update((p) => saveDailyPlan(p, plan))}
-              />
+              <>
+                {!progress.profile?.modePreference && (
+                  <ModeSelectorCard
+                    onSelectMode={(nextMode) =>
+                      update((p) => updateProfile(p, { modePreference: nextMode }))
+                    }
+                    say={say}
+                  />
+                )}
+                <Today
+                  progress={progress}
+                  start={start}
+                  navigate={navigate}
+                  say={say}
+                  curriculum={curriculum}
+                  savePlan={(plan) => update((p) => saveDailyPlan(p, plan))}
+                />
+              </>
             )}
             {page === "learn" && (
               <Library

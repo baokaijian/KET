@@ -1,8 +1,39 @@
 import metadata from "./vocabulary-metadata.json" with { type: "json" };
 import { topicCategories } from "./ket-words/levels.js";
-import { supplementaryTopics } from "./course-topics.js";
+import { supplementaryTopics, courseUnitFor } from "./course-topics.js";
 import { curatedTopics } from "./curated-topics.js";
 import { vocabularyCorrections } from "./vocabulary-corrections.js";
+import { additionalImages } from "./additional-images.js";
+
+const starterWordIds = new Set([
+  "l2_apple", "l2_banana", "l2_bread", "l2_milk",
+  "l12_cat", "l12_dog", "l12_rabbit", "l2_fish",
+  "l10_book", "l12_pencil", "l7_bicycle", "l5_bus",
+]);
+const l0ThemeWords = new Set(
+  "apple|banana|bread|milk|egg|cheese|juice|water|cat|dog|rabbit|fish|bird|duck|horse|cow|book|pencil|pen|bag|desk|teacher|school|friend|mother|father|sister|brother|family|grandmother|grandfather|baby|house|room|door|window|chair|table|bed|lamp|park|tree|flower|ball|play|run|jump|walk".split("|"),
+);
+
+export function hasVerifiedImage(wordId) {
+  return Boolean( starterWordIds.has(wordId) || additionalImages[wordId] );
+}
+
+export function computeGradeBand(word, topic) {
+  if (hasVerifiedImage(word.id)) {
+    return l0ThemeWords.has(word.word) ? "L0" : "L1";
+  }
+  const unit = courseUnitFor({ ...word, topic });
+  if (unit <= 6) return "L2";
+  if (unit <= 10) return "L3";
+  return "L4";
+}
+
+export function computeL12Subgroup(word, topic) {
+  if (word.level !== 12) return null;
+  if (["time_calendar", "positions"].includes(topic)) return "time_space";
+  if (["full_review", "daily_starters", "exam_expressions"].includes(topic)) return "everyday_actions";
+  return "thematic_review";
+}
 
 export const partOfSpeechLabels = {
   n: "n. 名词", v: "v. 动词", adj: "adj. 形容词", adv: "adv. 副词",
@@ -65,7 +96,10 @@ export function withVocabularyMetadata(word) {
   const officialTopic = entry.topics.map((name) => topicMap[name]).find(Boolean);
   const topic = animalWords.has(word.word) ? "animals" : clothesWords.has(word.word) ? "clothes" : explicit[word.word] || curatedTopics[word.word] || officialTopic || supplemental[word.word] || word.topic;
   const category = topicCategories.find((item) => item.id === topic);
+  const gradeBand = computeGradeBand(word, topic);
+  const l12Subgroup = computeL12Subgroup(word, topic);
   return { ...word, topic, scene: category.scene, scenePrompt: category.scenePrompt,
+    gradeBand, ...(l12Subgroup ? { l12Subgroup } : {}),
     partOfSpeech: pos, partOfSpeechLabel: pos.map((value) => partOfSpeechLabels[value]).join(" / "),
     grammarNotes: entry.pos.includes("pl") ? "复数形式" : "", posSource: correction?.source || metadata.source };
 }

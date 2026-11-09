@@ -34,3 +34,21 @@ export const allKetWords = [
   ...level11Words,
   ...level12Words
 ].map(withCorrectMeaning).map(withVocabularyMetadata);
+
+export const l12Subgroups = {
+  everyday_actions: {
+    id: "everyday_actions",
+    title: "日常行动与核心表达",
+    words: allKetWords.filter((w) => w.level === 12 && w.l12Subgroup === "everyday_actions"),
+  },
+  time_space: {
+    id: "time_space",
+    title: "时间日历与空间方位",
+    words: allKetWords.filter((w) => w.level === 12 && w.l12Subgroup === "time_space"),
+  },
+  thematic_review: {
+    id: "thematic_review",
+    title: "主题场景进阶复习",
+    words: allKetWords.filter((w) => w.level === 12 && w.l12Subgroup === "thematic_review"),
+  },
+};

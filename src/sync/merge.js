@@ -37,8 +37,13 @@ export function changesFor(key, previous, next) {
     }
   }
   add("draft", ["draft"], before.draft, after.draft);
+  add("profile", ["profile"], before.profile, after.profile);
   const oldSessions = new Set(before.sessions.map((session) => session.id));
   for (const session of after.sessions) if (!oldSessions.has(session.id)) changes.push({ key, type: "session", after: session });
+  const oldModeSessions = new Set((before.modeSessions || []).map((session) => session.id));
+  for (const session of after.modeSessions || []) {
+    if (!oldModeSessions.has(session.id)) changes.push({ key, type: "modeSession", after: session });
+  }
   return changes;
 }
 
@@ -81,6 +86,12 @@ export function applyOperations(base, operations) {
     }
     if (change.type === "session" && !p.sessions.some((item) => item.id === change.after.id)) {
       p.sessions = [...p.sessions, change.after].sort((a, b) => a.date.localeCompare(b.date)).slice(-100);
+    }
+    if (change.type === "modeSession" && change.after?.id && !p.modeSessions.some((item) => item.id === change.after.id)) {
+      p.modeSessions = [...p.modeSessions, change.after].sort((a, b) => String(a.startedAt).localeCompare(String(b.startedAt))).slice(-200);
+    }
+    if (change.type === "profile" && change.after && typeof change.after === "object") {
+      p.profile = { ...p.profile, ...change.after };
     }
     if (change.type === "memory" && change.after) {
       const current = p.memory[id]?.[skill];
